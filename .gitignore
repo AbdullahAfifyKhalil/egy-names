@@ -1,0 +1,26 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Build artifacts & caches
+**/target/
+**/build/
+**/dist/
+**/bin/
+**/obj/
+**/.dart_tool/
+**/node_modules/
+**/__pycache__/
+**/*.pyc
+**/*.egg-info/
+**/.pytest_cache/
+**/*.nupkg
+**/*.snupkg
+**/*.zip
+**/*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

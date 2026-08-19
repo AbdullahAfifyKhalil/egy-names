@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>egy-names — Egyptian Name Intelligence Engine</title>
+  <meta name="description" content="Production-grade Egyptian onomastic intelligence library for Python, TypeScript, Dart, C#, and Java. Generate, transliterate, segment, and analyze Egyptian names." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="app-loader" class="app-loader-screen">
+    <div class="loader-spinner"></div>
+    <div class="loader-title">Loading egy-names engine</div>
+    <div id="loader-sub" class="loader-sub">Loading corpus dataset...</div>
+  </div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="brand-area">
+        <img src="/logo.svg" alt="egy-names" class="brand-logo-img" />
+        <div class="brand-text">
+          <h1>egy-names</h1>
+          <p data-i18n="brandSubtitle">By Afify • Abdullah Afify</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="badge-status">
+          <span class="status-dot"></span>
+          <span data-i18n="engineLive">Online</span>
+        </div>
+
+        <!-- Language Toggle -->
+        <button id="btn-lang-toggle" class="util-btn" title="Toggle Language">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+          <span id="lang-label">العربية</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="btn-theme-toggle" class="util-btn" title="Toggle Theme">
+          <svg id="theme-icon-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <span id="theme-label">Light</span>
+        </button>
+
+        <!-- Quick Copy Install Command -->
+        <button id="btn-install-cmd" class="util-btn" title="Copy install command">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <code data-i18n="copyInstall">pip / npm install egy-names</code>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-tag" data-i18n="heroTag">
+        Egyptian Onomastic Dataset & NLP Suite
+      </div>
+      <h2 class="hero-title" data-i18n="heroTitle">
+        Egyptian Name Intelligence Engine
+      </h2>
+      <p class="hero-description" data-i18n="heroDesc">
+        A high-performance algorithmic suite for patronymic name generation, transliteration, space-less dynamic programming segmentation, etymology, and demographic classification.
+      </p>
+
+      <!-- Minimal Stats Bar -->
+      <div class="stats-strip">
+        <div class="stat-item">
+          <div id="stat-total-names" class="stat-num">33,117</div>
+          <div class="stat-label" data-i18n="statLemmas">Verified Lemmas</div>
+        </div>
+        <div class="stat-item">
+          <div id="stat-total-tokens" class="stat-num">11.0M+</div>
+          <div class="stat-label" data-i18n="statTokens">Corpus Tokens</div>
+        </div>
+        <div class="stat-item">
+          <div id="stat-total-students" class="stat-num">2.46M</div>
+          <div class="stat-label" data-i18n="statStudents">Student Records (2024–2026)</div>
+        </div>
+        <div class="stat-item">
+          <div id="stat-total-keys" class="stat-num">134,000+</div>
+          <div class="stat-label" data-i18n="statKeys">Index Lookup Keys</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <div class="tabs-nav-container">
+      <nav class="tabs-nav">
+        <button class="tab-btn active" data-tab="tab-generator" data-i18n="tabGenerator">Generator</button>
+        <button class="tab-btn" data-tab="tab-translator" data-i18n="tabTranslator">Translator</button>
+        <button class="tab-btn" data-tab="tab-splitter" data-i18n="tabSplitter">Segmentation</button>
+        <button class="tab-btn" data-tab="tab-inspector" data-i18n="tabInspector">Etymology & Stats</button>
+        <button class="tab-btn" data-tab="tab-corrector" data-i18n="tabCorrector">Orthography & Tashkeel</button>
+        <button class="tab-btn" data-tab="tab-chain" data-i18n="tabChain">Chain Analysis</button>
+        <button class="tab-btn" data-tab="tab-search" data-i18n="tabSearch">Corpus Explorer</button>
+        <button class="tab-btn" data-tab="tab-playground" data-i18n="tabPlayground">API & SDKs</button>
+      </nav>
+    </div>
+
+    <!-- 1. Generator Tab -->
+    <section id="tab-generator" class="tab-panel active">
+      <div class="module-card">
+        <div class="module-header">
+          <h3 class="module-title" data-i18n="genTitle">Full Name Generation</h3>
+          <p class="module-desc" data-i18n="genDesc">Generates authentic full names by sampling from positional probability distributions derived from national corpus records.</p>
+        </div>
+
+        <div class="grid-2col">
+          <div class="controls-col">
+            <div class="control-group">
+              <label class="control-label" data-i18n="genderLabel">Gender</label>
+              <div id="gen-gender-pills" class="pill-group">
+                <button class="pill-btn active" data-val="all" data-i18n="genderAll">All</button>
+                <button class="pill-btn" data-val="male" data-i18n="genderMale">Male</button>
+                <button class="pill-btn" data-val="female" data-i18n="genderFemale">Female</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" data-i18n="religionLabel">Cultural Context</label>
+              <div id="gen-religion-pills" class="pill-group">
+                <button class="pill-btn active" data-val="all" data-i18n="religionAll">All</button>
+                <button class="pill-btn" data-val="muslim" data-i18n="religionMuslim">Muslim</button>
+                <button class="pill-btn" data-val="christian" data-i18n="religionChristian">Christian</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" data-i18n="freqLabel">Frequency Tier</label>
+              <div id="gen-freq-pills" class="pill-group">
+                <button class="pill-btn active" data-val="all" data-i18n="freqAll">All</button>
+                <button class="pill-btn" data-val="common" data-i18n="freqCommon">Common</button>
+                <button class="pill-btn" data-val="normal" data-i18n="freqNormal">Normal</button>
+                <button class="pill-btn" data-val="rare" data-i18n="freqRare">Rare</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" data-i18n="lengthLabel">Chain Length</label>
+              <div class="slider-container">
+                <input id="gen-len" type="range" class="range-slider" min="0" max="7" value="0" />
+                <span id="gen-len-val" class="slider-val">Auto</span>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" data-i18n="countLabel">Quantity</label>
+              <div class="slider-container">
+                <input id="gen-count" type="range" class="range-slider" min="1" max="25" value="5" />
+                <span id="gen-count-val" class="slider-val">5</span>
+              </div>
+            </div>
+
+            <div class="control-group" style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+              <input id="gen-family" type="checkbox" checked style="accent-color: var(--text-primary); width: 15px; height: 15px; cursor: pointer;" />
+              <label for="gen-family" style="font-size: 0.82rem; color: var(--text-secondary); cursor: pointer;" data-i18n="familySurnameToggle">
+                Include family surname at chain termination
+              </label>
+            </div>
+
+            <button id="btn-generate" class="btn-primary" style="margin-top: 0.75rem;">
+              <span data-i18n="btnGenerate">Generate Names</span>
+            </button>
+          </div>
+
+          <div class="results-col">
+            <div class="control-label" data-i18n="genOutputHeader">Generated Output</div>
+            <div id="generator-results" class="output-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Translator Tab -->
+    <section id="tab-translator" class="tab-panel">
+      <div class="module-card">
+        <div class="module-header">
+          <h3 class="module-title" data-i18n="transTitle">Bi-Directional Transliteration</h3>
+          <p class="module-desc" data-i18n="transDesc">Deterministic and phonetic mapping between Arabic orthography and standardized English transliterations.</p>
+        </div>
+
+        <div style="display: flex; gap: 0.35rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center;">
+          <span style="font-size: 0.78rem; color: var(--text-muted);" data-i18n="tryPresets">Examples:</span>
+          <button class="btn-secondary trans-preset-btn" data-sample="محمد أحمد علي حسن الشاذلي">محمد أحمد الشاذلي</button>
+          <button class="btn-secondary trans-preset-btn" data-sample="عبدالرحمن محمود أبوالعزم">عبدالرحمن أبوالعزم</button>
+          <button class="btn-secondary trans-preset-btn" data-sample="مريم بطرس سمير ميخائيل">مريم بطرس ميخائيل</button>
+        </div>
+
+        <div class="grid-2col">
+          <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span class="control-label" style="margin-bottom: 0;" data-i18n="arToEnHeader">Arabic to English</span>
+              <button id="btn-copy-trans-en" class="btn-secondary" data-i18n="btnCopy">Copy</button>
+            </div>
+            <input id="trans-ar-input" type="text" class="input-text ar" value="محمد أحمد علي حسن الشاذلي" placeholder="Enter Arabic full name..." />
+            
+            <div style="margin-top: 0.85rem;">
+              <div class="control-label" data-i18n="enOutputLabel">English Transliteration</div>
+              <div id="trans-en-output" style="font-size: 1.05rem; font-weight: 600; color: var(--text-primary); min-height: 1.6rem;">
+                Mohamed Ahmed Ali Hassan Elshazly
+              </div>
+            </div>
+
+            <div style="margin-top: 0.75rem;">
+              <div class="control-label" data-i18n="transTokensHeader">Token Decomposition</div>
+              <div id="trans-tokens-container" class="token-chip-container"></div>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span class="control-label" style="margin-bottom: 0;" data-i18n="enToArHeader">English to Arabic</span>
+              <button id="btn-copy-trans-ar" class="btn-secondary" data-i18n="btnCopy">Copy</button>
+            </div>
+            <input id="trans-en-input" type="text" class="input-text" value="George Boutros Samir Mikhail" placeholder="Enter English transliterated name..." />
+            
+            <div style="margin-top: 0.85rem;">
+              <div class="control-label" data-i18n="arOutputLabel">Arabic Representation</div>
+              <div id="trans-ar-output" class="ar-text" style="font-size: 1.2rem; font-weight: 600; color: var(--text-primary); min-height: 1.6rem;">
+                جورج بطرس سمير ميخائيل
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Smart Splitter Tab -->
+    <section id="tab-splitter" class="tab-panel">
+      <div class="module-card">
+        <div class="module-header">
+          <h3 class="module-title" data-i18n="splitTitle">Dynamic Programming Segmentation</h3>
+          <p class="module-desc" data-i18n="splitDesc">Splits unspaced or concatenated Arabic names into canonical constituent tokens using cost-minimizing dynamic programming.</p>
+        </div>
+
+        <div style="display: flex; gap: 0.35rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center;">
+          <span style="font-size: 0.78rem; color: var(--text-muted);" data-i18n="tryPresets">Examples:</span>
+          <button class="btn-secondary split-preset-btn" data-sample="محمدأحمدعليحسنالشاذلي">محمدأحمدعليحسنالشاذلي</button>
+          <button class="btn-secondary split-preset-btn" data-sample="عبدالرحمنمحمودعبدالعزيز">عبدالرحمنمحمودعبدالعزيز</button>
+          <button class="btn-secondary split-preset-btn" data-sample="مريمجورجميخائيلسركيس">مريمجورجميخائيلسركيس</button>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <div class="control-label" data-i18n="splitInputLabel">Input Name String</div>
+          <input id="split-input" type="text" class="input-text ar" value="محمدأحمدعليحسنالشاذلي" placeholder="Enter concatenated or spaced name..." />
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
+          <div class="control-label" style="margin-bottom: 0;" data-i18n="splitTokensHeader">Extracted Name Components</div>
+          <button id="btn-copy-split" class="btn-secondary" data-i18n="btnCopySplit">Copy Tokenized</button>
+        </div>
+
+        <div id="split-tokens-container" class="token-chip-container"></div>
+      </div>
+    </section>
+
+    <!-- 4. Inspector Tab -->
+    <section id="tab-inspector" class="tab-panel">
+      <div class="module-card">
+        <div class="module-header">
+          <h3 class="module-title" data-i18n="inspectTitle">Linguistic & Statistical Analysis</h3>
+          <p class="module-desc" data-i18n="inspectDesc">Inspect etymological roots, national popularity ranking, and positional distribution across patronymic slots.</p>
+        </div>
+
+        <div style="display: flex; gap: 0.35rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center;">
+          <span style="font-size: 0.78rem; color: var(--text-muted);" data-i18n="popularLookups">Examples:</span>
+          <button class="btn-secondary inspect-preset-btn" data-sample="محمد">محمد</button>
+          <button class="btn-secondary inspect-preset-btn" data-sample="فاطمة">فاطمة</button>
+          <button class="btn-secondary inspect-preset-btn" data-sample="مينا">مينا</button>
+          <button class="btn-secondary inspect-preset-btn" data-sample="الشناوي">الشناوي</button>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <div class="control-label" data-i18n="inspectInputLabel">Name Lookup</div>
+          <input id="inspect-input" type="text" class="input-text ar" value="محمد" placeholder="Search lemma name..." />
+        </div>
+
+        <div id="inspect-result-card"></div>
+      </div>
+    </section>
+
+    <!-- 5. Corrector & Tashkeel Tab -->
+    <section id="tab-corrector" class="tab-panel">
+      <div class="module-card">
+        <div class="module-header">
+          <h3 class="module-title" data-i18n="correctTitle">Orthographic Normalization & Tashkeel</h3>
+          <p class="module-desc" data-i18n="correctDesc">Resolves common typos, dialectal spelling variations, and generates fully diacritized Arabic forms.</p>
+        </div>
+
+        <div style="display: flex; gap: 0.35rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center;">
+          <span style="font-size: 0.78rem; color: var(--text-muted);" data-i18n="tryPresets">Examples:</span>
+          <button class="btn-secondary correct-preset-btn" data-sample="احمد مصطفا عبد الرحيم">احمد مصطفا عبد الرحيم</button>
+          <button class="btn-secondary correct-preset-btn" data-sample="ابراهيم اسماعيل الحسينى">ابراهيم اسماعيل الحسينى</button>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <div class="control-label" data-i18n="correctInputLabel">Input Name</div>
+          <input id="correct-input" type="text" class="input-text ar" value="احمد مصطفا عبد الرحيم" placeholder="Enter name with spelling variations or typos..." />
+        </div>
+
+        <div class="grid-2col">
+          <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span class="control-label" style="margin-bottom: 0;" data-i18n="standardizedHeader">Canonical Normalized Form</span>
+              <button id="btn-copy-correct" class="btn-secondary" data-i18n="btnCopy">Copy</button>
+            </div>
+            <div id="correct-output" class="ar-text" style="font-size: 1.35rem; font-weight: 600; color: var(--text-primary); min-height: 1.8rem;">
+              أحمد مصطفى عبدالرحيم
+            </div>
+          </div>
+
+          <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span class="control-label" style="margin-bottom: 0;" data-i18n="tashkeelHeader">Diacritized Form (Tashkeel)</span>
+              <button id="btn-copy-tashkeel" class="btn-secondary" data-i18n="btnCopy">Copy</button>
+            </div>
+            <div id="tashkeel-output" class="ar-text" style="font-size: 1.35rem; font-weight: 600; color: var(--text-primary); min-height: 1.8rem;">
+              أَحْمَد مُصْطَفَى عَبْدُالرَّحِيم
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Patronymic Chain & AI Tab -->
+    <section id="tab-chain" class="tab-panel">
+      <div class="module-card">
+        <div class="module-header">
+          <h3 class="module-title" data-i18n="chainTitle">Patronymic Structure & Demographic Inference</h3>
+          <p class="module-desc" data-i18n="chainDesc">Analyzes generational hierarchy and computes probabilistic gender, cultural context, and uniqueness metrics.</p>
+        </div>
+
+        <div style="display: flex; gap: 0.35rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center;">
+          <span style="font-size: 0.78rem; color: var(--text-muted);" data-i18n="tryPresets">Examples:</span>
+          <button class="btn-secondary chain-preset-btn" data-sample="مريم إبراهيم حسن الشناوي">مريم إبراهيم حسن الشناوي</button>
+          <button class="btn-secondary chain-preset-btn" data-sample="جورج بطرس سمير ميخائيل سركيس">جورج بطرس سمير ميخائيل سركيس</button>
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+          <div class="control-label" data-i18n="chainInputLabel">Patronymic Chain</div>
+          <input id="chain-input" type="text" class="input-text ar" value="مريم إبراهيم حسن الشناوي" placeholder="Enter complete 3 to 5 part name..." />
+        </div>
+
+        <div style="margin-bottom: 1.25rem;">
+          <div class="control-label" data-i18n="structureHeader">Generational Structure</div>
+          <div id="chain-parts-container" class="token-chip-container"></div>
+        </div>
+
+        <div class="grid-2col">
+          <div>
+            <div class="gauge-container">
+              <div class="gauge-header">
+                <span class="gauge-title" data-i18n="genderDetectionHeader">Gender Classification</span>
+                <span id="ai-gender-val" class="gauge-score">FEMALE (57%)</span>
+              </div>
+              <div class="gauge-bar-bg">
+                <div id="ai-gender-fill" class="gauge-bar-fill" style="width: 57%;"></div>
+              </div>
+            </div>
+
+            <div class="gauge-container">
+              <div class="gauge-header">
+                <span class="gauge-title" data-i18n="religionDetectionHeader">Cultural Background Inference</span>
+                <span id="ai-religion-val" class="gauge-score">MUSLIM (75%)</span>
+              </div>
+              <div class="gauge-bar-bg">
+                <div id="ai-religion-fill" class="gauge-bar-fill" style="width: 75%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="gauge-container" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div class="gauge-header">
+                  <span class="gauge-title" data-i18n="uniquenessHeader">Name Uniqueness Index</span>
+                  <span id="ai-uniqueness-val" class="gauge-score">5.4 / 10</span>
+                </div>
+                <div class="gauge-bar-bg" style="margin-bottom: 0.5rem;">
+                  <div id="ai-uniqueness-fill" class="gauge-bar-fill" style="width: 54%;"></div>
+                </div>
+              </div>
+              <p id="ai-uniqueness-note" style="font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4;">
+                A balanced combination of common and distinct patronymic components.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Corpus Explorer Tab -->
+    <section id="tab-search" class="tab-panel">
+      <div class="module-card">
+        <div class="module-header">
+          <h3 class="module-title" data-i18n="searchTitle">Corpus Database Query</h3>
+          <p class="module-desc" data-i18n="searchDesc">Direct filtered queries across all 33,117 lemmas in the indexed national database.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.5rem; margin-bottom: 1rem;">
+          <div>
+            <label class="control-label" data-i18n="searchQueryLabel">Contains</label>
+            <input id="search-query" type="text" class="input-text ar" placeholder="Search..." />
+          </div>
+          <div>
+            <label class="control-label" data-i18n="searchPrefixLabel">Prefix</label>
+            <input id="search-prefix" type="text" class="input-text ar" placeholder="e.g. عبد..." />
+          </div>
+          <div>
+            <label class="control-label" data-i18n="roleLabel">Role</label>
+            <select id="search-role" class="input-text" style="cursor: pointer;">
+              <option value="all" data-i18n="roleAll">All</option>
+              <option value="given" data-i18n="roleGiven">Given Name</option>
+              <option value="family" data-i18n="roleFamily">Family Name</option>
+            </select>
+          </div>
+          <div>
+            <label class="control-label" data-i18n="genderLabel">Gender</label>
+            <select id="search-gender" class="input-text" style="cursor: pointer;">
+              <option value="all" data-i18n="genderAll">All</option>
+              <option value="male" data-i18n="genderMale">Male</option>
+              <option value="female" data-i18n="genderFemale">Female</option>
+            </select>
+          </div>
+          <div>
+            <label class="control-label" data-i18n="religionLabel">Context</label>
+            <select id="search-religion" class="input-text" style="cursor: pointer;">
+              <option value="all" data-i18n="religionAll">All</option>
+              <option value="muslim" data-i18n="religionMuslim">Muslim</option>
+              <option value="christian" data-i18n="religionChristian">Christian</option>
+            </select>
+          </div>
+          <div>
+            <label class="control-label" data-i18n="freqLabel">Frequency</label>
+            <select id="search-freq" class="input-text" style="cursor: pointer;">
+              <option value="all" data-i18n="freqAll">All</option>
+              <option value="common" data-i18n="freqCommon">Common</option>
+              <option value="normal" data-i18n="freqNormal">Normal</option>
+              <option value="rare" data-i18n="freqRare">Rare</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+          <span id="search-count-badge" class="badge">Loading...</span>
+        </div>
+
+        <div style="overflow-x: auto; max-height: 420px; border: 1px solid var(--border-color); border-radius: var(--radius-sm);">
+          <table style="width: 100%; border-collapse: collapse; text-align: start;">
+            <thead style="background: var(--bg-surface); position: sticky; top: 0;">
+              <tr>
+                <th style="padding: 0.5rem 0.75rem; font-size: 0.72rem; color: var(--text-muted); font-weight: 600;" data-i18n="thNum">Index</th>
+                <th style="padding: 0.5rem 0.75rem; font-size: 0.72rem; color: var(--text-muted); font-weight: 600;" data-i18n="thArabic">Arabic (Diacritized)</th>
+                <th style="padding: 0.5rem 0.75rem; font-size: 0.72rem; color: var(--text-muted); font-weight: 600;" data-i18n="thEnglish">English</th>
+                <th style="padding: 0.5rem 0.75rem; font-size: 0.72rem; color: var(--text-muted); font-weight: 600;" data-i18n="thGender">Gender</th>
+                <th style="padding: 0.5rem 0.75rem; font-size: 0.72rem; color: var(--text-muted); font-weight: 600;" data-i18n="thReligion">Context</th>
+                <th style="padding: 0.5rem 0.75rem; font-size: 0.72rem; color: var(--text-muted); font-weight: 600;" data-i18n="thRole">Role</th>
+              </tr>
+            </thead>
+            <tbody id="search-results-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Code Playground Tab -->
+    <section id="tab-playground" class="tab-panel">
+      <div class="module-card">
+        <div class="module-header">
+          <h3 class="module-title" data-i18n="playgroundTitle">Developer SDK Reference</h3>
+          <p class="module-desc" data-i18n="playgroundDesc">Production-ready integration snippets for all supported runtime environments.</p>
+        </div>
+
+        <div class="code-box-container">
+          <div class="code-box-header">
+            <div class="code-tabs">
+              <button class="code-tab-btn active" data-lang="python">Python</button>
+              <button class="code-tab-btn" data-lang="typescript">TypeScript</button>
+              <button class="code-tab-btn" data-lang="dart">Dart</button>
+              <button class="code-tab-btn" data-lang="csharp">C#</button>
+              <button class="code-tab-btn" data-lang="java">Java</button>
+            </div>
+            <button id="btn-copy-code" class="btn-secondary" style="padding: 0.25rem 0.55rem; font-size: 0.75rem;">
+              <span data-i18n="btnCopyCode">Copy Code</span>
+            </button>
+          </div>
+          <pre id="playground-code" class="code-box-pre"></pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="container">
+      <p><strong data-i18n="footerLine1">egy-names — Open-source Egyptian onomastic intelligence library.</strong></p>
+      <p style="margin-top: 0.2rem;" data-i18n="footerLine2">MIT License • Developed by Abdullah Afify (Afify).</p>
+      <div class="footer-links">
+        <a href="https://github.com/afify/egy-names" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://pypi.org/project/egy-names/" target="_blank" rel="noopener">PyPI</a>
+        <a href="https://www.npmjs.com/package/egy-names" target="_blank" rel="noopener">npm</a>
+        <a href="https://pub.dev/packages/egy_names" target="_blank" rel="noopener">Pub.dev</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="app-toast" class="toast">Copied to clipboard.</div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

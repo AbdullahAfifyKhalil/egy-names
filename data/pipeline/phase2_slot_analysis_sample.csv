@@ -1,0 +1,1001 @@
+ar_name,en_name,gender,family,religious_association,first_name_count,second_name_count,third_name_count,fourth_name_count,fifth_name_count,sixth_name_count,overall_count,muslim_first_name_count,muslim_second_name_count,muslim_third_name_count,muslim_fourth_name_count,muslim_fifth_name_count,muslim_sixth_name_count,muslim_overall_count,christian_first_name_count,christian_second_name_count,christian_third_name_count,christian_fourth_name_count,christian_fifth_name_count,christian_sixth_name_count,christian_overall_count
+محمد,Mohamed,male,True,"Christian, Muslim, neutral",56664,108821,109694,106819,39057,1586,422641,56661,108736,109533,106644,39001,1586,422161,1,16,30,50,15,0,112
+احمد,Ahmed,male,True,"Christian, Muslim, neutral",37453,52898,39991,45957,18361,2241,196901,37431,52783,39900,45837,18301,2235,196487,1,12,13,17,14,2,59
+محمود,Mahmoud,male,True,"Christian, Muslim, neutral",13983,24499,24586,24386,6230,297,93981,13979,24477,24544,24340,6219,296,93855,0,7,7,12,2,0,28
+ابراهيم,Ibrahim,male,True,"Christian, Muslim, neutral",4857,15009,22859,26503,14261,833,84322,4824,14638,22224,25696,13856,818,82056,24,305,541,683,356,11,1920
+على,Ali,male,True,"Christian, Muslim, neutral",5010,10913,19776,28268,15289,1045,80301,5008,10894,19743,28204,15261,1043,80153,0,7,6,13,3,0,29
+السيد,El-Sayed,male,True,"Christian, Muslim, neutral",1393,14502,23701,21457,10943,625,72621,1393,14494,23656,21418,10899,616,72476,0,4,25,23,29,8,89
+حسن,Hassan,male,True,"Christian, Muslim, neutral",2531,9490,14986,18275,10850,827,56959,2531,9468,14950,18231,10823,827,56830,0,3,8,5,8,0,24
+مصطفى,Mostafa,male,True,"Christian, Muslim, neutral",9343,11775,10418,8393,4748,326,45003,9339,11766,10401,8383,4734,325,44948,1,0,5,3,2,1,12
+يوسف,Youssef,male,True,"Christian, Muslim, neutral",22940,2480,4520,5485,3823,427,39675,22089,2071,3916,4882,3502,423,36883,646,369,538,534,289,4,2380
+سيد,Sayed,male,True,"Christian, Muslim, neutral",660,7391,10442,8133,3084,253,29963,660,7370,10396,8099,3074,252,29851,0,8,16,14,6,0,44
+حسين,Hussein,male,True,"Christian, Muslim, neutral",1228,5282,7490,9278,4922,345,28545,1228,5280,7475,9267,4916,345,28511,0,0,3,2,3,0,8
+عبدالله,Abdallah,male,True,"Christian, Muslim, neutral",5718,2865,6397,5458,2537,212,23187,5717,2851,6295,5332,2504,212,22911,1,14,94,117,33,0,259
+مريم,Maryam,female,True,"Christian, Muslim, neutral",22682,0,1,1,4,0,22688,20703,0,1,0,2,0,20706,1725,0,0,1,2,0,1728
+عبدالرحمن,Abdelrahman,male,True,"Christian, Muslim, neutral",11588,1508,3464,3955,1600,89,22204,11586,1508,3464,3954,1600,89,22201,1,0,0,0,0,0,1
+عمر,Omar,male,True,"Christian, Muslim, neutral",12096,2417,1780,1889,1661,245,20088,12092,2411,1775,1884,1658,245,20065,0,1,0,1,0,0,2
+خالد,Khaled,male,True,"Christian, Muslim, neutral",3405,14594,393,466,261,24,19143,3402,14511,390,463,260,24,19050,1,38,1,1,0,0,41
+اسماعيل,Ismail,male,True,"Christian, Muslim, neutral",566,2734,4949,6349,3797,303,18698,565,2732,4943,6335,3788,303,18666,0,0,2,2,3,0,7
+سعيد,Saeed,male,True,"Christian, Muslim, neutral",874,6371,7254,2430,1133,138,18200,871,6183,7019,2139,1022,138,17372,2,166,210,265,97,0,740
+شهد,Shahd,female,True,"Christian, Muslim, neutral",15517,0,0,0,0,1,15518,15503,0,0,0,0,1,15504,9,0,0,0,0,0,9
+رمضان,Ramadan,male,True,"Christian, Muslim, neutral",271,5592,5507,2467,1337,166,15340,271,5589,5498,2462,1336,165,15321,0,1,5,1,1,1,9
+سعد,Saad,male,True,"Christian, Muslim, neutral",514,3204,6774,3066,1585,171,15314,509,3020,6390,2785,1450,164,14318,4,164,326,250,122,4,870
+عبدالحميد,Abd El-Hameed,male,True,"Christian, Muslim, neutral",388,1787,5380,6179,972,41,14747,388,1786,5378,6175,971,40,14738,0,0,0,2,1,0,3
+سليمان,Soliman,male,True,"Christian, Muslim, neutral",199,1104,3061,5147,4596,438,14545,199,1046,2894,4783,4373,433,13728,0,50,148,313,202,5,718
+اشرف,Ashraf,male,True,"Christian, Muslim, neutral",562,13900,75,6,0,0,14543,553,12986,72,6,0,0,13617,8,823,0,0,0,0,831
+علي,Ali,male,True,"Christian, Muslim, neutral",740,1913,3438,4713,3054,208,14066,739,1909,3421,4703,3046,206,14024,0,0,3,0,1,1,5
+عبدالعزيز,Abdelaziz,male,True,"Christian, Muslim, neutral",529,1548,4912,5416,975,33,13413,529,1548,4908,5413,975,33,13406,0,0,3,1,0,0,4
+ملك,Malak,system_neutral,True,"Christian, Muslim, neutral",12900,8,52,194,29,0,13183,12802,1,4,16,3,0,12826,26,7,42,160,24,0,259
+فتحى,Fathy,male,True,"Christian, Muslim, neutral",458,2511,8039,1058,56,7,12129,457,2460,7758,1038,56,6,11775,1,44,244,15,0,0,304
+عبد الرحمن,Abd El-Rahman,male,True,"Christian, Muslim, neutral",5898,759,1688,2281,1092,78,11796,5897,759,1688,2277,1091,77,11789,0,0,0,2,0,0,2
+عادل,Adel,male,True,"Christian, Muslim, neutral",758,9001,1650,137,2,0,11548,724,8074,1432,136,2,0,10368,30,827,195,0,0,0,1052
+ايمن,Ayman,male,True,"Christian, Muslim, neutral",677,10646,48,3,0,1,11375,664,9860,45,3,0,1,10573,7,708,3,0,0,0,718
+أحمد,Ahmed,male,True,"Christian, Muslim, neutral",2151,2679,2203,2812,1079,150,11074,2151,2679,2201,2805,1076,150,11062,0,0,0,3,1,0,4
+جمال,Gamal,male,True,"Christian, Muslim, neutral",562,7972,2214,264,24,0,11036,556,7686,2115,261,23,0,10641,6,234,84,1,1,0,326
+عبد الله,Abdullah,male,True,"Christian, Muslim, neutral",2516,1281,2736,2733,1568,179,11013,2514,1269,2680,2641,1541,177,10822,1,12,52,86,26,1,178
+صلاح,Salah,male,True,"Christian, Muslim, neutral",669,4916,4799,392,99,19,10894,668,4829,4726,389,98,19,10729,1,72,55,1,0,0,129
+حامد,Hamed,male,True,"Christian, Muslim, neutral",262,1790,3827,3822,942,48,10691,262,1787,3821,3811,936,48,10665,0,1,0,1,2,0,4
+ياسر,Yasser,male,True,"Christian, Muslim, neutral",491,10063,56,9,3,0,10622,489,9919,56,9,3,0,10476,0,116,0,0,0,0,116
+عبده,Abdou,male,True,"Christian, Muslim, neutral",137,1425,2992,4052,1518,195,10319,134,1390,2806,3875,1472,194,9871,3,31,174,159,40,1,408
+عمرو,Amr,male,True,"Christian, Muslim, neutral",4913,5030,73,61,136,15,10228,4909,5016,73,61,135,15,10209,0,5,0,0,1,0,6
+سالم,Salem,male,True,"Christian, Muslim, neutral",170,1073,1989,3284,3252,426,10194,170,1068,1979,3276,3243,425,10161,0,0,6,4,3,0,13
+عطيه,Attia,male,True,"Christian, Muslim, neutral",51,1013,2788,3424,2539,219,10034,50,965,2592,3147,2379,219,9352,1,42,179,266,152,0,640
+شعبان,Shaaban,male,True,"Christian, Muslim, neutral",115,3600,3809,1444,797,86,9851,115,3598,3800,1437,796,86,9832,0,0,3,3,0,0,6
+عبدالفتاح,Abdel Fattah,male,True,"Christian, Muslim, neutral",236,1214,4409,3234,721,33,9847,236,1214,4405,3232,721,33,9841,0,0,4,0,0,0,4
+زياد,Ziad,male,True,"Christian, Muslim, neutral",9107,115,5,4,4,0,9235,9096,114,4,4,4,0,9222,1,0,0,0,0,0,1
+هانى,Hany,male,True,"Christian, Muslim, neutral",265,8812,70,24,25,8,9204,241,7576,64,23,25,8,7937,22,1119,3,1,0,0,1145
+ندى,Nada,female,True,"Christian, Muslim, neutral",9128,1,0,1,1,1,9132,9076,1,0,1,1,1,9080,32,0,0,0,0,0,32
+صالح,Saleh,male,True,"Christian, Muslim, neutral",315,1473,2322,2698,2007,302,9117,315,1432,2255,2585,1953,300,8840,0,30,58,93,46,2,229
+حبيبه,Habiba,female,True,"Christian, Muslim, neutral",8983,0,0,0,25,4,9012,8969,0,0,0,25,4,8998,7,0,0,0,0,0,7
+رجب,Ragab,male,True,"Christian, Muslim, neutral",165,3340,3434,1308,594,79,8920,165,3339,3426,1305,594,79,8908,0,1,4,0,0,0,5
+وليد,Walid,male,True,"Christian, Muslim, neutral",585,8290,33,1,1,0,8910,578,8177,33,1,1,0,8790,4,74,0,0,0,0,78
+كامل,Kamel,male,True,"Christian, Muslim, neutral",175,1150,3632,3481,403,60,8901,169,1047,3197,2895,383,60,7751,3,83,401,512,16,0,1015
+خليل,Khalil,male,True,"Christian, Muslim, neutral",55,619,1514,3218,3065,375,8846,53,539,1379,2827,2789,367,7954,1,67,117,351,243,6,785
+رضا,Reda,system_neutral,True,"Christian, Muslim, neutral",427,7243,844,295,30,5,8844,420,6954,796,292,30,5,8497,7,258,40,1,0,0,306
+عيد,Eid,male,True,"Christian, Muslim, neutral",97,2528,2787,1845,1270,166,8693,94,2364,2662,1812,1264,166,8362,3,148,106,28,5,0,290
+عبد الحميد,Abdel Hamid,male,True,"Christian, Muslim, neutral",198,969,2980,3693,747,20,8607,198,969,2977,3691,746,20,8601,0,0,2,1,1,0,4
+طه,Taha,male,True,"Muslim, neutral",582,1820,2366,2651,786,119,8324,582,1819,2364,2649,785,119,8318,0,0,0,0,0,0,0
+عثمان,Osman,male,True,"Christian, Muslim, neutral",104,840,1867,2986,2219,208,8224,104,840,1864,2981,2215,208,8212,0,0,0,0,1,0,1
+حمدى,Hamdy,male,True,"Christian, Muslim, neutral",575,4489,2630,336,48,7,8085,574,4460,2599,333,48,7,8021,0,17,15,1,0,0,33
+عماد,Emad,male,True,"Christian, Muslim, neutral",424,7526,93,13,3,0,8059,383,6001,87,13,3,0,6487,34,1434,5,0,0,0,1473
+عوض,Awad,male,True,"Christian, Muslim, neutral",66,990,2246,2546,1957,194,7999,63,908,2067,2253,1712,191,7194,2,73,162,270,227,3,737
+طارق,Tarek,male,True,"Christian, Muslim, neutral",1065,6774,71,5,7,0,7922,1063,6682,69,5,7,0,7826,1,71,2,0,0,0,74
+سمير,Samir,male,True,"Christian, Muslim, neutral",372,4168,3178,175,4,2,7899,340,3622,2418,167,4,2,6553,22,482,673,7,0,0,1184
+كمال,Kamal,male,True,"Christian, Muslim, neutral",360,2202,4189,956,96,13,7816,351,2004,3815,923,95,13,7201,2,179,321,28,1,0,531
+منه الله,Menat Allah,female,False,"Christian, Muslim",7769,0,0,0,0,0,7769,7767,0,0,0,0,0,7767,2,0,0,0,0,0,2
+ساره,Sarah,female,True,"Christian, Muslim, neutral",7531,0,0,0,3,0,7534,7161,0,0,0,3,0,7164,281,0,0,0,0,0,281
+عبد العزيز,Abd El-Aziz,male,True,"Christian, Muslim, neutral",234,798,2439,3233,792,27,7523,234,798,2435,3225,791,27,7510,0,0,2,7,1,0,10
+منصور,Mansour,male,True,"Christian, Muslim, neutral",163,1519,1732,1979,1869,195,7457,161,1451,1627,1817,1746,190,6992,2,56,90,136,116,5,405
+اسماء,Asmaa,female,True,"Christian, Muslim, neutral",7360,0,0,0,0,0,7360,7355,0,0,0,0,0,7355,2,0,0,0,0,0,2
+فاطمه,Fatma,female,True,"Christian, Muslim",7349,1,0,3,2,0,7355,7348,1,0,3,2,0,7354,1,0,0,0,0,0,1
+عبدالمنعم,Abdelmonem,male,True,"Christian, Muslim, neutral",261,1198,3799,1674,318,18,7268,261,1198,3790,1673,318,18,7258,0,0,6,0,0,0,6
+عصام,Essam,male,True,"Christian, Muslim, neutral",387,6674,141,18,1,0,7221,383,6399,139,16,1,0,6938,1,235,2,0,0,0,238
+امين,Amin,male,True,"Christian, Muslim, neutral",229,876,2149,3244,631,49,7178,225,835,2016,3082,621,49,6828,1,40,118,130,8,0,297
+اسراء,Asraa,female,False,"Muslim, neutral",7097,1,0,0,0,0,7098,7094,1,0,0,0,0,7095,0,0,0,0,0,0,0
+فرج,Farag,male,True,"Christian, Muslim, neutral",69,1224,1919,2012,1627,179,7030,61,1130,1716,1711,1478,174,6270,6,91,189,279,136,4,705
+صابر,Saber,male,True,"Christian, Muslim, neutral",162,2439,3000,1132,188,21,6942,158,2339,2862,1108,184,21,6672,2,92,117,19,2,0,232
+موسى,Moussa,male,True,"Christian, Muslim, neutral",107,585,1315,2393,2253,278,6931,91,505,1193,2195,2167,273,6424,13,72,104,170,76,4,439
+ايه,Aih,system_neutral,True,"Christian, Muslim, neutral",6869,0,0,0,0,0,6869,6862,0,0,0,0,0,6862,5,0,0,0,0,0,5
+روان,Rawan,female,False,"Christian, Muslim, neutral",6850,0,0,0,0,0,6850,6848,0,0,0,0,0,6848,1,0,0,0,0,0,1
+اسامه,Osama,male,True,"Christian, Muslim, neutral",1066,5609,125,9,1,0,6810,1060,5318,125,9,1,0,6513,5,248,0,0,0,0,253
+ايمان,Iman,system_neutral,True,"Christian, Muslim, neutral",6595,5,2,0,0,0,6602,6564,5,2,0,0,0,6571,24,0,0,0,0,0,24
+هاجر,Hager,female,True,"Christian, Muslim, neutral",6578,0,0,0,1,2,6581,6570,0,0,0,1,2,6573,2,0,0,0,0,0,2
+السعيد,El Saeed,male,True,"Christian, Muslim, neutral",150,1400,2590,1998,350,22,6510,149,1392,2581,1992,350,22,6486,0,6,7,2,0,0,15
+شريف,Sharif,male,True,"Christian, Muslim, neutral",636,4751,228,269,498,96,6478,630,4576,224,268,498,96,6292,3,145,3,0,0,0,151
+سلمى,Salma,female,True,"Christian, Muslim, neutral",6246,26,43,48,39,2,6404,6241,26,43,48,39,2,6399,1,0,0,0,0,0,1
+شحاته,Shehata,male,True,"Christian, Muslim, neutral",17,595,1946,2127,1421,191,6297,15,524,1700,1762,1280,191,5472,2,65,231,336,132,0,766
+ياسمين,Yasmine,female,True,"Christian, Muslim, neutral",6204,0,0,1,3,0,6208,6177,0,0,1,3,0,6181,15,0,0,0,0,0,15
+جمعه,Gomaa,male,True,"Christian, Muslim, neutral",41,1454,2143,1481,954,116,6189,41,1452,2134,1475,953,116,6171,0,2,6,3,1,0,12
+علاء,Alaa,male,True,"Christian, Muslim, neutral",790,5311,23,1,0,0,6125,784,5235,23,1,0,0,6043,5,65,0,0,0,0,70
+وائل,Wael,male,False,"Christian, Muslim, neutral",159,5912,31,3,0,0,6105,154,5646,31,3,0,0,5834,3,229,0,0,0,0,232
+عباس,Abbas,male,True,"Christian, Muslim, neutral",36,552,2027,2841,539,40,6035,36,550,2018,2830,539,40,6013,0,1,8,2,0,0,11
+هشام,Hesham,male,True,"Christian, Muslim, neutral",803,5140,63,8,19,1,6034,800,5076,63,7,19,1,5966,1,46,0,0,0,0,47
+عاطف,Atef,male,True,"Christian, Muslim, neutral",197,4854,867,93,4,0,6015,192,4287,786,90,4,0,5359,4,519,75,3,0,0,601
+منه,Menna,female,False,"Christian, Muslim, neutral",5974,0,0,0,0,0,5974,5969,0,0,0,0,0,5969,2,0,0,0,0,0,2
+مجدى,Magdy,male,True,"Christian, Muslim, neutral",227,5100,558,63,7,1,5956,209,4175,422,62,7,1,4876,13,862,126,1,0,0,1002
+رحمه,Rahma,female,True,"Christian, Muslim",5840,0,1,3,10,4,5858,5839,0,1,3,10,4,5857,1,0,0,0,0,0,1
+كريم,Kareem,male,True,"Christian, Muslim, neutral",4792,543,129,138,134,26,5762,4743,510,117,132,133,26,5661,30,29,12,4,1,0,76
+عبدالسلام,Abd El-Salam,male,True,"Christian, Muslim, neutral",101,683,2033,2384,520,25,5746,101,683,2030,2383,520,25,5742,0,0,1,0,0,0,1
+نورهان,Nourhan,female,False,"Christian, Muslim, neutral",5679,1,0,0,0,0,5680,5633,1,0,0,0,0,5634,32,0,0,0,0,0,32
+بسمله,Basmala,female,False,"Muslim, neutral",5670,0,0,0,0,0,5670,5669,0,0,0,0,0,5669,0,0,0,0,0,0,0
+فوزى,Fawzy,male,True,"Christian, Muslim, neutral",130,1142,3772,539,31,7,5621,125,1057,3277,422,29,7,4917,4,81,442,105,1,0,633
+عبد الفتاح,Abd El Fattah,male,True,"Christian, Muslim, neutral",86,600,2102,2085,568,38,5479,86,599,2101,2081,568,38,5473,0,0,1,1,0,0,2
+الاء,Alaa,female,False,"Muslim, neutral",5474,0,0,0,0,0,5474,5470,0,0,0,0,0,5470,0,0,0,0,0,0,0
+فؤاد,Fouad,male,True,"Christian, Muslim, neutral",241,714,3173,1176,100,8,5412,235,667,2860,1028,98,8,4896,3,36,282,124,2,0,447
+حنين,Henein,female,True,"Christian, Muslim, neutral",5020,6,49,161,94,0,5330,5017,1,3,13,5,0,5039,2,4,42,138,84,0,270
+عبداللطيف,Abd El-Latif,male,True,"Christian, Muslim, neutral",67,533,1599,2458,623,27,5307,67,533,1594,2456,622,27,5299,0,0,3,1,0,0,4
+جابر,Gaber,male,True,"Christian, Muslim, neutral",96,1264,2653,916,255,27,5211,96,1214,2534,872,252,27,4995,0,39,101,37,3,0,180
+توفيق,Tawfik,male,True,"Christian, Muslim, neutral",87,407,1749,2552,304,29,5128,86,376,1585,2200,286,29,4562,0,28,147,316,16,0,507
+عبدالعال,Abd El-Aal,male,True,"Christian, Muslim, neutral",14,373,1331,2108,1207,92,5125,14,372,1331,2106,1205,92,5120,0,0,0,1,2,0,3
+نور,Nour,system_neutral,True,"Christian, Muslim, neutral",4402,255,133,159,117,36,5102,4368,243,125,152,114,36,5038,21,9,8,5,2,0,45
+ناصر,Nasser,male,True,"Christian, Muslim, neutral",118,4355,232,125,204,28,5062,116,4176,220,125,203,28,4868,2,150,11,0,0,0,163
+سلامه,Salama,male,True,"Christian, Muslim, neutral",75,896,1219,1350,1327,194,5061,73,873,1152,1241,1265,193,4797,2,20,60,96,56,1,235
+ايهاب,Ehab,male,False,"Christian, Muslim, neutral",457,4505,27,1,0,0,4990,430,4005,26,1,0,0,4462,21,450,1,0,0,0,472
+سامى,Samy,male,True,"Christian, Muslim, neutral",207,3380,1060,272,11,7,4937,193,2950,794,187,9,7,4140,10,383,243,81,2,0,719
+ربيع,Rabie,male,True,"Christian, Muslim, neutral",109,2258,1681,554,247,62,4911,109,2251,1672,551,247,62,4892,0,2,5,1,0,0,8
+سامح,Sameh,male,True,"Christian, Muslim, neutral",302,4540,51,11,0,0,4904,267,3863,46,10,0,0,4186,28,607,5,0,0,0,640
+اسلام,Islam,system_neutral,True,Muslim,3487,1306,36,12,2,3,4846,3487,1306,36,12,2,3,4846,0,0,0,0,0,0,0
+متولى,Metwally,male,True,"Muslim, neutral",29,353,1113,1847,1400,84,4826,29,353,1113,1843,1399,84,4821,0,0,0,0,0,0,0
+فاروق,Farouk,male,True,"Christian, Muslim, neutral",227,335,4059,164,1,2,4788,222,323,3878,161,1,2,4587,4,11,159,1,0,0,175
+عبدالعظيم,Abd El-Azim,male,True,"Christian, Muslim, neutral",106,492,2212,1753,147,4,4714,106,492,2209,1751,147,4,4709,0,0,3,1,0,0,4
+حسام,Hossam,male,True,"Christian, Muslim, neutral",1626,3003,36,5,1,0,4671,1621,2961,36,5,1,0,4624,3,27,0,0,0,0,30
+شروق,Shorouk,female,False,"Christian, Muslim, neutral",4635,0,0,0,0,0,4635,4627,0,0,0,0,0,4627,2,0,0,0,0,0,2
+رزق,Rezk,male,True,"Christian, Muslim, neutral",46,743,1229,1412,1057,126,4613,43,652,1031,1074,928,124,3852,3,86,185,326,125,2,727
+مرسى,Morsi,male,True,"Christian, Muslim, neutral",14,243,749,1929,1508,98,4541,14,242,745,1927,1504,98,4530,0,0,1,1,2,0,4
+نصر,Nasr,male,True,"Christian, Muslim, neutral",83,1493,1009,1036,768,126,4515,82,1430,956,955,740,126,4289,1,58,47,72,25,0,203
+تامر,Tamer,male,True,"Christian, Muslim, neutral",145,4131,87,67,5,1,4436,139,3984,44,29,5,1,4202,5,119,39,33,0,0,196
+عبدالوهاب,Abd El-Wahab,male,True,"Christian, Muslim",221,453,1511,1739,470,28,4422,221,453,1511,1738,470,28,4421,0,0,0,1,0,0,1
+عبدالحليم,Abd El Halim,male,True,"Christian, Muslim, neutral",109,488,1428,1923,447,22,4417,109,488,1426,1922,447,22,4414,0,0,2,0,0,0,2
+نبيل,Nabil,male,True,"Christian, Muslim, neutral",200,2776,1242,157,3,0,4378,187,2220,983,155,3,0,3548,13,503,235,1,0,0,752
+زكى,Zaki,male,True,"Christian, Muslim, neutral",17,303,1336,2397,214,30,4297,16,282,1162,1997,189,28,3674,1,17,168,332,23,0,541
+عبدالرحيم,Abd El-Rahim,male,True,Muslim,112,631,1345,1611,534,27,4260,112,631,1345,1611,534,27,4260,0,0,0,0,0,0,0
+عبدالمجيد,Abdel Mageed,male,True,"Christian, Muslim",52,344,1118,2079,626,33,4252,52,344,1116,2079,626,33,4250,0,0,2,0,0,0,2
+جنى,Gana,female,False,"Muslim, neutral",4223,0,1,0,0,0,4224,4220,0,0,0,0,0,4220,0,0,0,0,0,0,0
+سليم,Saleem,male,True,"Christian, Muslim, neutral",92,322,766,1397,1407,191,4175,91,306,730,1364,1401,189,4081,1,12,30,27,4,1,75
+ممدوح,Mamdouh,male,True,"Christian, Muslim, neutral",179,3144,771,74,6,0,4174,176,2841,734,73,6,0,3830,2,269,29,1,0,0,301
+عبدالقادر,Abd El-Kader,male,True,"Christian, Muslim",61,497,1322,1674,552,28,4134,61,497,1320,1674,551,28,4131,0,0,2,0,1,0,3
+صبحى,Sobhy,male,True,"Christian, Muslim, neutral",72,1622,2054,312,26,8,4094,70,1480,1721,243,25,8,3547,2,129,312,62,1,0,506
+عزت,Ezzat,male,True,"Christian, Muslim, neutral",161,1819,1682,283,59,16,4020,156,1567,1531,277,58,16,3605,2,228,133,5,1,0,369
+عيسى,Eissa,male,True,"Christian, Muslim, neutral",81,401,788,1148,1352,248,4018,73,323,701,1061,1321,246,3725,7,64,72,69,22,2,236
+انور,Anwar,male,True,"Christian, Muslim, neutral",113,1346,1908,559,58,12,3996,109,1269,1705,516,58,12,3669,3,66,173,38,0,0,280
+صبرى,Sabry,male,True,"Christian, Muslim, neutral",131,2031,1398,323,46,10,3939,125,1923,1284,314,46,10,3702,3,101,98,8,0,0,210
+عبد المنعم,Abdel Moneim,male,True,"Christian, Muslim, neutral",90,648,1967,990,218,16,3929,90,647,1961,990,218,16,3922,0,0,4,0,0,0,4
+ماهر,Maher,male,True,"Christian, Muslim, neutral",186,2429,1052,200,14,0,3881,168,2097,866,194,14,0,3339,12,309,165,5,0,0,491
+عامر,Amer,male,True,"Christian, Muslim, neutral",124,736,506,744,1414,298,3822,123,723,502,740,1412,297,3797,0,9,2,3,0,0,14
+شيماء,Shaimaa,female,False,Muslim,3815,0,0,0,0,0,3815,3815,0,0,0,0,0,3815,0,0,0,0,0,0,0
+سما,Sama,female,False,"Christian, Muslim, neutral",3779,0,0,0,0,0,3779,3758,0,0,0,0,0,3758,12,0,0,0,0,0,12
+مصطفي,Mostafa,male,True,"Christian, Muslim, neutral",604,1060,868,714,437,33,3716,604,1059,866,712,437,33,3711,0,0,1,0,0,0,1
+حماده,Hamada,male,True,"Christian, Muslim, neutral",190,2772,289,184,187,46,3668,189,2761,288,184,186,46,3654,1,7,0,0,1,0,9
+حلمى,Helmy,male,True,"Christian, Muslim, neutral",108,534,2068,742,104,21,3577,102,505,1841,681,98,21,3248,5,25,199,53,3,0,285
+فارس,Fares,male,True,"Christian, Muslim, neutral",2671,380,254,160,92,14,3571,2637,350,202,112,87,14,3402,24,26,46,46,4,0,146
+جاد,Gad,male,True,"Christian, Muslim, neutral",22,250,747,1355,1070,122,3566,19,221,629,1136,1012,121,3138,1,26,108,200,57,1,393
+مسعد,Mossaad,male,True,"Christian, Muslim, neutral",67,1415,1252,615,198,14,3561,66,1384,1170,465,160,14,3259,1,27,67,127,35,0,257
+فهمى,Fahmy,male,True,"Christian, Muslim, neutral",39,249,1413,1608,162,29,3500,37,232,1251,1283,147,29,2979,1,14,142,287,14,0,458
+يحيى,Yehia,male,True,"Christian, Muslim, neutral",1050,1123,964,197,138,18,3490,1050,1114,947,197,138,18,3464,0,9,13,0,0,0,22
+هاشم,Hashem,male,True,"Christian, Muslim, neutral",102,570,1125,1201,421,68,3487,102,570,1123,1199,420,68,3482,0,0,1,0,0,0,1
+جلال,Galal,male,True,"Christian, Muslim, neutral",172,838,1715,566,156,32,3479,172,831,1700,564,154,32,3453,0,5,8,0,1,0,14
+حسنى,Hosni,male,True,"Christian, Muslim, neutral",107,1167,1745,391,56,12,3478,106,1126,1683,383,56,12,3366,1,37,50,8,0,0,96
+عبد اللطيف,Abd El-Latif,male,True,"Christian, Muslim, neutral",51,299,1007,1585,485,33,3460,51,299,1007,1582,485,33,3457,0,0,0,1,0,0,1
+عبد السلام,Abdel Salam,male,True,"Christian, Muslim, neutral",37,453,1087,1491,371,19,3458,37,453,1085,1490,371,19,3455,0,0,2,0,0,0,2
+مى,Mai,female,True,"Christian, Muslim, neutral",3434,1,0,0,1,0,3436,3419,1,0,0,1,0,3421,6,0,0,0,0,0,6
+حسانين,Hassanein,male,True,"Muslim, neutral",13,215,583,1291,1218,97,3417,13,215,582,1290,1216,97,3413,0,0,0,0,0,0,0
+حافظ,Hafez,male,True,"Christian, Muslim, neutral",32,334,783,1814,426,16,3405,32,330,763,1799,425,16,3365,0,3,19,9,0,0,31
+عبدالرازق,Abd El-Razek,male,True,"Christian, Muslim",62,401,1347,1203,363,18,3394,62,401,1346,1201,363,18,3391,0,0,1,2,0,0,3
+خليفه,Khalifa,male,True,"Christian, Muslim, neutral",26,314,772,1139,970,135,3356,25,308,744,1115,962,135,3289,1,6,25,24,5,0,61
+عبدالغنى,Abd El-Ghani,male,True,"Christian, Muslim, neutral",70,267,1086,1603,313,15,3354,70,267,1083,1603,312,15,3350,0,0,3,0,0,0,3
+خلف,Khalaf,male,True,"Christian, Muslim, neutral",26,783,1466,700,300,60,3335,25,728,1340,668,299,60,3120,0,44,104,25,1,0,174
+يونس,Younis,male,True,"Christian, Muslim, neutral",89,267,831,1119,869,115,3290,89,264,830,1112,867,115,3277,0,1,1,4,1,0,7
+عبدالجواد,Abdel Gawad,male,True,"Christian, Muslim, neutral",22,268,857,1577,535,24,3283,22,267,856,1577,534,24,3280,0,0,1,0,0,0,1
+جرجس,Girgis,male,True,"Christian, Muslim, neutral",254,736,624,915,731,12,3272,1,0,0,0,0,0,1,253,736,624,913,730,12,3268
+زينب,Zeinab,female,True,Muslim,3262,0,0,0,3,0,3265,3262,0,0,0,3,0,3265,0,0,0,0,0,0,0
+امام,Emam,male,True,"Christian, Muslim, neutral",51,332,783,1394,649,52,3261,51,332,782,1390,648,52,3255,0,0,0,2,0,0,2
+عبد العال,Abd El-Aal,male,True,"Christian, Muslim, neutral",11,202,700,1247,982,71,3213,11,201,699,1247,981,71,3210,0,1,1,0,0,0,2
+خميس,Khamis,male,True,"Christian, Muslim, neutral",23,912,1132,577,431,43,3118,23,899,1112,572,427,43,3076,0,11,17,4,2,0,34
+مروان,Marwan,male,True,"Christian, Muslim, neutral",2785,197,45,43,29,11,3110,2781,192,44,43,29,11,3100,1,1,0,0,0,0,2
+زكريا,Zakaria,male,True,"Christian, Muslim, neutral",132,961,1546,388,53,0,3080,129,835,1371,363,49,0,2747,2,116,163,21,4,0,306
+محسن,Mohsen,male,True,"Christian, Muslim, neutral",139,2184,476,112,86,17,3014,138,2071,470,111,86,17,2893,1,97,5,1,0,0,104
+حبيبة,Habiba,female,True,"Christian, Muslim",2969,0,0,1,15,0,2985,2968,0,0,1,15,0,2984,1,0,0,0,0,0,1
+اميره,Amira,female,False,"Christian, Muslim, neutral",2967,0,0,0,0,0,2967,2928,0,0,0,0,0,2928,35,0,0,0,0,0,35
+بدر,Badr,male,True,"Christian, Muslim, neutral",434,503,519,531,820,145,2952,431,485,507,530,818,145,2916,2,13,11,0,0,0,26
+منار,Manar,female,False,"Christian, Muslim, neutral",2948,0,0,0,0,0,2948,2925,0,0,0,0,0,2925,14,0,0,0,0,0,14
+عمار,Ammar,male,True,"Christian, Muslim, neutral",1760,208,150,240,465,83,2906,1759,208,147,239,463,83,2899,0,0,2,0,0,0,2
+بدوى,Badawy,male,True,"Christian, Muslim, neutral",18,447,571,801,878,182,2897,18,445,569,788,861,181,2862,0,1,2,11,11,0,25
+مختار,Mokhtar,male,True,"Christian, Muslim, neutral",118,883,1221,541,89,7,2859,118,862,1178,533,89,7,2787,0,17,38,8,0,0,63
+حازم,Hazem,male,True,"Christian, Muslim, neutral",1583,1221,39,6,0,0,2849,1579,1202,39,6,0,0,2826,1,16,0,0,0,0,17
+شوقى,Shawky,male,True,"Christian, Muslim, neutral",110,544,1759,387,24,3,2827,103,501,1496,347,24,3,2474,3,41,227,36,0,0,307
+ادهم,Adham,male,True,"Christian, Muslim, neutral",2568,188,37,12,4,3,2812,2563,185,35,12,4,3,2802,2,2,0,0,0,0,4
+عبد الرحيم,Abd El-Rahim,male,True,"Christian, Muslim, neutral",64,379,798,1070,473,27,2811,64,379,796,1070,473,27,2809,0,0,1,0,0,0,1
+رضوان,Redwan,male,True,"Muslim, neutral",65,285,507,851,980,115,2803,65,285,507,849,979,114,2799,0,0,0,0,0,0,0
+عبدالهادى,Abd El-Hady,male,True,"Muslim, neutral",62,367,920,1051,378,21,2799,62,367,919,1051,378,21,2798,0,0,0,0,0,0,0
+مازن,Mazen,male,True,"Christian, Muslim, neutral",2589,92,35,33,18,2,2769,2583,90,34,31,18,2,2758,2,0,0,0,0,0,2
+رشاد,Rashad,male,True,"Christian, Muslim, neutral",81,463,1418,658,103,8,2731,80,438,1389,658,103,8,2676,1,23,24,0,0,0,48
+رنا,Rana,female,True,"Christian, Muslim, neutral",2719,0,0,0,0,0,2719,2688,0,0,0,0,0,2688,22,0,0,0,0,0,22
+بسنت,Basant,female,False,"Christian, Muslim, neutral",2695,0,0,0,0,0,2695,2529,0,0,0,0,0,2529,140,0,0,0,0,0,140
+عبدالنبى,Abdel Nabi,neutral,True,Muslim,0,649,1081,644,285,29,2688,0,649,1081,644,285,29,2688,0,0,0,0,0,0,0
+عبدالكريم,Abd El-Karim,male,True,"Christian, Muslim, neutral",85,372,889,908,380,31,2665,85,372,885,907,380,31,2660,0,0,3,1,0,0,4
+محروس,Mahrous,male,True,"Christian, Muslim, neutral",20,659,1126,654,185,8,2652,20,591,975,589,181,8,2364,0,61,143,61,3,0,268
+بيومى,Bayoumi,male,True,"Christian, Muslim, neutral",4,139,511,1196,737,58,2645,4,139,510,1192,736,58,2639,0,0,1,0,1,0,2
+هنا,Hana,female,True,"Christian, Muslim, neutral",2632,0,0,0,9,4,2645,2622,0,0,0,9,4,2635,3,0,0,0,0,0,3
+عبد الوهاب,Abdel Wahab,male,True,"Christian, Muslim, neutral",93,239,814,1088,377,18,2629,93,239,813,1086,376,18,2625,0,0,0,2,0,0,2
+رفعت,Refaat,male,True,"Christian, Muslim, neutral",81,1082,1168,265,19,11,2626,81,915,1051,257,19,11,2334,0,154,111,4,0,0,269
+حسنين,Hassanein,male,True,"Muslim, neutral",4,130,454,892,1011,86,2577,4,130,453,891,1011,86,2575,0,0,0,0,0,0,0
+عبد المجيد,Abdel Megid,male,True,"Christian, Muslim, neutral",21,189,609,1235,481,29,2564,21,189,605,1232,481,29,2557,0,0,3,2,0,0,5
+دنيا,Donia,female,True,"Christian, Muslim, neutral",2485,2,1,11,41,12,2552,2450,1,1,11,41,12,2516,20,0,0,0,0,0,20
+عبد القادر,Abd El-Kader,male,True,Muslim,26,250,800,1063,391,19,2549,26,250,800,1063,391,19,2549,0,0,0,0,0,0,0
+عبدالمقصود,Abdelmaksoud,male,True,"Christian, Muslim, neutral",13,195,610,1380,322,12,2532,13,194,610,1377,321,12,2527,0,1,0,3,0,0,4
+ابوزيد,Abu Zeid,male,True,"Muslim, neutral",16,181,499,967,782,82,2527,16,181,498,966,782,82,2525,0,0,0,0,0,0,0
+فرح,Farah,system_neutral,True,"Christian, Muslim, neutral",2276,44,57,76,61,12,2526,2259,13,19,39,54,12,2396,11,29,36,33,5,0,114
+مبروك,Mabrouk,male,True,"Christian, Muslim, neutral",9,416,767,797,490,39,2518,9,412,763,797,490,39,2510,0,3,3,0,0,0,6
+معوض,Mawad,male,True,"Christian, Muslim, neutral",13,252,862,902,427,21,2477,12,231,800,753,350,21,2167,0,18,57,138,72,0,285
+مدحت,Medhat,male,True,"Christian, Muslim, neutral",110,2221,126,16,3,0,2476,100,1855,118,14,3,0,2090,9,331,7,0,0,0,347
+قطب,Kotb,male,True,"Christian, Muslim, neutral",6,206,660,1035,532,28,2467,6,206,655,1035,530,28,2460,0,0,3,0,1,0,4
+الدسوقى,El-Desouky,male,True,Muslim,7,213,519,1102,542,63,2446,7,213,519,1102,542,63,2446,0,0,0,0,0,0,0
+سيف,Seif,male,True,"Christian, Muslim, neutral",1790,81,104,264,144,22,2405,1777,69,85,224,131,22,2308,10,11,18,37,12,0,88
+الشحات,El Shahat,male,True,"Christian, Muslim",3,404,1014,654,268,42,2385,3,402,1006,652,268,42,2373,0,2,8,2,0,0,12
+صادق,Sadek,male,True,"Christian, Muslim, neutral",24,183,718,1281,153,17,2376,23,165,573,1040,148,17,1966,0,14,129,208,4,0,355
+طلعت,Talaat,male,True,"Christian, Muslim, neutral",68,1123,953,168,20,9,2341,65,1012,869,166,20,9,2141,1,106,72,1,0,0,180
+كيرلس,Kyrillos,male,True,Christian,2203,26,12,72,18,0,2331,0,0,0,0,0,0,0,2203,26,12,72,18,0,2331
+قاسم,Kassem,male,True,"Christian, Muslim, neutral",48,213,473,751,744,98,2327,48,211,470,751,744,98,2322,0,1,1,0,0,0,2
+دعاء,Doaa,female,False,Muslim,2319,0,0,0,0,0,2319,2319,0,0,0,0,0,2319,0,0,0,0,0,0,0
+غريب,Ghareeb,male,True,"Christian, Muslim, neutral",14,390,709,776,383,43,2315,14,388,707,776,381,43,2309,0,1,0,0,0,0,1
+عبدالتواب,Abdel Tawab,male,True,"Christian, Muslim, neutral",32,356,1065,780,69,5,2307,32,355,1061,780,69,5,2302,0,1,2,0,0,0,3
+امنيه,Omnia,female,False,Muslim,2292,0,0,0,0,0,2292,2292,0,0,0,0,0,2292,0,0,0,0,0,0,0
+منة الله,Menat Allah,female,False,"Christian, Muslim",2268,0,0,0,0,0,2268,2267,0,0,0,0,0,2267,1,0,0,0,0,0,1
+بسيونى,Basyouni,male,True,"Christian, Muslim, neutral",15,250,663,859,421,51,2259,15,249,658,853,419,51,2245,0,0,2,3,1,0,6
+عبد الحليم,Abdel Halim,male,True,"Christian, Muslim, neutral",32,235,598,1037,340,15,2257,32,234,596,1037,339,15,2253,0,0,2,0,1,0,3
+مؤمن,Moamen,male,True,"Christian, Muslim, neutral",1472,633,45,78,22,3,2253,1469,616,45,78,22,3,2233,1,14,0,0,0,0,15
+جوده,Gouda,male,True,"Christian, Muslim, neutral",20,212,752,841,359,61,2245,19,209,724,800,336,61,2149,0,2,22,35,21,0,80
+عبد العظيم,Abd El-Azim,male,True,"Christian, Muslim, neutral",47,233,943,893,124,5,2245,47,233,943,891,124,5,2243,0,0,0,1,0,0,1
+عبدالعاطى,Abdel-Aaty,male,True,"Christian, Muslim, neutral",18,197,925,860,229,12,2241,18,197,923,859,228,12,2237,0,0,2,0,0,0,2
+صلاح الدين,Salah El Din,male,True,"Christian, Muslim",175,568,1191,260,31,7,2232,175,568,1188,260,31,7,2229,0,0,3,0,0,0,3
+ندا,Nada,female,True,"Christian, Muslim, neutral",1794,18,28,78,255,53,2226,1778,18,26,76,248,52,2198,7,0,2,2,6,0,17
+عبدالخالق,Abdelkhalek,male,True,"Christian, Muslim",47,262,786,862,245,16,2218,47,262,785,861,245,16,2216,0,0,1,1,0,0,2
+لطفى,Lotfy,male,True,"Christian, Muslim, neutral",33,381,1297,413,74,12,2210,32,347,1171,383,72,12,2017,0,33,110,23,2,0,168
+مسعود,Massoud,male,True,"Christian, Muslim, neutral",16,407,608,648,475,55,2209,16,382,525,524,407,55,1909,0,22,71,110,60,0,263
+صديق,Seddik,male,True,"Christian, Muslim, neutral",30,153,749,1062,163,23,2180,30,150,703,1017,160,23,2083,0,2,41,38,2,0,83
+ياسين,Yassin,male,True,"Christian, Muslim, neutral",1128,225,306,340,159,15,2173,1126,225,304,339,159,15,2168,0,0,0,1,0,0,1
+درويش,Darwish,male,True,"Christian, Muslim, neutral",6,125,359,684,877,119,2170,6,125,357,681,877,119,2165,0,0,0,3,0,0,3
+عبد الرازق,Abd El-Razek,male,True,"Christian, Muslim",28,224,740,792,331,22,2137,28,224,739,792,331,22,2136,0,0,1,0,0,0,1
+حاتم,Hatem,male,True,"Christian, Muslim, neutral",244,1791,62,12,19,4,2132,244,1762,61,12,19,4,2102,0,15,0,0,0,0,15
+يارا,Yara,female,False,"Christian, Muslim, neutral",2128,0,0,0,0,0,2128,2101,0,0,0,0,0,2101,8,0,0,0,0,0,8
+فريد,Farid,male,True,"Christian, Muslim, neutral",84,670,706,545,107,10,2122,77,585,619,472,98,10,1861,7,71,78,66,9,0,231
+عطية,Attia,male,True,"Christian, Muslim, neutral",9,184,650,720,515,40,2118,8,178,610,667,486,39,1988,0,6,37,49,26,1,119
+عبدالعليم,Abdelaleem,male,True,"Muslim, neutral",35,269,822,862,99,4,2091,35,269,822,861,99,4,2090,0,0,0,0,0,0,0
+هلال,Helal,male,True,"Christian, Muslim, neutral",30,449,477,420,605,103,2084,30,416,452,412,600,103,2013,0,31,23,7,3,0,64
+معاذ,Moaz,male,True,Muslim,1963,40,24,23,5,0,2055,1963,40,24,23,5,0,2055,0,0,0,0,0,0,0
+عبد الغنى,Abd El-Ghani,male,True,"Christian, Muslim",19,187,534,1027,267,20,2054,19,187,534,1024,267,20,2051,0,0,0,3,0,0,3
+ثابت,Thabet,male,True,"Christian, Muslim, neutral",22,286,960,690,78,16,2052,20,238,712,537,74,16,1597,0,41,222,130,3,0,396
+حنا,Hanna,male,True,"Christian, neutral",11,203,381,863,560,5,2023,0,0,0,0,0,0,0,11,203,381,857,557,5,2014
+بخيت,Bakheet,male,True,"Christian, Muslim, neutral",5,198,517,765,496,32,2013,4,144,355,477,342,30,1352,1,51,151,272,146,2,623
+فتحي,Fathy,male,True,"Christian, Muslim, neutral",69,415,1353,164,6,0,2007,67,406,1291,161,5,0,1930,1,8,47,2,0,0,58
+بلال,Belal,male,True,"Muslim, neutral",1221,350,99,95,207,27,1999,1221,348,99,95,207,26,1996,0,0,0,0,0,0,0
+حماد,Hammad,male,True,"Christian, Muslim, neutral",22,191,368,581,701,100,1963,22,190,368,580,698,100,1958,0,0,0,0,2,0,2
+عطا,Atta,male,True,"Christian, Muslim, neutral",12,272,667,554,359,84,1948,11,233,584,492,342,82,1744,0,35,78,56,15,2,186
+رياض,Riad,male,True,"Christian, Muslim, neutral",165,221,605,889,64,1,1945,162,207,481,667,52,1,1570,2,13,113,204,11,0,343
+مروه,Marwa,female,False,"Christian, Muslim",1945,0,0,0,0,0,1945,1944,0,0,0,0,0,1944,1,0,0,0,0,0,1
+ريم,Reem,female,False,"Christian, Muslim, neutral",1940,0,0,0,0,0,1940,1936,0,0,0,0,0,1936,3,0,0,0,0,0,3
+ريهام,Reham,female,False,"Christian, Muslim, neutral",1938,0,0,0,0,0,1938,1919,0,0,0,0,0,1919,14,0,0,0,0,0,14
+اسامة,Osama,male,True,"Christian, Muslim, neutral",289,1611,23,3,0,0,1926,289,1510,23,3,0,0,1825,0,88,0,0,0,0,88
+عفيفى,Afifi,male,True,"Christian, Muslim, neutral",11,132,287,656,755,68,1909,10,125,281,654,755,68,1893,1,5,6,1,0,0,13
+حنفى,Hanafy,male,True,"Muslim, neutral",8,268,822,575,215,20,1908,8,268,820,575,215,20,1906,0,0,0,0,0,0,0
+شاكر,Shaker,male,True,"Christian, Muslim, neutral",45,356,701,708,69,14,1893,39,329,564,481,64,14,1491,4,26,123,204,5,0,362
+خلود,Kholoud,female,False,"Christian, Muslim, neutral",1886,0,0,0,0,0,1886,1884,0,0,0,0,0,1884,1,0,0,0,0,0,1
+حمزه,Hamza,male,True,"Christian, Muslim, neutral",740,168,341,395,207,28,1879,740,168,340,394,207,28,1877,0,0,1,0,0,0,1
+مينا,Mina,male,True,"Christian, Muslim, neutral",1507,220,24,80,45,2,1878,1,0,0,0,0,0,1,1505,219,24,76,44,2,1870
+عبدالستار,Abdel Sattar,male,True,"Muslim, neutral",29,259,1099,443,40,3,1873,29,259,1098,443,40,3,1872,0,0,0,0,0,0,0
+عبد الهادى,Abd El-Hadi,male,True,"Muslim, neutral",38,238,582,702,296,16,1872,38,238,582,701,296,16,1871,0,0,0,0,0,0,0
+عبد الجواد,Abd El Gawad,male,True,"Christian, Muslim, neutral",12,168,456,830,369,35,1870,12,168,455,828,369,35,1867,0,0,1,0,0,0,1
+ناجى,Nagy,male,True,"Christian, Muslim, neutral",65,831,616,211,125,21,1869,58,663,488,204,124,21,1558,4,157,108,5,1,0,275
+عبدالسميع,Abdel Samie,male,True,"Christian, Muslim, neutral",16,181,785,737,141,7,1867,16,181,783,736,141,7,1864,0,0,0,1,0,0,1
+عبدالحكيم,Abd El Hakeem,male,True,"Christian, Muslim, neutral",56,412,745,608,42,0,1863,56,412,741,606,42,0,1857,0,0,2,1,0,0,3
+فراج,Farag,male,True,"Christian, Muslim, neutral",18,301,473,570,432,65,1859,18,299,471,567,430,65,1850,0,1,0,0,0,0,1
+دينا,Dina,female,False,"Christian, Muslim, neutral",1846,0,0,0,0,0,1846,1791,0,0,0,0,0,1791,47,0,0,0,0,0,47
+منى,Mona,female,False,"Christian, Muslim, neutral",1846,0,0,0,0,0,1846,1827,0,0,0,0,0,1827,14,0,0,0,0,0,14
+مهدى,Mahdy,male,True,"Christian, Muslim, neutral",43,306,438,753,272,26,1838,43,304,436,750,270,26,1829,0,2,2,1,0,0,5
+عاشور,Ashour,male,True,"Christian, Muslim, neutral",13,499,596,299,340,85,1832,13,498,594,299,340,85,1829,0,1,1,0,0,0,2
+المتولى,El-Metwally,male,True,"Christian, Muslim, neutral",5,166,449,741,430,21,1812,5,165,448,740,428,21,1807,0,1,1,0,2,0,4
+ماجد,Maged,male,True,"Christian, Muslim, neutral",193,1456,107,30,16,2,1804,172,883,101,30,15,2,1203,13,535,4,0,1,0,553
+بكر,Bakr,male,True,"Christian, Muslim, neutral",39,308,463,511,413,63,1797,39,308,463,510,411,63,1794,0,0,0,0,1,0,1
+حسان,Hassan,male,True,"Christian, Muslim, neutral",32,268,393,559,496,47,1795,32,266,390,558,496,47,1789,0,1,3,0,0,0,4
+حجازى,Hegazy,male,True,"Christian, Muslim",7,170,244,456,744,150,1771,7,169,243,456,744,150,1769,0,1,1,0,0,0,2
+عبدالغفار,Abdelghaffar,male,True,"Christian, Muslim",23,198,565,799,171,13,1769,23,198,564,799,171,13,1768,0,0,1,0,0,0,1
+هبه,Heba,female,True,"Christian, Muslim, neutral",1744,1,0,0,2,1,1748,1736,0,0,0,2,1,1739,6,1,0,0,0,0,7
+عبدالناصر,Abd El-Nasser,male,True,"Christian, Muslim",47,1343,200,122,24,3,1739,47,1337,200,122,24,3,1733,0,6,0,0,0,0,6
+هدى,Hoda,female,True,"Christian, Muslim, neutral",1719,0,0,5,8,1,1733,1716,0,0,5,8,1,1730,2,0,0,0,0,0,2
+نجيب,Naguib,male,True,"Christian, Muslim, neutral",25,160,762,730,45,10,1732,23,113,442,421,37,10,1046,2,42,308,288,8,0,648
+جميل,Gamil,male,True,"Christian, Muslim, neutral",31,643,747,160,104,35,1720,28,452,529,132,103,35,1279,3,177,196,27,1,0,404
+يسرى,Yousry,male,True,"Christian, Muslim, neutral",73,1135,401,97,10,1,1717,70,1065,374,93,10,1,1613,3,63,24,3,0,0,93
+امير,Amir,male,True,"Christian, Muslim, neutral",702,879,84,49,1,0,1715,591,676,50,40,1,0,1358,94,188,30,8,0,0,320
+تسنيم,Tasneem,female,False,Muslim,1715,0,0,0,0,0,1715,1715,0,0,0,0,0,1715,0,0,0,0,0,0,0
+فايز,Fayez,male,True,"Christian, Muslim, neutral",46,641,863,151,13,0,1714,42,488,512,102,12,0,1156,3,141,326,43,1,0,514
+حسام الدين,Hossam El-Din,male,True,"Muslim, neutral",185,1390,75,22,36,2,1710,185,1388,75,22,36,2,1708,0,0,0,0,0,0,0
+نورا,Noura,female,False,"Christian, Muslim, neutral",1696,0,0,0,0,0,1696,1673,0,0,0,0,0,1673,20,0,0,0,0,0,20
+هيثم,Haitham,male,True,"Christian, Muslim, neutral",199,1474,15,2,0,1,1691,198,1465,15,2,0,1,1681,0,5,0,0,0,0,5
+النجار,El-Naggar,male,True,"Christian, Muslim",1,15,36,204,1087,346,1689,1,15,35,203,1086,345,1685,0,0,1,1,1,1,4
+كرم,Karam,male,True,"Christian, Muslim, neutral",118,1251,255,30,24,7,1685,109,1061,175,21,23,7,1396,6,167,73,7,1,0,254
+ميخائيل,Mikhaiel,male,True,"Christian, neutral",75,159,310,654,463,9,1670,0,0,0,0,0,0,0,75,159,310,653,461,9,1667
+دسوقى,Desouky,male,True,"Christian, Muslim, neutral",3,160,426,622,419,39,1669,3,160,425,621,419,39,1667,0,0,1,0,0,0,1
+علام,Allam,male,True,"Christian, Muslim, neutral",19,142,312,456,626,114,1669,19,141,308,452,626,114,1660,0,1,2,2,0,0,5
+يحى,Yehia,male,True,"Christian, Muslim, neutral",239,637,570,142,69,10,1667,239,629,551,141,69,10,1639,0,7,13,1,0,0,21
+خضر,Khader,male,True,"Muslim, neutral",20,133,251,348,770,140,1662,20,132,250,347,770,139,1658,0,0,0,0,0,0,0
+سيف الدين,Seif El Din,male,True,"Christian, Muslim",1367,74,87,63,62,8,1661,1366,74,87,63,62,8,1660,1,0,0,0,0,0,1
+امل,Amal,female,False,"Christian, Muslim, neutral",1626,15,3,0,0,0,1644,1596,13,3,0,0,0,1612,18,1,0,0,0,0,19
+عبدالواحد,Abd El Wahed,male,True,Muslim,27,133,507,625,332,17,1641,27,133,507,625,332,17,1641,0,0,0,0,0,0,0
+عويس,Oweis,male,True,"Christian, Muslim, neutral",2,116,551,616,310,39,1634,2,114,549,613,310,39,1627,0,1,0,1,0,0,2
+عبدالمحسن,Abdel-Mohsen,male,True,"Christian, Muslim",30,231,816,475,78,0,1630,30,231,816,474,78,0,1629,0,0,0,1,0,0,1
+داود,Dawoud,male,True,"Christian, Muslim, neutral",27,88,238,425,725,124,1627,14,49,126,251,636,123,1199,11,35,102,165,81,0,394
+جمعة,Gomaa,male,True,"Christian, Muslim, neutral",17,483,586,329,185,20,1620,17,481,585,328,185,20,1616,0,0,1,0,0,0,1
+منير,Mounir,male,True,"Christian, Muslim, neutral",54,531,842,162,21,5,1615,43,375,514,130,20,5,1087,7,145,300,27,1,0,480
+فهيم,Fahim,male,True,"Christian, Muslim, neutral",11,102,571,862,64,4,1614,10,80,383,523,54,4,1054,1,21,180,309,8,0,519
+حبيب,Habib,male,True,"Christian, Muslim, neutral",27,75,314,743,374,78,1611,22,43,115,197,334,77,788,5,28,190,519,34,0,776
+نوران,Nouran,female,False,"Christian, Muslim, neutral",1611,0,0,0,0,0,1611,1607,0,0,0,0,0,1607,2,0,0,0,0,0,2
+دياب,Diab,male,True,"Christian, Muslim, neutral",24,126,303,508,536,104,1601,24,117,301,504,533,104,1583,0,7,2,3,3,0,15
+جنه,Genna,female,True,"Christian, Muslim",1593,0,0,0,3,1,1597,1592,0,0,0,3,1,1596,1,0,0,0,0,0,1
+رضوى,Radwa,female,False,"Muslim, neutral",1597,0,0,0,0,0,1597,1595,0,0,0,0,0,1595,0,0,0,0,0,0,0
+عبيد,Obeid,male,True,"Christian, Muslim, neutral",10,155,342,553,454,80,1594,8,144,286,445,415,79,1377,2,9,48,98,35,1,193
+عزيز,Aziz,male,True,"Christian, Muslim, neutral",23,193,594,693,79,6,1588,16,114,191,130,50,5,506,6,74,382,532,28,1,1023
+فكرى,Fikry,male,True,"Christian, Muslim, neutral",23,308,1005,242,6,3,1587,21,286,852,194,4,3,1360,1,18,137,41,2,0,199
+الحسينى,El-Hosseiny,male,True,Muslim,61,290,493,522,202,17,1585,61,290,493,522,202,17,1585,0,0,0,0,0,0,0
+فاطمة,Fatima,female,False,Muslim,1582,0,0,0,0,0,1582,1582,0,0,0,0,0,1582,0,0,0,0,0,0,0
+فرحات,Farahat,male,True,"Christian, Muslim, neutral",12,258,493,428,327,43,1561,12,250,468,419,325,43,1517,0,7,23,9,0,0,39
+شلبى,Shalaby,neutral,True,"Christian, Muslim, neutral",0,71,175,372,809,129,1556,0,65,156,354,796,127,1498,0,6,16,14,10,0,46
+عرفه,Arafa,male,True,"Christian, Muslim, neutral",36,500,312,360,302,43,1553,36,499,310,359,302,43,1549,0,0,1,1,0,0,2
+راشد,Rashed,male,True,"Christian, Muslim, neutral",24,141,419,511,384,57,1536,23,137,375,494,382,56,1467,0,4,34,14,2,1,55
+زيدان,Zeidan,male,True,"Christian, Muslim, neutral",20,92,291,475,559,86,1523,19,92,285,475,558,85,1514,1,0,6,0,0,0,7
+باسم,Bassem,male,False,"Christian, Muslim, neutral",557,921,19,1,0,0,1498,504,651,18,1,0,0,1174,35,249,1,0,0,0,285
+شاهين,Shaheen,male,True,"Christian, Muslim, neutral",22,58,84,287,864,180,1495,22,57,83,287,863,180,1492,0,1,1,0,0,0,2
+اروى,Arwa,female,False,"Muslim, neutral",1491,0,0,0,0,0,1491,1489,0,0,0,0,0,1489,0,0,0,0,0,0,0
+الشربينى,El-Sherbiny,male,True,"Christian, Muslim",5,88,240,534,527,87,1481,5,88,240,534,526,87,1480,0,0,0,0,1,0,1
+طاهر,Taher,male,True,"Christian, Muslim, neutral",92,582,444,281,70,9,1478,92,576,443,278,70,9,1468,0,5,0,1,0,0,6
+هاني,Hany,male,True,"Christian, Muslim, neutral",44,1411,11,2,9,1,1478,39,1205,10,2,9,1,1266,5,187,1,0,0,0,193
+رأفت,Raafat,male,True,"Christian, Muslim, neutral",49,1085,275,53,9,4,1475,47,835,255,53,9,4,1203,2,225,17,0,0,0,244
+غنيم,Ghonem,male,True,"Christian, Muslim",9,37,103,287,849,172,1457,9,37,102,286,849,172,1455,0,0,1,1,0,0,2
+بركات,Barakat,male,True,"Christian, Muslim, neutral",16,207,276,310,554,77,1440,16,185,263,306,551,77,1398,0,20,11,2,1,0,34
+عبداللاه,Abd El Lah,male,True,Muslim,37,183,500,579,112,8,1419,37,183,500,579,112,8,1419,0,0,0,0,0,0,0
+خيرى,Khairy,male,True,"Christian, Muslim, neutral",36,637,572,143,24,4,1416,35,601,540,143,24,4,1347,1,34,28,0,0,0,63
+رحاب,Rehab,female,True,Muslim,1374,14,3,6,14,5,1416,1374,14,3,6,14,5,1416,0,0,0,0,0,0,0
+سارة,Sara,female,True,"Christian, Muslim, neutral",1413,0,0,0,1,0,1414,1357,0,0,0,1,0,1358,44,0,0,0,0,0,44
+عبد الكريم,Abdul Karim,male,True,"Christian, Muslim, neutral",57,203,405,459,270,19,1413,57,202,401,457,270,19,1406,0,1,4,1,0,0,6
+ميرنا,Merna,female,False,"Christian, Muslim, neutral",1406,0,0,0,0,0,1406,878,0,0,0,0,0,878,411,0,0,0,0,0,411
+مجاهد,Megahed,male,True,"Christian, Muslim, neutral",6,212,292,460,384,50,1404,6,207,289,456,384,50,1392,0,4,3,3,0,0,10
+رقيه,Roqaya,female,True,Muslim,1391,0,0,4,5,0,1400,1391,0,0,4,5,0,1400,0,0,0,0,0,0,0
+مراد,Murad,male,True,"Christian, Muslim, neutral",93,298,288,363,289,69,1400,88,227,224,352,285,69,1245,3,66,59,9,2,0,139
+عبدالحفيظ,Abdel Hafez,male,True,"Christian, Muslim",16,109,589,607,74,0,1395,16,109,588,606,74,0,1393,0,0,1,1,0,0,2
+سندس,Sondos,female,False,Muslim,1393,0,0,0,0,0,1393,1393,0,0,0,0,0,1393,0,0,0,0,0,0,0
+سهيله,Sohaila,female,False,"Christian, Muslim, neutral",1393,0,0,0,0,0,1393,1391,0,0,0,0,0,1391,1,0,0,0,0,0,1
+فتح الله,Fathallah,male,True,"Christian, Muslim, neutral",12,181,596,438,151,10,1388,12,177,585,436,150,10,1370,0,4,9,2,1,0,16
+ابوبكر,Abu Bakr,male,True,"Muslim, neutral",138,362,381,352,145,7,1385,138,362,381,352,144,7,1384,0,0,0,0,0,0,0
+عبدالجليل,Abdel Galil,male,True,Muslim,10,87,432,630,216,9,1384,10,87,432,630,216,9,1384,0,0,0,0,0,0,0
+إبراهيم,Ibrahim,male,True,"Christian, Muslim, neutral",49,240,375,478,229,12,1383,48,237,365,465,223,12,1350,1,2,9,11,5,0,28
+عواد,Awad,male,True,"Christian, Muslim, neutral",2,128,338,663,232,19,1382,2,125,336,659,232,19,1373,0,3,0,0,0,0,3
+مرزوق,Marzouk,male,True,"Christian, Muslim, neutral",7,219,395,412,310,37,1380,7,190,308,337,291,37,1170,0,28,78,71,16,0,193
+عياد,Ayyad,male,True,"Christian, Muslim, neutral",10,140,460,419,284,61,1374,3,45,70,119,253,59,549,6,93,377,286,28,2,792
+وحيد,Wahid,male,True,"Christian, Muslim, neutral",55,1054,212,34,9,2,1366,55,970,205,34,9,2,1275,0,75,6,0,0,0,81
+نادر,Nader,male,True,"Christian, Muslim, neutral",353,919,73,15,0,1,1361,304,698,45,11,0,1,1059,32,200,25,2,0,0,259
+يمنى,Yomna,female,True,"Christian, Muslim",1310,11,15,21,3,0,1360,1310,11,14,21,3,0,1359,0,0,1,0,0,0,1
+طلبه,Tolba,male,True,"Christian, Muslim",1,78,285,616,361,17,1358,1,78,283,615,360,17,1354,0,0,2,1,1,0,4
+لبيب,Labib,male,True,"Christian, Muslim, neutral",5,80,565,641,59,5,1355,2,61,340,303,47,5,758,3,16,206,311,11,0,547
+سلطان,Sultan,male,True,"Christian, Muslim, neutral",41,179,292,322,428,91,1353,41,177,283,316,426,91,1334,0,2,8,6,0,0,16
+عبد النبى,Abd El-Naby,male,True,"Christian, Muslim",1,242,491,405,185,20,1344,1,241,490,405,185,20,1342,0,1,1,0,0,0,2
+بسمه,Basma,female,True,"Christian, Muslim, neutral",1341,0,0,1,1,0,1343,1328,0,0,1,1,0,1330,12,0,0,0,0,0,12
+عبد الخالق,Abdel Khaleq,male,True,"Christian, Muslim, neutral",23,133,403,540,217,15,1331,23,133,402,538,217,15,1328,0,0,1,0,0,0,1
+رشدى,Rushdy,male,True,"Christian, Muslim, neutral",48,294,733,211,31,1,1318,45,267,603,175,29,1,1120,2,23,113,32,2,0,172
+ولاء,Walaa,female,False,"Christian, Muslim, neutral",1198,100,6,0,0,0,1304,1195,96,6,0,0,0,1297,1,3,0,0,0,0,4
+حموده,Hamouda,male,True,"Christian, Muslim, neutral",11,141,224,334,507,82,1299,11,139,224,334,507,82,1297,0,1,0,0,0,0,1
+ذكى,Zaki,male,True,"Christian, Muslim, neutral",6,79,398,729,81,3,1296,5,76,340,605,70,3,1099,1,1,53,106,10,0,171
+عبد المقصود,Abd El-Maksoud,male,True,"Christian, Muslim",2,59,283,719,219,7,1289,2,59,283,718,218,7,1287,0,0,0,1,1,0,2
+علياء,Alia,female,False,Muslim,1281,0,0,0,0,0,1281,1281,0,0,0,0,0,1281,0,0,0,0,0,0,0
+عنتر,Antar,male,True,"Christian, Muslim, neutral",12,475,525,167,67,15,1261,12,464,513,165,67,15,1236,0,10,10,1,0,0,21
+ادم,Adam,male,True,"Christian, Muslim, neutral",777,56,106,171,132,15,1257,752,51,100,168,131,15,1217,11,0,3,3,0,0,17
+فرغلى,Farghaly,male,True,"Muslim, neutral",13,116,431,478,204,14,1256,13,115,428,478,204,14,1252,0,0,0,0,0,0,0
+المرسى,El-Morsy,male,True,Muslim,3,71,213,464,469,32,1252,3,71,213,464,469,32,1252,0,0,0,0,0,0,0
+حمدان,Hamdan,male,True,"Christian, Muslim, neutral",8,273,465,350,139,9,1244,8,273,461,347,138,9,1236,0,0,0,0,1,0,1
+رفاعى,Refaay,male,True,"Christian, Muslim, neutral",8,185,297,412,301,41,1244,8,184,296,411,301,41,1241,0,0,1,0,0,0,1
+جبر,Gabr,male,True,"Christian, Muslim, neutral",4,77,226,395,446,85,1233,4,75,222,392,444,85,1222,0,1,3,2,1,0,7
+راضى,Radi,male,True,"Christian, Muslim, neutral",26,421,352,216,191,27,1233,25,372,311,209,191,27,1135,1,47,35,5,0,0,88
+شفيق,Shafik,male,True,"Christian, Muslim, neutral",5,105,573,518,26,6,1233,5,87,374,270,20,6,762,0,15,186,219,4,0,424
+عبدالحافظ,Abdel Hafez,male,True,"Christian, Muslim",8,87,283,643,199,12,1232,8,87,283,642,199,12,1231,0,0,0,1,0,0,1
+نادى,Nady,male,True,"Christian, Muslim, neutral",23,709,401,88,5,1,1227,17,515,282,87,5,1,907,5,169,105,1,0,0,280
+نور الدين,Nour El-Din,male,True,Muslim,450,138,242,254,128,14,1226,450,138,242,254,128,14,1226,0,0,0,0,0,0,0
+جهاد,Gihad,system_neutral,False,"Christian, Muslim, neutral",1035,167,11,1,0,0,1214,1035,164,9,1,0,0,1209,0,2,2,0,0,0,4
+صفوت,Safwat,male,True,"Christian, Muslim, neutral",31,883,227,60,6,2,1209,28,669,191,59,6,2,955,2,197,29,1,0,0,229
+عبدالمعطى,Abdel Moaty,male,True,"Christian, Muslim",8,86,417,523,169,4,1207,8,86,417,522,169,4,1206,0,0,0,1,0,0,1
+غانم,Ghanem,male,True,"Muslim, neutral",13,95,159,311,527,102,1207,13,94,158,310,527,102,1204,0,0,0,0,0,0,0
+محفوظ,Mahfouz,male,True,"Christian, Muslim, neutral",12,190,434,355,189,24,1204,11,171,389,346,187,24,1128,1,18,37,8,1,0,65
+حجاج,Haggag,male,True,"Christian, Muslim",12,328,181,186,420,74,1201,12,327,181,186,419,74,1199,0,1,0,0,1,0,2
+نورالدين,Nour El-Din,male,True,"Christian, Muslim, neutral",435,185,207,255,109,10,1201,435,185,207,254,108,10,1199,0,0,0,1,0,0,1
+حمدي,Hamdy,male,True,"Christian, Muslim, neutral",87,667,384,51,7,2,1198,87,660,379,50,7,2,1185,0,5,3,1,0,0,9
+خطاب,Khattab,male,True,"Muslim, neutral",16,74,119,236,625,123,1193,16,74,119,235,625,123,1192,0,0,0,0,0,0,0
+سلام,Salam,system_neutral,True,"Christian, Muslim, neutral",18,76,109,262,618,107,1190,17,72,107,262,614,107,1179,0,4,0,0,0,0,4
+انس,Anas,male,True,"Christian, Muslim, neutral",952,118,54,39,19,2,1184,951,117,52,34,19,2,1175,0,1,2,5,0,0,8
+عوض الله,Awad Allah,male,True,"Christian, Muslim, neutral",2,84,243,384,427,36,1176,2,78,201,324,387,35,1027,0,6,39,58,37,1,141
+رانيا,Rania,female,False,"Christian, Muslim, neutral",1175,0,0,0,0,0,1175,1136,0,0,0,0,0,1136,33,0,0,0,0,0,33
+وجيه,Wageeh,male,True,"Christian, Muslim, neutral",31,766,322,47,2,2,1170,29,548,244,46,2,2,871,1,203,69,1,0,0,274
+عمران,Omran,male,True,"Christian, Muslim, neutral",27,159,211,316,400,56,1169,27,158,211,314,400,56,1166,0,1,0,0,0,0,1
+شمس,Shams,system_neutral,True,"Muslim, neutral",1017,16,22,34,66,12,1167,1013,16,22,34,66,12,1163,0,0,0,0,0,0,0
+امانى,Amani,female,False,"Christian, Muslim, neutral",1166,0,0,0,0,0,1166,1147,0,0,0,0,0,1147,12,0,0,0,0,0,12
+عبدالباسط,Abdel Baset,male,True,"Christian, Muslim",15,401,372,337,39,1,1165,15,401,372,336,39,1,1164,0,0,0,1,0,0,1
+وهبه,Wahba,male,True,"Christian, Muslim, neutral",8,65,284,517,258,31,1163,7,52,191,309,224,31,814,1,12,86,191,29,0,319
+ثروت,Tharwat,male,True,"Christian, Muslim, neutral",42,817,263,34,3,2,1161,40,653,194,30,3,2,922,1,142,62,3,0,0,208
+هدير,Hadeer,female,False,"Christian, Muslim, neutral",1161,0,0,0,0,0,1161,1158,0,0,0,0,0,1158,1,0,0,0,0,0,1
+ضحى,Doha,female,True,Muslim,1147,0,0,3,3,0,1153,1147,0,0,3,3,0,1153,0,0,0,0,0,0,0
+معتز,Moataz,male,False,"Christian, Muslim, neutral",701,435,16,1,0,0,1153,700,429,16,1,0,0,1146,1,2,0,0,0,0,3
+آيه,Aya,female,False,"Christian, Muslim, neutral",1147,0,0,0,0,0,1147,1145,0,0,0,0,0,1145,1,0,0,0,0,0,1
+عبد العاطى,Abd El Aaty,male,True,"Christian, Muslim",8,115,394,471,141,17,1146,8,115,394,471,140,17,1145,0,0,0,0,1,0,1
+قرنى,Qarni,neutral,True,Muslim,0,84,563,455,43,0,1145,0,84,563,455,43,0,1145,0,0,0,0,0,0,0
+عبدالرؤف,Abdel-Raouf,male,True,"Muslim, neutral",32,157,561,331,60,3,1144,32,156,561,330,60,3,1142,0,0,0,0,0,0,0
+مهند,Mohannad,male,True,"Muslim, neutral",1106,32,6,0,0,0,1144,1105,31,6,0,0,0,1142,0,0,0,0,0,0,0
+نصار,Nassar,male,True,"Christian, Muslim, neutral",5,110,105,213,577,126,1136,5,102,94,211,575,123,1110,0,7,9,1,0,1,18
+شحات,Shehat,male,True,"Christian, Muslim, neutral",2,231,460,345,93,4,1135,2,213,421,312,83,4,1035,0,18,38,28,8,0,92
+مارينا,Marina,female,True,"Christian, Muslim, neutral",1126,0,0,0,0,0,1126,2,0,0,0,0,0,2,1116,0,0,0,0,0,1116
+أشرف,Ashraf,male,True,"Christian, Muslim, neutral",48,1066,3,0,0,0,1117,46,1000,3,0,0,0,1049,1,60,0,0,0,0,61
+تقى,Taki,system_neutral,True,"Christian, Muslim, neutral",1026,8,58,20,2,1,1115,1026,7,26,12,2,1,1074,0,1,30,7,0,0,38
+علاء الدين,Alaa El-Din,male,True,Muslim,47,959,56,31,16,4,1113,47,959,56,31,16,4,1113,0,0,0,0,0,0,0
+روضه,Rawda,female,False,Muslim,1110,1,0,0,0,0,1111,1110,1,0,0,0,0,1111,0,0,0,0,0,0,0
+صقر,Saqr,male,True,"Christian, Muslim, neutral",13,49,81,216,606,138,1103,13,48,79,212,605,138,1095,0,1,2,2,0,0,5
+الديب,El-Deeb,neutral,True,"Christian, Muslim, neutral",0,28,104,172,635,157,1096,0,23,90,160,634,157,1064,0,4,13,12,1,0,30
+جاب الله,Gaballah,male,True,"Christian, Muslim, neutral",5,68,217,420,344,41,1095,4,56,169,332,336,41,938,1,11,47,82,7,0,148
+داليا,Dalia,female,False,"Christian, Muslim, neutral",1092,0,0,0,0,0,1092,1066,0,0,0,0,0,1066,14,0,0,0,0,0,14
+عبد الحكيم,Abd El Hakeem,male,True,Muslim,31,177,385,455,42,2,1092,31,177,385,455,42,2,1092,0,0,0,0,0,0,0
+عبدالباقى,Abdelbaky,male,True,"Christian, Muslim",9,74,250,588,169,2,1092,9,74,249,587,169,2,1090,0,0,1,1,0,0,2
+هايدى,Haidi,female,False,"Christian, Muslim, neutral",1086,0,0,0,0,0,1086,947,0,0,0,0,0,947,68,0,0,0,0,0,68
+عبد العليم,Abdel Aleem,male,True,"Christian, Muslim, neutral",16,106,402,481,76,2,1083,16,106,401,480,76,2,1081,0,0,0,1,0,0,1
+عبد الغفار,Abd El-Ghaffar,male,True,Muslim,11,95,316,525,126,7,1080,11,95,316,525,126,7,1080,0,0,0,0,0,0,0
+هند,Hend,female,True,"Muslim, neutral",1071,0,0,3,6,0,1080,1070,0,0,3,6,0,1079,0,0,0,0,0,0,0
+عبدربه,Abdrabbo,male,True,"Christian, Muslim",3,53,260,471,276,15,1078,3,53,259,469,276,15,1075,0,0,1,2,0,0,3
+سلامة,Salama,male,True,"Christian, Muslim, neutral",13,204,281,242,297,40,1077,13,198,268,220,280,39,1018,0,6,12,21,17,1,57
+الشافعى,El-Shafei,male,True,"Christian, Muslim",6,59,153,259,501,95,1073,6,58,153,259,501,95,1072,0,1,0,0,0,0,1
+عطا الله,Ata Allah,male,True,"Christian, Muslim, neutral",4,78,236,397,328,28,1071,4,63,178,241,260,28,774,0,14,56,146,68,0,284
+فتوح,Fattouh,male,True,"Christian, Muslim, neutral",14,201,436,335,75,6,1067,14,198,434,334,73,5,1058,0,2,1,0,0,1,4
+زغلول,Zaghloul,male,True,"Christian, Muslim, neutral",4,183,472,196,178,31,1064,4,172,430,186,176,31,999,0,11,36,10,2,0,59
+ميار,Mayar,female,False,"Christian, Muslim, neutral",1063,1,0,0,0,0,1064,1059,1,0,0,0,0,1060,2,0,0,0,0,0,2
+حميده,Hameeda,female,True,"Muslim, neutral",26,81,228,397,293,34,1059,26,81,228,396,293,34,1058,0,0,0,0,0,0,0
+عدلى,Adly,male,True,"Christian, Muslim, neutral",12,200,676,151,17,2,1058,8,145,379,101,17,2,652,4,51,277,44,0,0,376
+حنان,Hanan,female,False,"Christian, Muslim, neutral",1054,0,1,0,0,0,1055,1037,0,0,0,0,0,1037,11,0,1,0,0,0,12
+الشيخ,El-Sheikh,neutral,True,Muslim,0,3,10,194,709,138,1054,0,3,10,194,709,138,1054,0,0,0,0,0,0,0
+عاصم,Asem,male,True,"Christian, Muslim, neutral",403,539,66,29,12,3,1052,402,527,65,29,12,3,1038,0,11,1,0,0,0,12
+نرمين,Narmin,female,False,"Christian, Muslim, neutral",1043,0,0,0,0,0,1043,954,0,0,0,0,0,954,75,0,0,0,0,0,75
+قنديل,Kandil,male,True,"Christian, Muslim, neutral",1,53,91,217,581,99,1042,1,51,91,212,577,98,1030,0,1,0,3,3,0,7
+عبد السميع,Abdel Samie,male,True,Muslim,7,71,420,448,84,4,1034,7,71,420,448,84,4,1034,0,0,0,0,0,0,0
+رؤى,Roaa,female,False,Muslim,1027,0,0,0,0,0,1027,1027,0,0,0,0,0,1027,0,0,0,0,0,0,0
+بكرى,Bakry,male,True,Muslim,8,124,381,389,104,12,1018,8,124,381,389,104,12,1018,0,0,0,0,0,0,0
+نعيم,Naeem,male,True,"Christian, Muslim, neutral",13,225,493,153,118,15,1017,10,155,255,119,116,15,670,2,62,220,30,0,0,314
+بسملة,Basmala,female,False,Muslim,1015,0,0,0,0,0,1015,1015,0,0,0,0,0,1015,0,0,0,0,0,0,0
+جورج,George,male,True,"Christian, Muslim, neutral",445,439,116,11,4,0,1015,0,0,1,0,0,0,1,445,438,115,11,4,0,1013
+عبد ربه,Abdel Rabbo,male,True,"Christian, Muslim",2,48,200,392,347,26,1015,2,46,197,390,343,26,1004,0,2,3,2,4,0,11
+جمال الدين,Gamal El Din,male,True,"Christian, Muslim, neutral",36,201,445,200,108,18,1008,36,200,444,198,108,18,1004,0,1,0,0,0,0,1
+زايد,Zayed,male,True,"Christian, Muslim, neutral",25,83,136,243,445,68,1000,25,81,135,239,445,68,993,0,2,1,3,0,0,6
+اياد,Iyad,male,False,"Muslim, neutral",942,46,3,0,0,0,991,941,46,3,0,0,0,990,0,0,0,0,0,0,0
+ميلاد,Milad,system_neutral,True,"Christian, Muslim, neutral",38,677,186,68,17,0,986,0,7,8,8,6,0,29,38,655,177,56,10,0,936
+ابو زيد,Abu Zeid,male,True,"Christian, Muslim",4,67,197,334,341,40,983,4,67,196,334,341,40,982,0,0,1,0,0,0,1
+مبارك,Mubarak,male,True,"Christian, Muslim, neutral",16,163,245,271,231,42,968,16,157,241,262,231,42,949,0,5,3,7,0,0,15
+محي الدين,Mohy El-Din,male,True,"Muslim, neutral",24,258,431,193,53,8,967,24,258,431,192,53,8,966,0,0,0,0,0,0,0
+الشرقاوى,El-Sharkawy,male,True,Muslim,1,11,24,179,633,114,962,1,11,24,179,633,114,962,0,0,0,0,0,0,0
+عبدالمطلب,Abdel Mottaleb,male,True,"Christian, Muslim",4,50,245,507,152,4,962,4,50,245,506,152,4,961,0,0,0,1,0,0,1
+شكرى,Shoukry,male,True,"Christian, Muslim, neutral",10,245,477,194,24,10,960,9,202,317,120,23,10,681,1,38,149,67,1,0,256
+وفاء,Wafaa,system_neutral,False,"Muslim, neutral",945,2,8,2,0,0,957,944,2,7,2,0,0,955,0,0,0,0,0,0,0
+مسلم,Moslem,male,True,"Christian, Muslim, neutral",52,92,190,281,306,30,951,52,91,188,281,305,30,947,0,1,0,0,1,0,2
+عبد الناصر,Abd El Nasser,male,True,"Christian, Muslim",22,678,120,114,15,1,950,22,677,120,114,15,1,949,0,1,0,0,0,0,1
+عزب,Azab,male,True,"Christian, Muslim, neutral",5,54,135,387,329,37,947,5,54,132,377,321,37,926,0,0,3,9,8,0,20
+راغب,Ragheb,male,True,"Christian, Muslim, neutral",18,78,301,459,77,9,942,16,71,241,334,71,9,742,2,7,50,113,5,0,177
+كنزى,Kenzy,female,True,"Christian, Muslim",929,1,1,0,1,1,933,917,0,1,0,1,1,920,12,1,0,0,0,0,13
+آلاء,Alaa,female,False,Muslim,931,0,0,0,0,0,931,931,0,0,0,0,0,931,0,0,0,0,0,0,0
+اسعد,Asaad,male,True,"Christian, Muslim, neutral",24,424,207,176,89,11,931,23,345,132,46,27,8,581,1,69,72,112,57,3,314
+خليفة,Khalifa,male,True,"Christian, Muslim, neutral",4,83,221,290,303,30,931,4,80,216,284,301,29,914,0,2,3,5,2,0,12
+فرحه,Farha,female,True,"Christian, Muslim, neutral",909,0,0,0,2,0,911,898,0,0,0,2,0,900,7,0,0,0,0,0,7
+رحمة,Rahma,female,True,"Christian, Muslim",905,0,0,1,2,1,909,903,0,0,1,2,1,907,2,0,0,0,0,0,2
+عبد الحافظ,Abd El Hafez,male,True,Muslim,3,50,177,500,170,8,908,3,50,177,500,170,8,908,0,0,0,0,0,0,0
+عبد الستار,Abd El Sattar,male,True,"Christian, Muslim",7,124,456,290,28,1,906,7,123,456,290,28,1,905,0,1,0,0,0,0,1
+عبد الواحد,Abd El-Wahed,male,True,Muslim,10,74,215,366,230,11,906,10,74,215,366,230,11,906,0,0,0,0,0,0,0
+ابوالعلا,Abu El-Ela,male,True,"Christian, Muslim",3,58,190,328,301,23,903,3,58,190,327,301,23,902,0,0,0,1,0,0,1
+ايوب,Ayoub,male,True,"Christian, Muslim, neutral",15,104,195,314,241,34,903,14,65,94,176,172,32,553,1,35,87,119,60,2,304
+اسحق,Ishaq,male,True,"Christian, Muslim, neutral",30,238,308,261,60,1,898,3,11,32,16,3,0,65,24,218,254,234,56,1,787
+غازى,Ghazi,male,True,"Muslim, neutral",7,52,160,320,313,43,895,7,52,158,320,313,43,893,0,0,0,0,0,0,0
+عبدالقوى,Abdelkawy,male,True,Muslim,8,71,271,453,84,2,889,8,71,271,453,84,2,889,0,0,0,0,0,0,0
+عماره,Omara,neutral,True,"Christian, Muslim, neutral",0,29,50,176,529,103,887,0,29,49,176,527,103,884,0,0,1,0,0,0,1
+همام,Hammam,male,True,"Christian, Muslim, neutral",30,143,156,340,200,18,887,30,141,156,339,200,18,884,0,1,0,0,0,0,1
+سيداحمد,Sayed Ahmed,male,True,"Muslim, neutral",2,55,179,345,281,22,884,2,55,179,345,280,22,883,0,0,0,0,0,0,0
+عبد الجليل,Abd El-Galil,male,True,"Christian, Muslim",10,71,262,403,128,10,884,10,71,261,402,128,10,882,0,0,1,1,0,0,2
+يسن,Yassin,male,True,"Muslim, neutral",60,92,216,352,144,18,882,60,92,214,352,144,18,880,0,0,0,0,0,0,0
+عليوه,Olewa,male,True,"Christian, Muslim, neutral",4,54,130,375,267,49,879,4,54,128,375,267,49,877,0,0,1,0,0,0,1
+ناجح,Nageh,male,True,"Christian, Muslim, neutral",19,614,236,8,1,0,878,18,503,163,5,1,0,690,0,103,66,3,0,0,172
+حسناء,Hasnaa,female,False,Muslim,877,0,0,0,0,0,877,877,0,0,0,0,0,877,0,0,0,0,0,0,0
+مجدي,Magdy,male,True,"Christian, Muslim, neutral",45,716,99,7,2,0,869,40,575,70,7,1,0,693,4,126,29,0,1,0,160
+عبد المحسن,Abd El-Mohsen,male,True,"Muslim, neutral",13,124,354,299,76,2,868,13,124,353,299,76,2,867,0,0,0,0,0,0,0
+حفنى,Hefny,male,True,"Christian, Muslim, neutral",3,55,183,435,181,10,867,3,55,181,435,181,10,865,0,0,1,0,0,0,1
+جنا,Gana,female,False,"Christian, Muslim, neutral",866,0,0,0,0,0,866,860,0,0,0,0,0,860,1,0,0,0,0,0,1
+بدير,Badeer,male,True,"Christian, Muslim, neutral",6,83,253,338,155,29,864,6,80,241,318,148,29,822,0,3,8,17,7,0,35
+فادى,Fady,male,False,"Christian, Muslim, neutral",691,155,15,3,0,0,864,66,59,11,2,0,0,138,589,90,4,0,0,0,683
+العربى,El-Araby,male,True,"Muslim, neutral",15,224,156,289,152,27,863,15,224,156,288,152,27,862,0,0,0,0,0,0,0
+عبدالموجود,Abdel-Mawgood,male,True,"Christian, Muslim",5,60,385,363,48,0,861,5,60,385,363,47,0,860,0,0,0,0,1,0,1
+حمد,Hamad,male,True,Muslim,41,69,161,232,325,30,858,41,69,161,232,325,30,858,0,0,0,0,0,0,0
+عبدالظاهر,Abdelzaher,male,True,"Christian, Muslim",10,58,392,368,26,0,854,10,57,392,368,26,0,853,0,1,0,0,0,0,1
+عبدالدايم,Abdel Dayem,male,True,"Muslim, neutral",4,63,246,309,210,21,853,4,63,245,309,210,21,852,0,0,0,0,0,0,0
+ابوالمجد,Abu El Magd,male,True,Muslim,11,71,298,327,133,10,850,11,71,298,327,133,10,850,0,0,0,0,0,0,0
+منتصر,Montaser,male,True,"Christian, Muslim, neutral",40,588,38,65,89,27,847,40,559,38,65,89,27,818,0,25,0,0,0,0,25
+فضل,Fadl,male,True,"Christian, Muslim, neutral",39,123,287,218,152,24,843,39,112,272,216,152,24,815,0,9,15,2,0,0,26
+الخولى,El-Kholy,neutral,True,"Muslim, neutral",0,2,2,125,591,119,839,0,2,2,125,591,118,838,0,0,0,0,0,0,0
+ريتاج,Retaj,female,False,"Muslim, neutral",831,0,0,0,0,0,831,830,0,0,0,0,0,830,0,0,0,0,0,0,0
+عبدالصمد,Abdel Samad,male,True,Muslim,9,59,268,354,131,8,829,9,59,268,354,131,8,829,0,0,0,0,0,0,0
+مرعى,Marey,male,True,"Christian, Muslim, neutral",10,74,192,181,312,59,828,10,73,186,178,312,59,818,0,1,5,3,0,0,9
+مكرم,Makram,male,True,"Christian, Muslim, neutral",23,266,489,23,23,4,828,13,114,146,12,21,4,310,6,140,320,11,2,0,479
+جعفر,Gaafar,male,True,Muslim,13,108,162,152,340,49,824,13,108,162,152,340,49,824,0,0,0,0,0,0,0
+عرفات,Arafat,male,True,"Muslim, neutral",17,301,168,157,154,24,821,17,301,167,157,154,24,820,0,0,0,0,0,0,0
+الجندى,Al Gendy,neutral,True,"Christian, Muslim",0,7,3,113,545,151,819,0,6,3,107,537,150,803,0,1,0,6,8,1,16
+ليلى,Leila,female,False,"Christian, Muslim",816,0,1,1,0,0,818,816,0,0,1,0,0,817,0,0,1,0,0,0,1
+بشير,Basheer,male,True,"Christian, Muslim, neutral",23,246,239,213,82,11,814,22,236,212,194,75,11,750,1,8,23,17,7,0,56
+اكرم,Akram,male,True,"Christian, Muslim, neutral",234,560,13,4,1,0,812,219,475,12,3,1,0,710,12,78,1,0,0,0,91
+زين العابدين,Zein El Abidine,male,True,"Christian, Muslim",21,282,373,111,24,1,812,21,282,372,111,24,1,811,0,0,1,0,0,0,1
+غاده,Ghada,female,False,"Christian, Muslim, neutral",811,0,0,0,0,0,811,807,0,0,0,0,0,807,3,0,0,0,0,0,3
+عبد اللاه,Abd El-lah,male,True,"Christian, Muslim",6,104,261,365,68,6,810,6,104,261,364,68,6,809,0,0,0,1,0,0,1
+رمزى,Ramzi,male,True,"Christian, Muslim, neutral",23,212,438,125,7,0,805,19,153,241,58,6,0,477,4,56,184,60,1,0,305
+رامى,Ramy,male,True,"Christian, Muslim, neutral",236,549,8,1,4,1,799,186,438,7,1,3,1,636,43,98,1,0,0,0,142
+انجى,Angie,female,False,"Christian, Muslim, neutral",792,0,0,0,0,0,792,603,0,0,0,0,0,603,130,0,0,0,0,0,130
+الرفاعى,El-Refai,male,True,"Christian, Muslim",3,59,148,213,311,56,790,3,59,148,212,311,56,789,0,0,0,1,0,0,1
+سمر,Samar,female,False,"Christian, Muslim, neutral",783,0,0,0,0,0,783,778,0,0,0,0,0,778,3,0,0,0,0,0,3
+مرسي,Morsi,male,True,"Muslim, neutral",1,42,136,303,284,17,783,1,42,136,302,284,16,781,0,0,0,0,0,0,0
+ابو الفتوح,Abu El-Fotouh,male,True,"Christian, Muslim, neutral",3,51,335,321,60,9,779,3,50,334,320,60,9,776,0,0,1,0,0,0,1
+رشوان,Rashwan,male,True,"Muslim, neutral",6,60,139,277,270,27,779,6,60,139,276,269,27,777,0,0,0,0,0,0,0
+عبد المعطى,Abd El-Moaty,male,True,Muslim,1,48,244,375,104,7,779,1,48,244,375,104,7,779,0,0,0,0,0,0,0
+رافت,Raafat,male,True,"Christian, Muslim, neutral",29,597,116,28,1,2,773,25,462,100,28,1,2,618,2,130,14,0,0,0,146
+شرف,Sharaf,male,True,"Muslim, neutral",5,62,60,145,402,97,771,5,62,60,143,401,97,768,0,0,0,0,0,0,0
+عزالدين,Ezz Eldin,male,True,"Christian, Muslim, neutral",165,203,234,131,33,3,769,165,203,233,130,33,3,767,0,0,1,0,0,0,1
+العزب,El-Azab,male,True,"Christian, Muslim",3,46,110,254,298,56,767,3,46,110,252,298,56,765,0,0,0,2,0,0,2
+علا,Ola,female,True,"Muslim, neutral",764,0,0,0,1,1,766,763,0,0,0,1,1,765,0,0,0,0,0,0,0
+مهران,Mehran,male,True,"Christian, Muslim, neutral",16,76,138,308,211,10,759,16,74,137,305,211,10,753,0,2,1,1,0,0,4
+يعقوب,Yacoub,male,True,"Christian, Muslim, neutral",13,98,188,321,129,10,759,2,10,34,60,69,10,185,10,81,142,241,53,0,527
+شادى,Shady,male,True,"Christian, Muslim, neutral",417,200,12,25,76,28,758,351,185,12,25,75,28,676,51,10,0,0,0,0,61
+امجد,Amgad,male,True,"Christian, Muslim, neutral",146,590,13,8,0,0,757,130,390,9,6,0,0,535,11,188,4,2,0,0,205
+شهاب,Shehab,male,True,"Christian, Muslim, neutral",398,69,16,65,171,38,757,398,67,15,65,171,38,754,0,1,1,0,0,0,2
+بطرس,Botros,male,True,Christian,17,115,153,310,157,4,756,0,0,0,0,0,0,0,17,115,153,310,157,4,756
+فوزي,Fawzi,male,True,"Christian, Muslim, neutral",11,140,528,69,5,2,755,11,128,470,48,5,2,664,0,11,53,19,0,0,83
+موسي,Moussa,male,True,"Christian, Muslim, neutral",12,74,139,255,255,20,755,8,61,126,232,246,20,693,2,10,11,16,9,0,48
+عبير,Abeer,female,False,"Christian, Muslim, neutral",754,0,0,0,0,0,754,747,0,0,0,0,0,747,4,0,0,0,0,0,4
+علاءالدين,Alaa Eldin,male,True,"Muslim, neutral",28,668,43,11,4,0,754,28,667,43,11,4,0,753,0,0,0,0,0,0,0
+مصباح,Misbah,male,True,"Muslim, neutral",8,234,249,123,121,16,751,8,233,249,122,120,16,748,0,0,0,0,0,0,0
+عبدالمولى,Abdulmoula,male,True,"Muslim, neutral",6,64,235,314,122,4,745,6,64,234,314,122,4,744,0,0,0,0,0,0,0
+شبل,Shabl,male,True,"Christian, Muslim",7,76,244,323,84,4,738,7,75,244,323,84,4,737,0,1,0,0,0,0,1
+ابوالفتوح,Abu El-Fotouh,male,True,Muslim,4,72,361,247,46,5,735,4,72,361,247,46,5,735,0,0,0,0,0,0,0
+متولي,Metwally,male,True,"Christian, Muslim, neutral",3,44,157,249,254,26,733,3,44,156,247,254,25,729,0,0,1,1,0,0,2
+نبيه,Nabih,male,True,"Christian, Muslim, neutral",17,101,425,168,16,3,730,17,89,346,143,16,3,614,0,11,70,21,0,0,102
+سماح,Samah,female,True,"Christian, Muslim",709,7,9,2,1,0,728,701,6,8,2,1,0,718,8,1,1,0,0,0,10
+المهدى,El-Mahdy,male,True,"Christian, Muslim",15,53,128,272,215,36,719,15,53,128,271,214,36,717,0,0,0,1,1,0,2
+فاضل,Fadel,male,True,"Christian, Muslim, neutral",10,82,236,272,109,9,718,10,79,225,266,109,9,698,0,3,11,5,0,0,19
+فيصل,Faisal,male,True,"Christian, Muslim, neutral",60,392,171,67,25,0,715,60,387,171,67,25,0,710,0,3,0,0,0,0,3
+فاطمه الزهراء,Fatima Al-Zahraa,female,False,Muslim,714,0,0,0,0,0,714,714,0,0,0,0,0,714,0,0,0,0,0,0,0
+الشناوى,El-Shennawy,male,True,Muslim,2,28,60,186,354,83,713,2,28,60,186,354,83,713,0,0,0,0,0,0,0
+محجوب,Mahgoub,male,True,"Christian, Muslim, neutral",3,47,154,222,250,35,711,3,47,154,219,250,35,708,0,0,0,1,0,0,1
+ادريس,Idris,male,True,"Christian, Muslim, neutral",8,68,169,209,229,26,709,8,68,168,208,228,26,706,0,0,0,1,0,0,1
+عز الدين,Ezz El-Din,male,True,"Christian, Muslim",152,166,194,134,54,9,709,152,166,193,134,53,9,707,0,0,1,0,1,0,2
+ناديه,Nadia,female,False,"Christian, Muslim, neutral",705,0,0,0,0,0,705,691,0,0,0,0,0,691,13,0,0,0,0,0,13
+مها,Maha,female,False,"Christian, Muslim, neutral",700,0,0,0,0,0,700,694,0,0,0,0,0,694,4,0,0,0,0,0,4
+عبد الحفيظ,Abdel Hafeez,male,True,"Christian, Muslim",5,51,282,309,48,3,698,5,51,279,309,48,3,695,0,0,3,0,0,0,3
+سويلم,Sweilem,male,True,"Muslim, neutral",1,24,91,183,337,61,697,1,24,91,183,336,61,696,0,0,0,0,0,0,0
+زكي,Zaki,male,True,"Christian, Muslim, neutral",2,42,220,377,49,3,693,2,36,192,296,40,2,568,0,3,27,64,8,1,103
+مهنى,Mihanna,male,True,"Christian, Muslim, neutral",4,70,149,401,66,3,693,4,61,115,311,58,3,552,0,7,31,81,7,0,126
+عابدين,Abdeen,male,True,"Christian, Muslim",16,88,253,188,124,23,692,16,88,251,187,124,23,689,0,0,2,1,0,0,3
+فايد,Fayed,male,True,"Christian, Muslim, neutral",6,35,82,126,367,75,691,6,35,80,125,366,75,687,0,0,1,0,0,0,1
+بيشوى,Bishoy,male,True,Christian,647,37,1,5,0,0,690,0,0,0,0,0,0,0,647,37,1,5,0,0,690
+غالى,Ghaly,male,True,"Christian, Muslim, neutral",4,48,74,294,223,47,690,3,8,20,37,148,47,263,1,38,53,240,70,0,402
+عبد الباسط,Abd El-Baset,male,True,Muslim,10,224,238,184,31,1,688,10,224,238,184,31,1,688,0,0,0,0,0,0,0
+الشاذلى,Al-Shazly,male,True,"Muslim, neutral",12,84,64,146,335,46,687,12,84,64,145,335,46,686,0,0,0,0,0,0,0
+عبدالنعيم,Abd El-Naim,male,True,"Christian, Muslim, neutral",3,66,277,284,55,0,685,3,66,273,284,55,0,681,0,0,3,0,0,0,3
+ملاك,Malak,system_neutral,True,"Christian, Muslim, neutral",88,373,163,59,2,0,685,25,4,3,1,0,0,33,52,360,157,57,2,0,628
+مطاوع,Mattawa,male,True,"Christian, Muslim",6,74,118,235,202,49,684,6,74,115,234,202,49,680,0,0,3,1,0,0,4
+عبدالحى,Abd El-Hay,male,True,"Christian, Muslim",8,64,291,235,77,6,681,8,64,291,235,76,6,680,0,0,0,0,1,0,1
+أمين,Amin,male,True,"Christian, Muslim, neutral",19,74,179,337,67,1,677,19,70,166,328,66,1,650,0,4,11,9,1,0,25
+جبريل,Gabriel,male,True,"Christian, Muslim, neutral",18,121,163,176,177,20,675,16,112,155,169,174,19,645,0,1,3,2,2,0,8
+الشيماء,Al Shaimaa,female,False,"Muslim, neutral",674,0,0,0,0,0,674,673,0,0,0,0,0,673,0,0,0,0,0,0,0
+سرحان,Sarhan,male,True,"Christian, Muslim, neutral",4,74,76,147,317,56,674,4,73,75,146,316,56,670,0,1,0,1,1,0,3
+كمال الدين,Kamal El Din,male,True,Muslim,22,143,323,149,30,5,672,22,143,323,149,30,5,672,0,0,0,0,0,0,0
+عبدالشافى,Abdelshafy,male,True,"Christian, Muslim",11,73,268,275,39,5,671,11,73,267,275,39,5,670,0,0,1,0,0,0,1
+زهران,Zahran,male,True,"Christian, Muslim",2,40,73,140,370,45,670,2,40,71,140,370,45,668,0,0,2,0,0,0,2
+هناء,Hanaa,female,False,"Christian, Muslim, neutral",665,2,1,0,0,0,668,655,1,1,0,0,0,657,8,1,0,0,0,0,9
+الجمل,El-Gamal,neutral,True,"Christian, Muslim",0,3,6,72,476,110,667,0,3,5,72,473,110,663,0,0,1,0,3,0,4
+شنوده,Shenouda,male,True,"Christian, neutral",84,183,94,182,122,1,666,0,0,0,0,0,0,0,84,183,94,182,121,1,665
+خلف الله,Khalaf Allah,male,True,"Christian, Muslim",1,113,203,206,128,14,665,1,112,197,204,127,14,655,0,1,6,2,1,0,10
+محمدى,Mohammady,male,True,Muslim,7,64,323,248,22,1,665,7,64,323,248,22,1,665,0,0,0,0,0,0,0
+نيره,Naira,female,False,"Muslim, neutral",665,0,0,0,0,0,665,664,0,0,0,0,0,664,0,0,0,0,0,0,0
+وسام,Wessam,system_neutral,False,"Christian, Muslim, neutral",412,247,3,0,0,0,662,400,229,3,0,0,0,632,9,13,0,0,0,0,22
+شحاتة,Shehata,neutral,True,"Christian, Muslim, neutral",0,73,208,223,137,18,659,0,68,178,185,126,18,575,0,4,28,33,11,0,76
+صبحي,Sobhy,male,True,"Christian, Muslim, neutral",15,224,358,54,6,1,658,14,187,288,43,6,1,539,1,34,64,8,0,0,107
+مهاب,Mohab,male,True,"Christian, Muslim, neutral",602,51,2,2,0,0,657,595,45,2,2,0,0,644,4,6,0,0,0,0,10
+الفقى,El-Feqy,neutral,True,Muslim,0,0,0,86,461,108,655,0,0,0,86,461,108,655,0,0,0,0,0,0,0
+سامي,Sami,male,True,"Christian, Muslim, neutral",33,430,146,41,3,1,654,29,366,115,33,2,1,546,2,55,28,7,1,0,93
+جودى,Judy,female,True,"Christian, Muslim, neutral",649,0,1,1,0,0,651,613,0,1,1,0,0,615,3,0,0,0,0,0,3
+جومانا,Gomana,female,False,"Christian, Muslim, neutral",651,0,0,0,0,0,651,454,0,0,0,0,0,454,165,0,0,0,0,0,165
+ناصف,Nasef,male,True,"Christian, Muslim, neutral",6,106,126,141,246,25,650,6,77,110,138,246,25,602,0,28,15,1,0,0,44
+الصاوى,El-Sawy,male,True,"Muslim, neutral",3,41,127,297,164,16,648,3,41,127,296,164,16,647,0,0,0,0,0,0,0
+ابو المجد,Abu El Magd,male,True,"Christian, Muslim, neutral",1,54,198,265,115,14,647,1,54,196,265,114,14,644,0,0,1,0,0,0,1
+بشرى,Boshra,system_neutral,True,"Christian, Muslim, neutral",148,81,255,151,10,0,645,141,28,26,21,6,0,222,6,50,213,115,4,0,388
+الغريب,El Gharib,male,True,"Muslim, neutral",1,42,162,287,142,8,642,1,42,161,287,142,8,641,0,0,0,0,0,0,0
+الزهراء,Al Zahraa,female,False,Muslim,586,53,0,0,0,0,639,586,53,0,0,0,0,639,0,0,0,0,0,0,0
+عطوه,Atwa,male,True,"Christian, Muslim, neutral",3,34,100,220,254,28,639,3,33,100,217,252,28,633,0,1,0,1,1,0,3
+مهرائيل,Mahrael,system_neutral,False,"Christian, Muslim, neutral",639,0,0,0,0,0,639,4,0,0,0,0,0,4,625,0,0,0,0,0,625
+البدرى,El-Badry,male,True,"Christian, Muslim, neutral",28,93,227,156,110,21,635,28,89,220,155,110,21,623,0,3,6,1,0,0,10
+سميه,Somaya,female,True,Muslim,630,0,0,2,3,0,635,630,0,0,2,3,0,635,0,0,0,0,0,0,0
+ابو العلا,Abu El-Ela,male,True,Muslim,1,35,98,247,222,31,634,1,35,98,247,222,31,634,0,0,0,0,0,0,0
+بهاء,Bahaa,male,True,"Christian, Muslim, neutral",125,485,20,4,0,0,634,122,414,19,4,0,0,559,2,65,1,0,0,0,68
+عبد المطلب,Abd El-Mottaleb,male,True,Muslim,1,38,185,301,102,7,634,1,38,185,301,102,7,634,0,0,0,0,0,0,0
+الصعيدى,El-Saeedi,neutral,True,Muslim,0,0,6,92,445,90,633,0,0,6,92,445,90,633,0,0,0,0,0,0,0
+عبد الرؤف,Abd El-Raouf,male,True,Muslim,21,93,276,212,27,3,632,21,93,276,212,27,3,632,0,0,0,0,0,0,0
+حسني,Hosny,male,True,"Christian, Muslim, neutral",22,203,344,51,8,1,629,22,195,331,49,8,1,606,0,7,10,2,0,0,19
+منة,Menna,female,False,Muslim,628,0,0,0,0,0,628,628,0,0,0,0,0,628,0,0,0,0,0,0,0
+ايات,Ayat,female,False,Muslim,626,0,0,0,0,0,626,626,0,0,0,0,0,626,0,0,0,0,0,0,0
+عزمى,Azmy,male,True,"Christian, Muslim, neutral",9,156,302,141,17,1,626,7,126,172,55,16,1,377,2,26,119,77,1,0,225
+اية,Aya,female,False,Muslim,622,0,0,0,0,0,622,622,0,0,0,0,0,622,0,0,0,0,0,0,0
+عبدالفضيل,Abdelfadil,male,True,Muslim,6,44,274,263,33,0,620,6,44,274,263,33,0,620,0,0,0,0,0,0,0
+نجاح,Nagah,system_neutral,True,"Christian, Muslim, neutral",58,254,290,14,2,2,620,58,243,274,14,2,2,593,0,10,16,0,0,0,26
+فوده,Fouda,neutral,True,Muslim,0,19,39,122,359,77,616,0,19,39,122,359,77,616,0,0,0,0,0,0,0
+بولس,Boulos,male,True,Christian,31,114,131,228,110,1,615,0,0,0,0,0,0,0,31,114,131,228,110,1,615
+عماد الدين,Emad El Din,male,False,"Christian, Muslim",37,525,43,10,0,0,615,37,523,43,10,0,0,613,0,2,0,0,0,0,2
+الجوهرى,El-Gohary,system_neutral,True,Muslim,5,24,50,137,335,61,612,5,24,50,137,335,61,612,0,0,0,0,0,0,0
+عارف,Aref,male,True,"Christian, Muslim, neutral",8,193,140,173,85,10,609,8,191,138,173,85,10,605,0,1,2,0,0,0,3
+الصغير,El-Soghayar,neutral,True,"Christian, Muslim, neutral",0,18,117,361,92,20,608,0,18,115,359,92,20,604,0,0,2,1,0,0,3
+فهمي,Fahmy,male,True,"Christian, Muslim, neutral",11,23,264,271,34,5,608,11,17,235,209,32,5,509,0,6,27,60,2,0,95
+صدقى,Sedky,male,True,"Christian, Muslim, neutral",11,71,429,81,12,3,607,10,52,319,63,12,3,459,0,14,104,16,0,0,134
+محمدين,Mohamedain,male,True,"Muslim, neutral",1,38,137,286,136,8,606,1,38,136,285,136,8,604,0,0,0,0,0,0,0
+يوستينا,Justina,female,False,"Christian, Muslim",606,0,0,0,0,0,606,2,0,0,0,0,0,2,604,0,0,0,0,0,604
+رويدا,Rowaida,female,False,"Muslim, neutral",602,0,0,0,0,0,602,600,0,0,0,0,0,600,0,0,0,0,0,0,0
+عبدالجيد,Abdel Geid,male,True,Muslim,1,49,203,304,42,3,602,1,49,203,304,42,3,602,0,0,0,0,0,0,0
+البنا,El-Banna,male,True,"Christian, Muslim",1,1,2,78,421,96,599,1,1,2,78,421,95,598,0,0,0,0,0,1,1
+اميرة,Amira,female,False,"Christian, Muslim, neutral",599,0,0,0,0,0,599,590,0,0,0,0,0,590,6,0,0,0,0,0,6
+عبد التواب,Abd El-Tawab,male,True,"Christian, Muslim, neutral",3,79,238,226,48,4,598,3,79,233,224,48,4,591,0,0,5,1,0,0,6
+عبد الحى,Abd El-Hay,male,True,"Christian, Muslim",7,61,235,233,54,4,594,7,61,234,233,54,4,593,0,0,1,0,0,0,1
+ابانوب,Abanoub,male,False,Christian,593,0,0,0,0,0,593,0,0,0,0,0,0,0,593,0,0,0,0,0,593
+عصمت,Esmat,system_neutral,True,"Christian, Muslim, neutral",22,324,181,54,7,3,591,21,288,179,53,7,3,551,1,34,2,1,0,0,38
+اسكندر,Eskandar,male,True,"Christian, Muslim, neutral",3,23,92,364,105,3,590,0,2,6,11,14,3,36,2,21,84,330,87,0,524
+عبدالراضى,Abd El Rady,male,True,"Christian, Muslim",7,82,281,194,26,0,590,7,81,279,194,26,0,587,0,1,2,0,0,0,3
+فخرى,Fakhry,male,True,"Christian, Muslim, neutral",10,97,320,148,14,1,590,6,80,196,60,14,1,357,3,16,114,80,0,0,213
+ضياء,Diaa,male,True,"Christian, Muslim, neutral",200,360,18,2,8,0,588,200,357,18,2,8,0,585,0,2,0,0,0,0,2
+حلمي,Helmy,male,True,"Christian, Muslim, neutral",16,70,362,119,13,5,585,16,57,313,110,12,5,513,0,13,46,8,1,0,68
+عبدالغني,Abd El-Ghani,male,True,Muslim,8,36,203,276,56,6,585,8,36,203,276,56,6,585,0,0,0,0,0,0,0
+قناوى,Kenawy,male,True,"Muslim, neutral",5,59,121,249,140,11,585,5,59,121,248,140,11,584,0,0,0,0,0,0,0
+جاد الله,Gadallah,male,True,"Christian, Muslim, neutral",1,21,71,203,258,30,584,1,16,52,147,231,28,475,0,5,17,54,27,2,105
+رودينا,Rodaina,female,False,"Muslim, neutral",584,0,0,0,0,0,584,582,0,0,0,0,0,582,0,0,0,0,0,0,0
+ابو المعاطى,Abu El-Maaty,neutral,True,Muslim,0,33,138,255,152,5,583,0,33,138,255,152,5,583,0,0,0,0,0,0,0
+رومانى,Romany,male,True,"Christian, neutral",117,422,41,1,1,0,582,0,0,0,0,0,0,0,117,420,41,1,1,0,580
+عبد الباقى,Abdel Baqy,male,True,"Christian, Muslim",7,31,141,289,107,6,581,7,31,140,285,106,6,575,0,0,1,4,1,0,6
+البسيونى,El Basyouni,neutral,True,"Christian, Muslim",0,33,61,150,282,53,579,0,33,60,150,282,53,578,0,0,1,0,0,0,1
+نشأت,Nashaat,male,True,"Christian, Muslim, neutral",13,466,85,14,1,0,579,10,313,64,14,1,0,402,2,139,14,0,0,0,155
+صليب,Sleeb,male,True,"Christian, neutral",2,32,100,287,150,5,576,0,0,0,0,0,0,0,2,32,100,286,148,4,572
+اشرقت,Ashrakat,female,False,"Muslim, neutral",574,0,0,0,0,0,574,571,0,0,0,0,0,571,0,0,0,0,0,0,0
+نهى,Noha,female,False,"Muslim, neutral",574,0,0,0,0,0,574,573,0,0,0,0,0,573,0,0,0,0,0,0,0
+سالمان,Salman,male,True,"Christian, Muslim, neutral",5,51,130,212,158,16,572,4,51,128,211,158,16,568,1,0,1,0,0,0,2
+فريده,Farida,female,False,"Christian, Muslim, neutral",571,0,0,0,0,0,571,569,0,0,0,0,0,569,1,0,0,0,0,0,1
+ابوالحسن,Abu El-Hassan,male,True,Muslim,8,126,138,200,92,5,569,8,126,138,200,92,5,569,0,0,0,0,0,0,0
+سرور,Sorour,male,True,"Christian, Muslim, neutral",3,41,91,116,273,45,569,2,39,85,108,269,44,547,1,2,6,7,3,0,19
+أيمن,Ayman,male,False,"Christian, Muslim, neutral",47,519,1,0,0,0,567,46,483,1,0,0,0,530,1,31,0,0,0,0,32
+ابو بكر,Abu Bakr,male,True,Muslim,51,169,156,139,49,3,567,51,169,156,139,49,3,567,0,0,0,0,0,0,0
+عبدالرسول,Abd El-Rasoul,neutral,True,Muslim,0,65,207,230,55,8,565,0,65,207,230,55,8,565,0,0,0,0,0,0,0
+ابو العنين,Abu El-Enein,male,True,Muslim,1,15,74,182,258,30,560,1,15,74,182,258,30,560,0,0,0,0,0,0,0
+نسمه,Nasma,female,False,"Christian, Muslim, neutral",557,0,0,0,0,0,557,548,0,0,0,0,0,548,8,0,0,0,0,0,8
+الباز,El-Baz,male,True,Muslim,1,29,92,173,220,39,554,1,29,92,173,220,39,554,0,0,0,0,0,0,0
+الشريف,El-Sherif,male,True,"Christian, Muslim",4,30,16,55,358,91,554,4,30,16,54,358,91,553,0,0,0,1,0,0,1
+عبدالسيد,Abdel Sayed,neutral,True,"Christian, Muslim, neutral",0,39,145,247,118,4,553,0,21,103,152,69,3,348,0,18,41,95,49,1,204
+حمادة,Hamada,male,True,"Christian, Muslim, neutral",31,398,55,34,33,1,552,31,396,55,34,33,1,550,0,1,0,0,0,0,1
+ساندى,Sandy,system_neutral,False,"Christian, Muslim, neutral",550,0,0,0,0,0,550,140,0,0,0,0,0,140,295,0,0,0,0,0,295
+صباح,Sabah,system_neutral,True,"Christian, Muslim, neutral",318,36,52,49,82,10,547,311,31,46,49,80,10,527,5,3,5,0,2,0,15
+نسيم,Naseem,system_neutral,True,"Christian, Muslim, neutral",10,190,193,130,21,3,547,8,83,75,34,11,3,214,2,102,111,93,10,0,318
+ابوالسعود,Abu El-Saoud,male,True,"Christian, Muslim",4,51,160,143,170,18,546,4,51,159,142,169,18,543,0,0,1,1,1,0,3
+الامام,El Imam,male,True,Muslim,2,37,82,173,205,44,543,2,37,82,173,205,44,543,0,0,0,0,0,0,0
+الهادى,El-Hady,male,True,"Christian, Muslim",4,99,120,213,89,16,541,4,99,119,213,89,16,540,0,0,1,0,0,0,1
+صفاء,Safaa,female,False,"Christian, Muslim, neutral",522,8,8,3,0,0,541,522,7,6,3,0,0,538,0,1,1,0,0,0,2
+حميد,Hameed,male,True,Muslim,6,65,124,190,135,19,539,6,65,124,190,135,19,539,0,0,0,0,0,0,0
+عبد الموجود,Abd El-Mawgood,male,True,Muslim,1,38,207,227,63,3,539,1,38,207,227,63,3,539,0,0,0,0,0,0,0
+هاله,Hala,female,False,"Christian, Muslim, neutral",538,0,0,0,0,0,538,533,0,0,0,0,0,533,4,0,0,0,0,0,4
+تمام,Tamam,system_neutral,True,"Christian, Muslim",6,45,131,268,83,3,536,6,45,130,268,83,3,535,0,0,1,0,0,0,1
+ماريا,Maria,female,True,"Christian, Muslim, neutral",536,0,0,0,0,0,536,7,0,0,0,0,0,7,516,0,0,0,0,0,516
+عبدالمعبود,Abdelmaboud,male,True,Muslim,6,39,247,202,36,1,531,6,39,247,202,36,1,531,0,0,0,0,0,0,0
+صموئيل,Samuel,male,True,"Christian, neutral",96,180,158,84,12,0,530,0,0,0,0,0,0,0,96,179,158,81,12,0,526
+عبدالنبي,Abdelnaby,male,True,Muslim,3,120,231,120,52,4,530,3,120,231,120,52,4,530,0,0,0,0,0,0,0
+صبري,Sabry,male,True,"Christian, Muslim, neutral",25,263,171,56,12,2,529,25,242,161,54,12,2,496,0,17,10,2,0,0,29
+وجدى,Wagdy,male,True,"Christian, Muslim, neutral",22,339,124,39,1,0,525,19,226,103,38,1,0,387,2,105,19,1,0,0,127
+عائشه,Aisha,female,False,Muslim,524,0,0,0,0,0,524,524,0,0,0,0,0,524,0,0,0,0,0,0,0
+عصام الدين,Essam El Din,male,True,"Muslim, neutral",19,427,63,13,2,0,524,19,425,63,13,2,0,522,0,0,0,0,0,0,0
+ابوسريع,Abu Serie,neutral,True,"Muslim, neutral",0,46,159,294,22,1,522,0,46,158,294,22,1,521,0,0,0,0,0,0,0
+بدوي,Badawi,male,True,"Christian, Muslim, neutral",2,90,98,129,178,23,520,2,90,97,128,178,23,518,0,0,0,1,0,0,1
+سند,Sanad,male,True,"Christian, Muslim, neutral",7,67,127,174,130,15,520,7,62,96,147,128,15,455,0,5,29,23,2,0,59
+زينه,Zeina,female,True,"Muslim, neutral",484,0,0,4,21,10,519,482,0,0,4,21,10,517,0,0,0,0,0,0,0
+ابواليزيد,Abu El-Yazeed,neutral,True,"Muslim, neutral",0,37,189,267,24,0,517,0,37,188,267,24,0,516,0,0,0,0,0,0,0
+البدوى,El-Badawy,male,True,Muslim,1,34,92,197,159,33,516,1,34,92,197,159,33,516,0,0,0,0,0,0,0
+بدرى,Badry,male,True,"Christian, Muslim, neutral",9,127,255,102,20,1,514,9,115,227,95,20,1,467,0,11,26,6,0,0,43
+ريناد,Renad,female,False,"Muslim, neutral",513,0,0,0,0,0,513,512,0,0,0,0,0,512,0,0,0,0,0,0,0
+نعمان,Noman,male,True,"Christian, Muslim, neutral",14,74,164,172,82,7,513,14,70,159,162,78,7,490,0,1,3,8,2,0,14
+الحسين,El Hussein,male,True,Muslim,209,222,57,20,4,0,512,209,222,57,20,4,0,512,0,0,0,0,0,0,0
+نادين,Nadine,female,False,"Christian, Muslim, neutral",512,0,0,0,0,0,512,461,0,0,0,0,0,461,6,0,0,0,0,0,6
+الامير,El Amir,male,True,"Christian, Muslim, neutral",50,219,99,83,44,16,511,40,191,96,83,44,16,470,9,27,2,0,0,0,38
+الصادق,El-Sadek,male,True,"Christian, Muslim",2,41,91,257,109,11,511,2,41,90,256,109,11,509,0,0,1,1,0,0,2
+حسينى,Hosseiny,male,True,Muslim,15,87,206,171,30,2,511,15,87,206,171,30,2,511,0,0,0,0,0,0,0
+امال,Amal,female,False,"Christian, Muslim, neutral",507,2,0,1,0,0,510,498,2,0,1,0,0,501,4,0,0,0,0,0,4
+عبد النعيم,Abd El-Naim,male,True,"Christian, Muslim",3,43,204,222,37,1,510,3,43,203,222,36,1,508,0,0,1,0,1,0,2
+عمادالدين,Emad El-Din,male,True,"Christian, Muslim, neutral",19,453,32,4,2,0,510,19,451,32,4,2,0,508,0,1,0,0,0,0,1
+مرام,Maram,female,False,"Christian, Muslim, neutral",507,0,0,0,0,0,507,505,0,0,0,0,0,505,1,0,0,0,0,0,1
+مياده,Mayada,female,False,Muslim,505,0,0,0,0,0,505,505,0,0,0,0,0,505,0,0,0,0,0,0,0
+سعد الدين,Saad El-Din,male,True,"Muslim, neutral",10,64,273,119,32,6,504,10,64,271,119,32,6,502,0,0,0,0,0,0,0
+عبدالبارى,Abdel Bary,male,True,Muslim,3,37,160,208,89,7,504,3,37,160,208,89,7,504,0,0,0,0,0,0,0
+خلاف,Khallaf,male,True,"Christian, Muslim, neutral",1,66,105,129,174,25,500,1,63,91,127,172,25,479,0,3,13,2,2,0,20
+نجم,Negm,male,True,"Muslim, neutral",2,45,32,78,264,79,500,2,45,31,78,264,79,499,0,0,0,0,0,0,0
+نانسى,Nancy,female,False,"Christian, Muslim, neutral",496,0,0,0,0,0,496,215,0,0,0,0,0,215,197,0,0,0,0,0,197
+ابوالعنين,Abu El-Enein,neutral,True,Muslim,0,13,72,140,258,12,495,0,13,72,140,258,12,495,0,0,0,0,0,0,0
+بدران,Badran,male,True,"Christian, Muslim, neutral",3,67,67,115,206,36,494,3,66,64,114,206,36,489,0,1,1,1,0,0,3
+شرف الدين,Sharaf El Din,male,True,"Christian, Muslim",6,36,50,127,229,44,492,6,36,50,127,228,44,491,0,0,0,0,1,0,1
+فرج الله,Farag Allah,male,True,"Christian, Muslim, neutral",1,55,132,184,112,8,492,1,41,98,118,86,6,350,0,13,34,64,26,2,139
+منال,Manal,female,False,"Christian, Muslim, neutral",492,0,0,0,0,0,492,479,0,0,0,0,0,479,12,0,0,0,0,0,12
+العبد,El-Abd,neutral,True,"Christian, Muslim, neutral",0,16,54,132,246,43,491,0,15,51,114,242,43,465,0,1,2,17,4,0,24
+زينهم,Zeinhom,male,True,"Christian, Muslim",3,126,285,69,7,1,491,3,126,283,69,7,1,489,0,0,2,0,0,0,2
+خديجه,Khadija,female,True,Muslim,486,0,0,0,3,0,489,486,0,0,0,3,0,489,0,0,0,0,0,0,0
+عبدالصادق,Abdel Sadek,male,True,"Christian, Muslim",6,44,162,244,32,1,489,6,44,162,242,32,1,487,0,0,0,2,0,0,2
+خاطر,Khater,male,True,"Christian, Muslim, neutral",5,34,39,80,271,57,486,5,34,39,78,271,57,484,0,0,0,1,0,0,1
+أسماء,Asmaa,female,False,Muslim,484,0,0,0,0,0,484,484,0,0,0,0,0,484,0,0,0,0,0,0,0
+يس,Yass,male,True,"Christian, Muslim",144,38,93,141,57,11,484,144,38,92,135,53,11,473,0,0,1,6,4,0,11
+بيومي,Bayoumi,male,True,"Christian, Muslim, neutral",1,26,90,197,154,15,483,1,26,90,196,154,14,481,0,0,0,0,0,1,1
+عابد,Abed,male,True,"Christian, Muslim, neutral",22,171,83,111,80,16,483,22,170,81,108,80,16,477,0,1,1,2,0,0,4
+السباعى,El Sebai,male,True,Muslim,2,36,100,215,119,10,482,2,36,100,215,119,10,482,0,0,0,0,0,0,0
+سعاد,Soad,female,True,"Muslim, neutral",480,0,0,0,2,0,482,478,0,0,0,2,0,480,0,0,0,0,0,0,0
+عبدالملاك,Abdelmalak,neutral,True,"Christian, neutral",0,35,98,211,135,2,481,0,0,0,0,0,0,0,0,35,97,210,135,2,479
+البيومى,El-Bayoumi,neutral,True,"Muslim, neutral",0,30,71,179,176,23,479,0,30,70,179,176,23,478,0,0,0,0,0,0,0
+شعيب,Shoaib,male,True,"Muslim, neutral",8,51,93,102,196,28,478,8,51,92,102,196,28,477,0,0,0,0,0,0,0
+غبريال,Ghobrial,male,True,Christian,1,16,91,194,172,4,478,0,0,0,0,0,0,0,1,16,91,194,172,4,478
+عشرى,Ashry,male,True,"Christian, Muslim",2,107,181,98,77,12,477,2,107,180,98,77,12,476,0,0,1,0,0,0,1
+حليم,Halim,male,True,"Christian, Muslim, neutral",8,70,244,141,12,1,476,3,27,45,26,5,0,106,4,41,190,99,7,1,342
+شمس الدين,Shams El-Din,male,True,Muslim,50,68,110,112,119,16,475,50,68,110,112,119,16,475,0,0,0,0,0,0,0
+سلسبيل,Salsabil,female,False,Muslim,473,0,0,0,0,0,473,473,0,0,0,0,0,473,0,0,0,0,0,0,0
+عطاالله,Ata Allah,male,True,"Christian, Muslim, neutral",1,49,105,165,142,11,473,1,39,77,95,123,11,346,0,9,27,66,18,0,120
+نصر الدين,Nasr El-Din,male,True,"Muslim, neutral",15,155,145,80,63,12,470,15,155,144,80,63,12,469,0,0,0,0,0,0,0
+عرابى,Orabi,male,True,"Christian, Muslim",3,40,57,226,122,21,469,3,40,56,226,122,21,468,0,0,1,0,0,0,1
+محرم,Moharram,male,True,"Christian, Muslim",6,105,98,89,144,27,469,6,105,97,89,144,27,468,0,0,1,0,0,0,1
+رسلان,Roslan,male,True,"Christian, Muslim, neutral",4,20,55,190,188,11,468,4,20,54,189,186,11,464,0,0,0,1,0,0,1
+عبدالصبور,Abdel Sabour,male,True,"Christian, Muslim",5,81,258,113,10,0,467,5,81,256,113,10,0,465,0,0,2,0,0,0,2
+عوده,Awda,neutral,True,"Christian, Muslim, neutral",0,23,103,150,165,26,467,0,22,102,149,164,26,463,0,0,1,0,1,0,2
+عزه,Azza,female,True,Muslim,459,0,0,5,1,0,465,459,0,0,5,1,0,465,0,0,0,0,0,0,0
+وليم,William,male,True,"Christian, neutral",8,55,377,25,0,0,465,0,0,0,0,0,0,0,8,55,369,24,0,0,456
+نجلاء,Naglaa,female,False,"Christian, Muslim, neutral",464,0,0,0,0,0,464,460,0,0,0,0,0,460,2,0,0,0,0,0,2
+نغم,Nagham,female,False,Muslim,462,0,0,0,0,0,462,462,0,0,0,0,0,462,0,0,0,0,0,0,0
+ابوطالب,Abu Taleb,neutral,True,Muslim,0,23,58,147,211,22,461,0,23,58,147,211,22,461,0,0,0,0,0,0,0
+حمزة,Hamza,male,True,Muslim,181,39,89,76,70,6,461,181,39,89,76,70,6,461,0,0,0,0,0,0,0
+عزام,Azzam,male,True,"Muslim, neutral",10,84,61,74,190,42,461,9,84,61,74,190,42,460,0,0,0,0,0,0,0
+جودة,Gouda,male,True,"Christian, Muslim, neutral",5,54,204,107,73,17,460,5,52,194,102,67,17,437,0,2,10,4,6,0,22
+هارون,Haroun,male,True,"Christian, Muslim, neutral",28,70,125,129,94,13,459,28,57,109,109,83,13,399,0,12,15,18,11,0,56
+الطنطاوى,El-Tantawy,neutral,True,"Christian, Muslim",0,7,56,138,225,32,458,0,7,56,138,224,32,457,0,0,0,0,1,0,1
+السمان,El-Samman,male,True,Muslim,3,16,66,242,110,20,457,3,16,66,242,110,20,457,0,0,0,0,0,0,0
+امينه,Amina,female,False,Muslim,455,0,0,0,0,0,455,455,0,0,0,0,0,455,0,0,0,0,0,0,0
+نصيف,Nassef,male,True,"Christian, Muslim, neutral",2,32,190,224,7,0,455,0,7,10,19,1,0,37,2,22,164,195,5,0,388
+بهجت,Bahgat,male,True,"Christian, Muslim, neutral",12,186,143,85,24,3,453,12,150,132,79,24,3,400,0,31,11,3,0,0,45
+عبد الصمد,Abd El-Samad,male,True,Muslim,1,40,115,194,96,7,453,1,40,115,194,96,7,453,0,0,0,0,0,0,0
+القاضى,Al-Kady,neutral,True,"Muslim, neutral",0,1,8,62,317,64,452,0,1,8,61,317,64,451,0,0,0,0,0,0,0
+ابو السعود,Abu El-Soud,male,True,"Christian, Muslim, neutral",4,49,127,129,118,23,450,4,48,126,129,117,22,446,0,1,1,0,1,0,3
+زاهر,Zaher,male,True,"Christian, Muslim, neutral",20,86,116,103,92,33,450,20,68,84,89,92,33,386,0,16,30,9,0,0,55
+سحر,Sahar,female,False,"Christian, Muslim",450,0,0,0,0,0,450,449,0,0,0,0,0,449,1,0,0,0,0,0,1
+مي,Mai,female,False,"Christian, Muslim, neutral",450,0,0,0,0,0,450,444,0,0,0,0,0,444,1,0,0,0,0,0,1
+حسب الله,Hasaballah,male,True,"Christian, Muslim, neutral",4,13,83,151,183,14,448,4,13,74,132,171,14,408,0,0,9,18,11,0,38
+عبدالهادي,Abdelhady,male,True,"Muslim, neutral",8,46,147,171,72,4,448,8,46,147,169,72,4,446,0,0,0,0,0,0,0
+ابوالوفا,Abu El-Wafa,male,True,Muslim,6,53,188,160,29,10,446,6,53,188,160,29,10,446,0,0,0,0,0,0,0
+سماء,Samaa,female,False,Muslim,443,0,0,1,0,0,444,443,0,0,1,0,0,444,0,0,0,0,0,0,0
+عبد الدايم,Abd El-Dayem,male,True,"Christian, Muslim",2,34,103,173,123,9,444,2,34,103,172,123,9,443,0,0,0,1,0,0,1
+ندي,Nady,female,True,"Muslim, neutral",442,0,0,0,1,0,443,440,0,0,0,1,0,441,0,0,0,0,0,0,0
+الجزار,Al-Gazzar,neutral,True,Muslim,0,0,1,56,299,86,442,0,0,1,56,299,86,442,0,0,0,0,0,0,0
+فهد,Fahd,male,True,"Christian, Muslim, neutral",324,86,19,9,4,0,442,323,85,15,6,2,0,431,0,1,3,3,2,0,9
+صبره,Sabra,system_neutral,True,"Christian, Muslim, neutral",2,37,107,175,110,10,441,2,36,103,175,110,10,436,0,0,3,0,0,0,3
+ابوالخير,Abu El-Kheir,neutral,True,"Christian, Muslim, neutral",0,78,74,83,173,32,440,0,74,70,79,170,32,425,0,3,3,4,3,0,13
+مايا,Maya,female,False,"Christian, Muslim, neutral",438,0,0,0,0,0,438,398,0,0,0,0,0,398,14,0,0,0,0,0,14
+شوقي,Shawky,male,True,"Christian, Muslim, neutral",14,88,270,59,5,1,437,13,85,215,47,5,1,366,1,3,49,11,0,0,64
+منةالله,Menat Allah,female,False,Muslim,437,0,0,0,0,0,437,437,0,0,0,0,0,437,0,0,0,0,0,0,0
+حكيم,Hakim,male,True,"Christian, Muslim, neutral",6,27,127,250,18,2,430,5,11,25,25,4,2,72,0,15,93,199,14,0,321
+وديع,Wadie,male,True,"Christian, Muslim, neutral",20,66,260,83,1,0,430,3,7,20,7,0,0,37,14,56,231,70,1,0,372
+الطاهر,El-Taher,male,True,Muslim,5,41,116,210,46,8,426,5,41,116,210,46,8,426,0,0,0,0,0,0,0
+الطيب,El-Tayeb,male,True,Muslim,7,88,108,142,69,12,426,7,88,108,142,69,12,426,0,0,0,0,0,0,0
+علوان,Alwan,male,True,"Muslim, neutral",1,24,48,143,194,16,426,1,24,47,142,193,16,423,0,0,0,0,0,0,0
+المصرى,Al-Masry,male,True,"Christian, Muslim, neutral",1,5,20,62,267,70,425,1,5,18,61,266,70,421,0,0,1,0,1,0,2
+لمياء,Lamia,female,False,"Muslim, neutral",425,0,0,0,0,0,425,423,0,0,0,0,0,423,0,0,0,0,0,0,0
+العشرى,El Ashry,male,True,Muslim,2,9,26,95,236,56,424,2,9,26,95,236,56,424,0,0,0,0,0,0,0
+الشامى,El Shamy,male,True,"Christian, Muslim",2,6,10,66,272,66,422,2,6,10,66,271,66,421,0,0,0,0,1,0,1
+رغد,Raghad,female,False,"Muslim, neutral",422,0,0,0,0,0,422,421,0,0,0,0,0,421,0,0,0,0,0,0,0
+ضاحى,Dahi,male,True,"Christian, Muslim, neutral",6,196,142,64,11,3,422,5,195,140,64,11,3,418,1,1,1,0,0,0,3
+وعد,Waad,system_neutral,False,"Muslim, neutral",420,2,0,0,0,0,422,419,2,0,0,0,0,421,0,0,0,0,0,0,0
+زين,Zein,male,True,"Christian, Muslim, neutral",47,128,96,83,55,8,417,47,127,93,83,55,8,413,0,1,1,0,0,0,2
+سهيلة,Sohaila,female,False,Muslim,417,0,0,0,0,0,417,417,0,0,0,0,0,417,0,0,0,0,0,0,0
+رفيق,Rafik,male,False,"Christian, Muslim, neutral",34,316,50,15,0,0,415,18,244,40,15,0,0,317,15,68,7,0,0,0,90
+الشبراوى,El-Shabrawy,male,True,"Muslim, neutral",2,40,171,124,68,9,414,2,39,171,124,68,9,413,0,0,0,0,0,0,0
+عقل,Aql,male,True,"Christian, Muslim, neutral",1,24,59,126,166,37,413,1,23,58,124,166,37,409,0,0,1,2,0,0,3
+مفتاح,Meftah,neutral,True,"Christian, Muslim, neutral",0,63,132,139,78,1,413,0,63,130,134,77,1,405,0,0,2,2,1,0,5
+معروف,Maarouf,male,True,"Christian, Muslim, neutral",7,68,137,121,71,8,412,7,67,134,121,70,8,407,0,0,2,0,0,0,2
+الجمال,El-Gamal,neutral,True,Muslim,0,2,0,52,285,72,411,0,2,0,52,285,72,411,0,0,0,0,0,0,0
+رزق الله,Rezkallah,male,True,"Christian, Muslim, neutral",1,25,94,191,98,2,411,0,8,14,27,16,0,65,1,16,79,163,81,2,342
+عيسي,Eissa,male,True,"Christian, Muslim, neutral",9,45,63,133,141,20,411,8,35,56,118,135,20,372,1,8,7,12,6,0,34
+هيكل,Heikal,male,True,"Christian, Muslim, neutral",1,21,10,56,256,67,411,1,18,10,56,254,67,406,0,2,0,0,0,0,2
+عبد الشافى,Abd El-Shafy,male,True,Muslim,3,45,166,150,45,1,410,3,45,166,150,45,1,410,0,0,0,0,0,0,0
+سلمان,Salman,male,True,"Christian, Muslim, neutral",29,38,86,115,124,17,409,29,38,85,113,120,17,402,0,0,1,1,4,0,6
+بيتر,Peter,male,True,Christian,373,35,0,0,0,0,408,0,0,0,0,0,0,0,373,35,0,0,0,0,408
+مطر,Matar,male,True,"Christian, Muslim, neutral",1,6,18,76,240,67,408,1,6,15,71,235,67,395,0,0,3,5,4,0,12
+زيد,Zeid,male,True,"Muslim, neutral",27,17,46,93,174,50,407,26,17,46,93,174,49,405,0,0,0,0,0,0,0
+بشاى,Bishay,male,True,"Christian, Muslim, neutral",4,18,58,167,155,3,405,0,1,0,0,0,0,1,4,17,57,167,154,3,402
+وهيب,Wahib,male,True,"Christian, Muslim, neutral",3,34,211,118,36,3,405,1,9,49,36,36,3,134,2,24,155,79,0,0,260
+عربى,Arabi,male,True,"Muslim, neutral",11,215,138,34,5,1,404,11,213,137,34,5,1,401,0,0,0,0,0,0,0
+الحسن,El Hassan,male,True,"Muslim, neutral",227,105,31,27,11,0,401,227,104,31,27,11,0,400,0,0,0,0,0,0,0
+الحداد,El-Haddad,neutral,True,"Christian, Muslim",0,2,13,62,250,73,400,0,2,13,62,249,73,399,0,0,0,0,1,0,1
+العوضى,El Awady,male,True,Muslim,1,19,60,148,155,17,400,1,19,60,148,155,17,400,0,0,0,0,0,0,0
+عبدالمعز,Abd El-Moez,male,True,"Christian, Muslim",14,52,227,100,6,1,400,14,52,225,100,6,1,398,0,0,2,0,0,0,2
+طنطاوى,Tantawy,male,True,"Muslim, neutral",1,32,58,139,153,15,398,1,31,58,138,153,15,396,0,0,0,0,0,0,0
+ظريف,Zareef,male,True,"Christian, Muslim, neutral",1,119,229,44,4,1,398,0,53,73,29,3,1,159,0,60,144,14,1,0,219
+عبدالمسيح,Abdel Messih,male,True,Christian,49,54,97,120,74,4,398,0,0,0,0,0,0,0,49,54,97,120,74,4,398
+العيسوى,El-Essawy,male,True,"Christian, Muslim",1,19,40,104,203,30,397,1,19,40,103,203,30,396,0,0,0,1,0,0,1
+عبد الظاهر,Abd El Zaher,male,True,Muslim,5,30,145,202,14,0,396,5,30,145,202,14,0,396,0,0,0,0,0,0,0
+عبد الملاك,Abd El-Malak,male,True,Christian,1,21,93,171,109,1,396,0,0,0,0,0,0,0,1,21,93,171,109,1,396
+عبدالبديع,Abdelbadee,male,True,"Christian, Muslim",5,57,218,110,6,0,396,5,57,217,109,6,0,394,0,0,1,1,0,0,2
+باسل,Bassel,male,True,"Christian, Muslim, neutral",350,33,2,5,3,0,393,337,30,2,5,1,0,375,5,0,0,0,1,0,6
+ضيف,Deif,male,True,"Christian, Muslim, neutral",4,50,77,90,138,34,393,4,49,73,78,138,34,376,0,1,4,11,0,0,16
+يحيي,Yahia,male,True,"Christian, Muslim, neutral",126,119,95,31,18,4,393,126,116,93,31,18,4,388,0,1,2,0,0,0,3
+عبدالعاطي,Abdel-Aaty,male,True,"Christian, Muslim",6,51,163,132,34,5,391,6,50,162,131,34,5,388,0,1,1,1,0,0,3
+عيسوى,Eissawy,male,True,"Christian, Muslim, neutral",3,23,55,143,142,24,390,3,22,54,140,141,24,384,0,1,0,0,0,0,1
+هريدى,Horeidy,male,True,"Christian, Muslim, neutral",2,26,62,181,103,16,390,2,25,62,179,103,16,387,0,1,0,1,0,0,2
+نصرالدين,Nasr El-Din,male,True,Muslim,14,162,129,60,22,2,389,14,162,129,60,22,2,389,0,0,0,0,0,0,0
+انيس,Anis,male,True,"Christian, Muslim, neutral",8,65,167,125,20,2,387,6,41,93,61,14,1,216,1,21,72,56,6,1,157
+غطاس,Ghattas,neutral,True,"Christian, Muslim, neutral",0,39,88,139,111,9,386,0,1,5,5,40,7,58,0,37,82,131,68,2,320
+امنية,Omnia,female,False,Muslim,385,0,0,0,0,0,385,385,0,0,0,0,0,385,0,0,0,0,0,0,0
+بسيوني,Bassiouni,male,True,"Christian, Muslim, neutral",5,40,102,126,106,6,385,5,39,102,125,106,6,383,0,1,0,0,0,0,1
+سمعان,Samaan,male,True,"Christian, Muslim, neutral",23,44,81,149,85,3,385,0,0,1,2,3,1,7,23,44,79,146,81,2,375
+مالك,Malek,male,True,"Christian, Muslim, neutral",242,63,32,28,19,1,385,242,58,29,28,19,1,377,0,3,3,0,0,0,6
+احلام,Ahlam,female,False,"Christian, Muslim",384,0,0,0,0,0,384,383,0,0,0,0,0,383,1,0,0,0,0,0,1
+طلب,Talab,neutral,True,Muslim,0,10,60,220,93,1,384,0,10,60,220,93,1,384,0,0,0,0,0,0,0
+عبدالونيس,Abdel-Wanis,male,True,"Muslim, neutral",2,22,166,178,15,1,384,2,22,166,177,15,1,383,0,0,0,0,0,0,0
+موريس,Maurice,male,True,"Christian, Muslim, neutral",7,91,267,18,0,0,383,0,0,1,0,0,0,1,7,91,264,18,0,0,380
+ابو الحسن,Abu El Hassan,male,True,Muslim,3,60,86,144,85,4,382,3,60,86,144,85,4,382,0,0,0,0,0,0,0
+مخلوف,Makhlouf,male,True,"Christian, Muslim, neutral",1,56,125,104,85,10,381,1,55,121,102,84,10,373,0,0,4,1,1,0,6
+عبد المولى,Abd El-Mawla,male,True,Muslim,1,29,133,138,77,1,379,1,29,133,138,77,1,379,0,0,0,0,0,0,0
+جيد,Gayed,male,True,"Christian, Muslim, neutral",2,22,72,222,57,2,377,0,4,8,25,7,0,44,0,16,63,176,49,1,305
+بسام,Bassam,male,True,"Christian, Muslim, neutral",182,160,24,6,3,1,376,173,151,22,6,3,1,356,4,1,0,0,0,0,5
+عبد,Abdel,male,True,"Christian, Muslim, neutral",2,33,94,171,67,8,375,2,27,88,158,62,8,345,0,6,6,12,5,0,29
+سلمي,Salmi,female,True,"Muslim, neutral",321,11,16,15,10,1,374,320,11,16,15,10,1,373,0,0,0,0,0,0,0
+عبد الغني,Abd El-Ghani,male,True,Muslim,5,29,93,195,49,3,374,5,29,93,195,49,3,374,0,0,0,0,0,0,0
+شيرين,Shereen,female,False,"Christian, Muslim, neutral",357,11,5,0,0,0,373,342,8,5,0,0,0,355,12,3,0,0,0,0,15
+سعودى,Saudi,male,True,Muslim,11,161,66,44,73,17,372,11,161,66,44,73,17,372,0,0,0,0,0,0,0
+لطفي,Lotfy,male,True,"Christian, Muslim, neutral",7,65,228,53,17,1,371,6,60,200,51,17,0,334,0,5,21,2,0,1,29
+مارتينا,Martina,female,False,"Christian, Muslim, neutral",371,0,0,0,0,0,371,1,0,0,0,0,0,1,368,0,0,0,0,0,368
+السعدنى,El-Saadany,neutral,True,Muslim,0,11,12,63,231,53,370,0,11,12,63,231,53,370,0,0,0,0,0,0,0
+الششتاوى,El-Shishtawy,neutral,True,Muslim,0,26,71,194,78,1,370,0,26,71,194,78,1,370,0,0,0,0,0,0,0
+كيلانى,Kilany,male,True,"Muslim, neutral",1,27,78,145,103,15,369,1,27,78,145,102,15,368,0,0,0,0,0,0,0
+السقا,El Sakka,neutral,True,Muslim,0,1,6,44,278,39,368,0,1,6,44,278,39,368,0,0,0,0,0,0,0
+جاد الرب,Gad El-Rab,neutral,True,"Christian, Muslim",0,19,125,151,71,2,368,0,14,105,122,63,2,306,0,5,20,29,8,0,62
+قدرى,Kadry,male,True,"Christian, Muslim, neutral",8,196,131,26,6,1,368,8,190,125,26,6,1,356,0,4,5,0,0,0,9
+دميانه,Damiana,female,False,"Christian, neutral",366,0,0,0,0,0,366,0,0,0,0,0,0,0,365,0,0,0,0,0,365
+مايكل,Michael,male,True,Christian,278,88,0,0,0,0,366,0,0,0,0,0,0,0,278,88,0,0,0,0,366
+جاد الكريم,Gad El-Kareem,neutral,True,"Christian, Muslim, neutral",0,23,138,148,54,1,364,0,21,125,137,48,1,332,0,2,13,10,6,0,31
+حنفي,Hanafi,male,True,Muslim,1,52,143,105,58,4,363,1,52,143,105,58,4,363,0,0,0,0,0,0,0
+صابرين,Sabreen,female,True,"Christian, Muslim, neutral",360,0,2,1,0,0,363,356,0,2,1,0,0,359,1,0,0,0,0,0,1
+نعمه,Neama,female,True,"Christian, Muslim, neutral",348,0,3,1,7,4,363,335,0,3,1,7,4,350,12,0,0,0,0,0,12
+هنداوى,Hendawy,male,True,"Christian, Muslim",1,45,75,119,109,14,363,1,45,74,119,109,14,362,0,0,1,0,0,0,1
+نصير,Nossair,male,True,"Christian, Muslim, neutral",2,15,52,92,175,25,361,2,9,36,73,167,25,312,0,4,13,17,7,0,41
+سعدالدين,Saad El-Din,male,True,Muslim,8,50,172,103,24,3,360,8,50,172,103,24,3,360,0,0,0,0,0,0,0
+عبدالمؤمن,Abdelmoumen,male,True,Muslim,12,57,148,128,15,0,360,12,57,148,128,15,0,360,0,0,0,0,0,0,0
+الخطيب,El-Khatib,neutral,True,"Christian, Muslim",0,69,8,58,180,44,359,0,69,8,58,179,44,358,0,0,0,0,1,0,1
+لقاء,Leqaa,female,False,"Christian, Muslim",359,0,0,0,0,0,359,358,0,0,0,0,0,358,1,0,0,0,0,0,1
+بحيرى,Beheiry,neutral,True,"Christian, Muslim, neutral",0,13,33,91,187,34,358,0,12,32,89,186,34,353,0,1,1,0,1,0,3
+عبود,Aboud,male,True,"Christian, Muslim, neutral",3,59,103,120,62,11,358,2,54,97,116,60,11,340,1,3,6,3,1,0,14
+عفيفي,Afifi,male,True,"Christian, Muslim, neutral",1,24,64,64,184,21,358,1,23,63,63,184,21,355,0,1,1,0,0,0,2
+ابو اليزيد,Abu El-Yazeed,male,True,Muslim,2,27,99,209,20,0,357,2,27,99,209,20,0,357,0,0,0,0,0,0,0
+ساميه,Samia,female,False,"Christian, Muslim, neutral",356,0,0,0,0,0,356,345,0,0,0,0,0,345,9,0,0,0,0,0,9
+سلوى,Salwa,female,False,"Christian, Muslim, neutral",356,0,0,0,0,0,356,353,0,0,0,0,0,353,2,0,0,0,0,0,2
+تهامى,Tohamy,male,True,Muslim,6,31,102,167,47,2,355,6,31,102,167,47,2,355,0,0,0,0,0,0,0
+ماضى,Mady,male,True,"Christian, Muslim, neutral",1,30,58,89,148,29,355,1,28,58,81,148,29,345,0,2,0,6,0,0,8
+أروى,Arwa,female,False,"Muslim, neutral",354,0,0,0,0,0,354,353,0,0,0,0,0,353,0,0,0,0,0,0,0
+ابتسام,Ebtesam,female,False,"Christian, Muslim, neutral",354,0,0,0,0,0,354,351,0,0,0,0,0,351,1,0,0,0,0,0,1
+صبح,Sobh,male,True,"Christian, Muslim, neutral",1,32,85,74,135,27,354,1,32,82,71,135,27,348,0,0,2,3,0,0,5
+رشا,Rasha,female,False,"Christian, Muslim, neutral",353,0,0,0,0,0,353,349,0,0,0,0,0,349,1,0,0,0,0,0,1
+تونى,Tony,male,True,"Christian, Muslim, neutral",50,26,92,160,24,0,352,0,7,63,118,20,0,208,49,12,5,6,0,0,72
+جون,John,male,True,Christian,287,62,2,0,0,0,351,0,0,0,0,0,0,0,287,62,2,0,0,0,351
+عبد الراضى,Abdel Rady,male,True,"Christian, Muslim",2,46,159,123,21,0,351,2,46,157,123,21,0,349,0,0,2,0,0,0,2
+كريمه,Kerima,female,True,"Muslim, neutral",338,0,0,0,10,3,351,337,0,0,0,10,3,350,0,0,0,0,0,0,0
+لؤى,Loay,male,False,Muslim,297,49,4,1,0,0,351,297,49,4,1,0,0,351,0,0,0,0,0,0,0
+هبه الله,Heba Allah,female,False,Muslim,349,0,2,0,0,0,351,349,0,2,0,0,0,351,0,0,0,0,0,0,0
+لوجين,Logain,female,False,"Christian, Muslim, neutral",350,0,0,0,0,0,350,344,0,0,0,0,0,344,3,0,0,0,0,0,3
+مصيلحى,Moselehi,male,True,Muslim,2,16,64,209,57,2,350,2,16,64,209,57,2,350,0,0,0,0,0,0,0
+نورين,Noreen,female,True,"Christian, Muslim",345,1,3,1,0,0,350,342,1,3,1,0,0,347,3,0,0,0,0,0,3
+الصياد,El-Sayyad,male,True,Muslim,1,6,13,67,208,53,348,1,6,13,67,208,53,348,0,0,0,0,0,0,0
+يحي,Yahia,male,True,"Christian, Muslim",47,127,118,26,26,1,345,47,125,111,26,26,1,336,0,2,7,0,0,0,9
+جادالله,Gadallah,male,True,"Christian, Muslim, neutral",3,17,54,126,132,12,344,3,15,37,97,113,12,277,0,2,17,26,19,0,64
+حشمت,Hashmat,male,True,"Christian, Muslim, neutral",5,142,164,27,3,3,344,4,107,120,20,3,3,257,1,32,39,7,0,0,79
+مروة,Marwa,female,False,"Muslim, neutral",344,0,0,0,0,0,344,343,0,0,0,0,0,343,0,0,0,0,0,0,0
+اكرامى,Ekramy,male,False,"Christian, Muslim, neutral",8,335,0,0,0,0,343,8,319,0,0,0,0,327,0,13,0,0,0,0,13
+تغريد,Taghreed,female,False,"Christian, Muslim",343,0,0,0,0,0,343,342,0,0,0,0,0,342,1,0,0,0,0,0,1
+لجين,Login,female,False,"Muslim, neutral",342,0,0,0,0,0,342,341,0,0,0,0,0,341,0,0,0,0,0,0,0
+ناجي,Nagi,male,True,"Christian, Muslim, neutral",12,129,139,40,19,3,342,10,104,107,37,19,3,280,2,20,31,3,0,0,56
+مهدي,Mahdi,male,True,"Christian, Muslim, neutral",10,51,92,132,53,3,341,10,50,92,130,52,3,337,0,1,0,0,0,0,1
+عكاشه,Okasha,male,True,"Christian, Muslim",2,32,85,120,87,14,340,2,32,85,119,87,14,339,0,0,0,1,0,0,1
+يسى,Yassa,system_neutral,True,"Christian, Muslim, neutral",195,6,22,105,12,0,340,0,0,0,4,1,0,5,193,6,21,100,10,0,330
+ابو الوفا,Abu El Wafa,male,True,"Christian, Muslim",1,28,122,117,61,10,339,1,28,122,117,60,10,338,0,0,0,0,1,0,1
+بهاء الدين,Bahaa El Din,male,True,Muslim,47,220,38,31,0,1,337,47,220,38,31,0,1,337,0,0,0,0,0,0,0
+يونان,Younan,male,True,"Christian, neutral",8,75,115,112,26,1,337,0,0,0,0,0,0,0,8,75,114,108,26,1,332
+ناشد,Nashed,male,True,"Christian, Muslim, neutral",1,11,74,233,17,0,336,0,4,10,19,1,0,34,1,7,58,200,16,0,282
+هادى,Hadi,male,True,"Christian, Muslim, neutral",232,74,14,11,5,0,336,228,70,14,11,5,0,328,2,4,0,0,0,0,6
+عايد,Aayed,male,True,"Christian, Muslim, neutral",4,83,119,87,39,3,335,2,50,86,84,39,3,264,2,28,30,3,0,0,63
+عبدالمنصف,Abdelmonsef,male,True,Muslim,8,51,188,81,7,0,335,8,51,188,81,7,0,335,0,0,0,0,0,0,0
+حربى,Harby,male,True,"Christian, Muslim, neutral",5,182,67,22,52,6,334,4,157,56,20,52,6,295,0,25,10,1,0,0,36
+صيام,Siam,male,True,"Christian, Muslim",3,25,28,43,199,36,334,3,24,28,43,199,36,333,0,1,0,0,0,0,1
+بولا,Paula,system_neutral,False,Christian,324,8,1,0,0,0,333,0,0,0,0,0,0,0,324,8,1,0,0,0,333
+حجازي,Hegazy,male,True,Muslim,2,26,46,70,151,36,331,2,26,46,70,151,36,331,0,0,0,0,0,0,0
+عبدالجابر,Abdelgaber,male,True,"Christian, Muslim",1,29,178,118,4,0,330,1,29,177,116,4,0,327,0,0,1,2,0,0,3
+عبد السيد,Abd El-Sayed,male,True,"Christian, Muslim, neutral",1,17,67,153,87,2,327,0,8,26,74,39,2,149,1,9,41,77,48,0,176
+مخيمر,Mokhaymer,neutral,True,"Muslim, neutral",0,28,125,86,73,14,326,0,28,125,85,70,14,322,0,0,0,0,0,0,0
+مدبولى,Madbouly,neutral,True,"Muslim, neutral",0,20,84,177,44,1,326,0,20,83,175,44,1,323,0,0,0,0,0,0,0
+شهاب الدين,Shehab El-Din,male,True,Muslim,96,52,26,45,89,17,325,96,52,26,45,89,17,325,0,0,0,0,0,0,0
+عبد المسيح,Abdel Messih,male,True,Christian,26,50,77,107,64,1,325,0,0,0,0,0,0,0,26,50,77,107,64,1,325
+سراج,Serag,male,True,"Christian, Muslim",60,65,21,47,108,23,324,60,63,21,46,108,23,321,0,2,0,1,0,0,3
+جومانه,Gomana,female,False,"Christian, Muslim, neutral",323,0,0,0,0,0,323,280,0,0,0,0,0,280,33,0,0,0,0,0,33
+جوهر,Gohar,male,True,"Christian, Muslim, neutral",2,16,47,87,137,33,322,1,14,40,65,131,33,284,0,2,6,19,6,0,33
+فرحان,Farhan,male,True,"Christian, Muslim, neutral",2,62,109,90,54,5,322,2,54,96,85,52,5,294,0,5,13,3,2,0,23
+نبوى,Nabawy,male,True,"Muslim, neutral",4,48,132,124,12,1,321,4,48,131,124,12,1,320,0,0,0,0,0,0,0
+الوكيل,El-Wakeel,neutral,True,"Christian, Muslim",0,2,3,44,226,45,320,0,2,3,44,225,45,319,0,0,0,0,1,0,1
+شرين,Shereen,female,False,"Christian, Muslim, neutral",313,7,0,0,0,0,320,298,7,0,0,0,0,305,11,0,0,0,0,0,11
+سيف النصر,Seif El Nasr,male,True,"Christian, Muslim, neutral",11,53,119,93,41,2,319,11,53,118,92,41,2,317,0,0,0,1,0,0,1
+مأمون,Mamoun,male,True,"Muslim, neutral",13,43,120,117,20,6,319,13,43,119,117,20,6,318,0,0,0,0,0,0,0
+الدمرداش,El-Demerdash,male,True,"Christian, Muslim",1,12,62,175,59,8,317,1,12,62,175,58,8,316,0,0,0,0,1,0,1
+دسوقي,Desouki,neutral,True,"Muslim, neutral",0,20,89,110,91,7,317,0,20,89,109,91,7,316,0,0,0,0,0,0,0
+ابو الخير,Abu El-Kheir,male,True,"Christian, Muslim",1,30,41,80,136,28,316,1,27,37,73,132,27,297,0,3,4,7,4,1,19
+اندرو,Andrawes,male,False,"Christian, neutral",316,0,0,0,0,0,316,0,0,0,0,0,0,0,315,0,0,0,0,0,315
+مرجان,Morgan,neutral,True,"Christian, Muslim, neutral",0,13,44,81,164,14,316,0,9,26,38,125,14,212,0,4,16,39,34,0,93
+مصلحى,Moslehi,male,True,Muslim,1,21,60,179,53,1,315,1,21,60,179,53,1,315,0,0,0,0,0,0,0
+أنور,Anwar,male,True,"Christian, Muslim, neutral",12,107,137,51,7,0,314,12,99,126,46,7,0,290,0,6,10,4,0,0,20
+العطار,El Attar,neutral,True,Muslim,0,1,2,40,218,53,314,0,1,2,40,218,53,314,0,0,0,0,0,0,0
+النحاس,Al-Nahhas,neutral,True,"Christian, Muslim",0,2,40,62,176,34,314,0,2,39,62,176,34,313,0,0,1,0,0,0,1
+رفيده,Rofaida,female,False,"Muslim, neutral",313,0,0,0,0,0,313,312,0,0,0,0,0,312,0,0,0,0,0,0,0
+سهام,Seham,female,False,"Christian, Muslim, neutral",310,1,0,1,0,0,312,307,0,0,1,0,0,308,2,1,0,0,0,0,3
+جوزيف,Joseph,male,True,"Christian, neutral",108,178,23,1,1,0,311,0,0,0,0,0,0,0,108,178,23,1,0,0,310
+التهامى,El-Tohamy,male,True,Muslim,4,25,54,159,61,7,310,4,25,54,159,61,7,310,0,0,0,0,0,0,0
+الليثى,El-Leithy,neutral,True,Muslim,0,14,28,103,145,20,310,0,14,28,103,145,20,310,0,0,0,0,0,0,0
+زين الدين,Zein El-Din,male,True,"Muslim, neutral",48,18,36,71,118,18,309,48,18,36,70,118,18,308,0,0,0,0,0,0,0
+عويضه,Oweida,neutral,True,"Christian, Muslim, neutral",0,13,41,92,144,19,309,0,10,28,62,130,19,249,0,3,11,26,11,0,51
+محي,Mohie,male,True,"Christian, Muslim",7,139,119,40,3,1,309,7,137,119,40,3,1,307,0,2,0,0,0,0,2
+نوفل,Nofal,male,True,"Christian, Muslim",2,6,26,45,183,47,309,2,6,25,45,183,47,308,0,0,1,0,0,0,1
+اسحاق,Ishaq,male,True,"Christian, Muslim, neutral",13,112,94,59,29,1,308,4,8,19,10,13,1,55,9,97,68,46,14,0,234
+الدسوقي,El-Desouky,male,True,Muslim,1,16,58,126,93,14,308,1,16,58,126,93,14,308,0,0,0,0,0,0,0
+العدل,El-Adl,male,True,"Christian, Muslim",1,22,34,83,145,23,308,1,22,33,83,145,23,307,0,0,1,0,0,0,1
+تادرس,Tadros,male,True,"Christian, neutral",9,14,50,140,94,1,308,0,0,0,0,0,0,0,9,14,50,139,94,1,307
+زهراء,Zahraa,female,True,Muslim,307,0,0,1,0,0,308,307,0,0,1,0,0,308,0,0,0,0,0,0,0
+المحمدى,El-Mohammady,male,True,Muslim,3,33,201,68,2,0,307,3,33,201,68,2,0,307,0,0,0,0,0,0,0
+النادى,El-Nady,male,True,Muslim,2,19,31,102,126,27,307,2,19,31,102,126,27,307,0,0,0,0,0,0,0
+الشاعر,El Shaer,male,True,Muslim,2,0,0,50,197,56,305,2,0,0,50,197,56,305,0,0,0,0,0,0,0
+عبدالمالك,Abd El-Malek,male,True,"Christian, Muslim",6,24,127,131,17,0,305,6,24,124,129,17,0,300,0,0,3,2,0,0,5
+عبد البارى,Abd El-Bary,male,True,Muslim,1,20,90,132,53,8,304,1,20,90,132,53,8,304,0,0,0,0,0,0,0
+عبد القوى,Abd El-Kawy,male,True,"Christian, Muslim",2,28,74,157,41,0,302,2,28,74,156,41,0,301,0,0,0,1,0,0,1
+نوح,Nouh,male,True,"Christian, Muslim, neutral",15,37,73,75,89,13,302,13,35,65,69,88,13,283,1,2,6,5,1,0,15
+ايناس,Enas,female,False,"Christian, Muslim, neutral",300,1,0,0,0,0,301,295,1,0,0,0,0,296,4,0,0,0,0,0,4
+تاوضروس,Tawadros,male,True,Christian,4,11,43,126,115,1,300,0,0,0,0,0,0,0,4,11,43,126,115,1,300
+عليان,Olayan,male,True,"Muslim, neutral",2,18,62,102,98,18,300,2,18,61,102,98,18,299,0,0,0,0,0,0,0
+جيهان,Gihan,female,False,"Christian, Muslim, neutral",299,0,0,0,0,0,299,289,0,0,0,0,0,289,6,0,0,0,0,0,6
+موده,Mawada,female,False,Muslim,299,0,0,0,0,0,299,299,0,0,0,0,0,299,0,0,0,0,0,0,0
+عزوز,Azzouz,male,True,"Christian, Muslim",4,46,99,98,48,3,298,4,45,97,96,46,3,291,0,1,2,2,2,0,7
+الحنفى,El-Hanafy,neutral,True,Muslim,0,3,32,73,159,30,297,0,3,32,73,159,30,297,0,0,0,0,0,0,0
+حبشى,Habashi,neutral,True,"Christian, Muslim, neutral",0,32,72,111,77,5,297,0,27,50,52,40,5,174,0,4,20,57,32,0,113
+طايع,Tayea,male,True,"Muslim, neutral",2,27,92,122,45,9,297,2,27,92,121,45,9,296,0,0,0,0,0,0,0
+كارم,Karem,male,True,"Christian, Muslim, neutral",19,234,31,10,3,0,297,19,231,30,10,3,0,293,0,3,0,0,0,0,3
+مارك,Mark,male,True,"Christian, neutral",294,2,1,0,0,0,297,0,0,0,0,0,0,0,293,2,1,0,0,0,296
+إسماعيل,Ismail,male,True,Muslim,4,33,59,101,91,8,296,4,33,59,101,91,8,296,0,0,0,0,0,0,0
+راتب,Rateb,male,True,"Christian, Muslim, neutral",4,32,124,116,17,3,296,4,29,93,100,17,3,246,0,1,28,14,0,0,43
+قرني,Qarni,neutral,True,Muslim,0,24,130,132,9,1,296,0,24,130,132,9,1,296,0,0,0,0,0,0,0
+ناهد,Nahed,female,False,"Christian, Muslim",291,3,2,0,0,0,296,287,3,2,0,0,0,292,4,0,0,0,0,0,4
+حلا,Hala,female,False,"Muslim, neutral",295,0,0,0,0,0,295,293,0,0,0,0,0,293,0,0,0,0,0,0,0
+عبد الرسول,Abdel Rasoul,neutral,True,Muslim,0,36,112,102,44,1,295,0,36,112,102,44,1,295,0,0,0,0,0,0,0
+عبدالحق,Abd El-Haq,male,True,Muslim,3,31,77,108,65,11,295,3,31,77,108,65,11,295,0,0,0,0,0,0,0
+المغربى,El-Maghraby,male,True,Muslim,1,5,15,58,170,45,294,1,5,15,58,170,45,294,0,0,0,0,0,0,0
+ضياء الدين,Diaa El Din,male,True,Muslim,49,198,30,11,2,4,294,49,198,30,11,2,4,294,0,0,0,0,0,0,0
+جنيدى,Geneidy,neutral,True,"Christian, Muslim",0,17,42,116,102,16,293,0,16,40,114,99,16,285,0,1,2,2,3,0,8
+رقية,Roqaya,female,True,Muslim,291,0,0,0,2,0,293,291,0,0,0,2,0,293,0,0,0,0,0,0,0
+فايق,Fayek,male,True,"Christian, Muslim, neutral",5,53,162,67,6,0,293,4,32,59,32,5,0,132,0,20,95,33,1,0,149
+ابرار,Abrar,system_neutral,False,"Muslim, neutral",292,0,0,0,0,0,292,291,0,0,0,0,0,291,0,0,0,0,0,0,0
+جنة,Genna,female,True,Muslim,290,0,0,0,2,0,292,290,0,0,0,2,0,292,0,0,0,0,0,0,0
+رانا,Rana,female,False,"Christian, Muslim, neutral",292,0,0,0,0,0,292,279,0,0,0,0,0,279,12,0,0,0,0,0,12
+رنيم,Raneem,female,False,"Christian, Muslim",292,0,0,0,0,0,292,291,0,0,0,0,0,291,1,0,0,0,0,0,1
+نزيه,Nazih,male,True,"Christian, Muslim, neutral",6,216,60,10,0,0,292,6,177,47,10,0,0,240,0,34,12,0,0,0,46
+واصف,Wassef,male,True,"Christian, Muslim, neutral",2,28,46,133,83,0,292,1,19,15,14,5,0,54,0,8,30,106,75,0,219
+رحيم,Raheem,male,True,Muslim,96,10,38,63,79,5,291,96,10,38,63,79,5,291,0,0,0,0,0,0,0
+الطوخى,El-Tokhy,neutral,True,Muslim,0,13,20,92,130,35,290,0,13,20,92,130,35,290,0,0,0,0,0,0,0
+مكى,Makki,male,True,"Muslim, neutral",5,23,34,114,97,17,290,5,23,34,114,97,16,289,0,0,0,0,0,0,0
+شعلان,Shaalan,neutral,True,Muslim,0,15,11,48,164,51,289,0,15,11,48,164,51,289,0,0,0,0,0,0,0
+مرقص,Morcos,male,True,Christian,7,61,56,100,65,0,289,0,0,0,0,0,0,0,7,61,56,100,65,0,289
+برسوم,Barsoum,male,True,Christian,24,25,49,129,61,0,288,0,0,0,0,0,0,0,24,25,49,129,61,0,288
+هندى,Hendy,neutral,True,"Christian, Muslim, neutral",0,13,39,86,122,28,288,0,12,24,79,116,28,259,0,1,12,7,5,0,25
+القطب,El-Kotb,male,True,"Christian, Muslim",1,32,103,115,36,0,287,1,32,103,114,36,0,286,0,0,0,1,0,0,1
+مكاوى,Mekawy,male,True,"Muslim, neutral",3,15,46,88,110,25,287,3,15,46,87,110,25,286,0,0,0,0,0,0,0
+فاتن,Faten,female,False,"Christian, Muslim, neutral",285,0,1,0,0,0,286,282,0,1,0,0,0,283,2,0,0,0,0,0,2
+لاشين,Lasheen,male,True,Muslim,1,7,13,61,169,35,286,1,7,13,61,169,35,286,0,0,0,0,0,0,0
+نافع,Nafe,male,True,"Christian, Muslim, neutral",2,47,55,57,100,25,286,2,45,52,57,98,25,279,0,1,3,0,2,0,6
+ابو النجا,Abu El Naga,male,True,"Christian, Muslim, neutral",3,21,33,73,134,21,285,3,20,33,73,133,21,283,0,0,0,0,1,0,1
+العدوى,Al-Adawy,neutral,True,Muslim,0,12,27,76,132,38,285,0,12,27,76,132,38,285,0,0,0,0,0,0,0
+عبد الهادي,Abd El-Hadi,male,True,Muslim,7,37,71,98,64,8,285,7,37,71,98,64,8,285,0,0,0,0,0,0,0
+رشيد,Rashid,male,True,"Christian, Muslim, neutral",8,34,111,82,39,10,284,8,33,92,75,37,10,255,0,1,16,7,2,0,26
+روميساء,Romaisa,female,False,"Muslim, neutral",284,0,0,0,0,0,284,283,0,0,0,0,0,283,0,0,0,0,0,0,0
+سامر,Samer,male,False,"Christian, Muslim, neutral",80,188,14,2,0,0,284,57,154,14,2,0,0,227,13,26,0,0,0,0,39
+سعداوى,Saadawy,male,True,"Muslim, neutral",3,51,84,111,35,0,284,3,51,84,109,35,0,282,0,0,0,0,0,0,0
+عجمى,Agamy,male,True,"Christian, Muslim, neutral",2,35,93,99,50,5,284,2,35,92,98,48,5,280,0,0,1,0,1,0,2
+الهام,Elham,female,True,"Christian, Muslim",278,2,1,2,0,0,283,278,1,1,2,0,0,282,0,1,0,0,0,0,1
+خير,Khair,male,True,"Christian, Muslim, neutral",1,52,71,100,52,7,283,1,40,55,74,49,7,226,0,10,16,22,2,0,50
+الصباغ,El Sabbagh,neutral,True,"Muslim, neutral",0,0,1,35,190,56,282,0,0,1,34,190,56,281,0,0,0,0,0,0,0
+شاهنده,Shahanda,female,False,Muslim,282,0,0,0,0,0,282,282,0,0,0,0,0,282,0,0,0,0,0,0,0
+لمعى,Lamei,neutral,True,"Christian, Muslim, neutral",0,16,190,73,2,1,282,0,7,24,13,1,1,46,0,7,156,58,1,0,222
+ابرام,Abram,male,False,"Christian, Muslim",265,12,4,0,0,0,281,1,0,0,0,0,0,1,264,12,4,0,0,0,280
+ابوالحمد,Abu El-Hamd,male,True,Muslim,2,30,153,88,8,0,281,2,30,153,88,8,0,281,0,0,0,0,0,0,0
+فيروز,Fayrouz,female,False,"Christian, Muslim, neutral",272,1,8,0,0,0,281,270,1,8,0,0,0,279,1,0,0,0,0,0,1
+توماس,Thomas,male,True,"Christian, neutral",252,3,3,12,10,0,280,0,0,0,0,0,0,0,251,3,3,12,10,0,279
+سنوسى,Senoussi,male,True,"Muslim, neutral",2,12,98,146,22,0,280,2,12,96,146,22,0,278,0,0,0,0,0,0,0
+عشماوى,Ashmawy,neutral,True,"Christian, Muslim",0,19,44,96,111,10,280,0,19,44,95,109,10,277,0,0,0,1,2,0,3

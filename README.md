@@ -11,13 +11,14 @@
 [![npm Version](https://img.shields.io/npm/v/egy-names?color=cb3837&label=npm%20%28TS%2FJS%29)](https://www.npmjs.com/package/egy-names)
 [![NuGet Version](https://img.shields.io/nuget/v/egy-names?color=004880&label=NuGet%20%28.NET%2FC%23%29)](https://www.nuget.org/packages/egy-names/)
 [![pub.dev Version](https://img.shields.io/pub/v/egy_names?color=0175C2&label=pub.dev%20%28Dart%2FFlutter%29)](https://pub.dev/packages/egy_names)
+[![Swift PM](https://img.shields.io/badge/Swift%20PM-iOS%20%7C%20macOS%20%7C%20visionOS-FA7343?logo=swift)](https://github.com/AbdullahAfifyKhalil/egy-names)
 [![Maven Central](https://img.shields.io/badge/Maven%20Central-0.1.1-orange)](https://central.sonatype.com/)
 [![C++ Standard](https://img.shields.io/badge/C%2B%2B-20%20%2F%2017-00599C?logo=cplusplus)](https://github.com/AbdullahAfifyKhalil/egy-names)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-**Available natively with 100% deterministic parity across 6 ecosystems:**
+**Available natively with 100% deterministic parity across 7 ecosystems:**
 <br />
-🐍 **Python** • 🟨 **TypeScript / Node.js** • 🔷 **.NET / C#** • 💙 **Flutter / Dart** • ☕ **Java / Kotlin** • ⚡ **Modern C++**
+🐍 **Python** • 🟨 **TypeScript / Node.js** • 🔷 **.NET / C#** • 💙 **Flutter / Dart** • 🍎 **Swift / iOS** • ☕ **Java / Kotlin** • ⚡ **Modern C++**
 
 [Features](#-key-features) • [The Story](#-the-story-why-egy-names) • [Installation](#-quick-start--installation) • [API & Examples](#-usage--api-examples) • [Dataset](#-data-pipeline--empirical-corpus) • [Architecture](#-onomastic-architecture)
 
@@ -54,6 +55,29 @@ Egyptian names present unique computational and onomastic challenges found in fe
 ---
 
 ## 🚀 Quick Start & Installation
+
+### 🍎 Swift / iOS / macOS / visionOS (Swift Package Manager)
+Add via Xcode: `File > Add Package Dependencies...` and enter:
+```text
+https://github.com/AbdullahAfifyKhalil/egy-names.git
+```
+Or in `Package.swift`:
+```swift
+dependencies: [
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.1.1")
+]
+```
+```swift
+import EgyNames
+
+let en = EgyptianNames()
+print(en.translate("محمد أحمد علي"))  // Mohamed Ahmed Ali
+print(en.correct("احمد مصطفا عبد الرحيم"))  // أحمد مصطفى عبدالرحيم
+print(en.tashkeel("محمد عبدالرحمن"))  // مُحَمَّد عَبْدُالرَّحْمَن
+print(en.split("محمدأحمدعليحسن"))  // ["محمد", "أحمد", "علي", "حسن"]
+```
+
+---
 
 ### 🐍 Python (3.9+)
 ```bash
@@ -209,6 +233,7 @@ Detailed documentation and sample pipeline datasets are available in the [`data/
 ## 🌟 Interactive Examples & Benchmarks
 
 Full runnable example suites for all languages are provided in [`examples/`](examples/):
+- [Swift Examples](examples/swift/main.swift)
 - [Python Examples](examples/python/demo.py)
 - [TypeScript Examples](examples/typescript/demo.ts)
 - [C# / .NET Examples](examples/csharp/Program.cs)

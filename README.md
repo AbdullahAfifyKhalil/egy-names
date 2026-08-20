@@ -1,66 +1,123 @@
 <div align="center">
 
-<img src="assets/banner.png" alt="Egyptian Names Banner" width="100%" style="border-radius: 12px; margin-bottom: 20px;" />
+<img src="assets/banner.png" alt="Egyptian Names Banner" width="100%" style="border-radius: 12px; margin-bottom: 24px;" />
 
-<img src="assets/logo.png" alt="Egyptian Names Logo" width="140" style="border-radius: 50%; box-shadow: 0 8px 32px rgba(0,0,0,0.4);" />
+<img src="assets/logo.png" alt="Egyptian Names Logo" width="120" style="border-radius: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.3);" />
 
-# 🇪🇬 Egyptian Names (`egy-names`)
-### *The Production-Grade Onomastic Intelligence & Linguistic Engine for Egyptian Names*
+# Egyptian Names (`egy-names`)
+### *A Production-Grade Onomastic Intelligence and Linguistic Engine for Egyptian Names*
 
-[![PyPI Version](https://img.shields.io/pypi/v/egy-names?color=blue&label=PyPI%20%28Python%29)](https://pypi.org/project/egy-names/)
-[![npm Version](https://img.shields.io/npm/v/egy-names?color=cb3837&label=npm%20%28TS%2FJS%29)](https://www.npmjs.com/package/egy-names)
-[![NuGet Version](https://img.shields.io/nuget/v/egy-names?color=004880&label=NuGet%20%28.NET%2FC%23%29)](https://www.nuget.org/packages/egy-names/)
-[![pub.dev Version](https://img.shields.io/pub/v/egy_names?color=0175C2&label=pub.dev%20%28Dart%2FFlutter%29)](https://pub.dev/packages/egy_names)
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-0.1.1-orange)](https://central.sonatype.com/)
+[![PyPI Version](https://img.shields.io/badge/PyPI%20(Python)-v0.2.1-blue?logo=pypi)](https://pypi.org/project/egy-names/)
+[![npm Version](https://img.shields.io/badge/npm%20(TS%2FJS)-v0.2.1-cb3837?logo=npm)](https://www.npmjs.com/package/egy-names)
+[![NuGet Version](https://img.shields.io/badge/NuGet%20(.NET)-v0.2.1-004880?logo=nuget)](https://www.nuget.org/packages/egy-names/)
+[![pub.dev Version](https://img.shields.io/badge/pub.dev%20(Dart)-v0.2.1-0175C2?logo=dart)](https://pub.dev/packages/egy_names)
+[![Swift PM](https://img.shields.io/badge/Swift%20PM-v0.2.1-FA7343?logo=swift)](https://github.com/AbdullahAfifyKhalil/egy-names)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v0.2.1-orange?logo=apachemaven)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
+[![Hugging Face Names](https://img.shields.io/badge/Hugging%20Face-Names%20(13M%20Corpus)-yellow?logo=huggingface)](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
+[![Hugging Face Degrees](https://img.shields.io/badge/Hugging%20Face-Student%20Degrees%20(3.79M)-blue?logo=huggingface)](https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades)
 [![C++ Standard](https://img.shields.io/badge/C%2B%2B-20%20%2F%2017-00599C?logo=cplusplus)](https://github.com/AbdullahAfifyKhalil/egy-names)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-**Available natively with 100% deterministic parity across 6 ecosystems:**
+**Implemented with deterministic parity across 7 major programming languages:**
 <br />
-🐍 **Python** • 🟨 **TypeScript / Node.js** • 🔷 **.NET / C#** • 💙 **Flutter / Dart** • ☕ **Java / Kotlin** • ⚡ **Modern C++**
+**Python** • **TypeScript / JavaScript** • **.NET / C#** • **Flutter / Dart** • **Swift** • **Java / Kotlin** • **C++**
 
-[Features](#-key-features) • [The Story](#-the-story-why-egy-names) • [Installation](#-quick-start--installation) • [API & Examples](#-usage--api-examples) • [Dataset](#-data-pipeline--empirical-corpus) • [Architecture](#-onomastic-architecture)
+[Features](#key-features) • [Overview](#overview) • [Installation & Usage](#installation--usage) • [Hugging Face Datasets](#hugging-face-datasets) • [Onomastic Architecture](#onomastic-architecture) • [About Afify Corporation](#about-afify-corporation) • [License](#license)
 
 </div>
 
 ---
 
-## 📖 The Story: Why Egyptian Names?
+## Overview
 
-Egyptian names present unique computational and onomastic challenges found in few other naming traditions:
+Egyptian personal names follow an unbroken patronymic lineage system (*Personal + Father + Grandfather + Ancestor + Family/Tribe*) rather than the Western *Given + Surname* convention. This structure creates significant computational and linguistic challenges:
 
-1. **Patronymic Lineage Chains**: Unlike Western naming systems ($Given + Surname$), Egyptian naming forms an unbroken patronymic chain ($Personal + Father + Grandfather + Ancestor + Family/Tribe$), where each position conveys specific demographic and cultural meaning.
-2. **Compound Name Ambiguity**: Names like `عبد الرحمن` (Abdel-Rahman), `نور الدين` (Nour El-Din), and `فاطمة الزهراء` (Fatima El-Zahraa) are frequently written concatenated (`عبدالرحمن`), unspaced, or split inconsistently across forms.
-3. **Pervasive Orthographic Variations**: Civil registries and digital forms contain vast phonetic and orthographic variations (e.g. `مصطفى` vs `مصطفا`, `إبراهيم` vs `ابراهيم`, `أحمد` vs `احمد`).
-4. **Unspaced Name Concatenation**: In legacy government records and scanned forms, entire full names appear glued together (`محمدأحمدعليحسنالشاذلي`).
+1. **Patronymic Lineage Ambiguity**: Determining the generational role of each name element in official and colloquial records.
+2. **Compound Names**: Proper handling of prefixed and unspaced compound names (`عبدالرحمن` vs `عبد الرحمن`, `نور الدين`, `فاطمة الزهراء`).
+3. **Orthographic Variations**: Resolving standard Arabic spelling variants (`مصطفى`/`مصطفا`, `إبراهيم`/`ابراهيم`, `أحمد`/`احمد`).
+4. **Concatenated Names**: Segmenting unspaced text strings in legacy digital records (`محمدأحمدعليحسنالشاذلي`).
 
-`egy-names` solves these challenges **deterministically and without LLM hallucination**, backed by an empirical statistical frequency model extracted from over **33,000+ validated personal names** across millions of real records.
+`egy-names` solves these problems deterministically without relying on language model inference, using an empirical statistical model extracted from over **13,000,000+ validated records**, **56,796 canonical names**, and **54,000+ orthographic correction rules**.
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 | Capability | Description | Example |
 |---|---|---|
-| 🎲 **Realistic Generation** | Patronymic Markov-chain generator with slot-specific frequencies | `حسام أحمد عبدالعليم` |
-| 🔀 **DP Name Splitter** | Dynamic programming shortest-path segmenter for unspaced text | `محمدأحمدعلي` $\to$ `[محمد, أحمد, علي]` |
-| ✍️ **Smart Tashkeel** | Full diacritization with compound name awareness | `محمد عبدالرحمن` $\to$ `مُحَمَّد عَبْدُالرَّحْمَن` |
-| 🛠️ **Orthographic Corrector** | 54K+ rule dictionary + Alif/Alif Maqsura normalization | `احمد مصطفا` $\to$ `أحمد مصطفى` |
-| 🌍 **Transliteration** | Bidirectional Arabic $\leftrightarrow$ English with phonetic preservation | `محمد أحمد علي` $\leftrightarrow$ `Mohamed Ahmed Ali` |
-| 📊 **Demographic Inference** | Empirical gender & religious probability classification | `مريم` (Female 95%), `جورج` (Christian 99%) |
-| 🌳 **Patronymic Decomposer** | Slot 1 to 6 genealogical lineage parser | Personal $\to$ Father $\to$ Grandfather $\to$ Family |
-| 📖 **Etymology & Meanings** | Arabic root definitions and English translations | `محمد` $\to$ *The Praised One ( الجذر: ح م د )* |
+| **Patronymic Generation** | Slot-weighted sampling matching national demographic distributions | `حسام أحمد عبدالعليم` |
+| **Concatenated Segmentation** | Dynamic programming shortest-path segmenter for unspaced text | `محمدأحمدعلي` $\to$ `[محمد, أحمد, علي]` |
+| **Diacritization (Tashkeel)** | Full vowel mark restoration with compound awareness | `محمد عبدالرحمن` $\to$ `مُحَمَّد عَبْدُالرَّحْمَن` |
+| **Orthographic Correction** | Rule-based correction and Alif/Alif Maqsura normalization | `احمد مصطفا` $\to$ `أحمد مصطفى` |
+| **Transliteration** | Bidirectional Arabic $\leftrightarrow$ English with phonetic preservation | `محمد أحمد علي` $\leftrightarrow$ `Mohamed Ahmed Ali` |
+| **Demographic Inference** | Empirical gender and religious cultural classification | `مريم` (Female 95%), `جورج` (Christian 99%) |
+| **Lineage Decomposition** | Six-slot generational decomposition | Personal $\to$ Father $\to$ Grandfather $\to$ Family |
+| **Etymology & Meanings** | Morphological root definitions and English translations | `محمد` $\to$ *The Praised One ( الجذر: ح م د )* |
 
 ---
 
-## 🚀 Quick Start & Installation
+## Hugging Face Datasets
 
-### 🐍 Python (3.9+)
+The underlying national datasets are open-source and available on Hugging Face:
+
+### 1. Egyptian Names & Onomastic Intelligence Dataset
+👉 **[https://huggingface.co/datasets/Abdullah-afify/egyptian-names](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)**
+- **56,796 Canonical Names** with gender, religion, 6-slot patronymic frequencies, tashkeel, root meanings, and transliterations.
+- **13,061,572 Raw Full Names** (`phase0_raw`) and **1,000,000 Segmented Chains** (`phase1_segmented`).
+- **106,343 Unique Token Frequencies** and **54,000+ Orthographic Correction Rules**.
+
+```python
+from datasets import load_dataset
+
+# Load default canonical dictionary (56.8K names)
+names_dataset = load_dataset("Abdullah-afify/egyptian-names")
+
+# Load raw full names
+raw_names = load_dataset("Abdullah-afify/egyptian-names", "phase0_raw")
+```
+
+### 2. Egyptian High School Students Degrees Dataset (2017–2026)
+👉 **[https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades](https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades)**
+- **3,790,225 Total Student Records** across 5 national examination cohorts (**2017**, **2023**, **2024**, **2025**, and **2026**).
+- Includes seating numbers, full student quad/quint names, total examination scores, and pass/fail statuses.
+
+```python
+# Load all 3.79M student records across 2017-2026
+degrees_dataset = load_dataset("Abdullah-afify/egyptian-high-school-students-grades")
+
+# Load a specific examination cohort (e.g. 2026 results)
+cohort_2026 = load_dataset("Abdullah-afify/egyptian-high-school-students-grades", "year_2026")
+```
+
+---
+
+## Installation & Usage
+
+### Swift / iOS / macOS / visionOS
+Add package via Xcode (`File > Add Package Dependencies...`) or in `Package.swift`:
+```swift
+dependencies: [
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.2.1")
+]
+```
+```swift
+import EgyNames
+
+let en = EgyptianNames()
+print(en.translate("محمد أحمد علي"))  // Mohamed Ahmed Ali
+print(en.correct("احمد مصطفا عبد الرحيم"))  // أحمد مصطفى عبدالرحيم
+print(en.tashkeel("محمد عبدالرحمن"))  // مُحَمَّد عَبْدُالرَّحْمَن
+print(en.split("محمدأحمدعليحسن"))  // ["محمد", "أحمد", "علي", "حسن"]
+```
+
+---
+
+### Python (3.9+)
 ```bash
-pip install egy-names
+pip install egy-names==0.2.1
 ```
 ```python
-from egy_names import EgyptianNames, Gender, Religion
+from egy_names import EgyptianNames
 
 en = EgyptianNames()
 print(en.translate("محمد أحمد علي"))  # Mohamed Ahmed Ali
@@ -71,9 +128,9 @@ print(en.split("محمدأحمدعليحسن"))  # ['محمد', 'أحمد', 'ع�
 
 ---
 
-### 🟨 TypeScript / JavaScript (Node.js & Browser)
+### TypeScript / Node.js
 ```bash
-npm install egy-names
+npm install egy-names@0.2.1
 ```
 ```typescript
 import { EgyptianNames } from 'egy-names';
@@ -87,9 +144,9 @@ console.log(en.split("محمدأحمدعليحسن")); // ['محمد', 'أحمد
 
 ---
 
-### 🔷 .NET / C# (.NET 8.0, 7.0, 6.0, Standard 2.0)
+### .NET / C#
 ```bash
-dotnet add package egy-names
+dotnet add package egy-names --version 0.2.1
 ```
 ```csharp
 using EgyNames;
@@ -103,11 +160,9 @@ Console.WriteLine(string.Join(", ", en.Split("محمدأحمدعليحسن"))); 
 
 ---
 
-### 💙 Flutter / Dart
+### Dart / Flutter
 ```bash
-flutter pub add egy_names
-# or
-dart pub add egy_names
+flutter pub add egy_names:^0.2.1
 ```
 ```dart
 import 'package:egy_names/egy_names.dart';
@@ -123,12 +178,12 @@ void main() {
 
 ---
 
-### ☕ Java / Kotlin (Maven & Gradle)
+### Java / Kotlin
 ```xml
 <dependency>
     <groupId>io.github.abdullahafifykhalil</groupId>
     <artifactId>egy-names</artifactId>
-    <version>0.1.1</version>
+    <version>0.2.1</version>
 </dependency>
 ```
 ```java
@@ -142,13 +197,13 @@ System.out.println(en.tashkeel("محمد عبدالرحمن")); // مُحَمَ�
 
 ---
 
-### ⚡ Modern C++ (C++20 / C++17)
+### Modern C++ (C++20 / C++17)
 ```cmake
 include(FetchContent)
 FetchContent_Declare(
     egy_names
     GIT_REPOSITORY https://github.com/AbdullahAfifyKhalil/egy-names.git
-    GIT_TAG v0.1.1
+    GIT_TAG v0.2.1
 )
 FetchContent_MakeAvailable(egy_names)
 target_link_libraries(your_target PRIVATE egy_names)
@@ -167,10 +222,10 @@ int main() {
 
 ---
 
-## 🧬 Onomastic Architecture
+## Onomastic Architecture
 
 ### 1. Patronymic Lineage Decomposition
-In Egyptian culture, the position of a name inside the full sequence defines its legal and social role:
+The position of a name within an Egyptian patronymic chain defines its legal and social role:
 
 ```
 [ محمد ]     [ أحمد ]      [ علي ]       [ حسن ]        [ الشاذلي ]
@@ -180,56 +235,37 @@ Person        Father     Grandfather     Ancestor      Family/Tribe
 (اسم الشخص)   (اسم الأب)   (اسم الجد)      (السلف)     (اللقب والعائلة)
 ```
 
-`egy-names` models the empirical probability $P(\text{Name} \mid \text{Slot}_k)$ across all positions.
+`egy-names` models the empirical probability $P(\text{Name} \mid \text{Slot}_k)$ across all six positions.
 
-### 2. Concatenated DP Name Segmentation
-When processing unspaced Arabic text (`محمدأحمدعليحسنالشاذلي`), the library executes a shortest-path Dynamic Programming algorithm over character codepoints, evaluating:
+### 2. Concatenated Dynamic Programming Segmentation
+When processing unspaced Arabic text (`محمدأحمدعليحسنالشاذلي`), the library executes a shortest-path dynamic programming algorithm over Unicode codepoints:
 
 $$\text{Cost}(i) = \min_{j < i} \Big( \text{Cost}(j) + \text{BaseCost} + \text{Bonus}(\text{Freq}_{j..i}) + \lambda \cdot \text{Length}_{j..i} \Big)$$
 
-This segments concatenated names with over **99.2% accuracy** in less than 1 millisecond.
+---
+
+## About Afify Corporation
+
+**[Afify Corporation](https://afify.co)** is a technology and media enterprise innovating across software, hardware systems, and digital media, leveraging advanced engineering and artificial intelligence.
+
+- 🌐 **Website**: **[afify.co](https://afify.co)**
+- 🐙 **GitHub**: **[github.com/AbdullahAfifyKhalil](https://github.com/AbdullahAfifyKhalil)**
+- 👤 **Founder**: **[Abdullah Afify](https://github.com/AbdullahAfifyKhalil)**
 
 ---
 
-## 📊 Data Pipeline & Empirical Corpus
+## Contributing
 
-The engine is powered by an empirical national dataset processed in 5 rigorous phases:
-
-- **33,117 Curated Canonical Names**
-- **54,000+ Orthographic Correction Rules**
-- **100% Zero-Dependency & Offline Execution** (Embedded 1.6 MB compressed bundle)
-
-Detailed documentation and sample pipeline datasets are available in the [`data/`](data/) directory:
-- [`data/pipeline/phase1_segmented_sample.csv`](data/pipeline/phase1_segmented_sample.csv): Token extraction from national records
-- [`data/pipeline/phase2_slot_analysis_sample.csv`](data/pipeline/phase2_slot_analysis_sample.csv): Positional slot frequency tables
-- [`data/pipeline/phase4_annotated_sample.csv`](data/pipeline/phase4_annotated_sample.csv): Full semantic and linguistic annotations
+Contributions, issues, and feature requests are welcome. Feel free to open an issue on the [GitHub issues page](https://github.com/AbdullahAfifyKhalil/egy-names/issues).
 
 ---
 
-## 🌟 Interactive Examples & Benchmarks
+## License
 
-Full runnable example suites for all languages are provided in [`examples/`](examples/):
-- [Python Examples](examples/python/demo.py)
-- [TypeScript Examples](examples/typescript/demo.ts)
-- [C# / .NET Examples](examples/csharp/Program.cs)
-- [Flutter / Dart Examples](examples/dart/main.dart)
-- [Java Examples](examples/java/Demo.java)
-- [C++ Examples](examples/cpp/main.cpp)
-
----
-
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/AbdullahAfifyKhalil/egy-names/issues).
-
----
-
-## 📜 License
-
-Distributed under the **MIT License**. See `LICENSE` for more information.
+Distributed under the **MIT License**. See `LICENSE` for details.
 
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by <b><a href="https://github.com/AbdullahAfifyKhalil">Abdullah Afify</a></b></sub>
+  <sub>Developed by <b><a href="https://github.com/AbdullahAfifyKhalil">Abdullah Afify</a></b> • Backed by <b><a href="https://afify.co">Afify Corporation (afify.co)</a></b></sub>
 </div>

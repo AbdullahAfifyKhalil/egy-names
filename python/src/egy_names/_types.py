@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import enum
 from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import Dict, List, Optional, Tuple, Union
 
 
 class Gender(enum.Enum):
@@ -15,7 +15,19 @@ class Gender(enum.Enum):
 
     @classmethod
     def _from_code(cls, c: str) -> Gender:
-        return {"m": cls.MALE, "f": cls.FEMALE, "n": cls.NEUTRAL}[c]
+        return {"m": cls.MALE, "f": cls.FEMALE, "n": cls.NEUTRAL}.get(c, cls.NEUTRAL)
+
+    @classmethod
+    def parse(cls, val: Optional[Union[str, Gender]]) -> Optional[Gender]:
+        if val is None or isinstance(val, cls):
+            return val
+        s = str(val).strip().lower()
+        mapping = {
+            "m": cls.MALE, "male": cls.MALE, "ذكر": cls.MALE,
+            "f": cls.FEMALE, "female": cls.FEMALE, "أنثى": cls.FEMALE, "انثى": cls.FEMALE,
+            "n": cls.NEUTRAL, "neutral": cls.NEUTRAL, "مشترك": cls.NEUTRAL, "محايد": cls.NEUTRAL,
+        }
+        return mapping.get(s)
 
 
 class Religion(enum.Enum):
@@ -26,17 +38,44 @@ class Religion(enum.Enum):
 
     @classmethod
     def _from_code(cls, c: str) -> Religion:
-        return {"m": cls.MUSLIM, "c": cls.CHRISTIAN, "n": cls.NEUTRAL}[c]
+        return {"m": cls.MUSLIM, "c": cls.CHRISTIAN, "n": cls.NEUTRAL}.get(c, cls.NEUTRAL)
+
+    @classmethod
+    def parse(cls, val: Optional[Union[str, Religion]]) -> Optional[Religion]:
+        if val is None or isinstance(val, cls):
+            return val
+        s = str(val).strip().lower()
+        mapping = {
+            "m": cls.MUSLIM, "muslim": cls.MUSLIM, "islam": cls.MUSLIM, "مسلم": cls.MUSLIM,
+            "c": cls.CHRISTIAN, "christian": cls.CHRISTIAN, "coptic": cls.CHRISTIAN, "مسيحي": cls.CHRISTIAN, "قبطي": cls.CHRISTIAN,
+            "n": cls.NEUTRAL, "neutral": cls.NEUTRAL, "مشترك": cls.NEUTRAL, "محايد": cls.NEUTRAL,
+        }
+        return mapping.get(s)
 
 
 class NameRole(enum.Enum):
     """Whether a name is primarily a given / first name or a family / surname."""
-    GIVEN = "given"
+    GIVEN  = "given"
     FAMILY = "family"
+    KUNYA  = "kunya"   # patronymic kunya (أبو X)
+    TRIBAL = "tribal"  # tribal/clan name
 
     @classmethod
     def _from_code(cls, c: str) -> NameRole:
-        return {"g": cls.GIVEN, "f": cls.FAMILY}[c]
+        return {"g": cls.GIVEN, "f": cls.FAMILY, "k": cls.KUNYA, "t": cls.TRIBAL}.get(c, cls.GIVEN)
+
+    @classmethod
+    def parse(cls, val: Optional[Union[str, NameRole]]) -> Optional[NameRole]:
+        if val is None or isinstance(val, cls):
+            return val
+        s = str(val).strip().lower()
+        mapping = {
+            "g": cls.GIVEN, "given": cls.GIVEN, "first": cls.GIVEN, "علم": cls.GIVEN, "اسم": cls.GIVEN,
+            "f": cls.FAMILY, "family": cls.FAMILY, "surname": cls.FAMILY, "last": cls.FAMILY, "عائلة": cls.FAMILY, "لقب": cls.FAMILY,
+            "k": cls.KUNYA, "kunya": cls.KUNYA, "patronymic": cls.KUNYA, "كنية": cls.KUNYA,
+            "t": cls.TRIBAL, "tribal": cls.TRIBAL, "clan": cls.TRIBAL, "قبلي": cls.TRIBAL, "قبيلة": cls.TRIBAL,
+        }
+        return mapping.get(s)
 
 
 class FrequencyClass(enum.Enum):
@@ -47,7 +86,20 @@ class FrequencyClass(enum.Enum):
 
     @classmethod
     def _from_code(cls, c: str) -> FrequencyClass:
-        return {"c": cls.COMMON, "n": cls.NORMAL, "r": cls.RARE}[c]
+        return {"c": cls.COMMON, "n": cls.NORMAL, "r": cls.RARE}.get(c, cls.NORMAL)
+
+    @classmethod
+    def parse(cls, val: Optional[Union[str, FrequencyClass]]) -> Optional[FrequencyClass]:
+        if val is None or isinstance(val, cls):
+            return val
+        s = str(val).strip().lower()
+        mapping = {
+            "c": cls.COMMON, "common": cls.COMMON, "شائع": cls.COMMON,
+            "n": cls.NORMAL, "normal": cls.NORMAL, "متوسط": cls.NORMAL, "عادي": cls.NORMAL,
+            "r": cls.RARE, "rare": cls.RARE, "نادر": cls.RARE,
+        }
+        return mapping.get(s)
+
 
 
 @dataclass(frozen=True, slots=True)
@@ -222,5 +274,76 @@ class UniquenessScore:
         return {
             "score": round(self.score, 3),
             "label": self.label,
+            "note": self.note,
+        }
+
+
+@dataclass(frozen=True)
+class AgeProfile:
+    """Generational age profile for a single name.
+
+    Describes which age group most commonly holds this name today,
+    derived from the slot distribution in the corpus.
+
+    Attributes
+    ----------
+    peak_age_range : tuple[int, int]
+        The (min, max) ages most likely to carry this name in the current year.
+    generation_label : str
+        Human-readable generation label: 'youth', 'parent', 'grandparent',
+        'great-grandparent', or 'timeless' (for family/clan names).
+    dominant_slot : int
+        The slot index (1-based) that has the highest weighted probability.
+    age_scores : dict[int, float]
+        Normalized relevance score (0.0–1.0) keyed by age (every 5 years from
+        0 to 100). Useful for plotting an age-relevance curve.
+    """
+    peak_age_range: tuple
+    generation_label: str
+    dominant_slot: int
+    age_scores: dict
+
+    def to_dict(self) -> dict:
+        return {
+            "peak_age_range": list(self.peak_age_range),
+            "generation_label": self.generation_label,
+            "dominant_slot": self.dominant_slot,
+            "age_scores": self.age_scores,
+        }
+
+
+@dataclass(frozen=True)
+class AgeDetection:
+    """Estimated age of a person based on their name's generational profile.
+
+    Returned by :meth:`EgyNames.detect_age`.
+
+    Attributes
+    ----------
+    estimated_age : int
+        Single best-guess age (midpoint of the peak age range).
+    age_range : tuple[int, int]
+        Plausible (min, max) age range where the name is most common.
+    confidence : float
+        Confidence in the estimate, 0.0–1.0.  Higher when the name has a
+        narrow generational peak; lower for timeless names like محمد.
+    generation_label : str
+        Human-readable generation: ``'youth'``, ``'parent'``,
+        ``'grandparent'``, ``'great-grandparent'``, or ``'timeless'``.
+    note : str
+        Plain-language explanation of the estimate.
+    """
+    estimated_age: int
+    age_range: tuple
+    confidence: float
+    generation_label: str
+    note: str
+
+    def to_dict(self) -> dict:
+        return {
+            "estimated_age": self.estimated_age,
+            "age_range": list(self.age_range),
+            "confidence": round(self.confidence, 3),
+            "generation_label": self.generation_label,
             "note": self.note,
         }

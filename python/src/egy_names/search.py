@@ -48,10 +48,10 @@ def search(
     entries = get_all()
 
     # ── Apply filters ──
-    g = Gender(gender) if gender else None
-    r = Religion(religion) if religion else None
-    rl = NameRole(role) if role else None
-    f = FrequencyClass(frequency) if frequency else None
+    g = Gender.parse(gender)
+    r = Religion.parse(religion)
+    rl = NameRole.parse(role)
+    f = FrequencyClass.parse(frequency)
 
     # Detect if prefix/suffix/contains is Arabic or English
     prefix_ar = starts_with and is_arabic(starts_with)

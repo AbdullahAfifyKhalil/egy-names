@@ -348,3 +348,174 @@ class TestChainAnalysis:
     def test_analyze_chain_doesnt_crash_on_short(self):
         chain = _e.analyze_chain("محمد")
         assert isinstance(chain, list)
+
+
+class TestAgeAwareFeature:
+    """Tests for the age-aware name generation feature (v0.2.1)."""
+
+    def test_names_for_age_returns_list(self):
+        results = _e.names_for_age(age=25)
+        assert isinstance(results, list)
+        assert len(results) > 0
+
+    def test_names_for_age_returns_name_info(self):
+        results = _e.names_for_age(age=25, top=5)
+        for r in results:
+            assert hasattr(r, "ar")
+            assert hasattr(r, "en")
+            assert hasattr(r, "gender")
+            assert hasattr(r, "slot_distribution")
+
+    def test_names_for_age_respects_top_limit(self):
+        results = _e.names_for_age(age=30, top=7)
+        assert len(results) <= 7
+
+    def test_names_for_age_male_filter(self):
+        results = _e.names_for_age(age=25, gender="m", top=20)
+        for r in results:
+            assert r.gender in ("male", "neutral"), \
+                f"{r.ar} has gender={r.gender}, expected male or neutral"
+
+    def test_names_for_age_female_filter(self):
+        results = _e.names_for_age(age=25, gender="f", top=20)
+        for r in results:
+            assert r.gender in ("female", "neutral"), \
+                f"{r.ar} has gender={r.gender}, expected female or neutral"
+
+    def test_names_for_age_youth_vs_parent_differ(self):
+        """Names for young people should differ from names for older people."""
+        youth   = {r.ar for r in _e.names_for_age(age=22, top=10)}
+        parents = {r.ar for r in _e.names_for_age(age=52, top=10)}
+        # They should NOT be identical — different generations have different names
+        assert youth != parents, "Youth and parent age groups returned identical names"
+
+    def test_names_for_age_all_given_by_default(self):
+        """By default, only given names (not family surnames) are returned."""
+        results = _e.names_for_age(age=30, top=20)
+        for r in results:
+            assert r.role in ("given", "kunya"), \
+                f"{r.ar} has role={r.role}, expected given or kunya"
+
+    def test_names_for_age_include_family(self):
+        """include_family=True should also return family names."""
+        results = _e.names_for_age(age=30, top=30, include_family=True)
+        roles = {r.role for r in results}
+        # Should include at least one non-given name when family included
+        assert len(results) > 0
+
+    def test_age_profile_returns_age_profile(self):
+        from egy_names import AgeProfile
+        profile = _e.age_profile("محمد")
+        assert profile is not None
+        assert isinstance(profile, AgeProfile)
+
+    def test_age_profile_unknown_name_returns_none(self):
+        profile = _e.age_profile("xyznotaname123")
+        assert profile is None
+
+    def test_age_profile_has_required_fields(self):
+        profile = _e.age_profile("أحمد")
+        assert profile is not None
+        assert isinstance(profile.peak_age_range, (tuple, list))
+        assert len(profile.peak_age_range) == 2
+        assert isinstance(profile.generation_label, str)
+        assert isinstance(profile.dominant_slot, int)
+        assert 1 <= profile.dominant_slot <= 6
+        assert isinstance(profile.age_scores, dict)
+        assert len(profile.age_scores) > 0
+
+    def test_age_profile_scores_are_valid(self):
+        profile = _e.age_profile("محمد")
+        assert profile is not None
+        for age, score in profile.age_scores.items():
+            assert 0.0 <= score <= 1.0, f"score at age {age} out of range: {score}"
+
+    def test_age_profile_to_dict(self):
+        profile = _e.age_profile("علي")
+        assert profile is not None
+        d = profile.to_dict()
+        assert "peak_age_range" in d
+        assert "generation_label" in d
+        assert "dominant_slot" in d
+        assert "age_scores" in d
+
+
+class TestAgeDetection:
+    """Tests for detect_age() — the inverse of names_for_age()."""
+
+    def test_detect_age_returns_age_detection(self):
+        from egy_names import AgeDetection
+        result = _e.detect_age("كريم")
+        assert result is not None
+        assert isinstance(result, AgeDetection)
+
+    def test_detect_age_unknown_name_returns_none(self):
+        result = _e.detect_age("xyznotaname999")
+        assert result is None
+
+    def test_detect_age_has_required_fields(self):
+        result = _e.detect_age("أحمد")
+        assert result is not None
+        assert isinstance(result.estimated_age, int)
+        assert 0 <= result.estimated_age <= 100
+        assert isinstance(result.age_range, (tuple, list))
+        assert len(result.age_range) == 2
+        assert result.age_range[0] <= result.estimated_age <= result.age_range[1]
+        assert isinstance(result.confidence, float)
+        assert 0.0 <= result.confidence <= 1.0
+        assert isinstance(result.generation_label, str)
+        assert isinstance(result.note, str)
+        assert len(result.note) > 0
+
+    def test_detect_age_to_dict(self):
+        result = _e.detect_age("علي")
+        assert result is not None
+        d = result.to_dict()
+        assert "estimated_age" in d
+        assert "age_range" in d
+        assert "confidence" in d
+        assert "generation_label" in d
+        assert "note" in d
+
+    def test_detect_age_youth_name(self):
+        """زياد, كريم, شهد etc. are modern youth names — should be youth/young."""
+        result = _e.detect_age("زياد")
+        assert result is not None
+        assert result.generation_label in ("youth", "parent"), \
+            f"Expected youth or parent for زياد, got {result.generation_label}"
+        assert result.estimated_age <= 50, \
+            f"Expected age <= 50 for زياد, got {result.estimated_age}"
+
+    def test_detect_age_grandparent_name(self):
+        """فاروق, شوقي, فتحي are old-generation names — should be grandparent."""
+        result = _e.detect_age("فاروق")
+        assert result is not None
+        assert result.generation_label in ("grandparent", "great-grandparent", "parent"), \
+            f"Expected older generation for فاروق, got {result.generation_label}"
+        assert result.estimated_age >= 40, \
+            f"Expected age >= 40 for فاروق, got {result.estimated_age}"
+
+    def test_detect_age_full_chain_uses_all_tokens(self):
+        """A full name chain should use all resolved tokens as cross-generational signals."""
+        from egy_names import AgeDetection
+        r_single = _e.detect_age("كريم")
+        r_chain  = _e.detect_age("كريم أشرف السيد")
+        assert r_single is not None
+        assert r_chain  is not None
+        # The chain result is also a valid AgeDetection
+        assert isinstance(r_chain, AgeDetection)
+        # The person's given name (كريم) dominates — result should still be youth range
+        assert r_chain.generation_label in ("youth", "parent"), \
+            f"Expected youth or parent generation for كريم أشرف السيد, got {r_chain.generation_label}"
+        # The chain note should mention how many tokens were used
+        assert "token" in r_chain.note.lower(), \
+            f"Expected 'token' in note, got: {r_chain.note}"
+
+
+    def test_detect_age_timeless_name_lower_confidence(self):
+        """محمد spans all generations — it should have lower confidence than a niche name."""
+        common  = _e.detect_age("محمد")   # very common, spans all slots
+        niche   = _e.detect_age("زياد")   # stronger in youth slot
+        if common and niche:
+            assert common.confidence <= niche.confidence + 0.1, \
+                f"Expected محمد ({common.confidence}) ≤ زياد ({niche.confidence}) + 0.1"

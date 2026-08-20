@@ -62,19 +62,32 @@ The underlying national datasets are open-source and available on Hugging Face:
 
 ### 1. Egyptian Names & Onomastic Intelligence Dataset
 👉 **[https://huggingface.co/datasets/Abdullah-afify/egyptian-names](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)**
-- **56,796 Canonical Names** with gender, religion, 6-slot patronymic frequencies, tashkeel, root meanings, and transliterations.
-- **13,061,572 Raw Full Names** (`phase0_raw`) and **1,000,000 Segmented Chains** (`phase1_segmented`).
-- **106,343 Unique Token Frequencies** and **54,000+ Orthographic Correction Rules**.
+- **44,626 Canonical Names** with gender, religion, generational slot distribution weights, Tashkeel, root meanings, and transliterations.
+- **15,875,535+ Raw Full Name Records** (`phase0_raw`) and **1,000,000 Segmented Chains** (`phase1_segmented`).
+- **43,333 Unique Token Frequencies** and **23,457 Orthographic Correction Rules**.
+
+#### 📊 Full Data vs. Single Names Breakdown
+
+| Metric | Count | Description |
+| :--- | :--- | :--- |
+| **Total Raw Exam Records** | **~15,875,535** | Total individual student & citizen exam rows across 494 dataset files |
+| **Total Full Name Occurrences** | **~15.88 Million** | Total full patronymic name chains (e.g., `"محمد أحمد علي حسن الشرقاوي"`) |
+| **Unique Full Name Strings** | **1,545,970+** | Distinct full 3-to-5-part name combinations |
+| **Total Single Name Occurrences** | **~63,500,000** | Total individual name occurrences across all slots (averaging 4 names per chain) |
+| **Raw Distinct Single Tokens** | **43,333** | Distinct raw word tokens before typo cleaning |
+| **Typo & Spelling Corrections** | **23,457** | Mappings for misspellings and unspaced compound names (`عبدالرحمن` $\to$ `عبد الرحمن`) |
+| **Final Canonical Master Lexicon** | **44,626** | **The complete clean dictionary of unique Egyptian names** |
 
 ```python
 from datasets import load_dataset
 
-# Load default canonical dictionary (56.8K names)
+# Load default canonical dictionary (44.6K names)
 names_dataset = load_dataset("Abdullah-afify/egyptian-names")
 
 # Load raw full names
 raw_names = load_dataset("Abdullah-afify/egyptian-names", "phase0_raw")
 ```
+
 
 ### 2. Egyptian High School Students Degrees Dataset (2017–2026)
 👉 **[https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades](https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades)**

@@ -17,16 +17,22 @@ from typing import Any, Dict, List, Optional, Sequence, Union
 
 from ._data import get_metadata
 from ._index import (
+    age_profile as _age_profile_fn,
+    detect_age_for_entry as _detect_age_fn,
+    detect_age_from_chain as _detect_age_chain_fn,
     get_all,
     get_ranked,
     is_arabic,
     lookup,
     lookup_ar,
     lookup_en,
+    names_for_age as _names_for_age_fn,
     normalize_ar,
     normalize_en,
 )
 from ._types import (
+    AgeDetection,
+    AgeProfile,
     ChainPart,
     FrequencyClass,
     Gender,
@@ -91,12 +97,23 @@ class EgyptianNames:
         """Translate a full name or single name between Arabic and English."""
         return translate(name, to=to)
 
+    def lookup(
+        self,
+        name: str,
+    ) -> Optional[NameInfo]:
+        """Look up a single name token and return its full NameInfo metadata."""
+        entry = lookup(name)
+        if entry is None:
+            return None
+        return NameInfo._from_entry(entry)
+
     def annotate(
         self,
         name: str,
     ) -> Optional[Union[NameInfo, List[Optional[NameInfo]]]]:
         """Annotate a name with linguistic and demographic metadata."""
         return annotate(name)
+
 
     def split(self, full_name: str) -> List[str]:
         """Split a full name into its individual name components."""
@@ -401,11 +418,173 @@ class EgyptianNames:
             "female_names": sum(1 for e in entries if e.gender == Gender.FEMALE),
         }
 
+    # ------------------------------------------------------------------
+    # Age-Aware Features
+    # ------------------------------------------------------------------
+
+    def names_for_age(
+        self,
+        age: int,
+        *,
+        gender: Optional[str] = None,
+        as_of_year: Optional[int] = None,
+        top: int = 20,
+        include_family: bool = False,
+    ) -> List[NameInfo]:
+        """Return names most likely to belong to a person of the given age.
+
+        Uses the corpus slot distribution to map birth years to generational
+        name popularity. The corpus is built from Egyptian high school records
+        (2017 & 2023), encoding 4 generations:
+
+        - slot1 (the student)      → ages ~19–27 in 2025
+        - slot2 (father's name)    → ages ~45–59 in 2025
+        - slot3 (grandfather)      → ages ~71–91 in 2025
+        - slot4 (great-grandparent)→ ages ~93–123 in 2025 (historical)
+
+        Parameters
+        ----------
+        age : int
+            Age of the person in years.
+        gender : str, optional
+            ``'m'`` / ``'male'``, ``'f'`` / ``'female'``, or ``'n'`` / ``'neutral'``.
+            ``None`` means no gender filter.
+        as_of_year : int, optional
+            Reference year for age calculation. Defaults to the current year.
+        top : int
+            Number of results to return (default 20).
+        include_family : bool
+            If True, include family surnames in results (default False).
+
+        Returns
+        -------
+        list[NameInfo]
+            Names sorted by age-relevance score (highest first).
+
+        Examples
+        --------
+        >>> e = EgyNames()
+        >>> e.names_for_age(age=25, gender='m', top=5)
+        >>> e.names_for_age(age=50, gender='f', top=10)
+        """
+        entries = _names_for_age_fn(
+            age,
+            gender=gender,
+            as_of_year=as_of_year,
+            top=top,
+            include_family=include_family,
+        )
+        return [NameInfo._from_entry(e) for e in entries]
+
+    def age_profile(self, name: str) -> Optional[AgeProfile]:
+        """Build a generational age profile for a name.
+
+        Returns which age group most commonly holds this name today,
+        based on its corpus slot distribution.
+
+        Parameters
+        ----------
+        name : str
+            Arabic or English name to profile.
+
+        Returns
+        -------
+        AgeProfile or None
+            ``None`` if the name is not in the library.
+
+        Examples
+        --------
+        >>> e = EgyNames()
+        >>> p = e.age_profile('محمد')
+        >>> p.generation_label
+        'parent'
+        >>> p.peak_age_range
+        (35, 55)
+        >>> p.age_scores
+        {0: 0.05, 5: 0.08, 10: 0.12, ..., 50: 0.95, ...}
+        """
+        entry = lookup(name)
+        if entry is None:
+            return None
+        return _age_profile_fn(entry)
+
+    def detect_age(
+        self,
+        name: str,
+        as_of_year: Optional[int] = None,
+    ) -> Optional["AgeDetection"]:
+        """Estimate the likely age of a person who carries this name.
+
+        Works for both **single names** and **full name chains**.
+
+        For a full chain (e.g. ``'كريم أشرف السيد'``), each token is used
+        as a cross-generational signal:
+
+        - Token 1 (``كريم``)  → direct age of the person
+        - Token 2 (``أشرف``)  → father's age − 30 = person's age
+        - Token 3 (``السيد``) → family name, ignored (no age signal)
+
+        Tokens that agree on the same age raise the confidence score.
+        Tokens that disagree lower it.
+
+        Parameters
+        ----------
+        name : str
+            A single Arabic or English name, or a full name chain.
+            Mixed-script input is supported.
+        as_of_year : int, optional
+            Reference year for age calculation (defaults to current year).
+
+        Returns
+        -------
+        AgeDetection or None
+            ``None`` if **no** token in the chain is found in the library.
+
+        Examples
+        --------
+        >>> e = EgyNames()
+        >>> # Single name
+        >>> r = e.detect_age('كريم')
+        >>> r.estimated_age, r.generation_label
+        (23, 'youth')
+
+        >>> # Full chain — all tokens used as corroborating signals
+        >>> r = e.detect_age('كريم أشرف السيد')
+        >>> r.note
+        'Based on 2-token chain: estimated age ~22 (10–34 years old), youth generation, high confidence.'
+
+        >>> e.detect_age('فاروق').generation_label
+        'grandparent'
+        """
+        tokens = name.strip().split()
+
+        if not tokens:
+            return None
+
+        # ── Resolve each token and assign a slot index ─────────────────────
+        # Slot 0 = person's own name, 1 = father, 2 = grandfather, etc.
+        # We attempt to resolve every token; skip those not in the library.
+        token_entries = []
+        slot_idx = 0
+        for token in tokens:
+            entry = lookup(token)
+            if entry is None:
+                # Try normalised / compound variants via the full token substring
+                entry = lookup(token)
+            if entry is not None:
+                token_entries.append((entry, slot_idx))
+                slot_idx += 1   # each resolved token advances the generation slot
+
+        if not token_entries:
+            return None
+
+        return _detect_age_chain_fn(token_entries, as_of_year=as_of_year)
+
 
 # Direct alias for concise usage
 EgyNames = EgyptianNames
 
-__version__ = "0.1.1"
+__version__ = "0.2.1"
 __author__ = "Abdullah Afify"
 __company__ = "Afify"
 __license__ = "MIT"
@@ -413,6 +592,8 @@ __license__ = "MIT"
 __all__ = [
     "EgyptianNames",
     "EgyNames",
+    "AgeDetection",
+    "AgeProfile",
     "Gender",
     "Religion",
     "NameRole",

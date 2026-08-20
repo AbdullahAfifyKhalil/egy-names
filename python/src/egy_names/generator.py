@@ -80,7 +80,8 @@ def _weighted_pick(
     weights: List[float] = []
 
     for e in entries:
-        w = e.slot_pcts[slot_idx] * e.corpus_share
+        slot_val = e.slot_pcts[slot_idx] if slot_idx < len(e.slot_pcts) else (e.slot_pcts[-1] if e.slot_pcts else 0.0)
+        w = slot_val * e.corpus_share
         if w > 0:
             candidates.append(e)
             weights.append(w)
@@ -123,9 +124,10 @@ def generate(
     all_entries = get_all()
 
     # Parse filter enums
-    g = Gender(gender) if gender else None
-    r = Religion(religion) if religion else None
-    f = FrequencyClass(frequency) if frequency else None
+    g = Gender.parse(gender)
+    r = Religion.parse(religion)
+    f = FrequencyClass.parse(frequency)
+
 
     # Patronymic slots: given names only (middle names are always male in
     # Egyptian patronymic tradition, regardless of the person's gender)

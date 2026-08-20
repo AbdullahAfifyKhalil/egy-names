@@ -312,9 +312,15 @@ class TestNewV021Entries:
     ]
 
     def test_compound_names_in_bundle(self):
-        bundle_ar = {e["a"] for e in _bundle["names"]}
-        missing = [n for n in self.COMPOUND_NAMES if n not in bundle_ar]
-        assert len(missing) <= 2, f"Missing new entries: {missing}"
+        """Compound names stored with or without spaces — check by normalized form."""
+        import re
+        _DIAC = re.compile(r"[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED\u0640]")
+        def norm(s):
+            s = _DIAC.sub("", s)
+            return s.translate(str.maketrans("آأإٱ","اااا")).translate(str.maketrans("ى","ي")).translate(str.maketrans("ة","ه")).replace(" ","").strip()
+        bundle_norms = {norm(e["a"]) for e in _bundle["names"]}
+        missing = [n for n in self.COMPOUND_NAMES if norm(n) not in bundle_norms]
+        assert len(missing) == 0, f"Compound names missing from bundle: {missing}"
 
     def test_concat_splits_in_corrections(self):
         corrections = _bundle["corrections"]

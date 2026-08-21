@@ -13,7 +13,7 @@
 [![pub.dev Version](https://img.shields.io/badge/pub.dev%20(Dart)-v0.2.1-0175C2?logo=dart)](https://pub.dev/packages/egy_names)
 [![Swift PM](https://img.shields.io/badge/Swift%20PM-v0.2.1-FA7343?logo=swift)](https://github.com/AbdullahAfifyKhalil/egy-names)
 [![Maven Central](https://img.shields.io/badge/Maven%20Central-v0.2.1-orange?logo=apachemaven)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
-[![Hugging Face Names](https://img.shields.io/badge/Hugging%20Face-Names%20(13M%20Corpus)-yellow?logo=huggingface)](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
+[![Hugging Face Names](https://img.shields.io/badge/Hugging%20Face-Names%20(44.6K%20Lexicon)-yellow?logo=huggingface)](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
 [![Hugging Face Degrees](https://img.shields.io/badge/Hugging%20Face-Student%20Degrees%20(3.79M)-blue?logo=huggingface)](https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades)
 [![C++ Standard](https://img.shields.io/badge/C%2B%2B-20%20%2F%2017-00599C?logo=cplusplus)](https://github.com/AbdullahAfifyKhalil/egy-names)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -22,7 +22,7 @@
 <br />
 **Python** • **TypeScript / JavaScript** • **.NET / C#** • **Flutter / Dart** • **Swift** • **Java / Kotlin** • **C++**
 
-[Features](#key-features) • [Overview](#overview) • [Installation & Usage](#installation--usage) • [Hugging Face Datasets](#hugging-face-datasets) • [Onomastic Architecture](#onomastic-architecture) • [About Afify Corporation](#about-afify-corporation) • [License](#license)
+[Features](#key-features) • [Overview](#overview) • [Full Data vs Single Names Breakdown](#-full-data-vs-single-names-breakdown) • [Age Intelligence](#-age-aware-intelligence-engine) • [Installation & Usage](#installation--usage) • [Hugging Face Datasets](#hugging-face-datasets) • [Onomastic Architecture](#onomastic-architecture) • [About Afify Corporation](#about-afify-corporation) • [License](#license)
 
 </div>
 
@@ -35,9 +35,30 @@ Egyptian personal names follow an unbroken patronymic lineage system (*Personal 
 1. **Patronymic Lineage Ambiguity**: Determining the generational role of each name element in official and colloquial records.
 2. **Compound Names**: Proper handling of prefixed and unspaced compound names (`عبدالرحمن` vs `عبد الرحمن`, `نور الدين`, `فاطمة الزهراء`).
 3. **Orthographic Variations**: Resolving standard Arabic spelling variants (`مصطفى`/`مصطفا`, `إبراهيم`/`ابراهيم`, `أحمد`/`احمد`).
-4. **Concatenated Names**: Segmenting unspaced text strings in legacy digital records (`محمدأحمدعليحسنالشاذلي`).
+4. **Concatenated Names**: Segmenting unspaced text strings in legacy digital records (`محمدأحمدعليحسنالشناوي`).
+5. **Generational & Demographic Dynamics**: Quantifying the probability of name popularity across historical birth cohorts and family roles.
 
-`egy-names` solves these problems deterministically without relying on language model inference, using an empirical statistical model extracted from over **13,000,000+ validated records**, **56,796 canonical names**, and **54,000+ orthographic correction rules**.
+`egy-names` solves these problems deterministically without relying on language model inference, using an empirical statistical model extracted from over **15.88 Million raw national records**, **44,626 canonical dictionary lemmas**, and **23,457 orthographic correction rules**.
+
+---
+
+## 📊 Full Data vs. Single Names Breakdown
+
+| Metric | Count | Description |
+| :--- | :--- | :--- |
+| **Total Raw Exam Records** | **~15,875,535** | Total individual student & citizen exam rows across 494 dataset files |
+| **Total Full Name Occurrences** | **~15.88 Million** | Total full patronymic name chains (e.g., `"محمد أحمد علي حسن الشرقاوي"`) |
+| **Unique Full Name Strings** | **1,545,970+** | Distinct full 3-to-5-part name combinations |
+| **Total Single Name Occurrences** | **~63,500,000** | Total individual name occurrences across all slots (averaging 4 names per chain) |
+| **Raw Distinct Single Tokens** | **43,333** | Distinct raw word tokens before typo cleaning |
+| **Typo & Spelling Corrections** | **23,457** | Mappings for misspellings and unspaced compound names (`عبدالرحمن` $\to$ `عبد الرحمن`) |
+| **Final Canonical Master Lexicon** | **44,626** | **The complete clean dictionary of unique Egyptian names** (100% Tashkeel & Meanings) |
+
+### Understanding Population Records vs. Onomastic Lexicon
+In an Egyptian population of **~16–30 Million records**, names repeat heavily across generations:
+* Highly common given names like **محمد**, **أحمد**, **محمود**, **علي**, **فاطمة**, **مريم** occur millions of times.
+* Family surnames like **الشرقاوي**, **السيد**, **إبراهيم** occur tens of thousands of times.
+* When every patronymic chain is decomposed and deduplicated, the **complete onomastic vocabulary of Egypt consists of 44,626 unique canonical lemmas**, capturing >99.9% of all contemporary and historical Egyptian personal and family names.
 
 ---
 
@@ -45,14 +66,36 @@ Egyptian personal names follow an unbroken patronymic lineage system (*Personal 
 
 | Capability | Description | Example |
 |---|---|---|
+| **Age-Aware Generation** | Generate names popular at a specific age using Gaussian slot birth centers | `names_for_age(24)` $\to$ `[كريم, أحمد, شهد]` |
+| **Age Detection** | Estimate person's age from single names or full patronymic chains | `detect_age("كريم أشرف فاروق")` $\to$ `~25 yrs` |
+| **Age Demographic Curves** | 0–100 year generational popularity profile | `age_profile("فاروق")` $\to$ `Peak: Grandparent (60-80 yrs)` |
 | **Patronymic Generation** | Slot-weighted sampling matching national demographic distributions | `حسام أحمد عبدالعليم` |
 | **Concatenated Segmentation** | Dynamic programming shortest-path segmenter for unspaced text | `محمدأحمدعلي` $\to$ `[محمد, أحمد, علي]` |
-| **Diacritization (Tashkeel)** | Full vowel mark restoration with compound awareness | `محمد عبدالرحمن` $\to$ `مُحَمَّد عَبْدُالرَّحْمَن` |
+| **Diacritization (Tashkeel)** | Full vowel mark restoration with compound awareness (100% coverage) | `محمد عبدالرحمن` $\to$ `مُحَمَّد عَبْدُالرَّحْمَن` |
 | **Orthographic Correction** | Rule-based correction and Alif/Alif Maqsura normalization | `احمد مصطفا` $\to$ `أحمد مصطفى` |
 | **Transliteration** | Bidirectional Arabic $\leftrightarrow$ English with phonetic preservation | `محمد أحمد علي` $\leftrightarrow$ `Mohamed Ahmed Ali` |
 | **Demographic Inference** | Empirical gender and religious cultural classification | `مريم` (Female 95%), `جورج` (Christian 99%) |
-| **Lineage Decomposition** | Six-slot generational decomposition | Personal $\to$ Father $\to$ Grandfather $\to$ Family |
-| **Etymology & Meanings** | Morphological root definitions and English translations | `محمد` $\to$ *The Praised One ( الجذر: ح م د )* |
+| **Lineage Decomposition** | Six-to-eight slot generational decomposition | Personal $\to$ Father $\to$ Grandfather $\to$ Family |
+| **Etymology & Meanings** | Morphological roots, toponyms, and English translations (100% coverage) | `المنياوي` $\to$ *Attributed to Minya in Upper Egypt* |
+
+---
+
+## ⏳ Age-Aware Intelligence Engine
+
+The library incorporates an empirical **Generational Gaussian Model** based on the national high-school graduation cohorts:
+
+$$\text{Birth Year}_{\text{slot 1}} = Y_{\text{data}} - A_{\text{student}} = 2020 - 18 = \mathbf{2002}$$
+
+Applying the Egyptian generational interval ($\Delta_{\text{gen}} = 30\text{ years}$):
+
+* **Slot 1 (The Student):** Birth ~2002 ($\approx 24\text{ years old in }2026$)
+* **Slot 2 (Father):** Birth ~1972 ($\approx 54\text{ years old in }2026$)
+* **Slot 3 (Grandfather):** Birth ~1942 ($\approx 84\text{ years old in }2026$)
+* **Slot 4 (Great-Grandfather):** Birth ~1912 (Historical generation)
+* **Slots 5 & 6 (Family & Clan):** Timeless
+
+### Gaussian Relevance Scoring:
+$$w_i = \exp\left(-\frac{1}{2} \left(\frac{\text{Target Birth Year} - \text{Center}_i}{\sigma}\right)^2\right), \quad \sigma = 12\text{ years}$$
 
 ---
 
@@ -66,28 +109,15 @@ The underlying national datasets are open-source and available on Hugging Face:
 - **15,875,535+ Raw Full Name Records** (`phase0_raw`) and **1,000,000 Segmented Chains** (`phase1_segmented`).
 - **43,333 Unique Token Frequencies** and **23,457 Orthographic Correction Rules**.
 
-#### 📊 Full Data vs. Single Names Breakdown
-
-| Metric | Count | Description |
-| :--- | :--- | :--- |
-| **Total Raw Exam Records** | **~15,875,535** | Total individual student & citizen exam rows across 494 dataset files |
-| **Total Full Name Occurrences** | **~15.88 Million** | Total full patronymic name chains (e.g., `"محمد أحمد علي حسن الشرقاوي"`) |
-| **Unique Full Name Strings** | **1,545,970+** | Distinct full 3-to-5-part name combinations |
-| **Total Single Name Occurrences** | **~63,500,000** | Total individual name occurrences across all slots (averaging 4 names per chain) |
-| **Raw Distinct Single Tokens** | **43,333** | Distinct raw word tokens before typo cleaning |
-| **Typo & Spelling Corrections** | **23,457** | Mappings for misspellings and unspaced compound names (`عبدالرحمن` $\to$ `عبد الرحمن`) |
-| **Final Canonical Master Lexicon** | **44,626** | **The complete clean dictionary of unique Egyptian names** |
-
 ```python
 from datasets import load_dataset
 
 # Load default canonical dictionary (44.6K names)
 names_dataset = load_dataset("Abdullah-afify/egyptian-names")
 
-# Load raw full names
+# Load raw full names (15.88M corpus sample)
 raw_names = load_dataset("Abdullah-afify/egyptian-names", "phase0_raw")
 ```
-
 
 ### 2. Egyptian High School Students Degrees Dataset (2017–2026)
 👉 **[https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades](https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades)**
@@ -97,14 +127,59 @@ raw_names = load_dataset("Abdullah-afify/egyptian-names", "phase0_raw")
 ```python
 # Load all 3.79M student records across 2017-2026
 degrees_dataset = load_dataset("Abdullah-afify/egyptian-high-school-students-grades")
-
-# Load a specific examination cohort (e.g. 2026 results)
-cohort_2026 = load_dataset("Abdullah-afify/egyptian-high-school-students-grades", "year_2026")
 ```
 
 ---
 
 ## Installation & Usage
+
+### Python (3.9+)
+```bash
+pip install --upgrade egy-names
+```
+```python
+from egy_names import EgyNames
+
+en = EgyNames()
+
+# 1. Age-Aware Features
+print(en.names_for_age(24, top=5))  # Names common for ~24-year-olds
+detection = en.detect_age("كريم أشرف فاروق")
+print(detection.estimated_age)       # ~25 years old
+print(detection.confidence)          # 0.641 (high confidence via chain synthesis)
+
+# 2. Translation & Tashkeel
+print(en.translate("محمد أحمد علي"))  # Mohamed Ahmed Ali
+print(en.tashkeel("محمد عبدالرحمن"))  # مُحَمَّد عَبْدُالرَّحْمَن
+
+# 3. Concatenated Splitting & Correction
+print(en.split("محمدأحمدعليحسنالشناوي"))  # ['محمد', 'أحمد', 'علي', 'حسن', 'الشناوي']
+print(en.correct("احمد مصطفا"))          # أحمد مصطفى
+
+# 4. Etymology & Meaning
+print(en.meaning("محمد"))
+# {'ar': 'المحمود؛ كثير الخصال المحمودة...', 'en': 'The praised one...'}
+```
+
+---
+
+### TypeScript / Node.js
+```bash
+npm install egy-names@0.2.1
+```
+```typescript
+import { EgyptianNames } from 'egy-names';
+
+const en = new EgyptianNames();
+
+// Generation & Translation
+console.log(en.translate("محمد أحمد علي")); // Mohamed Ahmed Ali
+console.log(en.tashkeel("محمد عبدالرحمن")); // مُحَمَّد عَبْدُالرَّحْمَن
+console.log(en.split("محمدأحمدعليحسن")); // ['محمد', 'أحمد', 'علي', 'حسن']
+console.log(en.correct("احمد مصطفا")); // أحمد مصطفى
+```
+
+---
 
 ### Swift / iOS / macOS / visionOS
 Add package via Xcode (`File > Add Package Dependencies...`) or in `Package.swift`:
@@ -121,38 +196,6 @@ print(en.translate("محمد أحمد علي"))  // Mohamed Ahmed Ali
 print(en.correct("احمد مصطفا عبد الرحيم"))  // أحمد مصطفى عبدالرحيم
 print(en.tashkeel("محمد عبدالرحمن"))  // مُحَمَّد عَبْدُالرَّحْمَن
 print(en.split("محمدأحمدعليحسن"))  // ["محمد", "أحمد", "علي", "حسن"]
-```
-
----
-
-### Python (3.9+)
-```bash
-pip install egy-names==0.2.1
-```
-```python
-from egy_names import EgyptianNames
-
-en = EgyptianNames()
-print(en.translate("محمد أحمد علي"))  # Mohamed Ahmed Ali
-print(en.correct("احمد مصطفا عبد الرحيم"))  # أحمد مصطفى عبدالرحيم
-print(en.tashkeel("محمد عبدالرحمن"))  # مُحَمَّد عَبْدُالرَّحْمَن
-print(en.split("محمدأحمدعليحسن"))  # ['محمد', 'أحمد', 'علي', 'حسن']
-```
-
----
-
-### TypeScript / Node.js
-```bash
-npm install egy-names@0.2.1
-```
-```typescript
-import { EgyptianNames } from 'egy-names';
-
-const en = new EgyptianNames();
-console.log(en.translate("محمد أحمد علي")); // Mohamed Ahmed Ali
-console.log(en.correct("احمد مصطفا عبد الرحيم")); // أحمد مصطفى عبدالرحيم
-console.log(en.tashkeel("محمد عبدالرحمن")); // مُحَمَّد عَبْدُالرَّحْمَن
-console.log(en.split("محمدأحمدعليحسن")); // ['محمد', 'أحمد', 'علي', 'حسن']
 ```
 
 ---
@@ -248,7 +291,7 @@ Person        Father     Grandfather     Ancestor      Family/Tribe
 (اسم الشخص)   (اسم الأب)   (اسم الجد)      (السلف)     (اللقب والعائلة)
 ```
 
-`egy-names` models the empirical probability $P(\text{Name} \mid \text{Slot}_k)$ across all six positions.
+`egy-names` models the empirical probability $P(\text{Name} \mid \text{Slot}_k)$ across all positions.
 
 ### 2. Concatenated Dynamic Programming Segmentation
 When processing unspaced Arabic text (`محمدأحمدعليحسنالشاذلي`), the library executes a shortest-path dynamic programming algorithm over Unicode codepoints:
@@ -259,7 +302,7 @@ $$\text{Cost}(i) = \min_{j < i} \Big( \text{Cost}(j) + \text{BaseCost} + \text{B
 
 ## About Afify Corporation
 
-**[Afify Corporation](https://afify.co)** is a technology and media enterprise innovating across software, hardware systems, and digital media, leveraging advanced engineering and artificial intelligence.
+**[Afify Corporation](https://afify.co)** is a technology enterprise innovating across software, language engineering, and machine intelligence systems.
 
 - 🌐 **Website**: **[afify.co](https://afify.co)**
 - 🐙 **GitHub**: **[github.com/AbdullahAfifyKhalil](https://github.com/AbdullahAfifyKhalil)**

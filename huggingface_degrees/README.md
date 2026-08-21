@@ -15,7 +15,7 @@ task_categories:
 task_ids:
 - named-entity-recognition
 - text-scoring
-pretty_name: Egyptian High School Students Grades & Degrees (2024–2026)
+pretty_name: Egyptian High School Students Grades & Degrees (2017–2026)
 tags:
 - arabic
 - egypt
@@ -33,6 +33,10 @@ configs:
   data_files: "data/high_school_degrees_all_years.parquet"
 - config_name: all_years
   data_files: "data/high_school_degrees_all_years.parquet"
+- config_name: year_2017
+  data_files: "data/high_school_degrees_2017.parquet"
+- config_name: year_2023
+  data_files: "data/high_school_degrees_2023.parquet"
 - config_name: year_2024
   data_files: "data/high_school_degrees_2024.parquet"
 - config_name: year_2025
@@ -41,8 +45,8 @@ configs:
   data_files: "data/high_school_degrees_2026.parquet"
 ---
 
-# 🇪🇬 Egyptian High School (Thanawya Amma) Students Degrees (2024–2026)
-### *A Large-Scale National Demographic and Educational Dataset of 2,465,366 Student Records*
+# 🇪🇬 Egyptian High School (Thanawya Amma) Students Degrees (2017–2026)
+### *A Large-Scale National Demographic and Educational Dataset of 3,790,225 Student Records*
 
 Published and maintained by **[Afify Corporation](https://afify.co)** (`afify.co`) and **[Abdullah Afify](https://github.com/AbdullahAfifyKhalil)**.
 
@@ -50,7 +54,7 @@ Published and maintained by **[Afify Corporation](https://afify.co)** (`afify.co
 
 ## 📊 Dataset Summary
 
-This dataset compiles official national examination results for Egyptian General Secondary Education (*Thanawya Amma* / **الثانوية العامة**) across three consecutive academic years: **2024, 2025, and 2026**, comprising **2,465,366 student records**.
+This dataset compiles official national examination results for Egyptian General Secondary Education (*Thanawya Amma* / **الثانوية العامة**) across five major cohorts: **2017, 2023, 2024, 2025, and 2026**, comprising **3,790,225 student records**.
 
 It serves as a primary empirical benchmark for:
 - **Arabic Onomastics & NLP**: Full authentic personal naming patterns and patronymic chains across Egyptian governorates.
@@ -60,12 +64,14 @@ It serves as a primary empirical benchmark for:
 
 ## 📁 Dataset Splits & Statistics
 
-| Academic Year | Configuration Name | Record Count | Total Exam Takers |
+| Academic Year | Configuration Name | Record Count | Description |
 |---|---|---|---|
-| 📅 **All Years (Combined)** | `default` / `all_years` | **2,465,366** | 100% |
-| 🎓 **2024 Academic Year** | `year_2024` | **734,990** | First cohort |
-| 🎓 **2025 Academic Year** | `year_2025` | **810,980** | Second cohort |
-| 🎓 **2026 Academic Year** | `year_2026` | **919,396** | Third cohort |
+| 📅 **All Years (Combined)** | `default` / `all_years` | **3,790,225** | Complete unified dataset |
+| 🎓 **2017 Academic Year** | `year_2017` | **540,110** | Historical graduation cohort |
+| 🎓 **2023 Academic Year** | `year_2023` | **784,749** | Pre-reform examination cohort |
+| 🎓 **2024 Academic Year** | `year_2024` | **734,990** | Recent graduation cohort |
+| 🎓 **2025 Academic Year** | `year_2025` | **810,980** | Modern examination cohort |
+| 🎓 **2026 Academic Year** | `year_2026` | **919,396** | Latest examination cohort |
 
 ---
 
@@ -74,7 +80,7 @@ It serves as a primary empirical benchmark for:
 ```python
 from datasets import load_dataset
 
-# 1. Load the complete 3-year unified dataset (2.46M rows)
+# 1. Load the complete 5-cohort unified dataset (3.79M rows)
 dataset = load_dataset("Abdullah-afify/egyptian-high-school-students-grades")
 print(dataset["train"][0])
 
@@ -99,33 +105,28 @@ print(df.head())
 
 | Field | Type | Description | Arabic Name | Example |
 |---|---|---|---|---|
-| `academic_year` | int64 | Cohort academic year (2024, 2025, 2026) | سنة الامتحان | `2026` |
-| `seating_no` | int64 | Official national examination seating number | رقم الجلوس | `2001970` |
-| `arabic_name` | string | Full student quad/quint name | اسم الطالب رباعي / خماسي | `احمد محمود السيد عبدالجواد السيد` |
-| `total_degree` | float64 | Total examination score obtained | المجموع الكلي للدرجات | `290.0` |
-| `student_case_desc` | string | Official status result | حالة الطالب | `ناجح دور أول` |
+| `seating_no` | int64 | Official examination seat number | رقم الجلوس | `1029481` |
+| `name` | string | Full student quad/quint name | اسم الطالب رباعي/خماسي | `محمد أحمد علي حسن الشرقاوي` |
+| `school` | string | School name | اسم المدرسة | `مدرسة السعيدية الثانوية العسكرية بنين` |
+| `stage` | string | Educational stage | المرحلة الدراسية | `الثانوية العامة` |
+| `status` | string | Examination status | حالة الطالب | `ناجح` (Passed) / `دور ثان` (Retake) |
+| `section` | string | Academic track / division | الشعبة | `علمي علوم` / `علمي رياضة` / `أدبي` |
+| `total_score` | float64 | Total examination score obtained | المجموع الكلي | `385.5` |
+| `percentage` | float64 | Overall percentage score | النسبة المئوية | `94.02` |
+| `year` | int64 | Examination academic year | سنة الامتحان | `2026` |
 
 ---
 
-## 🏢 About Afify Corporation
-This dataset is curated and released by **[Afify Corporation](https://afify.co)** (`afify.co`), a technology and media enterprise innovating across software, hardware systems, and digital media, leveraging advanced engineering and artificial intelligence.
+## 🏛️ Research Citations & Licensing
 
-- 🌐 **Corporate Portal**: [afify.co](https://afify.co)
-- 🐙 **GitHub Organization**: [github.com/AbdullahAfifyKhalil](https://github.com/AbdullahAfifyKhalil)
-- 📦 **Open Source Libraries**: [`egy-names` on GitHub](https://github.com/AbdullahAfifyKhalil/egy-names)
-
----
-
-## 📜 License & Citation
-
-Licensed under the **MIT License**.
+This dataset is released under the **MIT License** and is free for academic, commercial, and research use.
 
 ```bibtex
-@dataset{afify_high_school_grades_2026,
-  author = {Abdullah Afify and Afify Corporation},
-  title = {Egyptian High School Students Degrees & National Examination Results (2024-2026)},
-  year = {2026},
-  publisher = {Hugging Face},
-  url = {https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades}
+@dataset{afify2026egyptian_grades,
+  author       = {Abdullah Afify},
+  title        = {Egyptian High School Students Grades & Degrees (2017–2026)},
+  year         = {2026},
+  publisher    = {Hugging Face},
+  howpublished = {\url{https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades}}
 }
 ```

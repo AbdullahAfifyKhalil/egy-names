@@ -1,3 +1,12 @@
+## 0.3.1
+
+- Expanded canonical dataset to 44,626 Egyptian names derived from 15.88M+ records.
+- Added 14-dimensional onomastic intelligence features.
+- Bilingual authentic Egyptian pet names (أسماء الدلع) with Arabic lemmas, full Egyptian Tashkeel, English transliteration, and IPA phonetics.
+- Added structured descriptions for iconic Egyptian public figures (الاسماء المشهورة) in Arabic and English.
+- Added Semitic/Coptic root extraction, origin stratification, and sociological generation trends.
+- Added Modern Standard & Egyptian Colloquial IPA phonetic transcriptions.
+
 ## 0.1.1
 
 - Comprehensive onomastic dataset with 33,117 Egyptian name lemmas and 134,000+ lookup keys.

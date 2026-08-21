@@ -1,3 +1,7 @@
+## 0.3.2
+
+- Edge-case hardening, whitespace safety, and full stress-test validation.
+
 ## 0.3.1
 
 - Expanded canonical dataset to 44,626 Egyptian names derived from 15.88M+ records.

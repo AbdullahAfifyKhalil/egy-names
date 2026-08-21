@@ -64,27 +64,27 @@ $$\text{Full Legal Name} = \text{Personal Name} \to \text{Father} \to \text{Gran
 
 ### Python
 ```bash
-pip install egy-names==0.3.1
+pip install egy-names==0.3.2
 ```
 
 ### TypeScript / JavaScript (Node.js & Browsers)
 ```bash
-npm install egy-names@0.3.1
+npm install egy-names@0.3.2
 # or: yarn add egy-names / pnpm add egy-names
 ```
 
 ### Dart / Flutter
 ```bash
 flutter pub add egy_names
-# or in pubspec.yaml: egy_names: ^0.3.1
+# or in pubspec.yaml: egy_names: ^0.3.2
 ```
 
 ### Swift (iOS, macOS, watchOS, visionOS)
-In Xcode: **File → Add Package Dependencies...** with `https://github.com/AbdullahAfifyKhalil/egy-names.git` (Version `0.3.1`).
+In Xcode: **File → Add Package Dependencies...** with `https://github.com/AbdullahAfifyKhalil/egy-names.git` (Version `0.3.2`).
 Or in `Package.swift`:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.1")
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.2")
 ]
 ```
 
@@ -92,20 +92,20 @@ dependencies: [
 **Gradle:**
 ```groovy
 repositories { maven { url 'https://jitpack.io' } }
-dependencies { implementation 'com.github.AbdullahAfifyKhalil.egy-names:egy-names:v0.3.1' }
+dependencies { implementation 'com.github.AbdullahAfifyKhalil.egy-names:egy-names:v0.3.2' }
 ```
 **Maven:**
 ```xml
 <dependency>
     <groupId>com.github.AbdullahAfifyKhalil.egy-names</groupId>
     <artifactId>egy-names</artifactId>
-    <version>v0.3.1</version>
+    <version>v0.3.2</version>
 </dependency>
 ```
 
 ### .NET / C#
 ```bash
-dotnet add package egy-names --version 0.3.1
+dotnet add package egy-names --version 0.3.2
 ```
 
 ### C++ (Modern C++17/C++20 via CMake FetchContent)
@@ -114,7 +114,7 @@ include(FetchContent)
 FetchContent_Declare(
     egy_names
     GIT_REPOSITORY https://github.com/AbdullahAfifyKhalil/egy-names.git
-    GIT_TAG v0.3.1
+    GIT_TAG v0.3.2
     SOURCE_SUBDIR cpp/egy_names
 )
 FetchContent_MakeAvailable(egy_names)

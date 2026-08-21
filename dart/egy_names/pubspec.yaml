@@ -1,6 +1,6 @@
 name: egy_names
 description: A production-grade Egyptian onomastic intelligence library for Dart & Flutter — generate, translate, annotate, split, and analyze Egyptian names.
-version: 0.3.1
+version: 0.3.2
 homepage: https://github.com/AbdullahAfifyKhalil/egy-names
 repository: https://github.com/AbdullahAfifyKhalil/egy-names.git
 issue_tracker: https://github.com/afify/egy-names/issues

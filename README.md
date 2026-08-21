@@ -7,9 +7,9 @@
 # Egyptian Names (`egy-names`)
 ### *The Production-Grade Onomastic Intelligence and Computational Linguistic Engine for Egyptian Names*
 
-[![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.1-3776AB)](https://pypi.org/project/egy-names/)
-[![npm Version](https://img.shields.io/badge/npm-v0.3.1-CB3837)](https://www.npmjs.com/package/egy-names)
-[![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.1-0175C2)](https://pub.dev/packages/egy_names)
+[![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.2-3776AB)](https://pypi.org/project/egy-names/)
+[![npm Version](https://img.shields.io/badge/npm-v0.3.2-CB3837)](https://www.npmjs.com/package/egy-names)
+[![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.2-0175C2)](https://pub.dev/packages/egy_names)
 [![Hugging Face](https://img.shields.io/badge/Hugging_Face-44.6K_Lexicon-FFD21E)](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
 [![Documentation](https://img.shields.io/badge/Documentation-Complete_API_Reference-blue.svg)](DOCUMENTATION.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -227,7 +227,7 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 ### 1. Python (3.9+)
 
 ```bash
-pip install --upgrade egy-names==0.3.1
+pip install --upgrade egy-names==0.3.2
 ```
 
 ```python
@@ -278,7 +278,7 @@ print(f"Age: ~{det.estimated_age} yrs | Conf: {det.confidence} | {det.generation
 ### 2. TypeScript / JavaScript (Node.js & Modern Browsers)
 
 ```bash
-npm install egy-names@0.3.1
+npm install egy-names@0.3.2
 ```
 
 ```typescript
@@ -310,7 +310,7 @@ console.log(en.detectReligion("مينا جرجس بطرس")); // { religion: 'ch
 Add in Xcode or `Package.swift`:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.1")
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.2")
 ]
 ```
 
@@ -334,7 +334,7 @@ print(en.translate("محمد أحمد علي")) // "Mohamed Ahmed Ali"
 ### 4. .NET / C#
 
 ```bash
-dotnet add package egy-names --version 0.3.1
+dotnet add package egy-names --version 0.3.2
 ```
 
 ```csharp
@@ -357,7 +357,7 @@ Console.WriteLine(string.Join(", ", en.Split("محمدأحمدعليحسن"))); 
 ### 5. Dart / Flutter
 
 ```bash
-flutter pub add egy_names:^0.3.1
+flutter pub add egy_names:^0.3.2
 ```
 
 ```dart
@@ -386,7 +386,7 @@ void main() {
 <dependency>
     <groupId>io.github.abdullahafifykhalil</groupId>
     <artifactId>egy-names</artifactId>
-    <version>0.3.1</version>
+    <version>0.3.2</version>
 </dependency>
 ```
 
@@ -413,7 +413,7 @@ include(FetchContent)
 FetchContent_Declare(
     egy_names
     GIT_REPOSITORY https://github.com/AbdullahAfifyKhalil/egy-names.git
-    GIT_TAG v0.3.1
+    GIT_TAG v0.3.2
     SOURCE_SUBDIR cpp/egy_names
 )
 FetchContent_MakeAvailable(egy_names)
@@ -503,7 +503,7 @@ Distributed under the **MIT License**. See `LICENSE` for details.
   title        = {egy-names: A Production-Grade Onomastic Intelligence and Linguistic Engine for Egyptian Names},
   year         = {2026},
   publisher    = {GitHub},
-  version      = {0.3.1},
+  version      = {0.3.2},
   url          = {https://github.com/AbdullahAfifyKhalil/egy-names}
 }
 ```

@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net8.0</TargetFrameworks>
+    <PackageId>egy-names</PackageId>
+    <Version>0.2.1</Version>
+    <Authors>Abdullah Afify (Afify)</Authors>
+    <Company>Afify</Company>
+    <Description>A production-grade Egyptian onomastic intelligence library for .NET — generate, translate, annotate, split, and analyze Egyptian names.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/afify/egy-names</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AbdullahAfifyKhalil/egy-names.git</RepositoryUrl>
+    <PackageTags>egy-names;egyptian;names;arabic;onomastics;nlp;name-generator;translation;tashkeel</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>logo.png</PackageIcon>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\names.json.gz" LogicalName="names.json.gz" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="logo.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,341 @@
+package com.afify.egynames;
+
+import com.afify.egynames.data.DataLoader;
+import com.afify.egynames.engine.*;
+import com.afify.egynames.index.LookupIndices;
+import com.afify.egynames.model.Models;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class EgyptianNames {
+
+    private final Long seed;
+    private final String customDataPath;
+
+    public EgyptianNames() {
+        this(null, null);
+    }
+
+    public EgyptianNames(Long seed) {
+        this(seed, null);
+    }
+
+    public EgyptianNames(Long seed, String customDataPath) {
+        this.seed = seed;
+        this.customDataPath = customDataPath;
+    }
+
+    // Core Methods
+
+    public List<Models.GeneratedName> generate(int count, Models.Gender gender, Models.Religion religion, Integer length, boolean familyName, Models.FrequencyClass frequency, Long seed) {
+        return Generator.generate(count, gender, religion, length, familyName, frequency, seed != null ? seed : this.seed, customDataPath);
+    }
+
+    public List<Models.GeneratedName> generate(int count, String gender, String religion) {
+        return generate(count, Models.Gender.fromString(gender), Models.Religion.fromString(religion), null, true, null, null);
+    }
+
+    public List<Models.GeneratedName> generate(int count) {
+        return generate(count, (Models.Gender) null, null, null, true, null, null);
+    }
+
+    public String translate(String name, String to) {
+        return Translator.translate(name, to, customDataPath);
+    }
+
+    public String translate(String name) {
+        return translate(name, null);
+    }
+
+    public List<Models.NameInfo> annotate(String name) {
+        return Annotator.annotate(name, customDataPath);
+    }
+
+    public Models.NameInfo annotateSingle(String name) {
+        return Annotator.annotateSingle(name, customDataPath);
+    }
+
+    public List<String> split(String fullName) {
+        return Splitter.split(fullName, customDataPath);
+    }
+
+    public String tashkeel(String name) {
+        if (name == null || name.trim().isEmpty()) return name;
+        String[] rawTokens = name.trim().split("\\s+");
+        List<String> result = new ArrayList<>();
+
+        for (int i = 0; i < rawTokens.length; i++) {
+            String current = rawTokens[i];
+
+            if (i < rawTokens.length - 1) {
+                String next = rawTokens[i + 1];
+                String compound = current + " " + next;
+                String compoundNoSpace = current + next;
+                Models.NameEntry compoundEntry = LookupIndices.lookupAr(compound, customDataPath);
+                if (compoundEntry == null) {
+                    compoundEntry = LookupIndices.lookupAr(compoundNoSpace, customDataPath);
+                }
+                if (compoundEntry != null && compoundEntry.tashkeel != null && !compoundEntry.tashkeel.isEmpty()) {
+                    result.add(compoundEntry.tashkeel);
+                    i++;
+                    continue;
+                }
+            }
+
+            Models.NameEntry entry = LookupIndices.lookupAr(current, customDataPath);
+            result.add(entry != null && entry.tashkeel != null && !entry.tashkeel.isEmpty() ? entry.tashkeel : current);
+        }
+
+        return String.join(" ", result);
+    }
+
+    public String correct(String name) {
+        return Corrector.correct(name, customDataPath);
+    }
+
+    public Map<String, String> meaning(String name) {
+        Models.NameEntry entry = LookupIndices.lookup(name, customDataPath);
+        if (entry == null) return null;
+        if ((entry.meaningAr == null || entry.meaningAr.isEmpty()) && (entry.meaningEn == null || entry.meaningEn.isEmpty())) {
+            return null;
+        }
+        return Map.of("ar", entry.meaningAr != null ? entry.meaningAr : "", "en", entry.meaningEn != null ? entry.meaningEn : "");
+    }
+
+    public List<Models.NameInfo> families(int count, Models.FrequencyClass frequency, Models.Religion religion, String startsWith) {
+        return SearchEngine.search(null, religion, Models.NameRole.FAMILY, frequency, startsWith, null, null, null, count, "corpus_share", customDataPath);
+    }
+
+    public List<Models.NameInfo> search(Models.Gender gender, Models.Religion religion, Models.NameRole role, Models.FrequencyClass frequency, String startsWith, String endsWith, String contains, Double minCorpusShare, int maxResults, String sortBy) {
+        return SearchEngine.search(gender, religion, role, frequency, startsWith, endsWith, contains, minCorpusShare, maxResults, sortBy, customDataPath);
+    }
+
+    // Creative Methods
+
+    public boolean isValid(String name) {
+        return LookupIndices.lookup(name, customDataPath) != null;
+    }
+
+    public Models.GenderDetection detectGender(String fullName) {
+        if (fullName == null || fullName.trim().isEmpty()) return new Models.GenderDetection("neutral", 0.0);
+        String[] tokens = fullName.trim().split("\\s+");
+        if (tokens.length == 0) return new Models.GenderDetection("neutral", 0.0);
+
+        double maleScore = 0;
+        double femaleScore = 0;
+        double neutralScore = 0;
+        double totalWeight = 0;
+
+        for (int i = 0; i < tokens.length; i++) {
+            Models.NameEntry entry = LookupIndices.lookup(tokens[i], customDataPath);
+            if (entry == null) continue;
+
+            double w = i == 0 ? 4.0 : (i == 1 ? 2.0 : 1.0);
+            totalWeight += w;
+
+            if (entry.gender == Models.Gender.MALE) maleScore += w;
+            else if (entry.gender == Models.Gender.FEMALE) femaleScore += w;
+            else neutralScore += w;
+        }
+
+        if (totalWeight == 0) return new Models.GenderDetection("neutral", 0.0);
+
+        double maxScore = Math.max(maleScore, Math.max(femaleScore, neutralScore));
+        double confidence = maxScore / totalWeight;
+
+        if (maxScore == maleScore) return new Models.GenderDetection("male", confidence);
+        if (maxScore == femaleScore) return new Models.GenderDetection("female", confidence);
+        return new Models.GenderDetection("neutral", confidence);
+    }
+
+    public Models.ReligionDetection detectReligion(String fullName) {
+        if (fullName == null || fullName.trim().isEmpty()) return new Models.ReligionDetection("neutral", 0.0);
+        String[] tokens = fullName.trim().split("\\s+");
+        if (tokens.length == 0) return new Models.ReligionDetection("neutral", 0.0);
+
+        double muslimScore = 0;
+        double christianScore = 0;
+        double neutralScore = 0;
+        double totalWeight = 0;
+
+        for (int i = 0; i < tokens.length; i++) {
+            Models.NameEntry entry = LookupIndices.lookup(tokens[i], customDataPath);
+            if (entry == null) continue;
+
+            double w = 1.0;
+            totalWeight += w;
+
+            if (entry.religion == Models.Religion.MUSLIM) muslimScore += w;
+            else if (entry.religion == Models.Religion.CHRISTIAN) christianScore += w;
+            else neutralScore += w;
+        }
+
+        if (totalWeight == 0) return new Models.ReligionDetection("neutral", 0.0);
+
+        double maxScore = Math.max(muslimScore, Math.max(christianScore, neutralScore));
+        double confidence = maxScore / totalWeight;
+
+        if (maxScore == muslimScore) return new Models.ReligionDetection("muslim", confidence);
+        if (maxScore == christianScore) return new Models.ReligionDetection("christian", confidence);
+        return new Models.ReligionDetection("neutral", confidence);
+    }
+
+    public Models.RankInfo rank(String name) {
+        Models.NameEntry entry = LookupIndices.lookup(name, customDataPath);
+        if (entry == null) return null;
+
+        List<Models.NameEntry> ranked = LookupIndices.getRanked(customDataPath);
+        int total = ranked.size();
+
+        for (int i = 0; i < total; i++) {
+            if (ranked.get(i).ar.equals(entry.ar)) {
+                int rankPos = i + 1;
+                double percentile = (1.0 - (double)(rankPos - 1) / total) * 100.0;
+                String desc = String.format("The #%d most common name in the Egyptian corpus", rankPos);
+                if (rankPos <= 10) desc = "Top 10 — " + desc;
+                else if (rankPos <= 100) desc = "Top 100 — " + desc;
+                else if (rankPos <= 1000) desc = "Top 1000 — " + desc;
+
+                Models.RankInfo info = new Models.RankInfo();
+                info.rank = rankPos;
+                info.percentile = Math.round(percentile * 100.0) / 100.0;
+                info.corpusShare = String.format("%.4f%%", entry.corpusShare);
+                info.description = desc;
+                return info;
+            }
+        }
+        return null;
+    }
+
+    public List<Models.ChainPart> analyzeChain(String fullName) {
+        if (fullName == null || fullName.trim().isEmpty()) return List.of();
+        String[] tokens = fullName.trim().split("\\s+");
+        List<Models.ChainPart> parts = new ArrayList<>();
+        int n = tokens.length;
+
+        for (int i = 0; i < n; i++) {
+            String t = tokens[i];
+            Models.NameEntry entry = LookupIndices.lookup(t, customDataPath);
+            int slot = i + 1;
+
+            String roleLabel;
+            String detail;
+
+            if (i == 0) {
+                roleLabel = "person";
+                detail = "The individual's given name";
+            } else if (i == n - 1 && entry != null && entry.role == Models.NameRole.FAMILY) {
+                roleLabel = "family_name";
+                detail = "Family/tribal surname";
+            } else if (i == 1) {
+                roleLabel = "father";
+                detail = "Father's name";
+            } else if (i == 2) {
+                roleLabel = "grandfather";
+                detail = "Paternal grandfather";
+            } else if (i == 3) {
+                roleLabel = "great_grandfather";
+                detail = "Great-grandfather";
+            } else {
+                roleLabel = "ancestor";
+                detail = "Ancestor (generation " + i + ")";
+            }
+
+            Models.ChainPart cp = new Models.ChainPart();
+            cp.name = t;
+            cp.slot = slot;
+            cp.role = roleLabel;
+            cp.detail = detail;
+            parts.add(cp);
+        }
+
+        return parts;
+    }
+
+    public Models.UniquenessScore uniqueness(String fullName) {
+        if (fullName == null || fullName.trim().isEmpty()) {
+            Models.UniquenessScore u = new Models.UniquenessScore();
+            u.score = 0.5;
+            u.label = "unknown";
+            u.note = "Empty input";
+            return u;
+        }
+
+        String[] tokens = fullName.trim().split("\\s+");
+        List<Double> shares = new ArrayList<>();
+        int unknownCount = 0;
+
+        for (String t : tokens) {
+            Models.NameEntry entry = LookupIndices.lookup(t, customDataPath);
+            if (entry != null) shares.add(entry.corpusShare);
+            else unknownCount++;
+        }
+
+        if (shares.isEmpty()) {
+            Models.UniquenessScore u = new Models.UniquenessScore();
+            u.score = 1.0;
+            u.label = "unknown";
+            u.note = "None of the name parts are in the Egyptian corpus";
+            return u;
+        }
+
+        double logSum = 0;
+        for (double s : shares) logSum += Math.log(Math.max(s, 1e-9));
+        double logMean = logSum / shares.size();
+
+        double maxLog = 2.6;
+        double minLog = -9.2;
+        double score = 1.0 - (logMean - minLog) / (maxLog - minLog);
+        score = Math.max(0.0, Math.min(1.0, score));
+        score = Math.min(1.0, score + unknownCount * 0.15);
+
+        String label;
+        String note;
+        if (score < 0.2) {
+            label = "extremely_common";
+            note = "Each part is among the most common names nationally";
+        } else if (score < 0.4) {
+            label = "common";
+            note = "Well-known name parts with high national frequency";
+        } else if (score < 0.6) {
+            label = "moderate";
+            note = "A mix of common and less common name parts";
+        } else if (score < 0.8) {
+            label = "distinctive";
+            note = "Contains uncommon or regionally specific names";
+        } else {
+            label = "highly_unique";
+            note = "Rare name combination — distinctive family heritage";
+        }
+
+        Models.UniquenessScore u = new Models.UniquenessScore();
+        u.score = Math.round(score * 1000.0) / 1000.0;
+        u.label = label;
+        u.note = note;
+        return u;
+    }
+
+    public Map<String, Object> stats() {
+        DataLoader.DataBundle meta = DataLoader.loadBundle(customDataPath);
+        List<Models.NameEntry> entries = LookupIndices.getAll(customDataPath);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("version", meta.version);
+        map.put("corpus_tokens", meta.corpusTokens);
+        map.put("corpus_students", meta.corpusStudents);
+        map.put("cohort_years", meta.cohortYears);
+        map.put("total_names", entries.size());
+        map.put("given_names", entries.stream().filter(e -> e.role == Models.NameRole.GIVEN).count());
+        map.put("family_names", entries.stream().filter(e -> e.role == Models.NameRole.FAMILY).count());
+        map.put("male_names", entries.stream().filter(e -> e.gender == Models.Gender.MALE).count());
+        map.put("female_names", entries.stream().filter(e -> e.gender == Models.Gender.FEMALE).count());
+        return map;
+    }
+
+    public static class EgyNames extends EgyptianNames {
+        public EgyNames() { super(); }
+        public EgyNames(Long seed) { super(seed); }
+        public EgyNames(Long seed, String customDataPath) { super(seed, customDataPath); }
+    }
+}

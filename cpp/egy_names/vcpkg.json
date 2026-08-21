@@ -1,0 +1,11 @@
+{
+  "name": "egy-names",
+  "version": "0.1.1",
+  "description": "A production-grade Egyptian onomastic intelligence library for modern C++.",
+  "homepage": "https://github.com/AbdullahAfifyKhalil/egy-names",
+  "license": "MIT",
+  "dependencies": [
+    "zlib",
+    "nlohmann-json"
+  ]
+}

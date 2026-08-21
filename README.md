@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="assets/banner.png" alt="Egyptian Names Banner" width="100%" style="border-radius: 14px; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);" />
+<img src="https://raw.githubusercontent.com/AbdullahAfifyKhalil/egy-names/main/assets/banner.png" alt="Egyptian Names Banner" width="100%" style="border-radius: 14px; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);" />
 
-<img src="assets/logo.png" alt="Egyptian Names Logo" width="130" style="border-radius: 28px; box-shadow: 0 12px 36px rgba(0,0,0,0.25); margin-bottom: 12px;" />
+<img src="https://raw.githubusercontent.com/AbdullahAfifyKhalil/egy-names/main/assets/logo.png" alt="Egyptian Names Logo" width="130" style="border-radius: 28px; box-shadow: 0 12px 36px rgba(0,0,0,0.25); margin-bottom: 12px;" />
 
 # 🇪🇬 Egyptian Names (`egy-names`)
 ### *The Production-Grade Onomastic Intelligence & Computational Linguistic Engine for Egyptian Names*

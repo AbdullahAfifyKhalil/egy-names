@@ -140,25 +140,32 @@ corr_dataset = load_dataset("Abdullah-afify/egyptian-names", "phase3_corrections
 ## 🧬 Configurations & Data Schemas
 
 ### 1. `final_canonical` (Default — 44,626 Rows)
-The core enriched onomastic dictionary:
+The master 14-dimensional enriched onomastic dictionary:
 
-| Field | Type | Description | Example |
+| Field | Type | Description | Example (`محمد`) |
 |---|---|---|---|
 | `name_ar` | string | Canonical Arabic surface form | `محمد` |
 | `name_en` | string | Standard Egyptian English transliteration | `Mohamed` |
 | `gender` | string | Empirical gender (`male`, `female`, `neutral`) | `male` |
 | `religion` | string | Cultural/religious marker (`muslim`, `christian`, `neutral`) | `muslim` |
 | `role` | string | Onomastic role (`given`, `family`, `kunya`, `tribal`) | `given` |
-| `tashkeel` | string | Full Arabic vowel diacritization | `مُحَمَّد` |
-| `meaning_ar` | string | Morphological root & etymological definition in Arabic | `المحمود؛ كثير الخصال المحمودة (من الجذر ح م د)` |
-| `meaning_en` | string | English translation & linguistic origin | `The praised one; frequently praised` |
-| `slot1_pct` | float | Probability weight in Slot 1 (Person's own name) | `32.4` |
-| `slot2_pct` | float | Probability weight in Slot 2 (Father's name) | `28.6` |
-| `slot3_pct` | float | Probability weight in Slot 3 (Grandfather's name) | `22.1` |
-| `slot4_pct` | float | Probability weight in Slot 4 (Great-grandfather's name) | `14.2` |
-| `slot5_pct` | float | Probability weight in Slot 5 (Family surname) | `2.1` |
-| `slot6_pct` | float | Probability weight in Slot 6 (Clan/tribal name) | `0.6` |
-| `corpus_share_pct` | float | Overall percentage share of all name tokens in Egypt | `0.068` |
+| `tashkeel_standard` | string | Modern Standard Arabic vowel diacritization | `مُحَمَّد` |
+| `tashkeel_eg` | string | Egyptian Colloquial Arabic vocalization | `مُحَمَّدْ` |
+| `ipa_standard` | string | Modern Standard Arabic IPA transcription | `/muħamːad/` |
+| `ipa_eg` | string | Egyptian Colloquial Arabic IPA transcription | `[moˈħamːæd]` |
+| `meaning_ar` | string | Root & etymological definition in Arabic | `المحمود؛ كثير الخصال المحمودة (من الجذر ح م د)` |
+| `meaning_en` | string | Root & translation in English | `The praised one; frequently praised` |
+| `dallaa_ar` | string | Authentic Egyptian pet names (pipe-separated) | `ميدو\|حمو\|حمودة` |
+| `dallaa_tashkeel` | string | Vocalized Egyptian pet names with Tashkeel | `مِيدُو\|حَمُّو\|حَمُّودَة` |
+| `dallaa_en` | string | Transliterated English pet names | `Mido\|Hamou\|Hamouda` |
+| `dallaa_ipa` | string | Egyptian IPA transcription for pet names | `[ˈmiːdu]\|[ˈħæm.mu]\|[ħæmˈmuːdæ]` |
+| `root` | string | Semitic/Coptic morphological root | `ح-م-د` |
+| `origin_type` | string | Historical etymological stratum | `arabic_classical` |
+| `famous_figures_ar` | string | Egyptian public figures & descriptions (Arabic) | `محمد صلاح (قائد منتخب مصر)\|محمد علي باشا (مؤسس مصر الحديثة)` |
+| `famous_figures_en` | string | Egyptian public figures & descriptions (English) | `Mohamed Salah (Egyptian Football Captain)\|Mohamed Ali Pasha` |
+| `trend_category` | string | Sociological generation trend | `classic_timeless` |
+| `slot1_pct` ... `slot8_pct` | float | Generational slot distribution percentages | `26.91`, `31.77`, `28.84`, `7.19`, ... |
+| `corpus_share_pct` | float | Overall percentage share of all tokens in Egypt | `0.179624` |
 
 ---
 

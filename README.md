@@ -7,12 +7,12 @@
 # Egyptian Names (`egy-names`)
 ### *The Production-Grade Onomastic Intelligence and Computational Linguistic Engine for Egyptian Names*
 
-[![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.0-3776AB)](https://pypi.org/project/egy-names/)
-[![npm Version](https://img.shields.io/badge/npm-v0.3.0-CB3837)](https://www.npmjs.com/package/egy-names)
-[![NuGet Version](https://img.shields.io/badge/NuGet-v0.3.0-004880)](https://www.nuget.org/packages/egy-names/)
-[![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.0-0175C2)](https://pub.dev/packages/egy_names)
-[![Swift PM](https://img.shields.io/badge/Swift_PM-v0.3.0-FA7343)](https://github.com/AbdullahAfifyKhalil/egy-names)
-[![Maven Central](https://img.shields.io/badge/Maven_Central-v0.3.0-C71A36)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
+[![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.1-3776AB)](https://pypi.org/project/egy-names/)
+[![npm Version](https://img.shields.io/badge/npm-v0.3.1-CB3837)](https://www.npmjs.com/package/egy-names)
+[![NuGet Version](https://img.shields.io/badge/NuGet-v0.3.1-004880)](https://www.nuget.org/packages/egy-names/)
+[![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.1-0175C2)](https://pub.dev/packages/egy_names)
+[![Swift PM](https://img.shields.io/badge/Swift_PM-v0.3.1-FA7343)](https://github.com/AbdullahAfifyKhalil/egy-names)
+[![Maven Central](https://img.shields.io/badge/Maven_Central-v0.3.1-C71A36)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
 [![Hugging Face](https://img.shields.io/badge/Hugging_Face-44.6K_Lexicon-FFD21E)](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 

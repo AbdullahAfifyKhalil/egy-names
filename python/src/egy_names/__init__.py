@@ -690,7 +690,7 @@ class EgyptianNames:
 # Direct alias for concise usage
 EgyNames = EgyptianNames
 
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 __author__ = "Abdullah Afify"
 __company__ = "Afify"
 __license__ = "MIT"

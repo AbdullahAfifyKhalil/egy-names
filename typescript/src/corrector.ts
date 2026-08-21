@@ -1,16 +1,16 @@
 import { getCorrect, lookupAr, normalizeAr, getArNormForms } from "./lookupIndices";
 
 export function correctToken(token: string): string {
-  if (!token || !token.trim()) return token;
+  if (!token || !token.trim()) return "";
   const t = token.trim();
 
-  // 1. Direct surface correction pair
-  const canonical = getCorrect(t);
-  if (canonical) return canonical;
-
-  // 2. Exact match in arabic index (including phonetic variants)
+  // 1. Exact match in arabic index (including phonetic variants)
   const entry = lookupAr(t);
   if (entry) return entry.ar;
+
+  // 2. Direct surface correction pair
+  const canonical = getCorrect(t);
+  if (canonical) return canonical;
 
   // 3. Normalized form lookup
   const norm = normalizeAr(t);
@@ -33,7 +33,7 @@ export function correctToken(token: string): string {
 }
 
 export function correct(name: string): string {
-  if (!name || !name.trim()) return name;
+  if (!name || !name.trim()) return "";
   const rawTokens = name.trim().split(/\s+/);
   const result: string[] = [];
 

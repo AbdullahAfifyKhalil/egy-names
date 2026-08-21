@@ -14,7 +14,7 @@ export function translateToken(token: string, to?: "ar" | "en"): string {
 }
 
 export function translate(fullName: string, to?: "ar" | "en"): string {
-  if (!fullName || !fullName.trim()) return fullName;
+  if (!fullName || !fullName.trim()) return "";
   const tokens = fullName.trim().split(/\s+/);
   const translated = tokens.map((t) => translateToken(t, to));
   return translated.join(" ");

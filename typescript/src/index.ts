@@ -15,6 +15,7 @@ import {
   NameRole,
   FrequencyClass,
   NameInfo,
+  toNameInfo,
   PetName,
   GeneratedName,
   ChainPart,
@@ -71,7 +72,7 @@ export class EgyptianNames {
   }
 
   public tashkeel(name: string, dialect: "standard" | "egyptian" = "standard"): string {
-    if (!name || !name.trim()) return name;
+    if (!name || !name.trim()) return "";
     const rawTokens = name.trim().split(/\s+/);
     const result: string[] = [];
     const isEg = dialect === "egyptian";
@@ -110,6 +111,10 @@ export class EgyptianNames {
     return this.tashkeel(name, "egyptian");
   }
 
+  public tashkeelStandard(name: string): string {
+    return this.tashkeel(name, "standard");
+  }
+
   public ipa(name: string, dialect: "standard" | "egyptian" = "standard"): string {
     if (!name || !name.trim()) return "";
     const tokens = name.includes(" ") ? name.trim().split(/\s+/) : this.split(name);
@@ -136,6 +141,19 @@ export class EgyptianNames {
 
   public ipaEg(name: string): string {
     return this.ipa(name, "egyptian");
+  }
+
+  public ipaStandard(name: string): string {
+    return this.ipa(name, "standard");
+  }
+
+  public lookup(name: string): NameInfo | null {
+    const entry = lookup(name);
+    return entry ? toNameInfo(entry) : null;
+  }
+
+  public info(name: string): NameInfo | null {
+    return this.lookup(name);
   }
 
   public dallaa(name: string, format: "plain" | "tashkeel" | "en" | "ipa" = "plain"): string[] {
@@ -627,8 +645,8 @@ class BatchProcessor {
   }
 }
 
-export const EgyNames = EgyptianNames;
 export {
+  EgyptianNames as EgyNames,
   Gender,
   Religion,
   NameRole,

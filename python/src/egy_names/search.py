@@ -23,6 +23,8 @@ def search(
     frequency: Optional[str] = None,
     starts_with: Optional[str] = None,
     ends_with: Optional[str] = None,
+    prefix: Optional[str] = None,
+    suffix: Optional[str] = None,
     contains: Optional[str] = None,
     min_corpus_share: Optional[float] = None,
     max_results: int = 50,
@@ -37,6 +39,8 @@ def search(
         frequency: "common", "normal", "rare", or None for any.
         starts_with: Name prefix (Arabic or English).
         ends_with: Name suffix (Arabic or English).
+        prefix: Alias for starts_with.
+        suffix: Alias for ends_with.
         contains: Substring to match.
         min_corpus_share: Minimum corpus share percentage.
         max_results: Maximum number of results (default 50).
@@ -45,6 +49,8 @@ def search(
     Returns:
         List of NameInfo matching all criteria.
     """
+    effective_starts = prefix if prefix is not None else starts_with
+    effective_ends = suffix if suffix is not None else ends_with
     entries = get_all()
 
     # ── Apply filters ──
@@ -54,8 +60,8 @@ def search(
     f = FrequencyClass.parse(frequency)
 
     # Detect if prefix/suffix/contains is Arabic or English
-    prefix_ar = starts_with and is_arabic(starts_with)
-    suffix_ar = ends_with and is_arabic(ends_with)
+    prefix_ar = effective_starts and is_arabic(effective_starts)
+    suffix_ar = effective_ends and is_arabic(effective_ends)
     contains_ar = contains and is_arabic(contains)
 
     filtered: List[NameEntry] = []
@@ -73,21 +79,21 @@ def search(
             continue
 
         # Prefix match
-        if starts_with:
+        if effective_starts:
             if prefix_ar:
-                if not normalize_ar(e.ar).startswith(normalize_ar(starts_with)):
+                if not normalize_ar(e.ar).startswith(normalize_ar(effective_starts)):
                     continue
             else:
-                if not normalize_en(e.en).startswith(normalize_en(starts_with)):
+                if not normalize_en(e.en).startswith(normalize_en(effective_starts)):
                     continue
 
         # Suffix match
-        if ends_with:
+        if effective_ends:
             if suffix_ar:
-                if not normalize_ar(e.ar).endswith(normalize_ar(ends_with)):
+                if not normalize_ar(e.ar).endswith(normalize_ar(effective_ends)):
                     continue
             else:
-                if not normalize_en(e.en).endswith(normalize_en(ends_with)):
+                if not normalize_en(e.en).endswith(normalize_en(effective_ends)):
                     continue
 
         # Contains match

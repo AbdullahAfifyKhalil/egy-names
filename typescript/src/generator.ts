@@ -89,7 +89,8 @@ export function generateNames(options: {
   lang?: string;
   seed?: number;
 }): GeneratedName[] {
-  const count = options.count || 1;
+  const count = options.count !== undefined ? options.count : 1;
+  if (count <= 0) return [];
   const familyName = options.familyName !== false; // default true
   const lang = options.lang || "both";
   const randFunc = options.seed !== undefined ? LCG(options.seed) : Math.random;

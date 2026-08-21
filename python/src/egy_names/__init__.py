@@ -108,6 +108,13 @@ class EgyptianNames:
             return None
         return NameInfo._from_entry(entry)
 
+    def info(
+        self,
+        name: str,
+    ) -> Optional[NameInfo]:
+        """Alias for lookup(). Look up a name and return its NameInfo."""
+        return self.lookup(name)
+
     def annotate(
         self,
         name: str,
@@ -123,7 +130,7 @@ class EgyptianNames:
     def tashkeel(self, name: str, dialect: str = "standard") -> str:
         """Add Arabic diacritics (tashkeel) to an Egyptian name (standard or egyptian)."""
         if not name or not name.strip():
-            return name
+            return ""
         raw_tokens = name.strip().split()
         result = []
         i = 0
@@ -161,6 +168,10 @@ class EgyptianNames:
         """Add authentic Egyptian colloquial diacritics (tashkeel) to a name."""
         return self.tashkeel(name, dialect="egyptian")
 
+    def tashkeel_standard(self, name: str) -> str:
+        """Add Modern Standard Arabic diacritics (tashkeel) to a name."""
+        return self.tashkeel(name, dialect="standard")
+
     def ipa(self, name: str, dialect: str = "standard") -> str:
         """Generate International Phonetic Alphabet (IPA) transcription for TTS."""
         if not name or not name.strip():
@@ -185,6 +196,10 @@ class EgyptianNames:
     def ipa_eg(self, name: str) -> str:
         """Generate Egyptian Colloquial Arabic IPA phonetic transcription for TTS."""
         return self.ipa(name, dialect="egyptian")
+
+    def ipa_standard(self, name: str) -> str:
+        """Generate Modern Standard Arabic IPA phonetic transcription for TTS."""
+        return self.ipa(name, dialect="standard")
 
     def dallaa(self, name: str, format: str = "plain") -> List[str]:
         """Retrieve authentic Egyptian colloquial pet names/endearments (اسم الدلع).
@@ -294,6 +309,8 @@ class EgyptianNames:
         frequency: Optional[str] = None,
         starts_with: Optional[str] = None,
         ends_with: Optional[str] = None,
+        prefix: Optional[str] = None,
+        suffix: Optional[str] = None,
         contains: Optional[str] = None,
         min_corpus_share: Optional[float] = None,
         max_results: int = 50,
@@ -307,6 +324,8 @@ class EgyptianNames:
             frequency=frequency,
             starts_with=starts_with,
             ends_with=ends_with,
+            prefix=prefix,
+            suffix=suffix,
             contains=contains,
             min_corpus_share=min_corpus_share,
             max_results=max_results,

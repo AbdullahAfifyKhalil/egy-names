@@ -8,6 +8,8 @@ export function search(options: {
   frequency?: string;
   startsWith?: string;
   endsWith?: string;
+  prefix?: string;
+  suffix?: string;
   contains?: string;
   minCorpusShare?: number;
   maxResults?: number;
@@ -32,8 +34,10 @@ export function search(options: {
   if (options.frequency === "normal") f = FrequencyClass.NORMAL;
   if (options.frequency === "rare") f = FrequencyClass.RARE;
 
-  const prefixAr = options.startsWith && isArabic(options.startsWith);
-  const suffixAr = options.endsWith && isArabic(options.endsWith);
+  const effectiveStarts = options.prefix || options.startsWith;
+  const effectiveEnds = options.suffix || options.endsWith;
+  const prefixAr = effectiveStarts && isArabic(effectiveStarts);
+  const suffixAr = effectiveEnds && isArabic(effectiveEnds);
   const containsAr = options.contains && isArabic(options.contains);
 
   let filtered = entries.filter((e) => {
@@ -43,19 +47,19 @@ export function search(options: {
     if (f !== undefined && e.frequency !== f) return false;
     if (options.minCorpusShare !== undefined && e.corpusShare < options.minCorpusShare) return false;
 
-    if (options.startsWith) {
+    if (effectiveStarts) {
       if (prefixAr) {
-        if (!normalizeAr(e.ar).startsWith(normalizeAr(options.startsWith))) return false;
+        if (!normalizeAr(e.ar).startsWith(normalizeAr(effectiveStarts))) return false;
       } else {
-        if (!normalizeEn(e.en).startsWith(normalizeEn(options.startsWith))) return false;
+        if (!normalizeEn(e.en).startsWith(normalizeEn(effectiveStarts))) return false;
       }
     }
 
-    if (options.endsWith) {
+    if (effectiveEnds) {
       if (suffixAr) {
-        if (!normalizeAr(e.ar).endsWith(normalizeAr(options.endsWith))) return false;
+        if (!normalizeAr(e.ar).endsWith(normalizeAr(effectiveEnds))) return false;
       } else {
-        if (!normalizeEn(e.en).endsWith(normalizeEn(options.endsWith))) return false;
+        if (!normalizeEn(e.en).endsWith(normalizeEn(effectiveEnds))) return false;
       }
     }
 

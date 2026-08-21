@@ -48,7 +48,7 @@ def translate(
         The translated full name.
     """
     if not full_name or not full_name.strip():
-        return full_name
+        return ""
 
     tokens = full_name.strip().split()
     translated = [translate_token(t, to=to) for t in tokens]

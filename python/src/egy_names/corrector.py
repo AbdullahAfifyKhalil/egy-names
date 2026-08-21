@@ -22,19 +22,19 @@ from ._index import (
 def correct_token(token: str) -> str:
     """Correct a single name token to its canonical form."""
     if not token or not token.strip():
-        return token
+        return ""
 
     t = token.strip()
 
-    # 1. Correction index (surface_form -> canonical)
+    # 1. Exact AR entry match (already canonical)
+    entry = lookup_ar(t)
+    if entry and entry.ar:
+        return entry.ar
+
+    # 2. Correction index (surface_form -> canonical)
     canonical = _correction_lookup(t)
     if canonical:
         return canonical
-
-    # 2. Exact AR variant / phonetic match
-    entry = lookup_ar(t)
-    if entry:
-        return entry.ar
 
     # 3. Normalized match
     norm = normalize_ar(t)
@@ -61,7 +61,7 @@ def correct_token(token: str) -> str:
 def correct(name: str) -> str:
     """Correct a full name (including compound and multi-word names)."""
     if not name or not name.strip():
-        return name
+        return ""
 
     tokens = name.strip().split()
     result = []

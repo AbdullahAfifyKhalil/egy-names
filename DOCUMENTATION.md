@@ -4,7 +4,7 @@ Welcome to the definitive developer guide for **Egyptian Names (`egy-names`)**, 
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
 1. [Architectural Overview & 14D Schema](#1-architectural-overview--14d-schema)
 2. [Multi-Language Installation](#2-multi-language-installation)
@@ -641,7 +641,7 @@ interface NameInfo {
 
 ---
 
-## 🏛️ License
+## License
 
 Released under the **MIT License**. Free for commercial, academic, government, and personal use.
 © 2026 Abdullah Afify. Powered by Afify Corp.

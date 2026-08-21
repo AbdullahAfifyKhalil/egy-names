@@ -18,7 +18,7 @@
 <br />
 **Python** | **TypeScript / JavaScript** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)**
 
-[📖 Complete API Reference & Documentation](DOCUMENTATION.md) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
+[Complete API Reference & Documentation](DOCUMENTATION.md) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
 
 </div>
 
@@ -222,7 +222,7 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 
 ## Installation and Multi-Language Usage
 
-> **Full Documentation**: For exhaustive method signatures, parameter tables, and advanced configurations, see the [📖 Complete API Reference](DOCUMENTATION.md).
+> **Full Documentation**: For exhaustive method signatures, parameter tables, and advanced configurations, see the [Complete API Reference](DOCUMENTATION.md).
 
 ### 1. Python (3.9+)
 
@@ -442,7 +442,7 @@ int main() {
 The underlying national datasets are open-source and hosted on Hugging Face:
 
 ### 1. Egyptian Names Dataset (44.6K Lexicon and 15.88M Corpus)
-👉 [**https://huggingface.co/datasets/Abdullah-afify/egyptian-names**](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
+[https://huggingface.co/datasets/Abdullah-afify/egyptian-names](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
 * **`final_canonical` (Default):** 44,626 unique master names with 100% Tashkeel, Arabic/English meanings, and 6-slot generational probabilities.
 * **`phase0_raw`:** 1.54M raw full name strings.
 * **`phase1_segmented`:** 1.0M segmented patronymic chains.
@@ -456,7 +456,7 @@ print(dataset["train"][0])
 ```
 
 ### 2. Egyptian High School Students Degrees Dataset (2017–2026)
-👉 [**https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades**](https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades)
+[https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades](https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades)
 * **3,790,225 Total Records** across 5 national examination cohorts (**2017**, **2023**, **2024**, **2025**, **2026**).
 
 ---
@@ -503,7 +503,7 @@ Distributed under the **MIT License**. See `LICENSE` for details.
   title        = {egy-names: A Production-Grade Onomastic Intelligence and Linguistic Engine for Egyptian Names},
   year         = {2026},
   publisher    = {GitHub},
-  version      = {0.2.1},
+  version      = {0.3.1},
   url          = {https://github.com/AbdullahAfifyKhalil/egy-names}
 }
 ```

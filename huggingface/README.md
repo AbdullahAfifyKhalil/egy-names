@@ -47,14 +47,14 @@ configs:
   data_files: "data/slot_distributions.parquet"
 ---
 
-# 🇪🇬 Egyptian Names & Onomastic Intelligence Dataset
+# Egyptian Names & Onomastic Intelligence Dataset
 ### *From 15.88M+ Raw National Records to an Empirical Onomastic and Linguistic Engine*
 
 This repository hosts the complete, multi-phase statistical and linguistic dataset powering **`egy-names`**, the production onomastic intelligence engine for contemporary Egyptian naming traditions.
 
 ---
 
-## 📊 Dataset Pipeline Overview
+## Dataset Pipeline Overview
 
 Egyptian names follow an unbroken patronymic lineage chain ($Personal + Father + Grandfather + Ancestor + Family/Tribe$). This dataset provides the full transformation pipeline across all developmental phases:
 
@@ -77,7 +77,7 @@ Egyptian names follow an unbroken patronymic lineage chain ($Personal + Father +
 
 ---
 
-## 📊 Full Data vs. Single Names Breakdown
+## Full Data vs. Single Names Breakdown
 
 | Metric | Count | Description |
 | :--- | :--- | :--- |
@@ -97,7 +97,7 @@ In an Egyptian population of **~16–30 Million records**, names repeat extensiv
 
 ---
 
-## 🚀 Quick Start with Hugging Face `datasets`
+## Quick Start with Hugging Face `datasets`
 
 ### 1. Load Final Canonical Master Dataset (Default — 44,626 Names)
 ```python
@@ -137,7 +137,7 @@ corr_dataset = load_dataset("Abdullah-afify/egyptian-names", "phase3_corrections
 
 ---
 
-## 🧬 Configurations & Data Schemas
+## Configurations & Data Schemas
 
 ### 1. `final_canonical` (Default — 44,626 Rows)
 The master 14-dimensional enriched onomastic dictionary:
@@ -169,7 +169,7 @@ The master 14-dimensional enriched onomastic dictionary:
 
 ---
 
-## 🏛️ Research Citations & Licensing
+## Research Citations & Licensing
 
 This dataset is released under the **MIT License** and is free for academic, commercial, and research use.
 

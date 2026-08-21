@@ -45,14 +45,14 @@ configs:
   data_files: "data/high_school_degrees_2026.parquet"
 ---
 
-# 🇪🇬 Egyptian High School (Thanawya Amma) Students Degrees (2017–2026)
+# Egyptian High School (Thanawya Amma) Students Degrees (2017–2026)
 ### *A Large-Scale National Demographic and Educational Dataset of 3,790,225 Student Records*
 
 Published and maintained by **[Afify Corporation](https://afify.co)** (`afify.co`) and **[Abdullah Afify](https://github.com/AbdullahAfifyKhalil)**.
 
 ---
 
-## 📊 Dataset Summary
+## Dataset Summary
 
 This dataset compiles official national examination results for Egyptian General Secondary Education (*Thanawya Amma* / **الثانوية العامة**) across five major cohorts: **2017, 2023, 2024, 2025, and 2026**, comprising **3,790,225 student records**.
 
@@ -62,20 +62,20 @@ It serves as a primary empirical benchmark for:
 
 ---
 
-## 📁 Dataset Splits & Statistics
+## Dataset Splits & Statistics
 
 | Academic Year | Configuration Name | Record Count | Description |
 |---|---|---|---|
-| 📅 **All Years (Combined)** | `default` / `all_years` | **3,790,225** | Complete unified dataset |
-| 🎓 **2017 Academic Year** | `year_2017` | **540,110** | Historical graduation cohort |
-| 🎓 **2023 Academic Year** | `year_2023` | **784,749** | Pre-reform examination cohort |
-| 🎓 **2024 Academic Year** | `year_2024` | **734,990** | Recent graduation cohort |
-| 🎓 **2025 Academic Year** | `year_2025` | **810,980** | Modern examination cohort |
-| 🎓 **2026 Academic Year** | `year_2026` | **919,396** | Latest examination cohort |
+|  **All Years (Combined)** | `default` / `all_years` | **3,790,225** | Complete unified dataset |
+|  **2017 Academic Year** | `year_2017` | **540,110** | Historical graduation cohort |
+|  **2023 Academic Year** | `year_2023` | **784,749** | Pre-reform examination cohort |
+|  **2024 Academic Year** | `year_2024` | **734,990** | Recent graduation cohort |
+|  **2025 Academic Year** | `year_2025` | **810,980** | Modern examination cohort |
+|  **2026 Academic Year** | `year_2026` | **919,396** | Latest examination cohort |
 
 ---
 
-## 🚀 How to Use with `datasets`
+## How to Use with `datasets`
 
 ```python
 from datasets import load_dataset
@@ -101,7 +101,7 @@ print(df.head())
 
 ---
 
-## 🧬 Data Schema & Field Dictionary
+## Data Schema & Field Dictionary
 
 | Field | Type | Description | Arabic Name | Example |
 |---|---|---|---|---|
@@ -117,7 +117,7 @@ print(df.head())
 
 ---
 
-## 🏛️ Research Citations & Licensing
+## Research Citations & Licensing
 
 This dataset is released under the **MIT License** and is free for academic, commercial, and research use.
 

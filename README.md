@@ -9,18 +9,16 @@
 
 [![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.1-3776AB)](https://pypi.org/project/egy-names/)
 [![npm Version](https://img.shields.io/badge/npm-v0.3.1-CB3837)](https://www.npmjs.com/package/egy-names)
-[![NuGet Version](https://img.shields.io/badge/NuGet-v0.3.1-004880)](https://www.nuget.org/packages/egy-names/)
 [![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.1-0175C2)](https://pub.dev/packages/egy_names)
-[![Swift PM](https://img.shields.io/badge/Swift_PM-v0.3.1-FA7343)](https://github.com/AbdullahAfifyKhalil/egy-names)
-[![Maven Central](https://img.shields.io/badge/Maven_Central-v0.3.1-C71A36)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
 [![Hugging Face](https://img.shields.io/badge/Hugging_Face-44.6K_Lexicon-FFD21E)](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
+[![Documentation](https://img.shields.io/badge/Documentation-Complete_API_Reference-blue.svg)](DOCUMENTATION.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 **Engineered with 100% Deterministic Parity across 7 Major Languages:**
 <br />
 **Python** | **TypeScript / JavaScript** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)**
 
-[Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Corpus Scale](#national-corpus-genesis-and-empirical-grounding) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Hugging Face Datasets](#hugging-face-datasets) | [Architecture](#onomastic-architecture) | [About Afify Corp](#about-afify-corporation) | [License](#license)
+[📖 Complete API Reference & Documentation](DOCUMENTATION.md) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
 
 </div>
 
@@ -139,6 +137,45 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 
 ---
 
+### 9. Authentic Egyptian Pet Names (أسماء الدلع)
+* **The Cultural Nuance**: Egyptian pet names follow deeply rooted morphological diminutive patterns (`فَعُّول`, `مَيْفُو`, `فَعُّودَة`) distinct from Levantine or Gulf nicknames.
+* **4-Way Multi-Modal Representation**: Every pet name is provided in:
+  1. Plain Arabic lemma (`ميدو`, `حمو`, `حمودة`)
+  2. Full Egyptian vocalized Tashkeel (`مِيدُو`, `حَمُّو`, `حَمُّودَة`)
+  3. Transliterated English (`Mido`, `Hamou`, `Hamouda`)
+  4. Egyptian Colloquial IPA phonetics (`[ˈmiːdu]`, `[ˈħæm.mu]`, `[ħæmˈmuːdæ]`)
+
+---
+
+### 10. Iconic Egyptian Public Figures (الأسماء المشهورة)
+* **Empirical Validation**: Filtered exclusively for notable Egyptian historical leaders, scientists, authors, athletes, artists, and Nobel laureates.
+* **Bilingual Descriptions**: Provides concise historical context in both Arabic and English (e.g. *محمد صلاح - قائد منتخب مصر وهداف ليفربول العالمي* / *Mohamed Salah - Egyptian National Football Captain & Global Icon*).
+
+---
+
+### 11. Dual Vocalization (Standard vs. Egyptian Colloquial Tashkeel)
+* **Standard Tashkeel (`tashkeel_standard`)**: Full Modern Standard Arabic / Classical Quranic vocalization (`مُحَمَّد`, `آيَات`).
+* **Egyptian Tashkeel (`tashkeel_eg`)**: Real-world Egyptian colloquial vocalization with word-final sukun and dialectal vowel harmony (`مُحَمَّدْ`, `آيَاتْ`).
+
+---
+
+### 12. Standard & Egyptian IPA Phonetics (for AI TTS & Linguistics)
+* **The Phonetic Bridge**: Built specifically for Speech Synthesis (TTS), Voice AI, and non-native learners.
+* **Accurate Glottal & Velar Shifts**: Correctly reflects Egyptian `/d͡ʒ/` $\to$ `[ɡ]` (*Gamal* `[ɡæˈmæːl]`) and vowel elongation.
+
+---
+
+### 13. Multi-Criteria Onomastic Search & Lexical Filtering
+* **High-Performance Search Engine**: Sub-millisecond filtering across all 44,626 names by prefix, infix, suffix, gender, religion, etymological origin, and sociological generation trend.
+
+---
+
+### 14. Patronymic Chain Role Assignment & Custom Formatting
+* **Structural Decomposition**: Dynamically classifies every token in a multi-part chain into its exact genealogical position (`person`, `father`, `grandfather`, `ancestor`, `family_name`).
+* **Custom Template Engine**: Format strings with arbitrary templates (e.g. `"{person} {father} {family}"` $\to$ `"محمد أحمد الشاذلي"`).
+
+---
+
 ## The Mathematics of Grounded Patronymic Generation
 
 ### The 6-Slot Generational Model
@@ -185,10 +222,12 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 
 ## Installation and Multi-Language Usage
 
+> **Full Documentation**: For exhaustive method signatures, parameter tables, and advanced configurations, see the [📖 Complete API Reference](DOCUMENTATION.md).
+
 ### 1. Python (3.9+)
 
 ```bash
-pip install --upgrade egy-names
+pip install --upgrade egy-names==0.3.1
 ```
 
 ```python
@@ -196,55 +235,70 @@ from egy_names import EgyNames
 
 e = EgyNames()
 
-# 1. Age Detection and Generation
-print(e.names_for_age(24, gender="female", top=3))
-# -> [NameInfo(ar='شهد', en='Shahd', ...), NameInfo(ar='يارا', en='Yara', ...)]
+# 1. Authentic Egyptian Pet Names (أسماء الدلع)
+print(e.dallaa("محمد", format="tashkeel"))  # ['مِيدُو', 'حَمُّو', 'حَمُّودَة']
+print(e.dallaa("محمد", format="ipa"))       # ['[ˈmiːdu]', '[ˈħæm.mu]', '[ħæmˈmuːdæ]']
+print(e.dallaa_info("محمد"))                # [PetName(ar='ميدو', tashkeel='مِيدُو', en='Mido', ipa='[ˈmiːdu]'), ...]
 
-det = e.detect_age("كريم أشرف فاروق")
-print(f"Age: ~{det.estimated_age} ({det.age_range[0]}–{det.age_range[1]} yrs) | Conf: {det.confidence} | {det.generation_label}")
-# -> Age: ~25 (13–37 yrs) | Conf: 0.641 | youth generation
+# 2. Authentic Egyptian Public Figures (الأسماء المشهورة)
+print(e.famous_figures("محمد", lang="en"))
+# -> ['Mohamed Salah (Egyptian National Football Captain & Global Icon)', 'Mohamed Ali Pasha (Founder of Modern Egypt)', ...]
 
-# 2. Concatenated DP Splitting
+# 3. Dual Vocalization (Tashkeel) & IPA Transcriptions
+print(e.tashkeel("محمد عبدالرحمن الشرقاوي")) # "مُحَمَّد عَبْدُ الرَّحْمَن الشَّرْقَاوِيّ"
+print(e.tashkeel_eg("محمد"))                 # "مُحَمَّدْ"
+print(e.ipa_eg("جمال"))                      # "[ɡæˈmæːl]" (Authentic Egyptian [ɡ])
+print(e.ipa_standard("جمال"))                # "/d͡ʒamaːl/"
+
+# 4. Concatenated Dynamic Programming Splitting
 print(e.split("محمدأحمدعليحسنالشناوي"))
 # -> ['محمد', 'أحمد', 'علي', 'حسن', 'الشناوي']
 
-# 3. 100% Vocalization (Tashkeel) and Correction
-print(e.tashkeel("محمد عبدالرحمن الشرقاوي"))
-# -> "مُحَمَّد عَبْدُالرَّحْمَن الشَّرْقَاوِيّ"
+# 5. Deterministic Typo and OCR Correction
+print(e.correct("احمد مصطفا عبد الرحيم يحي"))
+# -> "أحمد مصطفى عبدالرحيم يحيى"
 
-print(e.correct("احمد مصطفا"))
-# -> "أحمد مصطفى"
-
-# 4. Complete Root Etymology
+# 6. Morphological Roots and Etymology
+print(e.info("محمد").root)                   # "ح-م-د"
 print(e.meaning("المنياوي"))
 # -> {'ar': 'نسبة إلى مدينة المنيا في صعيد مصر...', 'en': 'Attributed to Minya in Upper Egypt...'}
 
-# 5. Phonetic Egyptian Transliteration
-print(e.translate("محمد عبد الحميد الشاذلي"))
-# -> "Mohamed Abdelhamid Elshazly"
+# 7. Grounded 6-Slot Patronymic Generation
+names = e.generate(count=3, gender="female", religion="christian", length=4)
+for n in names:
+    print(f"{n.ar}  --  {n.en}")
+
+# 8. Generational Age Intelligence
+det = e.detect_age("كريم أشرف فاروق")
+print(f"Age: ~{det.estimated_age} yrs | Conf: {det.confidence} | {det.generation_label}")
 ```
 
 ---
 
-### 2. TypeScript / JavaScript (Node.js and Modern Browsers)
+### 2. TypeScript / JavaScript (Node.js & Modern Browsers)
 
 ```bash
-npm install egy-names@0.2.1
+npm install egy-names@0.3.1
 ```
 
 ```typescript
-import { EgyptianNames } from 'egy-names';
+import { EgyNames, Gender, Religion } from 'egy-names';
 
-const en = new EgyptianNames();
+const en = new EgyNames();
 
-// 1. Translation and Tashkeel
-console.log(en.translate("محمد أحمد علي")); // Mohamed Ahmed Ali
-console.log(en.tashkeel("محمد عبدالرحمن")); // مُحَمَّد عَبْدُالرَّحْمَن
+// 1. Pet Names & Figures
+console.log(en.dallaa("محمد", "tashkeel")); // ['مِيدُو', 'حَمُّو', 'حَمُّودَة']
+console.log(en.famousFigures("محمد", "en")); // ['Mohamed Salah (Egyptian National Football Captain & Global Icon)', ...]
 
-// 2. Intelligent Dynamic Programming Splitting
+// 2. Translation, Tashkeel & IPA
+console.log(en.translate("محمد أحمد علي")); // "Mohamed Ahmed Ali"
+console.log(en.tashkeel("محمد عبدالرحمن")); // "مُحَمَّد عَبْدُ الرَّحْمَن"
+console.log(en.ipaEg("جمال")); // "[ɡæˈmæːl]"
+
+// 3. Dynamic Programming Splitting
 console.log(en.split("محمدأحمدعليحسن")); // ["محمد", "أحمد", "علي", "حسن"]
 
-// 3. Demographic Inferences
+// 4. Demographic Inferences
 console.log(en.detectGender("فاطمة الزهراء")); // { gender: 'female', confidence: 0.95 }
 console.log(en.detectReligion("مينا جرجس بطرس")); // { religion: 'christian', confidence: 0.98 }
 ```
@@ -253,10 +307,10 @@ console.log(en.detectReligion("مينا جرجس بطرس")); // { religion: 'ch
 
 ### 3. Swift (iOS / macOS / watchOS / visionOS)
 
-Add via Xcode (`File > Add Package Dependencies...`) or in `Package.swift`:
+Add in Xcode or `Package.swift`:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.2.1")
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.1")
 ]
 ```
 
@@ -265,15 +319,14 @@ import EgyNames
 
 let en = EgyptianNames()
 
-// Splitting unspaced legacy strings
-let parts = en.split("محمدأحمدعليحسن")
-print(parts) // ["محمد", "أحمد", "علي", "حسن"]
+// Pet Names and Public Figures
+let petNames = en.dallaa("محمد", format: "tashkeel") // ["مِيدُو", "حَمُّو", "حَمُّودَة"]
+let figures = en.famousFigures("محمد", lang: "en")
 
-// Full Tashkeel restoration
-print(en.tashkeel("محمد عبدالرحمن")) // مُحَمَّد عَبْدُالرَّحْمَن
-
-// Egyptian passport transliteration
-print(en.translate("محمد أحمد علي")) // Mohamed Ahmed Ali
+// Splitting and Tashkeel
+let parts = en.split("محمدأحمدعليحسن") // ["محمد", "أحمد", "علي", "حسن"]
+print(en.tashkeel("محمد عبدالرحمن")) // "مُحَمَّد عَبْدُ الرَّحْمَن"
+print(en.translate("محمد أحمد علي")) // "Mohamed Ahmed Ali"
 ```
 
 ---
@@ -281,15 +334,21 @@ print(en.translate("محمد أحمد علي")) // Mohamed Ahmed Ali
 ### 4. .NET / C#
 
 ```bash
-dotnet add package egy-names --version 0.2.1
+dotnet add package egy-names --version 0.3.1
 ```
 
 ```csharp
 using EgyNames;
 
-var en = new EgyptianNames();
+var en = new EgyptianNamesEngine();
+
+// Generation & Transliteration
+var names = en.Generate(count: 3, gender: "female");
 Console.WriteLine(en.Translate("محمد أحمد علي")); // Mohamed Ahmed Ali
-Console.WriteLine(en.Tashkeel("محمد عبدالرحمن")); // مُحَمَّد عَبْدُالرَّحْمَن
+
+// 14D Features
+Console.WriteLine(string.Join(", ", en.Dallaa("محمد", "tashkeel"))); // مِيدُو, حَمُّو, حَمُّودَة
+Console.WriteLine(en.Tashkeel("محمد عبدالرحمن")); // مُحَمَّد عَبْدُ الرَّحْمَن
 Console.WriteLine(string.Join(", ", en.Split("محمدأحمدعليحسن"))); // محمد, أحمد, علي, حسن
 ```
 
@@ -298,16 +357,23 @@ Console.WriteLine(string.Join(", ", en.Split("محمدأحمدعليحسن"))); 
 ### 5. Dart / Flutter
 
 ```bash
-flutter pub add egy_names:^0.2.1
+flutter pub add egy_names:^0.3.1
 ```
 
 ```dart
 import 'package:egy_names/egy_names.dart';
 
 void main() {
-  final en = EgyptianNames();
+  final en = EgyNames();
+  
+  // 14D Features & Pet Names
+  print(en.dallaa('محمد', format: 'ipa')); // ['[ˈmiːdu]', '[ˈħæm.mu]', '[ħæmˈmuːdæ]']
+  print(en.famousFigures('محمد', lang: 'ar'));
+  print(en.ipaEg('محمد')); // '[moˈħamːæd]'
+
+  // Splitting & Translation
   print(en.translate("محمد أحمد علي")); // Mohamed Ahmed Ali
-  print(en.tashkeel("محمد عبدالرحمن")); // مُحَمَّد عَبْدُالرَّحْمَن
+  print(en.tashkeel("محمد عبدالرحمن")); // مُحَمَّد عَبْدُ الرَّحْمَن
   print(en.split("محمدأحمدعليحسن"));    // [محمد, أحمد, علي, حسن]
 }
 ```
@@ -320,7 +386,7 @@ void main() {
 <dependency>
     <groupId>io.github.abdullahafifykhalil</groupId>
     <artifactId>egy-names</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.1</version>
 </dependency>
 ```
 
@@ -330,8 +396,10 @@ import com.afify.egynames.EgyptianNames;
 public class Main {
     public static void main(String[] args) {
         EgyptianNames en = new EgyptianNames();
+        System.out.println(en.dallaa("محمد", "tashkeel")); // [مِيدُو, حَمُّو, حَمُّودَة]
+        System.out.println(en.famousFigures("محمد", "en"));
         System.out.println(en.translate("محمد أحمد علي")); // Mohamed Ahmed Ali
-        System.out.println(en.tashkeel("محمد عبدالرحمن")); // مُحَمَّد عَبْدُالرَّحْمَن
+        System.out.println(en.tashkeel("محمد عبدالرحمن")); // مُحَمَّد عَبْدُ الرَّحْمَن
     }
 }
 ```
@@ -345,7 +413,8 @@ include(FetchContent)
 FetchContent_Declare(
     egy_names
     GIT_REPOSITORY https://github.com/AbdullahAfifyKhalil/egy-names.git
-    GIT_TAG v0.2.1
+    GIT_TAG v0.3.1
+    SOURCE_SUBDIR cpp/egy_names
 )
 FetchContent_MakeAvailable(egy_names)
 target_link_libraries(your_target PRIVATE egy_names)
@@ -356,9 +425,12 @@ target_link_libraries(your_target PRIVATE egy_names)
 #include <iostream>
 
 int main() {
-    egy_names::EgyNames en;
+    egy_names::EgyptianNames en;
     std::cout << en.translate("محمد أحمد علي") << "\n"; // Mohamed Ahmed Ali
-    std::cout << en.tashkeel("محمد عبدالرحمن") << "\n"; // مُحَمَّد عَبْدُالرَّحْمَن
+    std::cout << en.tashkeel("محمد عبدالرحمن") << "\n"; // مُحَمَّد عَبْدُ الرَّحْمَن
+    auto dallaa = en.dallaa("محمد", "tashkeel");
+    for (const auto& d : dallaa) std::cout << d << " ";
+    std::cout << "\n";
     return 0;
 }
 ```

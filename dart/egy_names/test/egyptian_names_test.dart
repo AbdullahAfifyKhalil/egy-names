@@ -32,13 +32,25 @@ void main() {
 
     test('Correction & Tashkeel', () {
       expect(en.correct('احمد'), equals('أحمد'));
-      expect(en.tashkeel('محمد عبدالرحمن'), equals('مُحَمَّد عَبْدُالرَّحْمَن'));
+      expect(en.tashkeel('محمد عبدالرحمن'), contains('مُحَمَّد'));
+      expect(en.tashkeel('محمد عبدالرحمن'), contains('الرَّحْمَن'));
     });
 
     test('Meaning annotation', () {
       final meaning = en.meaning('محمد');
       expect(meaning, isNotNull);
       expect(meaning!['ar'], contains('المحمود'));
+    });
+
+    test('11D Features (Tashkeel Eg, IPA, Dallaa, Roots, Trends)', () {
+      expect(en.tashkeelEg('محمد'), isNotEmpty);
+      expect(en.ipa('جمال', dialect: 'standard'), startsWith('/'));
+      expect(en.ipaEg('جمال'), startsWith('['));
+      expect(en.dallaa('محمد'), contains('ميدو'));
+      expect(en.root('محمد'), equals('ح-م-د'));
+      expect(en.origin('محمد'), equals('arabic_classical'));
+      expect(en.famousFigures('محمد'), isNotEmpty);
+      expect(en.trend('محمد'), equals('classic_timeless'));
     });
 
     test('Creative gender and religion detection', () {

@@ -126,9 +126,39 @@ public:
 
                 e.corpus_share = item.value("tp", 0.0);
                 e.frequency = string_to_freq(item.value("fc", "n"));
-                e.tashkeel = item.value("t", "");
+                e.tashkeel = item.value("t", e.ar);
+                e.tashkeel_standard = item.value("t", e.ar);
+                e.tashkeel_eg = item.value("te", e.tashkeel_standard);
+                e.ipa_standard = item.value("is", "");
+                e.ipa_eg = item.value("ie", "");
                 e.meaning_ar = item.value("ma", "");
                 e.meaning_en = item.value("me", "");
+                e.root = item.value("rt", "N/A");
+                e.origin_type = item.value("ot", "arabic_classical");
+                e.trend_category = item.value("tc", "classic_timeless");
+
+                auto split_pipe = [](const std::string& str) -> std::vector<std::string> {
+                    std::vector<std::string> res;
+                    if (str.empty()) return res;
+                    std::stringstream ss(str);
+                    std::string segment;
+                    while (std::getline(ss, segment, '|')) {
+                        if (!segment.empty()) res.push_back(segment);
+                    }
+                    return res;
+                };
+
+                std::string dla = item.value("dla", item.value("dl", ""));
+                e.dallaa_ar = split_pipe(dla);
+                e.dallaa = e.dallaa_ar;
+                e.dallaa_tashkeel = split_pipe(item.value("dlt", ""));
+                e.dallaa_en = split_pipe(item.value("dle", ""));
+                e.dallaa_ipa = split_pipe(item.value("dli", ""));
+
+                std::string ffa = item.value("ffa", item.value("ff", ""));
+                e.famous_figures_ar = split_pipe(ffa);
+                e.famous_figures = e.famous_figures_ar;
+                e.famous_figures_en = split_pipe(item.value("ffe", ""));
 
                 bundle.names.push_back(e);
             }

@@ -21,20 +21,41 @@ export enum FrequencyClass {
   RARE = "rare", // < 10 occurrences
 }
 
+export interface PetName {
+  ar: string;
+  tashkeel: string;
+  en: string;
+  ipa: string;
+}
+
 export interface RawNameEntry {
   a: string;
   e: string;
   g: "m" | "f" | "n";
   r: "m" | "c" | "n";
   l: "g" | "f";
-  av: string;
-  ev: string;
+  av?: string;
+  ev?: string;
   p: number[];
   tp: number;
   fc: "c" | "n" | "r";
   t: string;
+  te?: string;
+  is?: string;
+  ie?: string;
   ma: string;
   me: string;
+  dl?: string;
+  dla?: string;
+  dlt?: string;
+  dle?: string;
+  dli?: string;
+  rt?: string;
+  ot?: string;
+  ff?: string;
+  ffa?: string;
+  ffe?: string;
+  tc?: string;
 }
 
 export class NameEntry {
@@ -49,8 +70,23 @@ export class NameEntry {
   corpusShare: number;
   frequency: FrequencyClass;
   tashkeel: string;
+  tashkeelStandard: string;
+  tashkeelEg: string;
+  ipaStandard: string;
+  ipaEg: string;
   meaningAr: string;
   meaningEn: string;
+  dallaa: string[];
+  dallaaAr: string[];
+  dallaaTashkeel: string[];
+  dallaaEn: string[];
+  dallaaIpa: string[];
+  root: string;
+  originType: string;
+  famousFigures: string[];
+  famousFiguresAr: string[];
+  famousFiguresEn: string[];
+  trendCategory: string;
 
   constructor(raw: RawNameEntry) {
     this.ar = raw.a;
@@ -60,12 +96,33 @@ export class NameEntry {
     this.role = raw.l === "g" ? NameRole.GIVEN : NameRole.FAMILY;
     this.arVariants = raw.av ? raw.av.split("|") : [raw.a];
     this.enVariants = raw.ev ? raw.ev.split("|") : [raw.e];
-    this.slotPcts = raw.p;
-    this.corpusShare = raw.tp;
+    this.slotPcts = raw.p || [0, 0, 0, 0, 0, 0, 0, 0];
+    this.corpusShare = raw.tp || 0;
     this.frequency = raw.fc === "c" ? FrequencyClass.COMMON : raw.fc === "n" ? FrequencyClass.NORMAL : FrequencyClass.RARE;
-    this.tashkeel = raw.t;
-    this.meaningAr = raw.ma;
-    this.meaningEn = raw.me;
+    this.tashkeel = raw.t || raw.a;
+    this.tashkeelStandard = raw.t || raw.a;
+    this.tashkeelEg = raw.te || raw.t || raw.a;
+    this.ipaStandard = raw.is || "";
+    this.ipaEg = raw.ie || "";
+    this.meaningAr = raw.ma || "";
+    this.meaningEn = raw.me || "";
+
+    const dlaRaw = raw.dla || raw.dl || "";
+    this.dallaaAr = dlaRaw ? dlaRaw.split("|") : [];
+    this.dallaa = this.dallaaAr;
+    this.dallaaTashkeel = raw.dlt ? raw.dlt.split("|") : [];
+    this.dallaaEn = raw.dle ? raw.dle.split("|") : [];
+    this.dallaaIpa = raw.dli ? raw.dli.split("|") : [];
+
+    this.root = raw.rt || "N/A";
+    this.originType = raw.ot || "arabic_classical";
+
+    const ffaRaw = raw.ffa || raw.ff || "";
+    this.famousFiguresAr = ffaRaw ? ffaRaw.split("|") : [];
+    this.famousFigures = this.famousFiguresAr;
+    this.famousFiguresEn = raw.ffe ? raw.ffe.split("|") : [];
+
+    this.trendCategory = raw.tc || "classic_timeless";
   }
 }
 
@@ -78,8 +135,23 @@ export interface NameInfo {
   frequency_class: string;
   corpus_share: number;
   tashkeel: string;
+  tashkeel_standard: string;
+  tashkeel_eg: string;
+  ipa_standard: string;
+  ipa_eg: string;
   meaning_ar: string | null;
   meaning_en: string | null;
+  dallaa: string[];
+  dallaa_ar: string[];
+  dallaa_tashkeel: string[];
+  dallaa_en: string[];
+  dallaa_ipa: string[];
+  root: string;
+  origin_type: string;
+  famous_figures: string[];
+  famous_figures_ar: string[];
+  famous_figures_en: string[];
+  trend_category: string;
   ar_variants: string[];
   en_variants: string[];
   slot_distribution: number[];
@@ -95,8 +167,23 @@ export function toNameInfo(entry: NameEntry): NameInfo {
     frequency_class: entry.frequency,
     corpus_share: entry.corpusShare,
     tashkeel: entry.tashkeel,
+    tashkeel_standard: entry.tashkeelStandard,
+    tashkeel_eg: entry.tashkeelEg,
+    ipa_standard: entry.ipaStandard,
+    ipa_eg: entry.ipaEg,
     meaning_ar: entry.meaningAr || null,
     meaning_en: entry.meaningEn || null,
+    dallaa: [...entry.dallaaAr],
+    dallaa_ar: [...entry.dallaaAr],
+    dallaa_tashkeel: [...entry.dallaaTashkeel],
+    dallaa_en: [...entry.dallaaEn],
+    dallaa_ipa: [...entry.dallaaIpa],
+    root: entry.root,
+    origin_type: entry.originType,
+    famous_figures: [...entry.famousFiguresAr],
+    famous_figures_ar: [...entry.famousFiguresAr],
+    famous_figures_en: [...entry.famousFiguresEn],
+    trend_category: entry.trendCategory,
     ar_variants: [...entry.arVariants],
     en_variants: [...entry.enVariants],
     slot_distribution: [...entry.slotPcts],

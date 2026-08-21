@@ -96,6 +96,22 @@ public class Models {
         }
     }
 
+    public static class PetName {
+        public String ar;
+        public String tashkeel;
+        public String en;
+        public String ipa;
+
+        public PetName() {}
+
+        public PetName(String ar, String tashkeel, String en, String ipa) {
+            this.ar = ar;
+            this.tashkeel = tashkeel;
+            this.en = en;
+            this.ipa = ipa;
+        }
+    }
+
     public static class NameEntry {
         public String ar;
         public String en;
@@ -108,8 +124,23 @@ public class Models {
         public double corpusShare;
         public FrequencyClass frequency;
         public String tashkeel;
+        public String tashkeelStandard;
+        public String tashkeelEg;
+        public String ipaStandard;
+        public String ipaEg;
         public String meaningAr;
         public String meaningEn;
+        public List<String> dallaa;
+        public List<String> dallaaAr;
+        public List<String> dallaaTashkeel;
+        public List<String> dallaaEn;
+        public List<String> dallaaIpa;
+        public String root;
+        public String originType;
+        public List<String> famousFigures;
+        public List<String> famousFiguresAr;
+        public List<String> famousFiguresEn;
+        public String trendCategory;
     }
 
     public static class NameInfo {
@@ -121,8 +152,23 @@ public class Models {
         public String frequencyClass;
         public double corpusShare;
         public String tashkeel;
+        public String tashkeelStandard;
+        public String tashkeelEg;
+        public String ipaStandard;
+        public String ipaEg;
         public String meaningAr;
         public String meaningEn;
+        public List<String> dallaa;
+        public List<String> dallaaAr;
+        public List<String> dallaaTashkeel;
+        public List<String> dallaaEn;
+        public List<String> dallaaIpa;
+        public String root;
+        public String originType;
+        public List<String> famousFigures;
+        public List<String> famousFiguresAr;
+        public List<String> famousFiguresEn;
+        public String trendCategory;
         public List<String> arVariants;
         public List<String> enVariants;
         public List<Double> slotDistribution;
@@ -137,11 +183,26 @@ public class Models {
             info.frequencyClass = entry.frequency.getValue();
             info.corpusShare = entry.corpusShare;
             info.tashkeel = entry.tashkeel;
+            info.tashkeelStandard = entry.tashkeelStandard;
+            info.tashkeelEg = entry.tashkeelEg;
+            info.ipaStandard = entry.ipaStandard;
+            info.ipaEg = entry.ipaEg;
             info.meaningAr = (entry.meaningAr != null && !entry.meaningAr.isEmpty()) ? entry.meaningAr : null;
             info.meaningEn = (entry.meaningEn != null && !entry.meaningEn.isEmpty()) ? entry.meaningEn : null;
-            info.arVariants = Collections.unmodifiableList(entry.arVariants);
-            info.enVariants = Collections.unmodifiableList(entry.enVariants);
-            info.slotDistribution = Collections.unmodifiableList(entry.slotPcts);
+            info.dallaa = entry.dallaaAr != null ? Collections.unmodifiableList(entry.dallaaAr) : Collections.emptyList();
+            info.dallaaAr = entry.dallaaAr != null ? Collections.unmodifiableList(entry.dallaaAr) : Collections.emptyList();
+            info.dallaaTashkeel = entry.dallaaTashkeel != null ? Collections.unmodifiableList(entry.dallaaTashkeel) : Collections.emptyList();
+            info.dallaaEn = entry.dallaaEn != null ? Collections.unmodifiableList(entry.dallaaEn) : Collections.emptyList();
+            info.dallaaIpa = entry.dallaaIpa != null ? Collections.unmodifiableList(entry.dallaaIpa) : Collections.emptyList();
+            info.root = entry.root != null ? entry.root : "N/A";
+            info.originType = entry.originType != null ? entry.originType : "arabic_classical";
+            info.famousFigures = entry.famousFiguresAr != null ? Collections.unmodifiableList(entry.famousFiguresAr) : Collections.emptyList();
+            info.famousFiguresAr = entry.famousFiguresAr != null ? Collections.unmodifiableList(entry.famousFiguresAr) : Collections.emptyList();
+            info.famousFiguresEn = entry.famousFiguresEn != null ? Collections.unmodifiableList(entry.famousFiguresEn) : Collections.emptyList();
+            info.trendCategory = entry.trendCategory != null ? entry.trendCategory : "classic_timeless";
+            info.arVariants = entry.arVariants != null ? Collections.unmodifiableList(entry.arVariants) : Collections.emptyList();
+            info.enVariants = entry.enVariants != null ? Collections.unmodifiableList(entry.enVariants) : Collections.emptyList();
+            info.slotDistribution = entry.slotPcts != null ? Collections.unmodifiableList(entry.slotPcts) : Collections.emptyList();
             return info;
         }
     }

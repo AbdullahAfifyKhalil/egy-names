@@ -103,6 +103,15 @@ class FrequencyClass(enum.Enum):
 
 
 @dataclass(frozen=True, slots=True)
+class PetName:
+    """Rich representation of an authentic Egyptian pet name / diminutive."""
+    ar: str
+    tashkeel: str
+    en: str
+    ipa: str
+
+
+@dataclass(frozen=True, slots=True)
 class NameEntry:
     """Internal representation of a single name lemma from the data bundle."""
     ar: str
@@ -116,25 +125,73 @@ class NameEntry:
     corpus_share: float          # total_count_percentage
     frequency: FrequencyClass
     tashkeel: str
+    tashkeel_eg: str
+    ipa_standard: str
+    ipa_eg: str
     meaning_ar: str
     meaning_en: str
+    dallaa_ar: List[str]
+    dallaa_tashkeel: List[str]
+    dallaa_en: List[str]
+    dallaa_ipa: List[str]
+    root: str
+    origin_type: str
+    famous_figures_ar: List[str]
+    famous_figures_en: List[str]
+    trend_category: str
+
+    @property
+    def dallaa(self) -> List[str]:
+        return self.dallaa_ar
+
+    @property
+    def famous_figures(self) -> List[str]:
+        return self.famous_figures_ar
 
     @classmethod
     def _from_raw(cls, raw: dict) -> NameEntry:
+        # Dalla fields
+        dla_raw = raw.get("dla", raw.get("dl", ""))
+        dla_list = dla_raw.split("|") if dla_raw else []
+        dlt_raw = raw.get("dlt", "")
+        dlt_list = dlt_raw.split("|") if dlt_raw else []
+        dle_raw = raw.get("dle", "")
+        dle_list = dle_raw.split("|") if dle_raw else []
+        dli_raw = raw.get("dli", "")
+        dli_list = dli_raw.split("|") if dli_raw else []
+
+        # Figures fields
+        ffa_raw = raw.get("ffa", raw.get("ff", ""))
+        ffa_list = ffa_raw.split("|") if ffa_raw else []
+        ffe_raw = raw.get("ffe", "")
+        ffe_list = ffe_raw.split("|") if ffe_raw else []
+
         return cls(
             ar=raw["a"],
             en=raw["e"],
             gender=Gender._from_code(raw["g"]),
             religion=Religion._from_code(raw["r"]),
             role=NameRole._from_code(raw["l"]),
-            ar_variants=raw["av"].split("|") if raw["av"] else [raw["a"]],
-            en_variants=raw["ev"].split("|") if raw["ev"] else [raw["e"]],
-            slot_pcts=raw["p"],
-            corpus_share=raw["tp"],
-            frequency=FrequencyClass._from_code(raw["fc"]),
-            tashkeel=raw["t"],
-            meaning_ar=raw["ma"],
-            meaning_en=raw["me"],
+            ar_variants=raw["av"].split("|") if raw.get("av") else [raw["a"]],
+            en_variants=raw["ev"].split("|") if raw.get("ev") else [raw["e"]],
+            slot_pcts=raw.get("p", [0.0] * 8),
+            corpus_share=raw.get("tp", 0.0),
+            frequency=FrequencyClass._from_code(raw.get("fc", "n")),
+            tashkeel=raw.get("t", raw["a"]),
+            tashkeel_eg=raw.get("te", raw.get("t", raw["a"])),
+            ipa_standard=raw.get("is", ""),
+            ipa_eg=raw.get("ie", ""),
+            meaning_ar=raw.get("ma", ""),
+            meaning_en=raw.get("me", ""),
+            dallaa_ar=dla_list,
+            dallaa_tashkeel=dlt_list,
+            dallaa_en=dle_list,
+            dallaa_ipa=dli_list,
+            root=raw.get("rt", "N/A"),
+            origin_type=raw.get("ot", "arabic_classical"),
+            famous_figures_ar=ffa_list,
+            famous_figures_en=ffe_list,
+            trend_category=raw.get("tc", "classic_timeless"),
         )
 
 
@@ -149,8 +206,23 @@ class NameInfo:
     frequency_class: str
     corpus_share: float
     tashkeel: str
+    tashkeel_standard: str
+    tashkeel_eg: str
+    ipa_standard: str
+    ipa_eg: str
     meaning_ar: Optional[str]
     meaning_en: Optional[str]
+    dallaa: List[str]
+    dallaa_ar: List[str]
+    dallaa_tashkeel: List[str]
+    dallaa_en: List[str]
+    dallaa_ipa: List[str]
+    root: str
+    origin_type: str
+    famous_figures: List[str]
+    famous_figures_ar: List[str]
+    famous_figures_en: List[str]
+    trend_category: str
     ar_variants: List[str]
     en_variants: List[str]
     slot_distribution: List[float]
@@ -166,8 +238,23 @@ class NameInfo:
             frequency_class=e.frequency.value,
             corpus_share=e.corpus_share,
             tashkeel=e.tashkeel,
+            tashkeel_standard=e.tashkeel,
+            tashkeel_eg=e.tashkeel_eg,
+            ipa_standard=e.ipa_standard,
+            ipa_eg=e.ipa_eg,
             meaning_ar=e.meaning_ar or None,
             meaning_en=e.meaning_en or None,
+            dallaa=list(e.dallaa_ar),
+            dallaa_ar=list(e.dallaa_ar),
+            dallaa_tashkeel=list(e.dallaa_tashkeel),
+            dallaa_en=list(e.dallaa_en),
+            dallaa_ipa=list(e.dallaa_ipa),
+            root=e.root,
+            origin_type=e.origin_type,
+            famous_figures=list(e.famous_figures_ar),
+            famous_figures_ar=list(e.famous_figures_ar),
+            famous_figures_en=list(e.famous_figures_en),
+            trend_category=e.trend_category,
             ar_variants=list(e.ar_variants),
             en_variants=list(e.en_variants),
             slot_distribution=list(e.slot_pcts),
@@ -184,8 +271,17 @@ class NameInfo:
             "frequency_class": self.frequency_class,
             "corpus_share": self.corpus_share,
             "tashkeel": self.tashkeel,
+            "tashkeel_standard": self.tashkeel_standard,
+            "tashkeel_eg": self.tashkeel_eg,
+            "ipa_standard": self.ipa_standard,
+            "ipa_eg": self.ipa_eg,
             "meaning_ar": self.meaning_ar,
             "meaning_en": self.meaning_en,
+            "dallaa": self.dallaa,
+            "root": self.root,
+            "origin_type": self.origin_type,
+            "famous_figures": self.famous_figures,
+            "trend_category": self.trend_category,
             "ar_variants": self.ar_variants,
             "en_variants": self.en_variants,
             "slot_distribution": self.slot_distribution,

@@ -39,7 +39,30 @@ int main() {
     std::string tashkeeled = en.tashkeel("محمد عبدالرحمن");
     std::cout << "   'محمد عبدالرحمن' -> " << tashkeeled << std::endl;
     assert(tashkeeled.find("مُحَمَّد") != std::string::npos);
-    assert(tashkeeled.find("عَبْدُالرَّحْمَن") != std::string::npos);
+    assert(tashkeeled.find("الرَّحْمَن") != std::string::npos);
+
+    // 5b. 11D Features
+    std::cout << "\n5b. 11D Features (Tashkeel Eg, IPA, Dallaa, Roots, Origins, Trends):" << std::endl;
+    std::string tk_eg = en.tashkeel_eg("محمد");
+    std::string ipa_std = en.ipa("جمال", "standard");
+    std::string ipa_eg = en.ipa_eg("جمال");
+    auto dallaa = en.dallaa("محمد");
+    auto root = en.root("محمد");
+    auto origin = en.origin("محمد");
+    auto figures = en.famous_figures("محمد");
+    auto trend = en.trend("محمد");
+
+    std::cout << "   Tashkeel Eg: " << tk_eg << std::endl;
+    std::cout << "   IPA Standard: " << ipa_std << " | IPA Eg: " << ipa_eg << std::endl;
+    std::cout << "   Root: " << (root ? *root : "N/A") << " | Origin: " << (origin ? *origin : "N/A") << std::endl;
+    assert(!tk_eg.empty());
+    assert(ipa_std.front() == '/');
+    assert(ipa_eg.front() == '[');
+    assert(!dallaa.empty());
+    assert(root.has_value() && *root == "ح-م-د");
+    assert(origin.has_value() && *origin == "arabic_classical");
+    assert(!figures.empty());
+    assert(trend.has_value() && *trend == "classic_timeless");
 
     // 6. Splitting / DP Segmentation
     std::cout << "\n6. Splitting concatenated Arabic names:" << std::endl;

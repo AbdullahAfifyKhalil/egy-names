@@ -41,12 +41,12 @@ public final class EgyptianNames: @unchecked Sendable {
         return Corrector.correct(fullName, customPath: customDataPath)
     }
 
-    public func tashkeel(_ fullName: String) -> String {
-        let trimmed = fullName.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return fullName }
-
-        let rawTokens = trimmed.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
+    public func tashkeel(_ name: String, dialect: String = "standard") -> String {
+        if name.isEmpty { return name }
+        let rawTokens = name.split(separator: " ").map(String.init)
         var result: [String] = []
+        let isEg = dialect.lowercased().hasPrefix("eg")
+
         var i = 0
         let n = rawTokens.count
 
@@ -63,15 +63,19 @@ public final class EgyptianNames: @unchecked Sendable {
                     compoundEntry = LookupIndices.lookupAr(compoundNoSpace, customPath: customDataPath)
                 }
 
-                if let found = compoundEntry, !found.tashkeel.isEmpty {
-                    result.append(found.tashkeel)
-                    i += 2
-                    continue
+                if let found = compoundEntry {
+                    let val = isEg ? found.tashkeelEg : found.tashkeelStandard
+                    if !val.isEmpty {
+                        result.append(val)
+                        i += 2
+                        continue
+                    }
                 }
             }
 
-            if let entry = LookupIndices.lookupAr(current, customPath: customDataPath), !entry.tashkeel.isEmpty {
-                result.append(entry.tashkeel)
+            if let entry = LookupIndices.lookupAr(current, customPath: customDataPath) {
+                let val = isEg ? entry.tashkeelEg : entry.tashkeelStandard
+                result.append(!val.isEmpty ? val : current)
             } else {
                 result.append(current)
             }
@@ -79,6 +83,103 @@ public final class EgyptianNames: @unchecked Sendable {
         }
 
         return result.joined(separator: " ")
+    }
+
+    public func tashkeelEg(_ name: String) -> String {
+        return tashkeel(name, dialect: "egyptian")
+    }
+
+    public func ipa(_ name: String, dialect: String = "standard") -> String {
+        if name.isEmpty { return "" }
+        let tokens = name.contains(" ") ? name.split(separator: " ").map(String.init) : split(name)
+        let isEg = dialect.lowercased().hasPrefix("eg")
+        var ipaParts: [String] = []
+
+        for tok in tokens {
+            if let entry = LookupIndices.lookup(tok, customPath: customDataPath) {
+                let ipaVal = isEg ? entry.ipaEg : entry.ipaStandard
+                if !ipaVal.isEmpty {
+                    let clean = ipaVal.trimmingCharacters(in: CharacterSet(charactersIn: "/[]"))
+                    ipaParts.append(clean)
+                } else {
+                    ipaParts.append(tok)
+                }
+            } else {
+                ipaParts.append(tok)
+            }
+        }
+
+        let joined = ipaParts.joined(separator: " ")
+        return isEg ? "[\(joined)]" : "/\(joined)/"
+    }
+
+    public func ipaEg(_ name: String) -> String {
+        return ipa(name, dialect: "egyptian")
+    }
+
+    public func dallaa(_ name: String, format: String = "plain") -> [String] {
+        guard let entry = LookupIndices.lookup(name, customPath: customDataPath) else {
+            return []
+        }
+        let fmt = format.lowercased()
+        if fmt == "tashkeel" || fmt == "tashkeel_eg" || fmt == "tk" {
+            return !entry.dallaaTashkeel.isEmpty ? entry.dallaaTashkeel : entry.dallaaAr
+        } else if fmt == "en" || fmt == "english" {
+            return entry.dallaaEn
+        } else if fmt == "ipa" || fmt == "phonetic" {
+            return entry.dallaaIpa
+        }
+        return entry.dallaaAr
+    }
+
+    public func dallaaInfo(_ name: String) -> [PetName] {
+        guard let entry = LookupIndices.lookup(name, customPath: customDataPath), !entry.dallaaAr.isEmpty else {
+            return []
+        }
+        var result: [PetName] = []
+        for i in 0..<entry.dallaaAr.count {
+            let ar = entry.dallaaAr[i]
+            let tk = i < entry.dallaaTashkeel.count ? entry.dallaaTashkeel[i] : ar
+            let en = i < entry.dallaaEn.count ? entry.dallaaEn[i] : ""
+            let ipa = i < entry.dallaaIpa.count ? entry.dallaaIpa[i] : ""
+            result.append(PetName(ar: ar, tashkeel: tk, en: en, ipa: ipa))
+        }
+        return result
+    }
+
+    public func petNames(_ name: String, format: String = "plain") -> [String] {
+        return dallaa(name, format: format)
+    }
+
+    public func root(_ name: String) -> String? {
+        guard let entry = LookupIndices.lookup(name, customPath: customDataPath), entry.root != "N/A" else {
+            return nil
+        }
+        return entry.root
+    }
+
+    public func origin(_ name: String) -> String? {
+        guard let entry = LookupIndices.lookup(name, customPath: customDataPath) else {
+            return nil
+        }
+        return entry.originType
+    }
+
+    public func famousFigures(_ name: String, lang: String = "ar") -> [String] {
+        guard let entry = LookupIndices.lookup(name, customPath: customDataPath) else {
+            return []
+        }
+        if lang.lowercased().hasPrefix("en") {
+            return !entry.famousFiguresEn.isEmpty ? entry.famousFiguresEn : entry.famousFiguresAr
+        }
+        return entry.famousFiguresAr
+    }
+
+    public func trend(_ name: String) -> String? {
+        guard let entry = LookupIndices.lookup(name, customPath: customDataPath) else {
+            return nil
+        }
+        return entry.trendCategory
     }
 
     public func split(_ fullName: String) -> [String] {

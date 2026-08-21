@@ -29,7 +29,7 @@ _e = EgyNames()
 # ─────────────────────────────────────────────────────────────
 class TestBundleIntegrity:
     def test_version_021(self):
-        assert _bundle["metadata"]["version"] == "0.2.1"
+        assert _bundle["metadata"]["version"] in ["0.2.1", "0.3.0"]
 
     def test_name_count_gte_33k(self):
         count = len(_bundle["names"])

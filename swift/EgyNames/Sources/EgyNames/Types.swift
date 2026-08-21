@@ -50,7 +50,21 @@ public enum FrequencyClass: String, Codable, Sendable {
     }
 }
 
-public struct NameEntry: Codable, Sendable {
+public struct PetName: Codable, Sendable {
+    public let ar: String
+    public let tashkeel: String
+    public let en: String
+    public let ipa: String
+
+    public init(ar: String, tashkeel: String, en: String, ipa: String) {
+        self.ar = ar
+        self.tashkeel = tashkeel
+        self.en = en
+        self.ipa = ipa
+    }
+}
+
+public struct NameEntry: Sendable {
     public let ar: String
     public let en: String
     public let gender: Gender
@@ -62,8 +76,23 @@ public struct NameEntry: Codable, Sendable {
     public let corpusShare: Double
     public let frequency: FrequencyClass
     public let tashkeel: String
+    public let tashkeelStandard: String
+    public let tashkeelEg: String
+    public let ipaStandard: String
+    public let ipaEg: String
     public let meaningAr: String
     public let meaningEn: String
+    public let dallaa: [String]
+    public let dallaaAr: [String]
+    public let dallaaTashkeel: [String]
+    public let dallaaEn: [String]
+    public let dallaaIpa: [String]
+    public let root: String
+    public let originType: String
+    public let famousFigures: [String]
+    public let famousFiguresAr: [String]
+    public let famousFiguresEn: [String]
+    public let trendCategory: String
 }
 
 public struct NameInfo: Codable, Sendable {
@@ -75,8 +104,23 @@ public struct NameInfo: Codable, Sendable {
     public let frequencyClass: String
     public let corpusShare: Double
     public let tashkeel: String
+    public let tashkeelStandard: String
+    public let tashkeelEg: String
+    public let ipaStandard: String
+    public let ipaEg: String
     public let meaningAr: String
     public let meaningEn: String
+    public let dallaa: [String]
+    public let dallaaAr: [String]
+    public let dallaaTashkeel: [String]
+    public let dallaaEn: [String]
+    public let dallaaIpa: [String]
+    public let root: String
+    public let originType: String
+    public let famousFigures: [String]
+    public let famousFiguresAr: [String]
+    public let famousFiguresEn: [String]
+    public let trendCategory: String
     public let arVariants: [String]
     public let enVariants: [String]
     public let slotDistribution: [Double]
@@ -122,19 +166,34 @@ public struct UniquenessScore: Codable, Sendable {
 extension NameEntry {
     public func toNameInfo() -> NameInfo {
         return NameInfo(
-            ar: self.ar,
-            en: self.en,
-            gender: self.gender.rawValue,
-            religion: self.religion.rawValue,
-            role: self.role.rawValue,
-            frequencyClass: self.frequency.rawValue,
-            corpusShare: self.corpusShare,
-            tashkeel: self.tashkeel,
-            meaningAr: self.meaningAr,
-            meaningEn: self.meaningEn,
-            arVariants: self.arVariants,
-            enVariants: self.enVariants,
-            slotDistribution: self.slotPcts
+            ar: ar,
+            en: en,
+            gender: gender.rawValue,
+            religion: religion.rawValue,
+            role: role.rawValue,
+            frequencyClass: frequency.rawValue,
+            corpusShare: corpusShare,
+            tashkeel: tashkeel,
+            tashkeelStandard: tashkeelStandard,
+            tashkeelEg: tashkeelEg,
+            ipaStandard: ipaStandard,
+            ipaEg: ipaEg,
+            meaningAr: meaningAr,
+            meaningEn: meaningEn,
+            dallaa: dallaaAr,
+            dallaaAr: dallaaAr,
+            dallaaTashkeel: dallaaTashkeel,
+            dallaaEn: dallaaEn,
+            dallaaIpa: dallaaIpa,
+            root: root,
+            originType: originType,
+            famousFigures: famousFiguresAr,
+            famousFiguresAr: famousFiguresAr,
+            famousFiguresEn: famousFiguresEn,
+            trendCategory: trendCategory,
+            arVariants: arVariants,
+            enVariants: enVariants,
+            slotDistribution: slotPcts
         )
     }
 }

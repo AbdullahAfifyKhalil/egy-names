@@ -31,7 +31,25 @@ final class EgyNamesTests: XCTestCase {
         // 5. Tashkeel
         let tashkeeled = en.tashkeel("محمد عبدالرحمن")
         XCTAssertTrue(tashkeeled.contains("مُحَمَّد"))
-        XCTAssertTrue(tashkeeled.contains("عَبْدُالرَّحْمَن"))
+        XCTAssertTrue(tashkeeled.contains("الرَّحْمَن"))
+
+        // 5b. 11D Features
+        let tkEg = en.tashkeelEg("محمد")
+        XCTAssertFalse(tkEg.isEmpty)
+        let ipaStd = en.ipa("جمال", dialect: "standard")
+        XCTAssertTrue(ipaStd.hasPrefix("/"))
+        let ipaEg = en.ipaEg("جمال")
+        XCTAssertTrue(ipaEg.hasPrefix("["))
+        let dl = en.dallaa("محمد")
+        XCTAssertTrue(dl.contains("ميدو"))
+        let rt = en.root("محمد")
+        XCTAssertEqual(rt, "ح-م-د")
+        let ot = en.origin("محمد")
+        XCTAssertEqual(ot, "arabic_classical")
+        let ff = en.famousFigures("محمد")
+        XCTAssertFalse(ff.isEmpty)
+        let tr = en.trend("محمد")
+        XCTAssertEqual(tr, "classic_timeless")
 
         // 6. Splitting / DP Segmentation
         let parts = en.split("محمدأحمدعليحسنالشاذلي")

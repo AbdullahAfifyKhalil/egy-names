@@ -1,3 +1,20 @@
+class PetName {
+  final String ar;
+  final String tashkeel;
+  final String en;
+  final String ipa;
+
+  const PetName({
+    required this.ar,
+    required this.tashkeel,
+    required this.en,
+    required this.ipa,
+  });
+
+  @override
+  String toString() => '$ar ($tashkeel) - $en $ipa';
+}
+
 enum Gender {
   male('male'),
   female('female'),
@@ -148,8 +165,23 @@ class NameEntry {
   final double corpusShare;
   final FrequencyClass frequency;
   final String tashkeel;
+  final String tashkeelStandard;
+  final String tashkeelEg;
+  final String ipaStandard;
+  final String ipaEg;
   final String meaningAr;
   final String meaningEn;
+  final List<String> dallaa;
+  final List<String> dallaaAr;
+  final List<String> dallaaTashkeel;
+  final List<String> dallaaEn;
+  final List<String> dallaaIpa;
+  final String root;
+  final String originType;
+  final List<String> famousFigures;
+  final List<String> famousFiguresAr;
+  final List<String> famousFiguresEn;
+  final String trendCategory;
 
   NameEntry({
     required this.ar,
@@ -163,8 +195,23 @@ class NameEntry {
     required this.corpusShare,
     required this.frequency,
     required this.tashkeel,
+    required this.tashkeelStandard,
+    required this.tashkeelEg,
+    required this.ipaStandard,
+    required this.ipaEg,
     required this.meaningAr,
     required this.meaningEn,
+    required this.dallaa,
+    required this.dallaaAr,
+    required this.dallaaTashkeel,
+    required this.dallaaEn,
+    required this.dallaaIpa,
+    required this.root,
+    required this.originType,
+    required this.famousFigures,
+    required this.famousFiguresAr,
+    required this.famousFiguresEn,
+    required this.trendCategory,
   });
 
   factory NameEntry.fromJson(Map<String, dynamic> json) {
@@ -174,6 +221,23 @@ class NameEntry {
     final ev = json['ev'] as String? ?? '';
     final pRaw = json['p'] as List<dynamic>? ?? [];
     final pList = pRaw.map((e) => (e as num).toDouble()).toList();
+    
+    final dlaRaw = (json['dla'] as String?) ?? (json['dl'] as String?) ?? '';
+    final dlaAr = dlaRaw.isNotEmpty ? dlaRaw.split('|') : <String>[];
+    final dltRaw = json['dlt'] as String? ?? '';
+    final dlaTk = dltRaw.isNotEmpty ? dltRaw.split('|') : <String>[];
+    final dleRaw = json['dle'] as String? ?? '';
+    final dlaEn = dleRaw.isNotEmpty ? dleRaw.split('|') : <String>[];
+    final dliRaw = json['dli'] as String? ?? '';
+    final dlaIpa = dliRaw.isNotEmpty ? dliRaw.split('|') : <String>[];
+
+    final ffaRaw = (json['ffa'] as String?) ?? (json['ff'] as String?) ?? '';
+    final ffaAr = ffaRaw.isNotEmpty ? ffaRaw.split('|') : <String>[];
+    final ffeRaw = json['ffe'] as String? ?? '';
+    final ffeEn = ffeRaw.isNotEmpty ? ffeRaw.split('|') : <String>[];
+
+    final tStd = json['t'] as String? ?? ar;
+    final tEg = json['te'] as String? ?? tStd;
 
     return NameEntry(
       ar: ar,
@@ -186,9 +250,24 @@ class NameEntry {
       slotPcts: pList,
       corpusShare: (json['tp'] as num? ?? 0).toDouble(),
       frequency: FrequencyClass.fromCode(json['fc'] as String? ?? 'r'),
-      tashkeel: json['t'] as String? ?? '',
+      tashkeel: tStd,
+      tashkeelStandard: tStd,
+      tashkeelEg: tEg,
+      ipaStandard: json['is'] as String? ?? '',
+      ipaEg: json['ie'] as String? ?? '',
       meaningAr: json['ma'] as String? ?? '',
       meaningEn: json['me'] as String? ?? '',
+      dallaa: dlaAr,
+      dallaaAr: dlaAr,
+      dallaaTashkeel: dlaTk,
+      dallaaEn: dlaEn,
+      dallaaIpa: dlaIpa,
+      root: json['rt'] as String? ?? 'N/A',
+      originType: json['ot'] as String? ?? 'arabic_classical',
+      famousFigures: ffaAr,
+      famousFiguresAr: ffaAr,
+      famousFiguresEn: ffeEn,
+      trendCategory: json['tc'] as String? ?? 'classic_timeless',
     );
   }
 }
@@ -202,13 +281,28 @@ class NameInfo {
   final String frequencyClass;
   final double corpusShare;
   final String tashkeel;
+  final String tashkeelStandard;
+  final String tashkeelEg;
+  final String ipaStandard;
+  final String ipaEg;
   final String? meaningAr;
   final String? meaningEn;
+  final List<String> dallaa;
+  final List<String> dallaaAr;
+  final List<String> dallaaTashkeel;
+  final List<String> dallaaEn;
+  final List<String> dallaaIpa;
+  final String root;
+  final String originType;
+  final List<String> famousFigures;
+  final List<String> famousFiguresAr;
+  final List<String> famousFiguresEn;
+  final String trendCategory;
   final List<String> arVariants;
   final List<String> enVariants;
   final List<double> slotDistribution;
 
-  NameInfo({
+  const NameInfo({
     required this.ar,
     required this.en,
     required this.gender,
@@ -217,8 +311,23 @@ class NameInfo {
     required this.frequencyClass,
     required this.corpusShare,
     required this.tashkeel,
+    required this.tashkeelStandard,
+    required this.tashkeelEg,
+    required this.ipaStandard,
+    required this.ipaEg,
     this.meaningAr,
     this.meaningEn,
+    required this.dallaa,
+    required this.dallaaAr,
+    required this.dallaaTashkeel,
+    required this.dallaaEn,
+    required this.dallaaIpa,
+    required this.root,
+    required this.originType,
+    required this.famousFigures,
+    required this.famousFiguresAr,
+    required this.famousFiguresEn,
+    required this.trendCategory,
     required this.arVariants,
     required this.enVariants,
     required this.slotDistribution,
@@ -234,8 +343,23 @@ class NameInfo {
       frequencyClass: entry.frequency.value,
       corpusShare: entry.corpusShare,
       tashkeel: entry.tashkeel,
+      tashkeelStandard: entry.tashkeelStandard,
+      tashkeelEg: entry.tashkeelEg,
+      ipaStandard: entry.ipaStandard,
+      ipaEg: entry.ipaEg,
       meaningAr: entry.meaningAr.isNotEmpty ? entry.meaningAr : null,
       meaningEn: entry.meaningEn.isNotEmpty ? entry.meaningEn : null,
+      dallaa: List.unmodifiable(entry.dallaaAr),
+      dallaaAr: List.unmodifiable(entry.dallaaAr),
+      dallaaTashkeel: List.unmodifiable(entry.dallaaTashkeel),
+      dallaaEn: List.unmodifiable(entry.dallaaEn),
+      dallaaIpa: List.unmodifiable(entry.dallaaIpa),
+      root: entry.root,
+      originType: entry.originType,
+      famousFigures: List.unmodifiable(entry.famousFiguresAr),
+      famousFiguresAr: List.unmodifiable(entry.famousFiguresAr),
+      famousFiguresEn: List.unmodifiable(entry.famousFiguresEn),
+      trendCategory: entry.trendCategory,
       arVariants: List.unmodifiable(entry.arVariants),
       enVariants: List.unmodifiable(entry.enVariants),
       slotDistribution: List.unmodifiable(entry.slotPcts),
@@ -251,8 +375,17 @@ class NameInfo {
         'frequency_class': frequencyClass,
         'corpus_share': corpusShare,
         'tashkeel': tashkeel,
+        'tashkeel_standard': tashkeelStandard,
+        'tashkeel_eg': tashkeelEg,
+        'ipa_standard': ipaStandard,
+        'ipa_eg': ipaEg,
         'meaning_ar': meaningAr,
         'meaning_en': meaningEn,
+        'dallaa': dallaa,
+        'root': root,
+        'origin_type': originType,
+        'famous_figures': famousFigures,
+        'trend_category': trendCategory,
         'ar_variants': arVariants,
         'en_variants': enVariants,
         'slot_distribution': slotDistribution,

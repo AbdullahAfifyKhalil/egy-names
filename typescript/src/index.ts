@@ -15,6 +15,7 @@ import {
   NameRole,
   FrequencyClass,
   NameInfo,
+  PetName,
   GeneratedName,
   ChainPart,
   GenderDetection,
@@ -69,10 +70,11 @@ export class EgyptianNames {
     return split(fullName);
   }
 
-  public tashkeel(name: string): string {
+  public tashkeel(name: string, dialect: "standard" | "egyptian" = "standard"): string {
     if (!name || !name.trim()) return name;
     const rawTokens = name.trim().split(/\s+/);
     const result: string[] = [];
+    const isEg = dialect === "egyptian";
 
     for (let i = 0; i < rawTokens.length; i++) {
       const current = rawTokens[i];
@@ -82,18 +84,115 @@ export class EgyptianNames {
         const compound = `${current} ${next}`;
         const compoundNoSpace = `${current}${next}`;
         const compoundEntry = lookupAr(compound) || lookupAr(compoundNoSpace);
-        if (compoundEntry && compoundEntry.tashkeel) {
-          result.push(compoundEntry.tashkeel);
-          i++;
-          continue;
+        if (compoundEntry) {
+          const val = isEg ? compoundEntry.tashkeelEg : compoundEntry.tashkeelStandard;
+          if (val) {
+            result.push(val);
+            i++;
+            continue;
+          }
         }
       }
 
       const entry = lookupAr(current);
-      result.push(entry && entry.tashkeel ? entry.tashkeel : current);
+      if (entry) {
+        const val = isEg ? entry.tashkeelEg : entry.tashkeelStandard;
+        result.push(val || current);
+      } else {
+        result.push(current);
+      }
     }
 
     return result.join(" ");
+  }
+
+  public tashkeelEg(name: string): string {
+    return this.tashkeel(name, "egyptian");
+  }
+
+  public ipa(name: string, dialect: "standard" | "egyptian" = "standard"): string {
+    if (!name || !name.trim()) return "";
+    const tokens = name.includes(" ") ? name.trim().split(/\s+/) : this.split(name);
+    const isEg = dialect === "egyptian";
+    const ipaParts: string[] = [];
+
+    for (const tok of tokens) {
+      const entry = lookup(tok);
+      if (entry) {
+        const ipaVal = isEg ? entry.ipaEg : entry.ipaStandard;
+        if (ipaVal) {
+          ipaParts.push(ipaVal.replace(/^[/[\]]+|[/[\]]+$/g, ""));
+        } else {
+          ipaParts.push(tok);
+        }
+      } else {
+        ipaParts.push(tok);
+      }
+    }
+
+    const joined = ipaParts.join(" ");
+    return isEg ? `[${joined}]` : `/${joined}/`;
+  }
+
+  public ipaEg(name: string): string {
+    return this.ipa(name, "egyptian");
+  }
+
+  public dallaa(name: string, format: "plain" | "tashkeel" | "en" | "ipa" = "plain"): string[] {
+    const entry = lookup(name);
+    if (!entry) return [];
+    const fmt = format.toLowerCase();
+    if (fmt === "tashkeel" || fmt === "tashkeel_eg" || fmt === "tk") {
+      return entry.dallaaTashkeel.length > 0 ? [...entry.dallaaTashkeel] : [...entry.dallaaAr];
+    } else if (fmt === "en" || fmt === "english") {
+      return [...entry.dallaaEn];
+    } else if (fmt === "ipa" || fmt === "phonetic") {
+      return [...entry.dallaaIpa];
+    }
+    return [...entry.dallaaAr];
+  }
+
+  public dallaaInfo(name: string): PetName[] {
+    const entry = lookup(name);
+    if (!entry || entry.dallaaAr.length === 0) return [];
+    const result: PetName[] = [];
+    for (let i = 0; i < entry.dallaaAr.length; i++) {
+      result.push({
+        ar: entry.dallaaAr[i],
+        tashkeel: entry.dallaaTashkeel[i] || entry.dallaaAr[i],
+        en: entry.dallaaEn[i] || "",
+        ipa: entry.dallaaIpa[i] || "",
+      });
+    }
+    return result;
+  }
+
+  public petNames(name: string, format: "plain" | "tashkeel" | "en" | "ipa" = "plain"): string[] {
+    return this.dallaa(name, format);
+  }
+
+  public root(name: string): string | null {
+    const entry = lookup(name);
+    return entry && entry.root !== "N/A" ? entry.root : null;
+  }
+
+  public origin(name: string): string | null {
+    const entry = lookup(name);
+    return entry ? entry.originType : null;
+  }
+
+  public famousFigures(name: string, lang: "ar" | "en" = "ar"): string[] {
+    const entry = lookup(name);
+    if (!entry) return [];
+    if (lang.toLowerCase().startsWith("en")) {
+      return entry.famousFiguresEn.length > 0 ? [...entry.famousFiguresEn] : [...entry.famousFiguresAr];
+    }
+    return [...entry.famousFiguresAr];
+  }
+
+  public trend(name: string): string | null {
+    const entry = lookup(name);
+    return entry ? entry.trendCategory : null;
   }
 
   public correct(name: string): string {
@@ -535,6 +634,7 @@ export {
   NameRole,
   FrequencyClass,
   NameInfo,
+  PetName,
   GeneratedName,
   ChainPart,
   GenderDetection,

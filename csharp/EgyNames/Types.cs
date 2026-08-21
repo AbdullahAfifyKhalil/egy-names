@@ -31,6 +31,26 @@ namespace EgyptianNames
         Rare
     }
 
+    public class PetName
+    {
+        public string Ar { get; set; } = string.Empty;
+        public string Tashkeel { get; set; } = string.Empty;
+        public string En { get; set; } = string.Empty;
+        public string Ipa { get; set; } = string.Empty;
+
+        public PetName() { }
+
+        public PetName(string ar, string tashkeel, string en, string ipa)
+        {
+            Ar = ar;
+            Tashkeel = tashkeel;
+            En = en;
+            Ipa = ipa;
+        }
+
+        public override string ToString() => $"{Ar} ({Tashkeel}) - {En} {Ipa}";
+    }
+
     public class NameEntry
     {
         public string Ar { get; set; } = string.Empty;
@@ -44,8 +64,23 @@ namespace EgyptianNames
         public double CorpusShare { get; set; }
         public FrequencyClass Frequency { get; set; }
         public string Tashkeel { get; set; } = string.Empty;
+        public string TashkeelStandard { get; set; } = string.Empty;
+        public string TashkeelEg { get; set; } = string.Empty;
+        public string IpaStandard { get; set; } = string.Empty;
+        public string IpaEg { get; set; } = string.Empty;
         public string MeaningAr { get; set; } = string.Empty;
         public string MeaningEn { get; set; } = string.Empty;
+        public List<string> Dallaa { get; set; } = new List<string>();
+        public List<string> DallaaAr { get; set; } = new List<string>();
+        public List<string> DallaaTashkeel { get; set; } = new List<string>();
+        public List<string> DallaaEn { get; set; } = new List<string>();
+        public List<string> DallaaIpa { get; set; } = new List<string>();
+        public string Root { get; set; } = "N/A";
+        public string OriginType { get; set; } = "arabic_classical";
+        public List<string> FamousFigures { get; set; } = new List<string>();
+        public List<string> FamousFiguresAr { get; set; } = new List<string>();
+        public List<string> FamousFiguresEn { get; set; } = new List<string>();
+        public string TrendCategory { get; set; } = "classic_timeless";
     }
 
     public class NameInfo
@@ -58,8 +93,23 @@ namespace EgyptianNames
         public string FrequencyClass { get; set; } = string.Empty;
         public double CorpusShare { get; set; }
         public string Tashkeel { get; set; } = string.Empty;
+        public string TashkeelStandard { get; set; } = string.Empty;
+        public string TashkeelEg { get; set; } = string.Empty;
+        public string IpaStandard { get; set; } = string.Empty;
+        public string IpaEg { get; set; } = string.Empty;
         public string? MeaningAr { get; set; }
         public string? MeaningEn { get; set; }
+        public List<string> Dallaa { get; set; } = new List<string>();
+        public List<string> DallaaAr { get; set; } = new List<string>();
+        public List<string> DallaaTashkeel { get; set; } = new List<string>();
+        public List<string> DallaaEn { get; set; } = new List<string>();
+        public List<string> DallaaIpa { get; set; } = new List<string>();
+        public string Root { get; set; } = "N/A";
+        public string OriginType { get; set; } = "arabic_classical";
+        public List<string> FamousFigures { get; set; } = new List<string>();
+        public List<string> FamousFiguresAr { get; set; } = new List<string>();
+        public List<string> FamousFiguresEn { get; set; } = new List<string>();
+        public string TrendCategory { get; set; } = "classic_timeless";
         public IReadOnlyList<string> ArVariants { get; set; } = Array.Empty<string>();
         public IReadOnlyList<string> EnVariants { get; set; } = Array.Empty<string>();
         public IReadOnlyList<double> SlotDistribution { get; set; } = Array.Empty<double>();
@@ -76,8 +126,23 @@ namespace EgyptianNames
                 FrequencyClass = entry.Frequency.ToString().ToLowerInvariant(),
                 CorpusShare = entry.CorpusShare,
                 Tashkeel = entry.Tashkeel,
+                TashkeelStandard = entry.TashkeelStandard,
+                TashkeelEg = entry.TashkeelEg,
+                IpaStandard = entry.IpaStandard,
+                IpaEg = entry.IpaEg,
                 MeaningAr = string.IsNullOrEmpty(entry.MeaningAr) ? null : entry.MeaningAr,
                 MeaningEn = string.IsNullOrEmpty(entry.MeaningEn) ? null : entry.MeaningEn,
+                Dallaa = new List<string>(entry.DallaaAr),
+                DallaaAr = new List<string>(entry.DallaaAr),
+                DallaaTashkeel = new List<string>(entry.DallaaTashkeel),
+                DallaaEn = new List<string>(entry.DallaaEn),
+                DallaaIpa = new List<string>(entry.DallaaIpa),
+                Root = entry.Root,
+                OriginType = entry.OriginType,
+                FamousFigures = new List<string>(entry.FamousFiguresAr),
+                FamousFiguresAr = new List<string>(entry.FamousFiguresAr),
+                FamousFiguresEn = new List<string>(entry.FamousFiguresEn),
+                TrendCategory = entry.TrendCategory,
                 ArVariants = entry.ArVariants.ToList(),
                 EnVariants = entry.EnVariants.ToList(),
                 SlotDistribution = entry.SlotPcts.ToList()

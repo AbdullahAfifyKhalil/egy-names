@@ -78,10 +78,37 @@ public class DataLoader {
                         entry.religion = Models.Religion.fromCode(elem.has("r") ? elem.get("r").asText() : "n");
                         entry.role = Models.NameRole.fromCode(elem.has("l") ? elem.get("l").asText() : "g");
                         entry.frequency = Models.FrequencyClass.fromCode(elem.has("fc") ? elem.get("fc").asText() : "r");
-                        entry.tashkeel = elem.has("t") ? elem.get("t").asText() : "";
+                        entry.tashkeel = elem.has("t") ? elem.get("t").asText() : entry.ar;
+                        entry.tashkeelStandard = elem.has("t") ? elem.get("t").asText() : entry.ar;
+                        entry.tashkeelEg = elem.has("te") ? elem.get("te").asText() : entry.tashkeelStandard;
+                        entry.ipaStandard = elem.has("is") ? elem.get("is").asText() : "";
+                        entry.ipaEg = elem.has("ie") ? elem.get("ie").asText() : "";
                         entry.meaningAr = elem.has("ma") ? elem.get("ma").asText() : "";
                         entry.meaningEn = elem.has("me") ? elem.get("me").asText() : "";
+                        entry.root = elem.has("rt") ? elem.get("rt").asText() : "N/A";
+                        entry.originType = elem.has("ot") ? elem.get("ot").asText() : "arabic_classical";
+                        entry.trendCategory = elem.has("tc") ? elem.get("tc").asText() : "classic_timeless";
                         entry.corpusShare = elem.has("tp") ? elem.get("tp").asDouble() : 0.0;
+
+                        String dla = elem.has("dla") ? elem.get("dla").asText() : (elem.has("dl") ? elem.get("dl").asText() : "");
+                        entry.dallaaAr = !dla.isEmpty() ? Arrays.asList(dla.split("\\|")) : Collections.emptyList();
+                        entry.dallaa = entry.dallaaAr;
+
+                        String dlt = elem.has("dlt") ? elem.get("dlt").asText() : "";
+                        entry.dallaaTashkeel = !dlt.isEmpty() ? Arrays.asList(dlt.split("\\|")) : Collections.emptyList();
+
+                        String dle = elem.has("dle") ? elem.get("dle").asText() : "";
+                        entry.dallaaEn = !dle.isEmpty() ? Arrays.asList(dle.split("\\|")) : Collections.emptyList();
+
+                        String dli = elem.has("dli") ? elem.get("dli").asText() : "";
+                        entry.dallaaIpa = !dli.isEmpty() ? Arrays.asList(dli.split("\\|")) : Collections.emptyList();
+
+                        String ffa = elem.has("ffa") ? elem.get("ffa").asText() : (elem.has("ff") ? elem.get("ff").asText() : "");
+                        entry.famousFiguresAr = !ffa.isEmpty() ? Arrays.asList(ffa.split("\\|")) : Collections.emptyList();
+                        entry.famousFigures = entry.famousFiguresAr;
+
+                        String ffe = elem.has("ffe") ? elem.get("ffe").asText() : "";
+                        entry.famousFiguresEn = !ffe.isEmpty() ? Arrays.asList(ffe.split("\\|")) : Collections.emptyList();
 
                         String av = elem.has("av") ? elem.get("av").asText() : "";
                         String ev = elem.has("ev") ? elem.get("ev").asText() : "";

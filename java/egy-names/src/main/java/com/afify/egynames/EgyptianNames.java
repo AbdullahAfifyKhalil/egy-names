@@ -60,10 +60,11 @@ public class EgyptianNames {
         return Splitter.split(fullName, customDataPath);
     }
 
-    public String tashkeel(String name) {
+    public String tashkeel(String name, String dialect) {
         if (name == null || name.trim().isEmpty()) return name;
         String[] rawTokens = name.trim().split("\\s+");
         List<String> result = new ArrayList<>();
+        boolean isEg = dialect != null && dialect.toLowerCase().startsWith("eg");
 
         for (int i = 0; i < rawTokens.length; i++) {
             String current = rawTokens[i];
@@ -76,18 +77,136 @@ public class EgyptianNames {
                 if (compoundEntry == null) {
                     compoundEntry = LookupIndices.lookupAr(compoundNoSpace, customDataPath);
                 }
-                if (compoundEntry != null && compoundEntry.tashkeel != null && !compoundEntry.tashkeel.isEmpty()) {
-                    result.add(compoundEntry.tashkeel);
-                    i++;
-                    continue;
+                if (compoundEntry != null) {
+                    String val = isEg ? compoundEntry.tashkeelEg : compoundEntry.tashkeelStandard;
+                    if (val != null && !val.isEmpty()) {
+                        result.add(val);
+                        i++;
+                        continue;
+                    }
                 }
             }
 
             Models.NameEntry entry = LookupIndices.lookupAr(current, customDataPath);
-            result.add(entry != null && entry.tashkeel != null && !entry.tashkeel.isEmpty() ? entry.tashkeel : current);
+            if (entry != null) {
+                String val = isEg ? entry.tashkeelEg : entry.tashkeelStandard;
+                result.add(val != null && !val.isEmpty() ? val : current);
+            } else {
+                result.add(current);
+            }
         }
 
         return String.join(" ", result);
+    }
+
+    public String tashkeel(String name) {
+        return tashkeel(name, "standard");
+    }
+
+    public String tashkeelEg(String name) {
+        return tashkeel(name, "egyptian");
+    }
+
+    public String ipa(String name, String dialect) {
+        if (name == null || name.trim().isEmpty()) return "";
+        List<String> tokens = name.contains(" ") ? Arrays.asList(name.trim().split("\\s+")) : split(name);
+        boolean isEg = dialect != null && dialect.toLowerCase().startsWith("eg");
+        List<String> ipaParts = new ArrayList<>();
+
+        for (String tok : tokens) {
+            Models.NameEntry entry = LookupIndices.lookup(tok, customDataPath);
+            if (entry != null) {
+                String ipaVal = isEg ? entry.ipaEg : entry.ipaStandard;
+                if (ipaVal != null && !ipaVal.isEmpty()) {
+                    ipaParts.add(ipaVal.replaceAll("^[/|\\[]+|[/|\\]]+$", ""));
+                } else {
+                    ipaParts.add(tok);
+                }
+            } else {
+                ipaParts.add(tok);
+            }
+        }
+
+        String joined = String.join(" ", ipaParts);
+        return isEg ? "[" + joined + "]" : "/" + joined + "/";
+    }
+
+    public String ipa(String name) {
+        return ipa(name, "standard");
+    }
+
+    public String ipaEg(String name) {
+        return ipa(name, "egyptian");
+    }
+
+    public List<String> dallaa(String name, String format) {
+        Models.NameEntry entry = LookupIndices.lookup(name, customDataPath);
+        if (entry == null) return Collections.emptyList();
+        String fmt = format != null ? format.toLowerCase() : "plain";
+        if ("tashkeel".equals(fmt) || "tashkeel_eg".equals(fmt) || "tk".equals(fmt)) {
+            return entry.dallaaTashkeel != null && !entry.dallaaTashkeel.isEmpty() ? entry.dallaaTashkeel : (entry.dallaaAr != null ? entry.dallaaAr : Collections.emptyList());
+        } else if ("en".equals(fmt) || "english".equals(fmt)) {
+            return entry.dallaaEn != null ? entry.dallaaEn : Collections.emptyList();
+        } else if ("ipa".equals(fmt) || "phonetic".equals(fmt)) {
+            return entry.dallaaIpa != null ? entry.dallaaIpa : Collections.emptyList();
+        }
+        return entry.dallaaAr != null ? entry.dallaaAr : Collections.emptyList();
+    }
+
+    public List<String> dallaa(String name) {
+        return dallaa(name, "plain");
+    }
+
+    public List<Models.PetName> dallaaInfo(String name) {
+        Models.NameEntry entry = LookupIndices.lookup(name, customDataPath);
+        if (entry == null || entry.dallaaAr == null || entry.dallaaAr.isEmpty()) {
+            return Collections.emptyList();
+        }
+        List<Models.PetName> result = new ArrayList<>();
+        for (int i = 0; i < entry.dallaaAr.size(); i++) {
+            String ar = entry.dallaaAr.get(i);
+            String tk = (entry.dallaaTashkeel != null && i < entry.dallaaTashkeel.size()) ? entry.dallaaTashkeel.get(i) : ar;
+            String en = (entry.dallaaEn != null && i < entry.dallaaEn.size()) ? entry.dallaaEn.get(i) : "";
+            String ipa = (entry.dallaaIpa != null && i < entry.dallaaIpa.size()) ? entry.dallaaIpa.get(i) : "";
+            result.add(new Models.PetName(ar, tk, en, ipa));
+        }
+        return result;
+    }
+
+    public List<String> petNames(String name, String format) {
+        return dallaa(name, format);
+    }
+
+    public List<String> petNames(String name) {
+        return dallaa(name, "plain");
+    }
+
+    public String root(String name) {
+        Models.NameEntry entry = LookupIndices.lookup(name, customDataPath);
+        return (entry != null && entry.root != null && !"N/A".equalsIgnoreCase(entry.root)) ? entry.root : null;
+    }
+
+    public String origin(String name) {
+        Models.NameEntry entry = LookupIndices.lookup(name, customDataPath);
+        return entry != null ? entry.originType : null;
+    }
+
+    public List<String> famousFigures(String name, String lang) {
+        Models.NameEntry entry = LookupIndices.lookup(name, customDataPath);
+        if (entry == null) return Collections.emptyList();
+        if (lang != null && lang.toLowerCase().startsWith("en")) {
+            return entry.famousFiguresEn != null && !entry.famousFiguresEn.isEmpty() ? entry.famousFiguresEn : (entry.famousFiguresAr != null ? entry.famousFiguresAr : Collections.emptyList());
+        }
+        return entry.famousFiguresAr != null ? entry.famousFiguresAr : Collections.emptyList();
+    }
+
+    public List<String> famousFigures(String name) {
+        return famousFigures(name, "ar");
+    }
+
+    public String trend(String name) {
+        Models.NameEntry entry = LookupIndices.lookup(name, customDataPath);
+        return entry != null ? entry.trendCategory : null;
     }
 
     public String correct(String name) {

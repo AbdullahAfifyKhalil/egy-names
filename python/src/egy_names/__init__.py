@@ -41,6 +41,7 @@ from ._types import (
     NameEntry,
     NameInfo,
     NameRole,
+    PetName,
     RankInfo,
     Religion,
     ReligionDetection,
@@ -119,14 +120,16 @@ class EgyptianNames:
         """Split a full name into its individual name components."""
         return split(full_name)
 
-    def tashkeel(self, name: str) -> str:
-        """Add Arabic diacritics (tashkeel) to an Egyptian name."""
+    def tashkeel(self, name: str, dialect: str = "standard") -> str:
+        """Add Arabic diacritics (tashkeel) to an Egyptian name (standard or egyptian)."""
         if not name or not name.strip():
             return name
         raw_tokens = name.strip().split()
         result = []
         i = 0
         n = len(raw_tokens)
+
+        is_eg = str(dialect).lower().startswith("eg")
 
         while i < n:
             current = raw_tokens[i]
@@ -137,23 +140,126 @@ class EgyptianNames:
                 compound = f"{current} {next_tok}"
                 compound_no_space = f"{current}{next_tok}"
                 compound_entry = lookup_ar(compound) or lookup_ar(compound_no_space)
-                if compound_entry and compound_entry.tashkeel:
-                    result.append(compound_entry.tashkeel)
-                    i += 2
-                    continue
+                if compound_entry:
+                    val = compound_entry.tashkeel_eg if is_eg else compound_entry.tashkeel
+                    if val:
+                        result.append(val)
+                        i += 2
+                        continue
 
             entry = lookup_ar(current)
-            result.append(entry.tashkeel if entry and entry.tashkeel else current)
+            if entry:
+                val = entry.tashkeel_eg if is_eg else entry.tashkeel
+                result.append(val if val else current)
+            else:
+                result.append(current)
             i += 1
 
         return " ".join(result)
+
+    def tashkeel_eg(self, name: str) -> str:
+        """Add authentic Egyptian colloquial diacritics (tashkeel) to a name."""
+        return self.tashkeel(name, dialect="egyptian")
+
+    def ipa(self, name: str, dialect: str = "standard") -> str:
+        """Generate International Phonetic Alphabet (IPA) transcription for TTS."""
+        if not name or not name.strip():
+            return ""
+        tokens = split(name) if " " not in name.strip() else name.strip().split()
+        is_eg = str(dialect).lower().startswith("eg")
+        ipa_parts = []
+        for tok in tokens:
+            entry = lookup(tok)
+            if entry:
+                ipa_val = entry.ipa_eg if is_eg else entry.ipa_standard
+                if ipa_val:
+                    ipa_parts.append(ipa_val.strip("/[]"))
+                else:
+                    ipa_parts.append(tok)
+            else:
+                ipa_parts.append(tok)
+        
+        joined = " ".join(ipa_parts)
+        return f"[{joined}]" if is_eg else f"/{joined}/"
+
+    def ipa_eg(self, name: str) -> str:
+        """Generate Egyptian Colloquial Arabic IPA phonetic transcription for TTS."""
+        return self.ipa(name, dialect="egyptian")
+
+    def dallaa(self, name: str, format: str = "plain") -> List[str]:
+        """Retrieve authentic Egyptian colloquial pet names/endearments (اسم الدلع).
+        
+        Args:
+            name: The Arabic or English name.
+            format: 'plain'/'ar' (e.g. ميدو), 'tashkeel' (e.g. مِيدُو), 'en' (e.g. Mido), or 'ipa' (e.g. [ˈmiːdu]).
+        """
+        entry = lookup(name)
+        if not entry:
+            return []
+        fmt = format.lower()
+        if fmt in ["tashkeel", "tashkeel_eg", "tk"]:
+            return list(entry.dallaa_tashkeel) if entry.dallaa_tashkeel else list(entry.dallaa_ar)
+        elif fmt in ["en", "english"]:
+            return list(entry.dallaa_en)
+        elif fmt in ["ipa", "ipa_eg", "phonetic"]:
+            return list(entry.dallaa_ipa)
+        return list(entry.dallaa_ar)
+
+    def dallaa_info(self, name: str) -> List[PetName]:
+        """Retrieve rich PetName objects (ar, tashkeel, en, ipa) for a name."""
+        entry = lookup(name)
+        if not entry or not entry.dallaa_ar:
+            return []
+        
+        res = []
+        n = len(entry.dallaa_ar)
+        for i in range(n):
+            ar = entry.dallaa_ar[i]
+            tk = entry.dallaa_tashkeel[i] if i < len(entry.dallaa_tashkeel) else ar
+            en = entry.dallaa_en[i] if i < len(entry.dallaa_en) else ""
+            ipa = entry.dallaa_ipa[i] if i < len(entry.dallaa_ipa) else ""
+            res.append(PetName(ar=ar, tashkeel=tk, en=en, ipa=ipa))
+        return res
+
+    def pet_names(self, name: str, format: str = "plain") -> List[str]:
+        """Alias for dallaa()."""
+        return self.dallaa(name, format=format)
+
+    def root(self, name: str) -> Optional[str]:
+        """Retrieve the Semitic/Coptic morphological root of a name."""
+        entry = lookup(name)
+        return entry.root if entry and entry.root != "N/A" else None
+
+    def origin(self, name: str) -> Optional[str]:
+        """Retrieve the historical etymological stratum/origin layer of a name."""
+        entry = lookup(name)
+        return entry.origin_type if entry else None
+
+    def famous_figures(self, name: str, lang: str = "ar") -> List[str]:
+        """Retrieve authentic Egyptian historical or cultural icons with descriptions.
+        
+        Args:
+            name: The Arabic or English name.
+            lang: 'ar' for Arabic descriptions or 'en' for English descriptions.
+        """
+        entry = lookup(name)
+        if not entry:
+            return []
+        if lang.lower().startswith("en"):
+            return list(entry.famous_figures_en) if entry.famous_figures_en else list(entry.famous_figures_ar)
+        return list(entry.famous_figures_ar)
+
+    def trend(self, name: str) -> Optional[str]:
+        """Retrieve the popularity trend category of a name."""
+        entry = lookup(name)
+        return entry.trend_category if entry else None
 
     def correct(self, name: str) -> str:
         """Correct misspelled or variant-form names to their canonical Arabic forms."""
         return correct(name)
 
     def meaning(self, name: str) -> Optional[Dict[str, str]]:
-        """Retrieve the etymological meaning of a name in Arabic and English."""
+        """Retrieve the deep etymological meaning of a name in Arabic and English."""
         entry = lookup(name)
         if not entry or (not entry.meaning_ar and not entry.meaning_en):
             return None
@@ -584,7 +690,7 @@ class EgyptianNames:
 # Direct alias for concise usage
 EgyNames = EgyptianNames
 
-__version__ = "0.2.1"
+__version__ = "0.3.0"
 __author__ = "Abdullah Afify"
 __company__ = "Afify"
 __license__ = "MIT"
@@ -600,6 +706,7 @@ __all__ = [
     "FrequencyClass",
     "NameEntry",
     "NameInfo",
+    "PetName",
     "GeneratedName",
     "ChainPart",
     "GenderDetection",

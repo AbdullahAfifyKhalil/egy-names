@@ -58,11 +58,12 @@ namespace EgyptianNames
             return Splitter.Split(fullName, _customDataPath);
         }
 
-        public string Tashkeel(string name)
+        public string Tashkeel(string name, string dialect = "standard")
         {
             if (string.IsNullOrWhiteSpace(name)) return name;
             var rawTokens = name.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             var result = new List<string>();
+            bool isEg = dialect.ToLowerInvariant().StartsWith("eg");
 
             for (int i = 0; i < rawTokens.Length; i++)
             {
@@ -74,19 +75,134 @@ namespace EgyptianNames
                     string compound = $"{current} {next}";
                     string compoundNoSpace = $"{current}{next}";
                     var compoundEntry = LookupIndices.LookupAr(compound, _customDataPath) ?? LookupIndices.LookupAr(compoundNoSpace, _customDataPath);
-                    if (compoundEntry != null && !string.IsNullOrEmpty(compoundEntry.Tashkeel))
+                    if (compoundEntry != null)
                     {
-                        result.Add(compoundEntry.Tashkeel);
-                        i++;
-                        continue;
+                        var val = isEg ? compoundEntry.TashkeelEg : compoundEntry.TashkeelStandard;
+                        if (!string.IsNullOrEmpty(val))
+                        {
+                            result.Add(val);
+                            i++;
+                            continue;
+                        }
                     }
                 }
 
                 var entry = LookupIndices.LookupAr(current, _customDataPath);
-                result.Add(entry != null && !string.IsNullOrEmpty(entry.Tashkeel) ? entry.Tashkeel : current);
+                if (entry != null)
+                {
+                    var val = isEg ? entry.TashkeelEg : entry.TashkeelStandard;
+                    result.Add(!string.IsNullOrEmpty(val) ? val : current);
+                }
+                else
+                {
+                    result.Add(current);
+                }
             }
 
             return string.Join(" ", result);
+        }
+
+        public string TashkeelEg(string name) => Tashkeel(name, "egyptian");
+
+        public string Ipa(string name, string dialect = "standard")
+        {
+            if (string.IsNullOrWhiteSpace(name)) return string.Empty;
+            var tokens = name.Contains(' ') ? name.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList() : Split(name);
+            bool isEg = dialect.ToLowerInvariant().StartsWith("eg");
+            var ipaParts = new List<string>();
+
+            foreach (var tok in tokens)
+            {
+                var entry = LookupIndices.Lookup(tok, _customDataPath);
+                if (entry != null)
+                {
+                    var ipaVal = isEg ? entry.IpaEg : entry.IpaStandard;
+                    if (!string.IsNullOrEmpty(ipaVal))
+                    {
+                        ipaParts.Add(ipaVal.Trim('/', '[', ']'));
+                    }
+                    else
+                    {
+                        ipaParts.Add(tok);
+                    }
+                }
+                else
+                {
+                    ipaParts.Add(tok);
+                }
+            }
+
+            var joined = string.Join(" ", ipaParts);
+            return isEg ? $"[{joined}]" : $"/{joined}/";
+        }
+
+        public string IpaEg(string name) => Ipa(name, "egyptian");
+
+        public List<string> Dallaa(string name, string format = "plain")
+        {
+            var entry = LookupIndices.Lookup(name, _customDataPath);
+            if (entry == null) return new List<string>();
+            var fmt = format.ToLowerInvariant();
+            if (fmt == "tashkeel" || fmt == "tashkeel_eg" || fmt == "tk")
+            {
+                return entry.DallaaTashkeel.Count > 0 ? new List<string>(entry.DallaaTashkeel) : new List<string>(entry.DallaaAr);
+            }
+            else if (fmt == "en" || fmt == "english")
+            {
+                return new List<string>(entry.DallaaEn);
+            }
+            else if (fmt == "ipa" || fmt == "phonetic")
+            {
+                return new List<string>(entry.DallaaIpa);
+            }
+            return new List<string>(entry.DallaaAr);
+        }
+
+        public List<PetName> DallaaInfo(string name)
+        {
+            var entry = LookupIndices.Lookup(name, _customDataPath);
+            if (entry == null || entry.DallaaAr.Count == 0) return new List<PetName>();
+            var result = new List<PetName>();
+            for (int i = 0; i < entry.DallaaAr.Count; i++)
+            {
+                var ar = entry.DallaaAr[i];
+                var tk = i < entry.DallaaTashkeel.Count ? entry.DallaaTashkeel[i] : ar;
+                var en = i < entry.DallaaEn.Count ? entry.DallaaEn[i] : string.Empty;
+                var ipa = i < entry.DallaaIpa.Count ? entry.DallaaIpa[i] : string.Empty;
+                result.Add(new PetName(ar, tk, en, ipa));
+            }
+            return result;
+        }
+
+        public List<string> PetNames(string name, string format = "plain") => Dallaa(name, format);
+
+        public string? Root(string name)
+        {
+            var entry = LookupIndices.Lookup(name, _customDataPath);
+            return (entry != null && entry.Root != "N/A") ? entry.Root : null;
+        }
+
+        public string? Origin(string name)
+        {
+            var entry = LookupIndices.Lookup(name, _customDataPath);
+            return entry?.OriginType;
+        }
+
+        public List<string> FamousFigures(string name, string lang = "ar")
+        {
+            var entry = LookupIndices.Lookup(name, _customDataPath);
+            if (entry == null) return new List<string>();
+            if (lang.ToLowerInvariant().StartsWith("en"))
+            {
+                return entry.FamousFiguresEn.Count > 0 ? new List<string>(entry.FamousFiguresEn) : new List<string>(entry.FamousFiguresAr);
+            }
+            return new List<string>(entry.FamousFiguresAr);
+        }
+
+        public string? Trend(string name)
+        {
+            var entry = LookupIndices.Lookup(name, _customDataPath);
+            return entry?.TrendCategory;
         }
 
         public string Correct(string name)

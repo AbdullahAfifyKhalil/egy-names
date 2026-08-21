@@ -155,9 +155,27 @@ public final class DataLoader: @unchecked Sendable {
                 let p = item["p"] as? [Double] ?? []
                 let tp = item["tp"] as? Double ?? 0.0
                 let fc = FrequencyClass.from(string: item["fc"] as? String ?? "n")
-                let t = item["t"] as? String ?? ""
+                let t = item["t"] as? String ?? ar
+                let te = item["te"] as? String ?? t
+                let isStr = item["is"] as? String ?? ""
+                let ieStr = item["ie"] as? String ?? ""
                 let ma = item["ma"] as? String ?? ""
                 let me = item["me"] as? String ?? ""
+
+                let dlaRaw = (item["dla"] as? String) ?? (item["dl"] as? String) ?? ""
+                let dlaAr = dlaRaw.components(separatedBy: "|").filter { !$0.isEmpty }
+                let dlaTk = (item["dlt"] as? String)?.components(separatedBy: "|").filter { !$0.isEmpty } ?? []
+                let dlaEn = (item["dle"] as? String)?.components(separatedBy: "|").filter { !$0.isEmpty } ?? []
+                let dlaIpa = (item["dli"] as? String)?.components(separatedBy: "|").filter { !$0.isEmpty } ?? []
+
+                let rt = item["rt"] as? String ?? "N/A"
+                let ot = item["ot"] as? String ?? "arabic_classical"
+
+                let ffaRaw = (item["ffa"] as? String) ?? (item["ff"] as? String) ?? ""
+                let ffaAr = ffaRaw.components(separatedBy: "|").filter { !$0.isEmpty }
+                let ffeEn = (item["ffe"] as? String)?.components(separatedBy: "|").filter { !$0.isEmpty } ?? []
+
+                let tc = item["tc"] as? String ?? "classic_timeless"
 
                 names.append(NameEntry(
                     ar: ar,
@@ -171,8 +189,23 @@ public final class DataLoader: @unchecked Sendable {
                     corpusShare: tp,
                     frequency: fc,
                     tashkeel: t,
+                    tashkeelStandard: t,
+                    tashkeelEg: te,
+                    ipaStandard: isStr,
+                    ipaEg: ieStr,
                     meaningAr: ma,
-                    meaningEn: me
+                    meaningEn: me,
+                    dallaa: dlaAr,
+                    dallaaAr: dlaAr,
+                    dallaaTashkeel: dlaTk,
+                    dallaaEn: dlaEn,
+                    dallaaIpa: dlaIpa,
+                    root: rt,
+                    originType: ot,
+                    famousFigures: ffaAr,
+                    famousFiguresAr: ffaAr,
+                    famousFiguresEn: ffeEn,
+                    trendCategory: tc
                 ))
             }
         }

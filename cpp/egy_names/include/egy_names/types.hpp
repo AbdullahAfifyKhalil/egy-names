@@ -82,6 +82,13 @@ inline FrequencyClass string_to_freq(const std::string& s) {
     return FrequencyClass::RARE;
 }
 
+struct PetName {
+    std::string ar;
+    std::string tashkeel;
+    std::string en;
+    std::string ipa;
+};
+
 struct NameEntry {
     std::string ar;
     std::string en;
@@ -94,8 +101,23 @@ struct NameEntry {
     double corpus_share = 0.0;
     FrequencyClass frequency = FrequencyClass::NORMAL;
     std::string tashkeel;
+    std::string tashkeel_standard;
+    std::string tashkeel_eg;
+    std::string ipa_standard;
+    std::string ipa_eg;
     std::string meaning_ar;
     std::string meaning_en;
+    std::vector<std::string> dallaa;
+    std::vector<std::string> dallaa_ar;
+    std::vector<std::string> dallaa_tashkeel;
+    std::vector<std::string> dallaa_en;
+    std::vector<std::string> dallaa_ipa;
+    std::string root = "N/A";
+    std::string origin_type = "arabic_classical";
+    std::vector<std::string> famous_figures;
+    std::vector<std::string> famous_figures_ar;
+    std::vector<std::string> famous_figures_en;
+    std::string trend_category = "classic_timeless";
 };
 
 struct NameInfo {
@@ -107,8 +129,23 @@ struct NameInfo {
     std::string frequency_class;
     double corpus_share = 0.0;
     std::string tashkeel;
+    std::string tashkeel_standard;
+    std::string tashkeel_eg;
+    std::string ipa_standard;
+    std::string ipa_eg;
     std::string meaning_ar;
     std::string meaning_en;
+    std::vector<std::string> dallaa;
+    std::vector<std::string> dallaa_ar;
+    std::vector<std::string> dallaa_tashkeel;
+    std::vector<std::string> dallaa_en;
+    std::vector<std::string> dallaa_ipa;
+    std::string root = "N/A";
+    std::string origin_type = "arabic_classical";
+    std::vector<std::string> famous_figures;
+    std::vector<std::string> famous_figures_ar;
+    std::vector<std::string> famous_figures_en;
+    std::string trend_category = "classic_timeless";
     std::vector<std::string> ar_variants;
     std::vector<std::string> en_variants;
     std::vector<double> slot_distribution;
@@ -161,8 +198,23 @@ inline NameInfo to_name_info(const NameEntry& e) {
     info.frequency_class = freq_to_string(e.frequency);
     info.corpus_share = e.corpus_share;
     info.tashkeel = e.tashkeel;
+    info.tashkeel_standard = e.tashkeel_standard;
+    info.tashkeel_eg = e.tashkeel_eg;
+    info.ipa_standard = e.ipa_standard;
+    info.ipa_eg = e.ipa_eg;
     info.meaning_ar = e.meaning_ar;
     info.meaning_en = e.meaning_en;
+    info.dallaa = e.dallaa_ar;
+    info.dallaa_ar = e.dallaa_ar;
+    info.dallaa_tashkeel = e.dallaa_tashkeel;
+    info.dallaa_en = e.dallaa_en;
+    info.dallaa_ipa = e.dallaa_ipa;
+    info.root = e.root;
+    info.origin_type = e.origin_type;
+    info.famous_figures = e.famous_figures_ar;
+    info.famous_figures_ar = e.famous_figures_ar;
+    info.famous_figures_en = e.famous_figures_en;
+    info.trend_category = e.trend_category;
     info.ar_variants = e.ar_variants;
     info.en_variants = e.en_variants;
     info.slot_distribution = e.slot_pcts;

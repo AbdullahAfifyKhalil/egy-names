@@ -69,6 +69,23 @@ function runTests() {
     console.log(`    ${r.ar}`);
   });
 
+  console.log("\n12. 11D Features (Tashkeel Eg, IPA, Dallaa, Roots, Origins, Trends):");
+  const tkEg = en.tashkeelEg("محمد");
+  const ipaStd = en.ipa("جمال", "standard");
+  const ipaEg = en.ipaEg("جمال");
+  const dl = en.dallaa("محمد");
+  const rt = en.root("محمد");
+  const ot = en.origin("محمد");
+  const ff = en.famousFigures("محمد");
+  const tr = en.trend("محمد");
+
+  console.log(`  Tashkeel Egyptian: ${tkEg}`);
+  console.log(`  IPA Standard: ${ipaStd}`);
+  console.log(`  IPA Egyptian: ${ipaEg}`);
+  console.log(`  Dallaa (Pet names):`, dl);
+  console.log(`  Root: ${rt} | Origin: ${ot} | Trend: ${tr}`);
+  console.log(`  Famous Figures:`, ff);
+
   console.log("\nAll smoke tests passed!");
 }
 

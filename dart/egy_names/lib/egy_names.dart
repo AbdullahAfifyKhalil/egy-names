@@ -57,10 +57,11 @@ class EgyptianNames {
     return Splitter.split(fullName, dataPath: customDataPath);
   }
 
-  String tashkeel(String name) {
+  String tashkeel(String name, {String dialect = 'standard'}) {
     if (name.trim().isEmpty) return name;
     final rawTokens = name.trim().split(RegExp(r'\s+'));
     final result = <String>[];
+    final isEg = dialect.toLowerCase().startsWith('eg');
 
     for (var i = 0; i < rawTokens.length; i++) {
       final current = rawTokens[i];
@@ -71,18 +72,109 @@ class EgyptianNames {
         final compoundNoSpace = '$current$next';
         final compoundEntry = LookupIndices.lookupAr(compound, dataPath: customDataPath) ??
             LookupIndices.lookupAr(compoundNoSpace, dataPath: customDataPath);
-        if (compoundEntry != null && compoundEntry.tashkeel.isNotEmpty) {
-          result.add(compoundEntry.tashkeel);
-          i++;
-          continue;
+        if (compoundEntry != null) {
+          final val = isEg ? compoundEntry.tashkeelEg : compoundEntry.tashkeelStandard;
+          if (val.isNotEmpty) {
+            result.add(val);
+            i++;
+            continue;
+          }
         }
       }
 
       final entry = LookupIndices.lookupAr(current, dataPath: customDataPath);
-      result.add(entry != null && entry.tashkeel.isNotEmpty ? entry.tashkeel : current);
+      if (entry != null) {
+        final val = isEg ? entry.tashkeelEg : entry.tashkeelStandard;
+        result.add(val.isNotEmpty ? val : current);
+      } else {
+        result.add(current);
+      }
     }
 
     return result.join(' ');
+  }
+
+  String tashkeelEg(String name) => tashkeel(name, dialect: 'egyptian');
+
+  String ipa(String name, {String dialect = 'standard'}) {
+    if (name.trim().isEmpty) return '';
+    final tokens = name.contains(' ') ? name.trim().split(RegExp(r'\s+')) : split(name);
+    final isEg = dialect.toLowerCase().startsWith('eg');
+    final ipaParts = <String>[];
+
+    for (final tok in tokens) {
+      final entry = LookupIndices.lookup(tok, dataPath: customDataPath);
+      if (entry != null) {
+        final ipaVal = isEg ? entry.ipaEg : entry.ipaStandard;
+        if (ipaVal.isNotEmpty) {
+          ipaParts.add(ipaVal.replaceAll(RegExp(r'^[/[\]]+|[/[\]]+$'), ''));
+        } else {
+          ipaParts.add(tok);
+        }
+      } else {
+        ipaParts.add(tok);
+      }
+    }
+
+    final joined = ipaParts.join(' ');
+    return isEg ? '[$joined]' : '/$joined/';
+  }
+
+  String ipaEg(String name) => ipa(name, dialect: 'egyptian');
+
+  List<String> dallaa(String name, {String format = 'plain'}) {
+    final entry = LookupIndices.lookup(name, dataPath: customDataPath);
+    if (entry == null) return [];
+    final fmt = format.toLowerCase();
+    if (fmt == 'tashkeel' || fmt == 'tashkeel_eg' || fmt == 'tk') {
+      return entry.dallaaTashkeel.isNotEmpty ? List.from(entry.dallaaTashkeel) : List.from(entry.dallaaAr);
+    } else if (fmt == 'en' || fmt == 'english') {
+      return List.from(entry.dallaaEn);
+    } else if (fmt == 'ipa' || fmt == 'phonetic') {
+      return List.from(entry.dallaaIpa);
+    }
+    return List.from(entry.dallaaAr);
+  }
+
+  List<PetName> dallaaInfo(String name) {
+    final entry = LookupIndices.lookup(name, dataPath: customDataPath);
+    if (entry == null || entry.dallaaAr.isEmpty) return [];
+    final result = <PetName>[];
+    for (var i = 0; i < entry.dallaaAr.length; i++) {
+      result.add(PetName(
+        ar: entry.dallaaAr[i],
+        tashkeel: i < entry.dallaaTashkeel.length ? entry.dallaaTashkeel[i] : entry.dallaaAr[i],
+        en: i < entry.dallaaEn.length ? entry.dallaaEn[i] : '',
+        ipa: i < entry.dallaaIpa.length ? entry.dallaaIpa[i] : '',
+      ));
+    }
+    return result;
+  }
+
+  List<String> petNames(String name, {String format = 'plain'}) => dallaa(name, format: format);
+
+  String? root(String name) {
+    final entry = LookupIndices.lookup(name, dataPath: customDataPath);
+    return (entry != null && entry.root != 'N/A') ? entry.root : null;
+  }
+
+  String? origin(String name) {
+    final entry = LookupIndices.lookup(name, dataPath: customDataPath);
+    return entry?.originType;
+  }
+
+  List<String> famousFigures(String name, {String lang = 'ar'}) {
+    final entry = LookupIndices.lookup(name, dataPath: customDataPath);
+    if (entry == null) return [];
+    if (lang.toLowerCase().startsWith('en')) {
+      return entry.famousFiguresEn.isNotEmpty ? List.from(entry.famousFiguresEn) : List.from(entry.famousFiguresAr);
+    }
+    return List.from(entry.famousFiguresAr);
+  }
+
+  String? trend(String name) {
+    final entry = LookupIndices.lookup(name, dataPath: customDataPath);
+    return entry?.trendCategory;
   }
 
   String correct(String name) {

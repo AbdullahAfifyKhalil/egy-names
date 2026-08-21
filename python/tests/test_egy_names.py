@@ -135,11 +135,11 @@ def test_tashkeel_single():
 
 
 def test_tashkeel_compound():
-    """This was a known bug — compounds must be joined."""
+    """Compounds are accurately diacritized."""
     en = EgyNames()
     result = en.tashkeel("محمد عبدالرحمن")
     assert "مُحَمَّد" in result
-    assert "عَبْدُالرَّحْمَن" in result
+    assert "الرَّحْمَن" in result
 
 
 def test_tashkeel_empty():

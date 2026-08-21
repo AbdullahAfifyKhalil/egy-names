@@ -58,7 +58,7 @@ public:
         return Corrector::correct(name, custom_data_path);
     }
 
-    std::string tashkeel(const std::string& name) {
+    std::string tashkeel(const std::string& name, const std::string& dialect = "standard") {
         if (name.empty()) return name;
 
         std::stringstream ss(name);
@@ -68,6 +68,7 @@ public:
             raw_tokens.push_back(tok);
         }
 
+        bool is_eg = (dialect.find("eg") != std::string::npos || dialect.find("Eg") != std::string::npos);
         std::vector<std::string> result;
         for (size_t i = 0; i < raw_tokens.size(); ++i) {
             std::string current = raw_tokens[i];
@@ -82,15 +83,23 @@ public:
                     compound_entry = LookupIndices::lookup_ar(compound_no_space, custom_data_path);
                 }
 
-                if (compound_entry.has_value() && !compound_entry->tashkeel.empty()) {
-                    result.push_back(compound_entry->tashkeel);
-                    i++;
-                    continue;
+                if (compound_entry.has_value()) {
+                    std::string val = is_eg ? compound_entry->tashkeel_eg : compound_entry->tashkeel_standard;
+                    if (!val.empty()) {
+                        result.push_back(val);
+                        i++;
+                        continue;
+                    }
                 }
             }
 
             auto entry = LookupIndices::lookup_ar(current, custom_data_path);
-            result.push_back(entry.has_value() && !entry->tashkeel.empty() ? entry->tashkeel : current);
+            if (entry.has_value()) {
+                std::string val = is_eg ? entry->tashkeel_eg : entry->tashkeel_standard;
+                result.push_back(!val.empty() ? val : current);
+            } else {
+                result.push_back(current);
+            }
         }
 
         std::string out;
@@ -99,6 +108,117 @@ public:
             out += result[i];
         }
         return out;
+    }
+
+    std::string tashkeel_eg(const std::string& name) {
+        return tashkeel(name, "egyptian");
+    }
+
+    std::string ipa(const std::string& name, const std::string& dialect = "standard") {
+        if (name.empty()) return "";
+        std::vector<std::string> tokens = (name.find(' ') != std::string::npos) ? split_words(name) : split(name);
+        bool is_eg = (dialect.find("eg") != std::string::npos || dialect.find("Eg") != std::string::npos);
+        std::vector<std::string> ipa_parts;
+
+        for (const auto& tok : tokens) {
+            auto entry = LookupIndices::lookup(tok, custom_data_path);
+            if (entry.has_value()) {
+                std::string ipa_val = is_eg ? entry->ipa_eg : entry->ipa_standard;
+                if (!ipa_val.empty()) {
+                    // strip delimiters
+                    std::string clean_ipa;
+                    for (char c : ipa_val) {
+                        if (c != '/' && c != '[' && c != ']') clean_ipa += c;
+                    }
+                    ipa_parts.push_back(clean_ipa);
+                } else {
+                    ipa_parts.push_back(tok);
+                }
+            } else {
+                ipa_parts.push_back(tok);
+            }
+        }
+
+        std::string joined;
+        for (size_t i = 0; i < ipa_parts.size(); ++i) {
+            if (i > 0) joined += " ";
+            joined += ipa_parts[i];
+        }
+        return is_eg ? ("[" + joined + "]") : ("/" + joined + "/");
+    }
+
+    std::string ipa_eg(const std::string& name) {
+        return ipa(name, "egyptian");
+    }
+
+    std::vector<std::string> dallaa(const std::string& name, const std::string& format = "plain") {
+        auto entry = LookupIndices::lookup(name, custom_data_path);
+        if (!entry.has_value()) return {};
+        std::string fmt = format;
+        std::transform(fmt.begin(), fmt.end(), fmt.begin(), ::tolower);
+        if (fmt == "tashkeel" || fmt == "tashkeel_eg" || fmt == "tk") {
+            return !entry->dallaa_tashkeel.empty() ? entry->dallaa_tashkeel : entry->dallaa_ar;
+        } else if (fmt == "en" || fmt == "english") {
+            return entry->dallaa_en;
+        } else if (fmt == "ipa" || fmt == "phonetic") {
+            return entry->dallaa_ipa;
+        }
+        return entry->dallaa_ar;
+    }
+
+    std::vector<PetName> dallaa_info(const std::string& name) {
+        auto entry = LookupIndices::lookup(name, custom_data_path);
+        if (!entry.has_value() || entry->dallaa_ar.empty()) return {};
+        std::vector<PetName> res;
+        for (size_t i = 0; i < entry->dallaa_ar.size(); ++i) {
+            std::string ar = entry->dallaa_ar[i];
+            std::string tk = i < entry->dallaa_tashkeel.size() ? entry->dallaa_tashkeel[i] : ar;
+            std::string en = i < entry->dallaa_en.size() ? entry->dallaa_en[i] : "";
+            std::string ipa = i < entry->dallaa_ipa.size() ? entry->dallaa_ipa[i] : "";
+            res.push_back({ar, tk, en, ipa});
+        }
+        return res;
+    }
+
+    std::vector<std::string> pet_names(const std::string& name, const std::string& format = "plain") {
+        return dallaa(name, format);
+    }
+
+    std::optional<std::string> root(const std::string& name) {
+        auto entry = LookupIndices::lookup(name, custom_data_path);
+        if (entry.has_value() && entry->root != "N/A") return entry->root;
+        return std::nullopt;
+    }
+
+    std::optional<std::string> origin(const std::string& name) {
+        auto entry = LookupIndices::lookup(name, custom_data_path);
+        if (entry.has_value()) return entry->origin_type;
+        return std::nullopt;
+    }
+
+    std::vector<std::string> famous_figures(const std::string& name, const std::string& lang = "ar") {
+        auto entry = LookupIndices::lookup(name, custom_data_path);
+        if (!entry.has_value()) return {};
+        std::string l = lang;
+        std::transform(l.begin(), l.end(), l.begin(), ::tolower);
+        if (l.rfind("en", 0) == 0) {
+            return !entry->famous_figures_en.empty() ? entry->famous_figures_en : entry->famous_figures_ar;
+        }
+        return entry->famous_figures_ar;
+    }
+
+    std::optional<std::string> trend(const std::string& name) {
+        auto entry = LookupIndices::lookup(name, custom_data_path);
+        if (entry.has_value()) return entry->trend_category;
+        return std::nullopt;
+    }
+
+    static std::vector<std::string> split_words(const std::string& s) {
+        std::stringstream ss(s);
+        std::string w;
+        std::vector<std::string> res;
+        while (ss >> w) res.push_back(w);
+        return res;
     }
 
     std::vector<std::string> split(const std::string& fullName) {

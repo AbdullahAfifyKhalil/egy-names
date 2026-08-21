@@ -122,9 +122,24 @@ namespace EgyptianNames
                             var avStr = elem.TryGetProperty("av", out var av) ? av.GetString() : string.Empty;
                             var evStr = elem.TryGetProperty("ev", out var ev) ? ev.GetString() : string.Empty;
                             var fcStr = elem.TryGetProperty("fc", out var fc) ? fc.GetString() : "r";
-                            var tStr = elem.TryGetProperty("t", out var t) ? t.GetString() : string.Empty;
+                            var tStr = elem.TryGetProperty("t", out var t) ? t.GetString() : ar;
+                            var teStr = elem.TryGetProperty("te", out var te) ? te.GetString() : tStr;
+                            var isStr = elem.TryGetProperty("is", out var isVal) ? isVal.GetString() : string.Empty;
+                            var ieStr = elem.TryGetProperty("ie", out var ieVal) ? ieVal.GetString() : string.Empty;
                             var maStr = elem.TryGetProperty("ma", out var ma) ? ma.GetString() : string.Empty;
                             var meStr = elem.TryGetProperty("me", out var me) ? me.GetString() : string.Empty;
+                            var dlaStr = elem.TryGetProperty("dla", out var dlaVal) ? dlaVal.GetString() : (elem.TryGetProperty("dl", out var dlVal) ? dlVal.GetString() : string.Empty);
+                            var dltStr = elem.TryGetProperty("dlt", out var dltVal) ? dltVal.GetString() : string.Empty;
+                            var dleStr = elem.TryGetProperty("dle", out var dleVal) ? dleVal.GetString() : string.Empty;
+                            var dliStr = elem.TryGetProperty("dli", out var dliVal) ? dliVal.GetString() : string.Empty;
+
+                            var rtStr = elem.TryGetProperty("rt", out var rt) ? rt.GetString() : "N/A";
+                            var otStr = elem.TryGetProperty("ot", out var ot) ? ot.GetString() : "arabic_classical";
+
+                            var ffaStr = elem.TryGetProperty("ffa", out var ffaVal) ? ffaVal.GetString() : (elem.TryGetProperty("ff", out var ffVal) ? ffVal.GetString() : string.Empty);
+                            var ffeStr = elem.TryGetProperty("ffe", out var ffeVal) ? ffeVal.GetString() : string.Empty;
+
+                            var tcStr = elem.TryGetProperty("tc", out var tc) ? tc.GetString() : "classic_timeless";
                             var tp = elem.TryGetProperty("tp", out var tpVal) ? tpVal.GetDouble() : 0.0;
 
                             var pList = new List<double>();
@@ -149,6 +164,30 @@ namespace EgyptianNames
                                 ? evStr.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList()
                                 : new List<string> { en };
 
+                            var dallaaAr = !string.IsNullOrEmpty(dlaStr)
+                                ? dlaStr.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList()
+                                : new List<string>();
+
+                            var dallaaTk = !string.IsNullOrEmpty(dltStr)
+                                ? dltStr.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList()
+                                : new List<string>();
+
+                            var dallaaEn = !string.IsNullOrEmpty(dleStr)
+                                ? dleStr.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList()
+                                : new List<string>();
+
+                            var dallaaIpa = !string.IsNullOrEmpty(dliStr)
+                                ? dliStr.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList()
+                                : new List<string>();
+
+                            var famousFiguresAr = !string.IsNullOrEmpty(ffaStr)
+                                ? ffaStr.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList()
+                                : new List<string>();
+
+                            var famousFiguresEn = !string.IsNullOrEmpty(ffeStr)
+                                ? ffeStr.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList()
+                                : new List<string>();
+
                             bundle.Names.Add(new NameEntry
                             {
                                 Ar = ar,
@@ -161,9 +200,24 @@ namespace EgyptianNames
                                 SlotPcts = pList,
                                 CorpusShare = tp,
                                 Frequency = freq,
-                                Tashkeel = tStr ?? string.Empty,
+                                Tashkeel = tStr ?? ar,
+                                TashkeelStandard = tStr ?? ar,
+                                TashkeelEg = teStr ?? tStr ?? ar,
+                                IpaStandard = isStr ?? string.Empty,
+                                IpaEg = ieStr ?? string.Empty,
                                 MeaningAr = maStr ?? string.Empty,
-                                MeaningEn = meStr ?? string.Empty
+                                MeaningEn = meStr ?? string.Empty,
+                                Dallaa = dallaaAr,
+                                DallaaAr = dallaaAr,
+                                DallaaTashkeel = dallaaTk,
+                                DallaaEn = dallaaEn,
+                                DallaaIpa = dallaaIpa,
+                                Root = rtStr ?? "N/A",
+                                OriginType = otStr ?? "arabic_classical",
+                                FamousFigures = famousFiguresAr,
+                                FamousFiguresAr = famousFiguresAr,
+                                FamousFiguresEn = famousFiguresEn,
+                                TrendCategory = tcStr ?? "classic_timeless"
                             });
                         }
                     }

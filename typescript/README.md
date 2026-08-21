@@ -22,7 +22,7 @@
 <br />
 **Python** • **TypeScript / JavaScript** • **.NET / C#** • **Flutter / Dart** • **Swift (iOS/macOS)** • **Java / Kotlin** • **C++ (C++20/17)**
 
-[Why Egyptian Names?](#-why-egyptian-names-are-unique--computationally-complex) • [The Grounded Generation Engine](#-the-mathematics-of-grounded-patronymic-generation) • [Corpus Scale](#-national-corpus-genesis--empirical-grounding) • [Key Capabilities](#-key-capabilities) • [Age Intelligence](#-age-aware-demographic-intelligence) • [Installation & Multi-Language Usage](#-installation--multi-language-usage) • [Hugging Face Hub](#-hugging-face-datasets) • [Architecture](#-onomastic-architecture) • [About Afify Corp](#-about-afify-corporation) • [License](#-license)
+[Why Egyptian Names?](#-why-egyptian-names-are-unique--computationally-complex) • [Creative Feature Deep Dive](#-creative-deep-dive-how-every-feature-was-engineered) • [The Grounded Generation Engine](#-the-mathematics-of-grounded-patronymic-generation) • [Corpus Scale](#-national-corpus-genesis--empirical-grounding) • [Installation & Multi-Language Usage](#-installation--multi-language-usage) • [Hugging Face Hub](#-hugging-face-datasets) • [Architecture](#-onomastic-architecture) • [About Afify Corp](#-about-afify-corporation) • [License](#-license)
 
 </div>
 
@@ -47,57 +47,87 @@ This ancient onomastic system—intertwined with **Pharaonic & Coptic substrates
 
 ---
 
-### The 5 Hard Problems Solved by `egy-names`:
+## 🧠 Creative Deep Dive: How Every Feature Was Engineered
 
-1. **🧩 Unspaced Concatenation in Legacy Databases**: Egyptian civil records and bank databases frequently compress full chains without spaces (`محمدأحمدعليحسنالشناوي`). Standard splitters fail; `egy-names` solves this via **Dynamic Programming shortest-path lattice segmentation**.
-2. **⏳ Generational Slot Drift & Demographics**: The exact same name (`فاروق`, `شهد`, `كريم`) possesses radically different statistical probabilities depending on whether it occupies Slot 1 (Student/Child), Slot 2 (Father), or Slot 3 (Grandfather).
-3. **🔗 Compound Name Integrity**: Prefix-bound names (`عبد الرحمن`, `أبو بكر`, `نور الدين`, `فاطمة الزهراء`, `ذو الفقار`) are recognized as atomic entities without corrupting patronymic slot counting.
-4. **🔤 Phonetic Egyptian Passport Transliteration**: Standard Arabic transliterators use Levantine or Gulf phonetics (*Jamal*, *Hamid*). `egy-names` enforces authentic Egyptian Civil Registry phonetics (*Gamal*, *Hamed*, *El-*, *Abou-*).
-5. **🎯 100% Arabic Vocalization & Deep Root Etymology**: Complete Tashkeel (diacritization) and root analysis across all **44,626 canonical entries**.
+`egy-names` is designed as a zero-hallucination, high-performance linguistic engine. Here is the architectural philosophy and creative execution behind each capability:
 
 ---
 
-## 🎲 The Mathematics of Grounded Patronymic Generation
-
-### Why Generic Name Generators Fail in Arabic
-Generic name generators (like Faker or simple random lists) sample independently from a single bag of words. In Egyptian Arabic, this produces absurd and culturally impossible outputs:
-* ❌ *Invalid Patrilineal Genders*: Placing female names as fathers or grandfathers (e.g. `"أحمد فاطمة منى"`).
-* ❌ *Cross-Religious Lineage Impossibilities*: Generating conflicting patronymics that violate historical lineage rules.
-* ❌ *Archaic Surnames as Given Names*: Generating modern children with 19th-century tribal surnames as first names.
-* ❌ *Unrealistic Demographic Distributions*: Treating extremely rare names as having equal probability to national staples.
-
----
-
-### The `egy-names` 6-Slot Generational Model
-`egy-names` models full name generation as a **joint multi-variate probability distribution over a 6-slot genealogical transition graph**:
-
-$$P(N_1, N_2, N_3, N_4, N_5) = P(N_1 \mid G, R, A) \times \left[ \prod_{k=2}^{4} P(N_k \mid \text{Male}, R, S_k) \right] \times P(N_5 \mid \text{Surname})$$
-
-Where:
-* $N_1$ = Given Name of Person (conditioned on **Target Gender $G$**, **Religion $R$**, and **Target Age $A$**).
-* $N_2, N_3, N_4$ = Father, Grandfather, and Ancestor Names (strictly constrained to **Valid Male Given Names** matching lineage religion $R$, sampled according to empirical slot weights $S_k$).
-* $N_5$ = Family Surname (sampled from the **Family/Tribal Onomastic Distribution**).
-
-```
-╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗
-║                                 THE 6-SLOT PATRONYMIC LINEAGE GRAPH                               ║
-╠═══════════════╦═══════════════╦═══════════════╦═══════════════════╦══════════════════════════════╣
-║    Slot 1     ║    Slot 2     ║    Slot 3     ║      Slot 4       ║            Slot 5            ║
-║  Person ($N_1$) ║  Father ($N_2$) ║ Grandfather($N_3$)║ Ancestor ($N_4$)  ║     Family Surname ($N_5$)   ║
-╠═══════════════╬═══════════════╬═══════════════╬═══════════════════╬══════════════════════════════╣
-║ [ يارا ]      ║ [ عادل ]      ║ [ فاروق ]     ║ [ مخلوف ]         ║ [ الشناوي ]                  ║
-║ Female Youth  ║ Male Parent   ║ Male Grandpar.║ Male Historical   ║ Toponymic Family Surname     ║
-║ (Age ~24)     ║ (Age ~54)     ║ (Age ~84)     ║ (Historical Era)  ║ (All Generations)            ║
-╚═══════════════╩═══════════════╩═══════════════╩═══════════════════╩══════════════════════════════╝
-```
+### 1. 🎲 Grounded 6-Slot Patronymic Name Generation
+* **The Problem with Generic Generators**: Tools like Faker randomly choose words from a flat list, creating culturally absurd chains (e.g. putting female names as fathers, pairing incompatible religious markers, or using archaic 19th-century surnames as first names for children).
+* **Our Creative Architecture**: We formulated name generation as a **joint multi-variate transition graph over 6 genealogical positions**.
+  $$P(N_1, N_2, N_3, N_4, N_5) = P(N_1 \mid G, R, A) \times \left[ \prod_{k=2}^{4} P(N_k \mid \text{Male}, R, S_k) \right] \times P(N_5 \mid \text{Surname})$$
+* **Why It Is Perfect**:
+  * $N_1$ respects requested gender ($G$), religion ($R$), and age cohort ($A$).
+  * $N_2, N_3, N_4$ are mathematically bounded to authentic male given names matching religious continuity.
+  * $N_5$ samples from real Egyptian clan and toponymic surname distributions.
 
 ---
 
-### Tri-Layer Cultural & Lineage Guardrails:
+### 2. ⏳ Generational Gaussian Age Intelligence Engine
+* **The Creative Insight**: Names are temporal cultural artifacts. A name like `شهد` or `يارا` belongs overwhelmingly to Egyptian youth born in the 2000s, whereas `فاروق` or `بسيوني` belongs to grandfathers born in the 1930s–1940s.
+* **Our Mathematical Modeling**: We anchored the national corpus to its mean examination year ($Y_{\text{data}} = 2020$) and graduation age ($A_{\text{grad}} = 18$), yielding a baseline birth center of **2002 for Slot 1**. Applying the national inter-generational span ($\Delta_{\text{gen}} = 30\text{ years}$):
+  * $\text{Slot }1 \text{ (Student): Center } 2002 \ (\approx 24\text{ yrs in }2026)$
+  * $\text{Slot }2 \text{ (Father): Center } 1972 \ (\approx 54\text{ yrs in }2026)$
+  * $\text{Slot }3 \text{ (Grandfather): Center } 1942 \ (\approx 84\text{ yrs in }2026)$
+  * $\text{Slot }4 \text{ (Great-Grandfather): Center } 1912 \ (\text{Historical})$
+* **Continuous Gaussian Scoring**:
+  $$w_i = \exp\left(-\frac{1}{2} \left(\frac{\text{Target Birth Year} - \text{Center}_i}{\sigma}\right)^2\right), \quad \sigma = 12\text{ years}$$
+* **Multi-Token Cross-Generational Corroboration**: When analyzing a full name chain (e.g. `"كريم أشرف فاروق"`), the engine checks the person (`كريم`, youth) + father (`أشرف`, parent) + grandfather (`فاروق`, grandparent). When all generational vectors align, it triggers a Bayesian corroboration boost, elevating confidence to **`0.641`**.
 
-1. **Patrilineal Gender Invariance**: While $N_1$ can be Male or Female, slots $N_2, N_3, N_4$ are mathematically bounded to valid Egyptian male given names.
-2. **Inter-Generational Religious Cohesion**: Seamlessly distinguishes between **neutral/shared ancestral names** (`إبراهيم`, `يوسف`, `سمير`, `عادل`) and **distinct denominational markers** (`ميخائيل`, `جرجس`, `شنودة` vs `محمد`, `أحمد`, `مصطفى`), producing 100% authentic lineages.
-3. **Generational Era Drift**: The ancestral slots ($N_3, N_4$) naturally shift toward historical Egyptian names (`طه`, `مرسي`, `بسيوني`, `شحاتة`), while the youth slot ($N_1$) reflects modern national birth cohorts (`يارا`, `شهد`, `كريم`, `زياد`).
+---
+
+### 3. 🧩 Dynamic Programming (DP) Unspaced Text Segmentation
+* **The Challenge**: Egyptian government and bank archives frequently contain concatenated strings without spaces (e.g. `محمدأحمدعليحسنالشناوي`).
+* **Our Creative Solution**: Formulated as a **Unicode codepoint shortest-path DAG optimization**:
+  $$\text{Cost}(i) = \min_{j < i} \Big( \text{Cost}(j) + \text{BaseCost} + \text{Bonus}(\text{Freq}_{j..i}) + \lambda \cdot \text{Length}_{j..i} \Big)$$
+* **Why It Is Perfect**:
+  * Splits 3-to-6-part unspaced chains in **$< 0.05\text{ ms}$**.
+  * Intelligently preserves prefixed compound names (`عبد الرحمن`, `نور الدين`, `فاطمة الزهراء`).
+  * Recovers smoothly if non-Arabic or foreign noise tokens are embedded.
+
+---
+
+### 4. 🎯 100% Arabic Tashkeel (Diacritization) & Vocalization
+* **The Challenge**: Arabic without Tashkeel is ambiguous (`محمد` could theoretically be read as *Mohamed*, *Mahmad*, or *Mohamad*).
+* **Our Solution**: Every single one of the **44,626 canonical lemmas** is 100% vocalized with classical diacritics (Fathah, Dammah, Kasrah, Shaddah, Sukun).
+* **Compound Awareness**: Handles bound genitive constructs (`عبدالرحمن` $\to$ `عَبْدُ الرَّحْمَن`, `حسام الدين` $\to$ `حُسَامُ الدِّين`).
+
+---
+
+### 5. 🔤 Authentic Egyptian Passport Transliteration
+* **The Challenge**: Generic Arabic transliterators use Levantine or Gulf rules (producing *Jamal*, *Hamid*, *Jihan*).
+* **Our Solution**: We engineered an authentic **Egyptian Civil Registry phonetic engine** enforcing the distinctive Egyptian pronunciation:
+  * `ج` $\to$ **`G`** (*Gamal*, *Gihan*, *Magdy*)
+  * `ح` $\to$ **`H`** (*Hassan*, *Hamed*)
+  * Definite article $\to$ **`El-`** (*Elshazly*, *Elsayed*, *Elsharkawy*)
+  * Theophoric compounds $\to$ **`Abdel-` / `Abou-`** (*Abdelrahman*, *Abdelhamid*, *Aboubakr*)
+
+---
+
+### 6. 🔍 Deep Morphological Etymology, Roots & Toponyms
+* **100% Bilingual Coverage**: Every entry in the 44.6K lexicon includes rich Arabic and English linguistic definitions:
+  * **Semitic Triliteral Roots**: e.g., `محمد` $\to$ *المحمود؛ كثير الخصال المحمودة (من الجذر ح م د)*.
+  * **Coptic/Ancient Heritage**: e.g., `مهرائيل` $\to$ *اسم قبطي/سرياني مركب يعني هبة الله أو عطية النور*.
+  * **Ottoman Guild Occupations**: e.g., `بوادقجي` $\to$ *صانع أو بائع البارود في العهد العثماني*.
+  * **Nile Delta & Upper Egypt Toponyms**: e.g., `المنياوي` $\to$ *نسبة إلى مدينة المنيا في صعيد مصر*.
+
+---
+
+### 7. 🛡️ 23,457 Deterministic Typo & Orthographic Correction Rules
+* **The Challenge**: Real-world citizen data entry is plagued by typos, keyboard slips, and OCR scanning noise.
+* **Our Solution**: Extracted from 15.88M+ records to build an in-memory $O(1)$ lookup hash index covering:
+  * Missing/Extra letters (`ابراهم` $\to$ `إبراهيم`)
+  * Compound fusion/spacing (`عبدالرحمن` $\to$ `عبد الرحمن`)
+  * Alif Maqsura vs. Ya (`مصطفا` $\to$ `مصطفى`, `يحي` $\to$ `يحيى`)
+  * Hamza normalization (`اسماعيل` $\to$ `إسماعيل`)
+  * Ta Marbuta vs. Ha (`فاطمه` $\to$ `فاطمة`)
+
+---
+
+### 8. ⚖️ Bayesian Demographic & Religion Inference
+* **How It Works**: Applies empirical frequency marginalization over patronymic chains.
+* **Lineage Continuity**: Distinguishes between neutral names shared across denominations (`إبراهيم`, `يوسف`, `سمير`, `عادل`) and distinct markers (`ميخائيل`, `جرجس`, `شنودة` vs `محمد`, `أحمد`, `مصطفى`), calculating calibrated Bayesian confidence scores.
 
 ---
 
@@ -105,15 +135,15 @@ Where:
 
 `egy-names` is the **most comprehensive, empirically grounded, and mathematically validated onomastic intelligence library in existence for Egyptian Arabic**:
 
-| Feature / Metric | Standard Open-Source Tools / LLMs | `egy-names` (v0.2.1) |
+| Dimension | Standard Open-Source / LLMs | `egy-names` (v0.2.1) |
 | :--- | :--- | :--- |
 | **National Empirical Corpus** | ❌ Synthetic / web-scraped (<50K records) | 🟢 **15.88M+ Verified Official Records** (30M+ total corpus) |
 | **Master Lexicon Size** | ❌ 1,000–5,000 common names | 🟢 **44,626 Unique Canonical Lemmas** (>99.9% population coverage) |
-| **Spelling Typo Corrections** | ❌ None or basic regex | 🟢 **23,457 Deterministic Correction Rules** |
+| **Spelling Typo Corrections** | ❌ Basic regex / none | 🟢 **23,457 Deterministic Correction Rules** |
 | **Execution Latency** | ❌ 500ms – 2,000ms (LLM API call) | 🟢 **< 0.01 ms (Sub-microsecond In-Memory Hash Trie)** |
-| **Network & AI Dependencies** | ❌ Requires OpenAI / Cloud API / Internet | 🟢 **Zero Dependencies • 100% Offline & Deterministic** |
-| **Arabic Diacritization (Tashkeel)**| ❌ Partial or rule-based guessing | 🟢 **100.0% Verified Arabic Tashkeel (44,626/44,626)** |
-| **Morphological Etymology** | ❌ None | 🟢 **100.0% Root & Toponym Definitions in Arabic & English** |
+| **Dependencies & Privacy** | ❌ Cloud APIs / Internet required | 🟢 **Zero Dependencies • 100% Offline & Deterministic** |
+| **Arabic Diacritization (Tashkeel)**| ❌ Partial guessing | 🟢 **100.0% Verified Arabic Tashkeel (44,626/44,626)** |
+| **Morphological Etymology** | ❌ None | 🟢 **100.0% Roots & Toponyms in Arabic & English** |
 | **Age Intelligence Engine** | ❌ Non-existent | 🟢 **Continuous Gaussian Generational Demographic Model** |
 | **Cross-Language Parity** | ❌ Python-only | 🟢 **7 Native SDKs** (Python, TS, Swift, C#, Dart, Java, C++) |
 
@@ -130,42 +160,6 @@ Where:
 | **Phase 2: Raw Unique Word Tokens** | **43,333 Distinct Words** | Unique word forms before spelling normalization |
 | **Phase 3: Typo & Orthography Rules** | **23,457 Rules** | Mappings for misspellings & unspaced compounds (`عبدالرحمن` $\to$ `عبد الرحمن`) |
 | **Phase 4: Master Canonical Lexicon** | **44,626 Master Lemmas** | **The complete verified onomastic dictionary of Egypt** |
-
----
-
-## ⚡ Key Capabilities Matrix
-
-| Capability | Technical Method | Example Input | Output |
-| :--- | :--- | :--- | :--- |
-| **⏳ Age Detection** | Bayesian Multi-Token Cross-Generational Inference | `كريم أشرف فاروق` | `Age: ~25 yrs (Conf: 0.641)` |
-| **⏳ Age-Aware Generation** | Gaussian Slot-Weight Convolution | `names_for_age(24, female)` | `[شهد, يارا, منة, نوران]` |
-| **🧩 DP Unspaced Splitting** | Unicode Shortest-Path Dynamic Programming | `محمدأحمدعليحسنالشناوي` | `[محمد, أحمد, علي, حسن, الشناوي]` |
-| **🎯 100% Arabic Tashkeel** | Compound-Aware Vowel Diacritization | `محمد عبدالرحمن الشرقاوي` | `مُحَمَّد عَبْدُالرَّحْمَن الشَّرْقَاوِيّ` |
-| **🔤 Passport Transliteration** | Authentic Egyptian Civil Registry Phonetics | `محمد عبد الحميد الشاذلي` | `Mohamed Abdelhamid Elshazly` |
-| **🔍 Linguistic Etymology** | Root Triliteral Decomposition & Toponym Mapping | `المنياوي` | *Attributed to Minya in Upper Egypt* |
-| **⚖️ Demographic Inference** | Empirical Frequency Marginalization | `مريم إبراهيم حسن` | `Gender: Female (95%)` |
-| **🎲 Grounded Name Generation**| 6-Slot Generational Graph Sampling | `generate(gender='female', len=4)` | `يارا محمد محمود فرغلي` |
-
----
-
-## ⏳ Age-Aware Demographic Intelligence
-
-The library incorporates an empirical **Gaussian Generational Demographic Model** that maps naming popularity across historical birth years.
-
-### Generational Center Anchors:
-Given the national corpus anchor year ($Y_{\text{data}} = 2020$) and Egyptian high-school graduation age ($A_{\text{grad}} = 18$):
-
-$$\text{Student Birth Center (Slot 1)} = 2020 - 18 = \mathbf{2002} \quad (\approx 24\text{ years old in }2026)$$
-
-Applying the average generational gap in Egyptian families ($\Delta_{\text{gen}} = 30\text{ years}$):
-
-| Generational Slot | Demographic Role | Birth Year Anchor | Current Age in 2026 | Popular Empirical Names |
-| :--- | :--- | :--- | :--- | :--- |
-| **Slot 1 (Student)** | **Person (Youth)** | **~2002** (1998–2006) | ~24 years | `شهد`, `يارا`, `كريم`, `زياد`, `منة`, `أدهم` |
-| **Slot 2 (Father)** | **Parent Generation** | **~1972** (1966–1980) | ~54 years | `أشرف`, `عادل`, `طارق`, `عصام`, `مجدي`, `مدحت` |
-| **Slot 3 (Grandfather)** | **Grandparent Generation** | **~1942** (1934–1954) | ~84 years | `فاروق`, `سيد`, `شحاتة`, `بسيوني`, `مرسي`, `طه` |
-| **Slot 4 (Great-Grandparent)** | **Historical Generation** | **~1912** (1902–1930) | Historical | `مخلوف`, `حجازي`, `دردير`, `شلتوت`, `قنديل` |
-| **Slots 5 & 6 (Family & Clan)** | **Timeless Surnames** | **Timeless** | Any Age | `الشرقاوي`, `السيد`, `إبراهيم`, `الشناوي` |
 
 ---
 

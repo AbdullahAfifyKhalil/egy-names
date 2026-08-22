@@ -384,14 +384,20 @@ void main() {
 
 ---
 
-### 6. Java / Kotlin
+### 6. Java & Android (Kotlin / Scala)
 
+**Maven (`pom.xml`):**
 ```xml
 <dependency>
     <groupId>io.github.abdullahafifykhalil</groupId>
     <artifactId>egy-names</artifactId>
     <version>0.3.2</version>
 </dependency>
+```
+
+**Gradle (`build.gradle` / `build.gradle.kts`):**
+```groovy
+implementation 'io.github.abdullahafifykhalil:egy-names:0.3.2'
 ```
 
 ```java

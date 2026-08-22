@@ -1,0 +1,6 @@
+jdk:
+  - openjdk17
+before_install:
+  - cd java/egy-names
+install:
+  - mvn install -DskipTests

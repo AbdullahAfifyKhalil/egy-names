@@ -196,7 +196,7 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 
 ## Comparison with Existing Systems
 
-| Dimension | Standard Open-Source / LLMs | `egy-names` (v0.2.1) |
+| Dimension | Standard Open-Source / LLMs | `egy-names` (v0.3.2) |
 | :--- | :--- | :--- |
 | **National Empirical Corpus** | Synthetic / web-scraped (<50K records) | **15.88M+ Verified Official Records** (30M+ total corpus) |
 | **Master Lexicon Size** | 1,000–5,000 common names | **44,626 Unique Canonical Lemmas** (>99.9% population coverage) |

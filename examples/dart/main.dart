@@ -1,32 +1,49 @@
 import 'package:egy_names/egy_names.dart';
 
 void main() {
-  final en = EgyptianNames();
+  final en = EgyNames();
 
   print('=' * 60);
-  print(' Egyptian Names (egy_names) - Flutter / Dart Showcase');
+  print(' Egyptian Names (egy_names) v0.3.2 — Dart / Flutter Showcase');
   print('=' * 60);
 
-  // 1. Generation
   print('\n1. Name Generation:');
-  final names = en.generate(count: 3, length: 3, gender: 'female');
-  for (final n in names) {
-    print('   ${n.ar} (${n.en})');
+  for (final n in en.generate(count: 3, length: 4, gender: 'female', religion: 'muslim')) {
+    print('   ${n.ar}  (${n.en})');
   }
 
-  // 2. Translation
   print('\n2. Transliteration:');
-  print('   "محمد أحمد علي" -> ${en.translate("محمد أحمد علي")}');
+  print('   "محمد أحمد علي الشناوي" -> ${en.translate("محمد أحمد علي الشناوي")}');
 
-  // 3. Correction
   print('\n3. Orthographic Correction:');
   print('   "احمد مصطفا عبد الرحيم" -> ${en.correct("احمد مصطفا عبد الرحيم")}');
 
-  // 4. Tashkeel
-  print('\n4. Tashkeel:');
-  print('   "محمد عبدالرحمن" -> ${en.tashkeel("محمد عبدالرحمن")}');
+  print('\n4. Dual Tashkeel & IPA:');
+  print('   Standard: ${en.tashkeel("محمد عبدالرحمن")}');
+  print('   Egyptian: ${en.tashkeelEg("محمد عبدالرحمن")}');
+  print('   IPA std:  ${en.ipa("جمال")}');
+  print('   IPA eg:   ${en.ipaEg("جمال")}');
 
-  // 5. Splitting
-  print('\n5. Splitting unspaced name:');
-  print('   "محمدأحمدعليحسن" -> ${en.split("محمدأحمدعليحسن")}');
+  print('\n5. Splitting concatenated names:');
+  print('   ${en.split("محمدأحمدعليحسنالشناوي")}');
+
+  print('\n6. Pet names & famous figures:');
+  print('   dallaa: ${en.dallaa("محمد", format: "tashkeel")}');
+  print('   figures: ${en.famousFigures("محمد", lang: "en").take(2).toList()}');
+
+  print('\n7. 14D lookup:');
+  print('   root=${en.root("محمد")} | origin=${en.origin("محمد")} | trend=${en.trend("محمد")}');
+  print('   meaning: ${en.meaning("محمد")?['en']}');
+
+  print('\n8. Demographics:');
+  print('   ${en.detectGender("فاطمة الزهراء")}');
+  print('   ${en.detectReligion("مينا جرجس بطرس")}');
+
+  print('\n9. Chain analysis, rank, uniqueness:');
+  for (final p in en.analyzeChain('محمد أحمد علي الشناوي')) {
+    print('   Slot ${p.slot}: ${p.name} — ${p.role}');
+  }
+  final rank = en.rank('محمد');
+  final uniq = en.uniqueness('محمد أحمد علي الشناوي');
+  print('   rank=#${rank?.rank}  uniqueness=${uniq.score} (${uniq.label})');
 }

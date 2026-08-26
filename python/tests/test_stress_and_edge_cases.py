@@ -1,5 +1,5 @@
 """
-Adversarial Stress & Edge-Case Testing Suite for egy-names v0.2.1
+Adversarial Stress & Edge-Case Testing Suite for egy-names v0.3.2
 Tests every possible boundary, corrupted input, extreme scenario,
 unusual Unicode, and concurrent multi-threading behavior to ensure
 absolute robustness and zero crashes.

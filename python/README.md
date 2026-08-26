@@ -23,9 +23,45 @@
 <br />
 **Python** | **TypeScript / JavaScript** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)** | **Faker** | **Hugging Face**
 
-[Complete API Reference & Documentation](DOCUMENTATION.md) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
+[Complete API Reference & Documentation](DOCUMENTATION.md) | [Why you need this](#why-you-need-this) | [Try it in 30 seconds](#try-it-in-30-seconds) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
 
 </div>
+
+---
+
+## Why you need this
+
+Your signup form asks for *first name* and *last name*. An Egyptian user types **أحمد محمد حسن علي الشناوي**. KYC fails. The chatbot calls him *Mr. Shen*. A generic faker invents a girl as someone's father.
+
+Egypt does not use Western surnames. A legal name is a **patronymic chain** — person → father → grandfather → family. Flatten it and you silently corrupt identity for **115 million** people.
+
+`egy-names` is the offline engine trained on **15.8 million** official records. Same input, same output. No network. No hallucination. If you ship forms, KYC, OCR cleanup, test fixtures, or TTS for Egypt — you need this.
+
+## Try it in 30 seconds
+
+```bash
+pip install egy-names==0.3.2
+```
+
+```python
+from egy_names import EgyNames
+
+e = EgyNames()
+
+# A bank / civil-registry dump with no spaces
+print(e.split("محمدأحمدعليحسنالشناوي"))
+# ['محمد', 'أحمد', 'علي', 'حسن', 'الشناوي']
+
+# Egyptian passport spelling (Gamal, not Jamal)
+print(e.translate("محمد أحمد علي الشناوي"))
+# Mohamed Ahmed Ali Elshenawy
+
+# A grounded test person — never a female father
+name = e.generate(gender="female", religion="muslim", length=4)[0]
+print(f"{name.ar}  —  {name.en}")
+```
+
+Need the same names inside existing Faker tests? `pip install faker-egy-names`.
 
 ---
 

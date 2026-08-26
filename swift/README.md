@@ -5,7 +5,7 @@
 <img src="https://raw.githubusercontent.com/AbdullahAfifyKhalil/egy-names/main/assets/logo.png" alt="Egyptian Names Logo" width="130" style="border-radius: 28px; box-shadow: 0 12px 36px rgba(0,0,0,0.25); margin-bottom: 12px;" />
 
 # Egyptian Names (`egy-names`)
-### *The Production-Grade Onomastic Intelligence and Computational Linguistic Engine for Egyptian Names*
+### *The Production-Grade Onomastic Intelligence Engine for Egyptian Names — offline across 7 languages, plus Faker and Hugging Face*
 
 [![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.2-3776AB)](https://pypi.org/project/egy-names/)
 [![Faker Provider](https://img.shields.io/badge/Faker-faker--egy--names_v0.1.0-563D7C)](https://pypi.org/project/faker-egy-names/)
@@ -21,7 +21,7 @@
 
 **Engineered with 100% Deterministic Parity across 7 Major Languages:**
 <br />
-**Python** | **TypeScript / JavaScript** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)**
+**Python** | **TypeScript / JavaScript** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)** | **Faker** | **Hugging Face**
 
 [Complete API Reference & Documentation](DOCUMENTATION.md) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
 

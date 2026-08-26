@@ -1,6 +1,6 @@
 # Egyptian Names (`egy-names`) — Complete API Reference & Documentation
 
-Welcome to the definitive developer guide for **Egyptian Names (`egy-names`)**, the production-grade onomastic intelligence and computational linguistic engine for Egyptian naming traditions.
+Welcome to the definitive developer guide for **Egyptian Names (`egy-names`)**, the production-grade onomastic intelligence engine for Egyptian names — offline across seven languages, with a Faker companion and Hugging Face datasets.
 
 ---
 

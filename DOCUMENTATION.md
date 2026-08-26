@@ -27,6 +27,7 @@ Welcome to the definitive developer guide for **Egyptian Names (`egy-names`)**, 
 4. [Cross-Language SDK Code Reference (Python, TS, Dart, Swift, Java, C#, C++)](#4-cross-language-sdk-code-reference)
 5. [Data Types & Models Reference](#5-data-types--models-reference)
 6. [Performance, Concurrency & Security](#6-performance-concurrency--security)
+7. [Faker Companion (`faker-egy-names`)](#7-faker-companion-faker-egy-names)
 
 ---
 
@@ -66,6 +67,14 @@ $$\text{Full Legal Name} = \text{Personal Name} \to \text{Father} \to \text{Gran
 ```bash
 pip install egy-names==0.3.2
 ```
+
+Faker test suites can install the companion instead of calling `generate()` directly:
+
+```bash
+pip install faker-egy-names
+```
+
+See [§7 Faker Companion](#7-faker-companion-faker-egy-names).
 
 ### TypeScript / JavaScript (Node.js & Browsers)
 ```bash
@@ -638,6 +647,37 @@ interface NameInfo {
 - **Sub-Microsecond Latency**: Lookups, translations, and DP splits execute in $< 0.05\text{ ms}$.
 - **Thread-Safe**: Fully read-only, immutable singleton design across all 7 language SDKs. Safe for high-concurrency HTTP servers, multi-threaded pipelines, and mobile apps.
 - **100% Offline & Private**: Zero external API calls, zero telemetry, zero data collection. Meets strict enterprise, banking, and GDPR privacy standards.
+
+---
+
+## 7. Faker Companion (`faker-egy-names`)
+
+[`faker-egy-names`](https://pypi.org/project/faker-egy-names/) is a **separate** package. It does not add Faker as a dependency of `egy-names`. Every method forwards to `EgyNames.generate()` from `egy-names>=0.3.2,<0.4`.
+
+```python
+from faker import Faker
+from faker_egy_names import Provider
+
+fake = Faker()
+fake.add_provider(Provider)
+
+name = fake.egyptian_name(gender="female", religion="muslim", length=4, seed=1)
+name.ar          # full Arabic chain
+name.en          # Egyptian passport transliteration
+name.parts_ar    # [person, father, grandfather, family]
+
+fake.egyptian_full_name(lang="en")   # or "ar" / "both"
+fake.egyptian_person()
+fake.egyptian_father()
+fake.egyptian_grandfather()
+fake.egyptian_family()
+```
+
+Keyword arguments passed through to `generate()`: `gender`, `religion`, `length`, `family_name`, `frequency`, `seed`.
+
+`Faker.seed_instance(n)` is honored unless you pass `seed=` yourself. Slot helpers on separate calls are not the same person — use `egyptian_name()` once for a coherent fixture.
+
+Source lives in [`faker-egy-names/`](faker-egy-names/).
 
 ---
 

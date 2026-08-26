@@ -8,6 +8,7 @@
 ### *The Production-Grade Onomastic Intelligence and Computational Linguistic Engine for Egyptian Names*
 
 [![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.2-3776AB)](https://pypi.org/project/egy-names/)
+[![Faker Provider](https://img.shields.io/badge/Faker-faker--egy--names_v0.1.0-563D7C)](https://pypi.org/project/faker-egy-names/)
 [![npm Version](https://img.shields.io/badge/npm-v0.3.2-CB3837)](https://www.npmjs.com/package/egy-names)
 [![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.2-0175C2)](https://pub.dev/packages/egy_names)
 [![Maven Central](https://img.shields.io/badge/Maven_Central-v0.3.2-C71A36)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
@@ -22,7 +23,7 @@
 <br />
 **Python** | **TypeScript / JavaScript** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)**
 
-[Complete API Reference & Documentation](DOCUMENTATION.md) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
+[Complete API Reference & Documentation](DOCUMENTATION.md) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
 
 </div>
 
@@ -276,6 +277,32 @@ for n in names:
 det = e.detect_age("كريم أشرف فاروق")
 print(f"Age: ~{det.estimated_age} yrs | Conf: {det.confidence} | {det.generation_label}")
 ```
+
+#### Faker companion (`faker-egy-names`)
+
+A separate PyPI package for test suites that already use [Faker](https://faker.readthedocs.io/). It does not sample names itself — every call forwards to `egy-names==0.3.2` `generate()`. The engine stays offline and unchanged.
+
+```bash
+pip install faker-egy-names
+```
+
+```python
+from faker_egy_names import egyptian_faker
+
+fake = egyptian_faker()
+name = fake.egyptian_name(gender="female", religion="muslim")
+print(name.ar)   # grounded 6-slot chain
+print(name.en)
+
+fake.egyptian_full_name()          # English full name
+fake.egyptian_full_name("ar")      # Arabic full name
+fake.egyptian_person()             # slot 1
+fake.egyptian_father()             # slot 2
+fake.egyptian_grandfather()        # slot 3
+fake.egyptian_family()             # clan / toponymic surname
+```
+
+There is no `first_name` / `last_name` mapping. For one coherent person, call `egyptian_name()` once and read `parts_ar` / `parts_en`. Source: [`faker-egy-names/`](../faker-egy-names/) · [PyPI](https://pypi.org/project/faker-egy-names/).
 
 ---
 

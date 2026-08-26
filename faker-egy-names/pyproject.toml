@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "faker-egy-names"
+version = "0.1.0"
+description = "Faker provider for grounded Egyptian names — a thin wrapper around egy-names 0.3.2."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Abdullah Afify", email = "abdullah@afify.dev" }]
+maintainers = [{ name = "Afify" }]
+keywords = [
+    "egy-names",
+    "egyptian",
+    "faker",
+    "names",
+    "arabic",
+    "onomastics",
+    "testing",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Text Processing :: Linguistic",
+    "Typing :: Typed",
+]
+dependencies = [
+    "egy-names>=0.3.2,<0.4",
+    "Faker>=18.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/AbdullahAfifyKhalil/egy-names"
+Documentation = "https://github.com/AbdullahAfifyKhalil/egy-names#readme"
+Issues = "https://github.com/AbdullahAfifyKhalil/egy-names/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/faker_egy_names"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/",
+    "tests/",
+    "README.md",
+    "LICENSE",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

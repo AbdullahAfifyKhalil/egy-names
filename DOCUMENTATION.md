@@ -24,7 +24,7 @@ Welcome to the definitive developer guide for **Egyptian Names (`egy-names`)**, 
    - [3.13 Patronymic Chain Decomposition & Formatting (`analyze_chain`, `format_name`)](#313-patronymic-chain-decomposition--formatting)
    - [3.14 Frequency Ranking & Rarity Metrics (`rank`, `uniqueness`)](#314-frequency-ranking--rarity-metrics)
    - [3.15 High-Throughput Batch Processing (`batch`)](#315-high-throughput-batch-processing)
-4. [Cross-Language SDK Code Reference (Python, TS, Dart, Swift, Java, C#, C++)](#4-cross-language-sdk-code-reference)
+4. [Cross-Language SDK Code Reference (Python, TS, Dart, Swift, Java, C#, C++, Faker)](#4-cross-language-sdk-code-reference)
 5. [Data Types & Models Reference](#5-data-types--models-reference)
 6. [Performance, Concurrency & Security](#6-performance-concurrency--security)
 7. [Faker Companion (`faker-egy-names`)](#7-faker-companion-faker-egy-names)
@@ -592,6 +592,19 @@ auto pet_names = en.dallaa("محمد", "tashkeel");
 auto figures = en.famous_figures("محمد", "en");
 ```
 
+### Faker (Python companion)
+```python
+from faker_egy_names import egyptian_faker
+
+fake = egyptian_faker()
+name = fake.egyptian_name(gender="female", religion="muslim", length=4)
+print(name.ar, name.en)
+print(fake.egyptian_full_name("ar"))
+print(fake.egyptian_person(), fake.egyptian_father(), fake.egyptian_family())
+```
+
+See [§7 Faker Companion](#7-faker-companion-faker-egy-names) for the full method reference.
+
 ---
 
 ## 5. Data Types & Models Reference
@@ -652,32 +665,71 @@ interface NameInfo {
 
 ## 7. Faker Companion (`faker-egy-names`)
 
-[`faker-egy-names`](https://pypi.org/project/faker-egy-names/) is a **separate** package. It does not add Faker as a dependency of `egy-names`. Every method forwards to `EgyNames.generate()` from `egy-names>=0.3.2,<0.4`.
+[`faker-egy-names`](https://pypi.org/project/faker-egy-names/) **0.1.0** is a separate PyPI package. It does **not** add Faker as a dependency of `egy-names`. Every method forwards to `EgyNames.generate()` from `egy-names>=0.3.2,<0.4`. There is no `first_name` / `last_name` mapping.
+
+**Install:** `pip install faker-egy-names`  
+**Source:** [`faker-egy-names/`](faker-egy-names/)
+
+### 7.1 Registration
 
 ```python
 from faker import Faker
-from faker_egy_names import Provider
+from faker_egy_names import Provider, egyptian_faker
 
 fake = Faker()
 fake.add_provider(Provider)
 
-name = fake.egyptian_name(gender="female", religion="muslim", length=4, seed=1)
-name.ar          # full Arabic chain
-name.en          # Egyptian passport transliteration
-name.parts_ar    # [person, father, grandfather, family]
+# or
+fake = egyptian_faker()
+```
 
-fake.egyptian_full_name(lang="en")   # or "ar" / "both"
-fake.egyptian_person()
+`Faker.seed_instance(n)` is honored unless you pass `seed=` yourself.
+
+### 7.2 Method Reference
+
+| Method | Returns | Description |
+| :--- | :--- | :--- |
+| `egyptian_name(...)` | `GeneratedName` | One grounded chain: `ar`, `en`, `parts_ar`, `parts_en` |
+| `egyptian_full_name(lang="en", ...)` | `str` or `(ar, en)` | Full patronymic name |
+| `egyptian_person(lang="en", ...)` | `str` or `(ar, en)` | Slot 1 — the person's given name |
+| `egyptian_father(lang="en", ...)` | `str` or `(ar, en)` | Slot 2 — father. Empty if the chain has no father slot |
+| `egyptian_grandfather(lang="en", ...)` | `str` or `(ar, en)` | Slot 3 — grandfather. Empty if the chain is too short |
+| `egyptian_family(lang="en", ...)` | `str` or `(ar, en)` | Final clan / toponymic surname. Empty when `family_name=False` |
+
+Slot helpers on separate calls are **not** the same person. For one fixture, call `egyptian_name()` once and read `parts_ar` / `parts_en`.
+
+### 7.3 Parameters
+
+Passed through to `egy-names.generate()`:
+
+- `gender` *(string, optional)*: `"male"` or `"female"`.
+- `religion` *(string, optional)*: `"muslim"` or `"christian"`.
+- `length` *(int, optional, 2–8)*: Number of patronymic slots.
+- `family_name` *(bool, default=True)*: When `True`, the final slot is a verified Egyptian surname.
+- `frequency` *(string, optional)*: `"common"`, `"normal"`, or `"rare"`.
+- `seed` *(int, optional)*: Overrides Faker's RNG for that call.
+
+`lang` is `"en"` (default), `"ar"`, or `"both"` (returns a `(ar, en)` tuple). It is **not** forwarded to the engine — the provider always generates both scripts and selects the requested one.
+
+### 7.4 Example
+
+```python
+from faker_egy_names import egyptian_faker
+
+fake = egyptian_faker()
+name = fake.egyptian_name(gender="female", religion="muslim", length=4, seed=1)
+print(name.ar)        # شهد هاشم نبيل الديب
+print(name.en)        # Shahd Hashem Nabil Eldeeb
+print(name.parts_en)  # ['Shahd', 'Hashem', 'Nabil', 'Eldeeb']
+
+fake.egyptian_full_name()                 # English full name
+fake.egyptian_full_name("ar")             # Arabic full name
+fake.egyptian_full_name(lang="both")      # (ar, en)
+fake.egyptian_person(gender="male")
 fake.egyptian_father()
 fake.egyptian_grandfather()
 fake.egyptian_family()
 ```
-
-Keyword arguments passed through to `generate()`: `gender`, `religion`, `length`, `family_name`, `frequency`, `seed`.
-
-`Faker.seed_instance(n)` is honored unless you pass `seed=` yourself. Slot helpers on separate calls are not the same person — use `egyptian_name()` once for a coherent fixture.
-
-Source lives in [`faker-egy-names/`](faker-egy-names/).
 
 ---
 

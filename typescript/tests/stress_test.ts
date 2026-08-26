@@ -1,7 +1,11 @@
-import { EgyptianNames, PetName, Gender, Religion } from '../src/index';
+/**
+ * egy-names v0.3.2 — TypeScript Adversarial Stress & Edge-Case Suite
+ * Mirrors tests/stress_test.py for the APIs available in the TS SDK.
+ */
+import { EgyptianNames } from '../src/index';
 
 const en = new EgyptianNames();
-console.log("Initialized TypeScript EgyNames successfully.");
+console.log("Initialized TypeScript EgyNames v0.3.2 successfully.");
 
 let passed = 0;
 let failed = 0;
@@ -40,6 +44,14 @@ runTest("1.1 Empty string input across all APIs", () => {
   assertEq(en.split(""), []);
   assertEq(en.dallaa(""), []);
   assertEq(en.famousFigures(""), []);
+  assertEq(en.lookup(""), null);
+  assertEq(en.info(""), null);
+  assertEq(en.meaning(""), null);
+  assertEq(en.root(""), null);
+  assertEq(en.origin(""), null);
+  assertEq(en.trend(""), null);
+  assertEq(en.rank(""), null);
+  assertEq(en.isValid(""), false);
 });
 
 runTest("1.2 Whitespace-only input (spaces, tabs, newlines)", () => {
@@ -66,6 +78,8 @@ runTest("2.1 SQL Injection / Script payload injection safety", () => {
   en.correct("'; DROP TABLE names; --");
   en.split("'; DROP TABLE names; --");
   en.search({ prefix: "'; DROP TABLE" });
+  en.lookup("'; DROP TABLE names; --");
+  en.annotate("'; DROP TABLE names; --");
 });
 
 runTest("2.2 Unicode Control Characters, Zero-Width & Emojis", () => {
@@ -121,6 +135,7 @@ runTest("5.1 Pet Names multi-format extraction", () => {
   if (tash.length < 3) throw new Error(`Expected tashkeel pet names, got ${tash}`);
   if (ipa.length < 3) throw new Error(`Expected ipa pet names, got ${ipa}`);
   if (info.length < 3) throw new Error(`Expected PetName objects, got ${info.length}`);
+  assertEq(en.petNames("محمد"), plain);
   console.log(`      'محمد' Pet Names: ${info.map(p => `${p.ar} (${p.tashkeel}) [${p.ipa}]`).join(', ')}`);
 });
 
@@ -133,10 +148,54 @@ runTest("5.2 Famous Figures bilingual extraction & filtering", () => {
 });
 
 console.log("\n=======================================================");
-console.log("SUITE 6: HIGH-THROUGHPUT STRESS TEST & BENCHMARK");
+console.log("SUITE 6: 14D LOOKUP, ANNOTATION, RANK & CHAIN ANALYSIS");
 console.log("=======================================================");
 
-runTest("6.1 Generate 10,000 patronymic names in bulk", () => {
+runTest("6.1 Lookup, info, isValid, and annotate", () => {
+  const info = en.info("محمد");
+  const lookup = en.lookup("محمد");
+  if (!info || !lookup) throw new Error("Expected NameInfo for محمد");
+  if (info.ar !== "محمد" || lookup.ar !== "محمد") throw new Error("Arabic lemma mismatch");
+  if (!en.isValid("محمد") || !en.isValid("فاطمة")) throw new Error("Expected isValid true");
+  const annotOne = en.annotate("محمد");
+  if (!annotOne || Array.isArray(annotOne)) throw new Error("Expected single NameInfo from annotate");
+  const annotChain = en.annotate("محمد أحمد");
+  if (!Array.isArray(annotChain) || annotChain.length < 2) throw new Error("Expected chain annotate list");
+});
+
+runTest("6.2 Meaning, root, origin, and trend", () => {
+  const meaning = en.meaning("محمد");
+  if (!meaning || !meaning.ar || !meaning.en) throw new Error(`Expected bilingual meaning, got ${JSON.stringify(meaning)}`);
+  const root = en.root("محمد");
+  if (!root || root === "N/A") throw new Error(`Expected morphological root, got ${root}`);
+  const origin = en.origin("محمد");
+  if (!origin) throw new Error("Expected origin_type");
+  const trend = en.trend("محمد");
+  const allowed = ["classic_timeless", "rising_modern", "vintage_heritage", "rare_toponymic"];
+  if (!trend || !allowed.includes(trend)) throw new Error(`Unexpected trend: ${trend}`);
+  console.log(`      meaning/root/origin/trend -> ${meaning.en.slice(0, 60)} | ${root} | ${origin} | ${trend}`);
+});
+
+runTest("6.3 Rank, analyzeChain, uniqueness, families, and stats", () => {
+  const rank = en.rank("محمد");
+  if (!rank || rank.rank < 1) throw new Error(`Unexpected rank: ${JSON.stringify(rank)}`);
+  const chain = en.analyzeChain("محمد أحمد علي الشناوي");
+  if (chain.length !== 4) throw new Error(`Expected 4 chain parts, got ${JSON.stringify(chain)}`);
+  if (chain[0].role !== "person") throw new Error(`Expected person role, got ${chain[0].role}`);
+  const score = en.uniqueness("محمد أحمد علي الشناوي");
+  if (score.score < 0 || score.score > 1) throw new Error(`Uniqueness out of range: ${score.score}`);
+  const families = en.families({ count: 10 });
+  if (families.length !== 10) throw new Error(`Expected 10 families, got ${families.length}`);
+  const stats = en.stats();
+  if ((stats.total_names || 0) < 44000) throw new Error(`Expected >= 44000 names, got ${stats.total_names}`);
+  console.log(`      rank=#${rank.rank} uniqueness=${score.score} (${score.label}) families=${families.length}`);
+});
+
+console.log("\n=======================================================");
+console.log("SUITE 7: HIGH-THROUGHPUT STRESS TEST & BENCHMARK");
+console.log("=======================================================");
+
+runTest("7.1 Generate 10,000 patronymic names in bulk", () => {
   const t0 = performance.now();
   const names = en.generate({ count: 10000, length: 4 });
   const dt = (performance.now() - t0) / 1000;
@@ -144,7 +203,7 @@ runTest("6.1 Generate 10,000 patronymic names in bulk", () => {
   console.log(`      Generated 10,000 names in ${dt.toFixed(3)}s (${(10000 / dt).toFixed(0)} names/sec)`);
 });
 
-runTest("6.2 Transliterate 50,000 tokens", () => {
+runTest("7.2 Transliterate 50,000 tokens", () => {
   const sampleNames = ["محمد", "أحمد", "فاطمة", "الشناوي", "عبد الرحمن", "مهرائيل", "جرجس", "بوادقجي"];
   const t0 = performance.now();
   for (let i = 0; i < 50000; i++) {

@@ -2,36 +2,53 @@ import Foundation
 import EgyNames
 
 let en = EgyptianNames()
+let rule = String(repeating: "=", count: 60)
 
-print("=" * 60)
-print(" Egyptian Names (EgyNames) - Swift Package Showcase")
-print("=" * 60)
+print(rule)
+print(" Egyptian Names (EgyNames) v0.3.2 — Swift Showcase")
+print(rule)
 
-// 1. Generation
 print("\n1. Name Generation:")
-let names = en.generate(count: 3, length: 3, gender: "female")
-for n in names {
+for n in en.generate(count: 3, length: 4, gender: "female", religion: "muslim") {
     print("   \(n.ar)  (\(n.en))")
 }
 
-// 2. Translation
 print("\n2. Transliteration:")
-print("   'محمد أحمد علي' -> \(en.translate("محمد أحمد علي"))")
+print("   'محمد أحمد علي الشناوي' -> \(en.translate("محمد أحمد علي الشناوي"))")
 
-// 3. Correction
 print("\n3. Orthographic Correction:")
 print("   'احمد مصطفا عبد الرحيم' -> \(en.correct("احمد مصطفا عبد الرحيم"))")
 
-// 4. Tashkeel
-print("\n4. Tashkeel:")
-print("   'محمد عبدالرحمن' -> \(en.tashkeel("محمد عبدالرحمن"))")
+print("\n4. Dual Tashkeel & IPA:")
+print("   Standard: \(en.tashkeel("محمد عبدالرحمن"))")
+print("   Egyptian: \(en.tashkeelEg("محمد عبدالرحمن"))")
+print("   IPA std:  \(en.ipa("جمال"))")
+print("   IPA eg:   \(en.ipaEg("جمال"))")
 
-// 5. Splitting
-print("\n5. Splitting unspaced name:")
-print("   'محمدأحمدعليحسن' -> \(en.split("محمدأحمدعليحسن"))")
+print("\n5. Splitting concatenated names:")
+print("   \(en.split("محمدأحمدعليحسنالشناوي"))")
 
-// 6. Chain Analysis
-print("\n6. Patronymic Chain:")
-for p in en.analyzeChain("محمد أحمد علي حسن الشاذلي") {
-    print("   Slot \(p.slot): \(p.name) - \(p.detail)")
+print("\n6. Pet names & famous figures:")
+print("   dallaa: \(en.dallaa("محمد", format: "tashkeel"))")
+print("   figures: \(en.famousFigures("محمد", lang: "en").prefix(2))")
+
+print("\n7. 14D lookup:")
+print("   root=\(en.root("محمد") ?? "nil") | origin=\(en.origin("محمد") ?? "nil") | trend=\(en.trend("محمد") ?? "nil")")
+if let meaning = en.meaning("محمد") {
+    print("   meaning: \(meaning["en"] ?? "")")
+}
+
+print("\n8. Demographics:")
+let gender = en.detectGender("فاطمة الزهراء")
+let religion = en.detectReligion("مينا جرجس بطرس")
+print("   \(gender.gender) (\(gender.confidence))")
+print("   \(religion.religion) (\(religion.confidence))")
+
+print("\n9. Chain analysis, rank, uniqueness:")
+for p in en.analyzeChain("محمد أحمد علي الشناوي") {
+    print("   Slot \(p.slot): \(p.name) — \(p.role)")
+}
+if let rank = en.rank("محمد") {
+    let uniq = en.uniqueness("محمد أحمد علي الشناوي")
+    print("   rank=#\(rank.rank)  uniqueness=\(uniq.score) (\(uniq.label))")
 }

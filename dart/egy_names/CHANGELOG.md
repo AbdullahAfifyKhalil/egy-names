@@ -1,6 +1,7 @@
 ## 0.3.6
 
 - Version alignment with the other SDKs. Same book.
+- Language-specific README on pub.dev.
 
 ## 0.3.5
 

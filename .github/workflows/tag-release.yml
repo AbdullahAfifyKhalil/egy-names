@@ -37,14 +37,33 @@ jobs:
           echo "version=$v" >> "$GITHUB_OUTPUT"
 
       - name: Create and push tag if it doesn't exist
+        id: tag
         run: |
           v="v${{ steps.local.outputs.version }}"
+          echo "tag=$v" >> "$GITHUB_OUTPUT"
           if git rev-parse "$v" >/dev/null 2>&1; then
+            echo "created=false" >> "$GITHUB_OUTPUT"
             echo "$v already exists — nothing to do."
           else
             git config user.name "egy-names-release-bot"
             git config user.email "actions@github.com"
             git tag "$v"
             git push origin "$v"
+            echo "created=true" >> "$GITHUB_OUTPUT"
             echo "pushed tag $v"
+          fi
+
+      # A git tag is not a GitHub Release. The Releases page and the
+      # repo "Latest" badge read Releases, not tags — so without this
+      # step the UI stays on the previous version after a tag-only push.
+      - name: Create GitHub Release if missing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v="${{ steps.tag.outputs.tag }}"
+          if gh release view "$v" >/dev/null 2>&1; then
+            echo "Release $v already exists."
+          else
+            gh release create "$v" --title "$v" --generate-notes
+            echo "created GitHub Release $v"
           fi

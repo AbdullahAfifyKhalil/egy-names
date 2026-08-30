@@ -23,6 +23,7 @@
 [![NuGet Version](https://img.shields.io/badge/NuGet-v0.3.5-004880)](https://www.nuget.org/packages/egy-names/)
 [![Swift PM](https://img.shields.io/badge/Swift_PM-v0.3.5-FA7343)](https://github.com/AbdullahAfifyKhalil/egy-names)
 [![Hugging Face](https://img.shields.io/badge/Hugging_Face-44.6K_Lexicon-FFD21E)](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
+[![Fallback model](https://img.shields.io/badge/Model-egy--names--fallback--classifier-FFD21E)](https://huggingface.co/Abdullah-afify/egy-names-fallback-classifier)
 [![Medium](https://img.shields.io/badge/Medium-14D_Engine-00AB6C)](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4)
 [![Documentation](https://img.shields.io/badge/Documentation-Complete_API_Reference-blue.svg)](DOCUMENTATION.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -31,7 +32,7 @@
 <br />
 **Python** | **TypeScript / JavaScript** | **PHP** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)** | **Faker** | **Hugging Face**
 
-[Site · origin, lab, demo](https://afify.co/egy-names) | [Complete API Reference & Documentation](DOCUMENTATION.md) | [Why you need this](#why-you-need-this) | [Try it in 30 seconds](#try-it-in-30-seconds) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face Datasets](#hugging-face-datasets) | [Medium](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4) | [License](#license)
+[Site · origin, lab, demo](https://afify.co/egy-names) | [Complete API Reference & Documentation](DOCUMENTATION.md) | [Why you need this](#why-you-need-this) | [Try it in 30 seconds](#try-it-in-30-seconds) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face](#hugging-face-datasets-and-model) | [Medium](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4) | [License](#license)
 
 </div>
 
@@ -543,9 +544,9 @@ int main() {
 
 ---
 
-## Hugging Face Datasets
+## Hugging Face Datasets and Model
 
-The underlying national datasets are open-source and hosted on Hugging Face:
+The underlying national datasets — and the fallback classifier trained on them — are open-source on Hugging Face.
 
 ### 1. Egyptian Names Dataset (44.6K Lexicon and 15.88M Corpus)
 [https://huggingface.co/datasets/Abdullah-afify/egyptian-names](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
@@ -561,7 +562,12 @@ dataset = load_dataset("Abdullah-afify/egyptian-names")
 print(dataset["train"][0])
 ```
 
-### 2. Egyptian High School Students Degrees Dataset (2017–2026)
+### 2. Fallback classifier (names not in the book)
+[https://huggingface.co/Abdullah-afify/egy-names-fallback-classifier](https://huggingface.co/Abdullah-afify/egy-names-fallback-classifier)
+
+Trained on this dataset. Used only when `lookup` misses. Every prediction is labeled `inferred: true`. The model abstains (`unknown` / `neutral`) below calibrated precision thresholds instead of guessing. Wired into the Python SDK as `identify()` / `identify_all()`.
+
+### 3. Egyptian High School Students Degrees Dataset (2017–2026)
 [https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades](https://huggingface.co/datasets/Abdullah-afify/egyptian-high-school-students-grades)
 * **3,790,225 Total Records** across 5 national examination cohorts (**2017**, **2023**, **2024**, **2025**, **2026**).
 

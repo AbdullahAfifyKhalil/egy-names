@@ -2,7 +2,17 @@
 
 How to ship a new cut of the ten libraries. Egy-Names is an Afify open-source project. Product page: [afify.co/egy-names](https://afify.co/egy-names).
 
-The eight engines share one book and one version (`0.3.6` today). The two Faker companions have their own line (`0.1.2` today). Do not publish a Faker as `0.3.x`.
+The eight engines share one book. Registry versions can drift when only one door needs a patch. **Live today:**
+
+| Door | Live |
+|---|---|
+| PyPI / npm / pub.dev / NuGet / Maven Central | `0.3.6` |
+| Packagist `afify/egy-names` | `v0.3.7` |
+| Monorepo tag (Swift, C++, JitPack) | `v0.3.8` |
+| Faker Python `faker-egy-names` | `0.1.2` |
+| Faker PHP `afify/faker-egy-names` | `v0.1.3` |
+
+Do not publish a Faker as `0.3.x`. Do not pin JitPack `v0.3.6` — that tag is a cached Error. C++ `GIT_TAG v0.3.6` does not find the book.
 
 A version number can be published **once**. PyPI, npm, NuGet, pub.dev, and Maven Central reject a rebuild of the same version. If a cut is wrong, bump again.
 
@@ -39,7 +49,7 @@ GitHub secrets on [AbdullahAfifyKhalil/egy-names](https://github.com/AbdullahAfi
 |---|---|
 | `PYPI_API_TOKEN` | `publish-python.yml`, `publish-faker-python.yml` |
 | `NPM_TOKEN` | `publish-npm.yml` |
-| `NUGET_API_KEY` | `publish-nuget.yml` |
+| `NUGET_API_KEY` | `publish-nuget.yml` — optional. New nuget.org keys last 30 days. Prefer Trusted Publishing or a manual `.nupkg` upload. |
 
 pub.dev uses GitHub OIDC. No long-lived secret. The publisher on pub.dev must allow **tag** `refType` with pattern `v{{version}}`. A push to `main` or a manual workflow click will test, then fail publish.
 
@@ -254,7 +264,7 @@ Search can stay empty for a while after repo1 is 200. The publishing phase is no
 
 JitPack builds the **monorepo tag** `vX.Y.Z`. It caches by tag name. If the first build fails, it keeps that failure even after you fix `main`.
 
-`jitpack.yml` runs Maven in `java/egy-names` and skips javadoc. JitPack’s Maven is old; javadoc plugin 3.8.0 will fail if that skip is missing.
+`jitpack.yml` runs Maven in `java/egy-names`. JitPack’s Maven is older than 3.6.3, so `maven-javadoc-plugin` must stay at **3.5.0**. Plugin 3.8.0 fails before skip flags apply. That is why `v0.3.6` / `v0.3.7` stay Error. Pin **`v0.3.8`**.
 
 After the tag exists: open [jitpack.io/#AbdullahAfifyKhalil/egy-names](https://jitpack.io/#AbdullahAfifyKhalil/egy-names) and **Rebuild** `vX.Y.Z` if status is Error.
 

@@ -15,7 +15,7 @@ int main() {
     egy_names::EgyNames en;
 
     std::cout << "============================================================" << std::endl;
-    std::cout << " Egyptian Names (egy-names) 0.3.6 — C++20" << std::endl;
+    std::cout << " Egyptian Names (egy-names) 0.3.8 — C++20" << std::endl;
     std::cout << "============================================================" << std::endl;
 
     std::cout << "\n1. Generate a grounded chain:" << std::endl;

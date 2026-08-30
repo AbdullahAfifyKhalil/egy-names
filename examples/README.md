@@ -8,7 +8,7 @@ One folder per live library. Same engine. Each script stays in its own language.
 | [`typescript/`](typescript/) | `npm install egy-names` |
 | [`php/`](php/) | `composer require afify/egy-names` |
 | [`dart/`](dart/) | `dart pub add egy_names` |
-| [`java/`](java/) | JitPack `egy-names` |
+| [`java/`](java/) | Maven Central `io.github.abdullahafifykhalil:egy-names:0.3.6` |
 | [`csharp/`](csharp/) | `dotnet add package egy-names` |
 | [`swift/`](swift/) | Swift PM `EgyNames` |
 | [`cpp/`](cpp/) | C++20 header + catalog |

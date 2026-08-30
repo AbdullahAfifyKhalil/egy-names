@@ -1,7 +1,7 @@
 <?php
 
 /**
- * afify/egy-names 0.3.6 — PHP showcase.
+ * afify/egy-names 0.3.7 — PHP showcase.
  */
 
 declare(strict_types=1);
@@ -28,7 +28,7 @@ use Afify\EgyNames\EgyNames;
 $en = new EgyNames();
 
 echo str_repeat('=', 60) . PHP_EOL;
-echo " Egyptian Names (afify/egy-names) 0.3.6 — PHP" . PHP_EOL;
+echo " Egyptian Names (afify/egy-names) 0.3.7 — PHP" . PHP_EOL;
 echo str_repeat('=', 60) . PHP_EOL;
 
 echo "\n1. Generate a grounded chain:\n";

@@ -86,7 +86,7 @@ See [§7 Faker Companion](#7-faker-companion-faker-egy-names).
 
 ### PHP (8.1+)
 ```bash
-composer require afify/egy-names:^0.3.6
+composer require afify/egy-names:^0.3.7
 ```
 
 Packagist: [`afify/egy-names`](https://packagist.org/packages/afify/egy-names).
@@ -94,7 +94,7 @@ Packagist: [`afify/egy-names`](https://packagist.org/packages/afify/egy-names).
 Faker test suites:
 
 ```bash
-composer require afify/faker-egy-names:^0.1.2
+composer require afify/faker-egy-names:^0.1.3
 ```
 
 See [§4 PHP](#php-81) and [§7.5 PHP](#75-php-fakerphp).
@@ -113,28 +113,21 @@ dart pub add egy_names:^0.3.6
 ```
 
 ### Swift (iOS, macOS, watchOS, visionOS)
-In Xcode: **File → Add Package Dependencies...** with `https://github.com/AbdullahAfifyKhalil/egy-names.git` (Version `0.3.6`).
+In Xcode: **File → Add Package Dependencies...** with `https://github.com/AbdullahAfifyKhalil/egy-names.git` (Version `0.3.8`).
 Or in `Package.swift`:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.6")
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.8")
 ]
 ```
 
-### Java / Kotlin (Maven / Gradle via JitPack)
-**Gradle:**
-```groovy
-repositories { maven { url 'https://jitpack.io' } }
-dependencies { implementation 'com.github.AbdullahAfifyKhalil.egy-names:egy-names:v0.3.6' }
+### Java / Kotlin (Maven Central)
+
+```kotlin
+implementation("io.github.abdullahafifykhalil:egy-names:0.3.6")
 ```
-**Maven:**
-```xml
-<dependency>
-    <groupId>com.github.AbdullahAfifyKhalil.egy-names</groupId>
-    <artifactId>egy-names</artifactId>
-    <version>v0.3.6</version>
-</dependency>
-```
+
+JitPack builds tag `v0.3.8` if you need it: `com.github.AbdullahAfifyKhalil:egy-names:v0.3.8`. Do not pin JitPack `v0.3.6` — that tag is a cached Error.
 
 ### .NET / C#
 ```bash
@@ -744,7 +737,7 @@ Python: [`faker-egy-names`](https://pypi.org/project/faker-egy-names/) **0.1.2**
 
 PHP: [`afify/faker-egy-names`](https://packagist.org/packages/afify/faker-egy-names) is the same API for [FakerPHP](https://fakerphp.github.io/). The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). The Faker companion still ships a generate-only catalog so test suites do not have to load the full book. Same methods, same arguments, no `first_name` / `last_name` mapping.
 
-**Install:** `pip install faker-egy-names==0.1.2` · `composer require afify/faker-egy-names:^0.1.2`  
+**Install:** `pip install faker-egy-names==0.1.2` · `composer require afify/faker-egy-names:^0.1.3`  
 **Source:** [`faker-egy-names/`](faker-egy-names/) · [`faker-egy-names-php/`](faker-egy-names-php/) · [Packagist](https://packagist.org/packages/afify/faker-egy-names)
 
 ### 7.1 Registration

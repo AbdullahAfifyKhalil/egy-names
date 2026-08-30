@@ -15,18 +15,20 @@
 [![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.6-3776AB)](https://pypi.org/project/egy-names/)
 [![Packagist](https://img.shields.io/packagist/v/afify/egy-names.svg?label=Packagist)](https://packagist.org/packages/afify/egy-names)
 [![Faker Provider](https://img.shields.io/badge/Faker-faker--egy--names_v0.1.2-563D7C)](https://pypi.org/project/faker-egy-names/)
-[![FakerPHP](https://img.shields.io/badge/FakerPHP-afify/faker--egy--names-777BB4)](https://packagist.org/packages/afify/faker-egy-names)
+[![FakerPHP](https://img.shields.io/badge/FakerPHP-v0.1.3-777BB4)](https://packagist.org/packages/afify/faker-egy-names)
 [![npm Version](https://img.shields.io/badge/npm-v0.3.6-CB3837)](https://www.npmjs.com/package/egy-names)
 [![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.6-0175C2)](https://pub.dev/packages/egy_names)
 [![Maven Central](https://img.shields.io/badge/Maven_Central-v0.3.6-C71A36)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
-[![JitPack](https://img.shields.io/badge/JitPack-v0.3.6-2ECC71)](https://jitpack.io/#AbdullahAfifyKhalil/egy-names/v0.3.6)
+[![JitPack](https://img.shields.io/badge/JitPack-v0.3.8-2ECC71)](https://jitpack.io/#AbdullahAfifyKhalil/egy-names/v0.3.8)
 [![NuGet Version](https://img.shields.io/badge/NuGet-v0.3.6-004880)](https://www.nuget.org/packages/egy-names/)
-[![Swift PM](https://img.shields.io/badge/Swift_PM-v0.3.6-FA7343)](https://github.com/AbdullahAfifyKhalil/egy-names)
+[![Swift PM](https://img.shields.io/badge/Swift_PM-v0.3.8-FA7343)](https://github.com/AbdullahAfifyKhalil/egy-names)
 [![Hugging Face](https://img.shields.io/badge/Hugging_Face-44.6K_Lexicon-FFD21E)](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
 [![Fallback model](https://img.shields.io/badge/Model-egy--names--fallback--classifier-FFD21E)](https://huggingface.co/Abdullah-afify/egy-names-fallback-classifier)
 [![Medium](https://img.shields.io/badge/Medium-14D_Engine-00AB6C)](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4)
 [![Documentation](https://img.shields.io/badge/Documentation-Complete_API_Reference-blue.svg)](DOCUMENTATION.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
+**Live:** PyPI / npm / pub.dev / NuGet / Maven Central `0.3.6` · Packagist `afify/egy-names` `0.3.7` · source tag [`v0.3.8`](https://github.com/AbdullahAfifyKhalil/egy-names/releases/tag/v0.3.8) (Swift, C++, JitPack) · Faker `0.1.2` / `0.1.3`. Product page: [afify.co/egy-names](https://afify.co/egy-names).
 
 **Engineered with 100% Deterministic Parity across 8 Major Languages:**
 <br />
@@ -336,8 +338,8 @@ print(f"Age: ~{det.estimated_age} yrs | Conf: {det.confidence} | {det.generation
 Python and PHP packages for test suites that already use Faker. They do not invent a first name and a last name. Every call runs `generate()` — grounded patronymic chains. Offline.
 
 ```bash
-pip install faker-egy-names
-composer require afify/faker-egy-names
+pip install faker-egy-names==0.1.2
+composer require afify/faker-egy-names:^0.1.3
 ```
 
 ```python
@@ -363,7 +365,7 @@ There is no `first_name` / `last_name` mapping. For one coherent person, call `e
 ### PHP (8.1+)
 
 ```bash
-composer require afify/egy-names
+composer require afify/egy-names:^0.3.7
 ```
 
 ```php
@@ -415,7 +417,7 @@ console.log(en.detectReligion("مينا جرجس بطرس")); // { religion: 'ch
 Add in Xcode or `Package.swift`:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.6")
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.8")
 ]
 ```
 

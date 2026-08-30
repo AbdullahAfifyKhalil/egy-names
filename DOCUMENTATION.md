@@ -83,7 +83,7 @@ See [§7 Faker Companion](#7-faker-companion-faker-egy-names).
 composer require afify/egy-names
 ```
 
-Until Packagist lists the engine: add the VCS repo `https://github.com/AbdullahAfifyKhalil/egy-names-php`.
+Packagist: [`afify/egy-names`](https://packagist.org/packages/afify/egy-names).
 
 Faker test suites:
 

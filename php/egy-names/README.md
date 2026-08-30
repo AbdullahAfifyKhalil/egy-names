@@ -4,28 +4,12 @@ Egyptian names engine for PHP 8.1+. Same book as the other SDKs — 44,626 lemma
 
 A legal Egyptian name is a patronymic chain, not a first name and a last name. This package generates, translates, splits, and corrects those chains. Product page: [afify.co/egy-names](https://afify.co/egy-names).
 
-This is the engine. For Faker fixtures, use [`afify/faker-egy-names`](https://github.com/AbdullahAfifyKhalil/faker-egy-names-php).
+This is the engine. Packagist: [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). For Faker fixtures, use [`afify/faker-egy-names`](https://packagist.org/packages/afify/faker-egy-names).
 
 ## Install
 
 ```bash
 composer require afify/egy-names
-```
-
-Until it is on Packagist, add the GitHub repo:
-
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/AbdullahAfifyKhalil/egy-names-php"
-    }
-  ],
-  "require": {
-    "afify/egy-names": "^0.3"
-  }
-}
 ```
 
 Requires PHP 8.1+, `ext-json`, and `ext-zlib`. No Faker dependency.

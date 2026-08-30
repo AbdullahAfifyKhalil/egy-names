@@ -11,7 +11,7 @@
 
 [![Afify](https://img.shields.io/badge/afify.co-Egy--Names-17191c)](https://afify.co/egy-names)
 [![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.2-3776AB)](https://pypi.org/project/egy-names/)
-[![Packagist](https://img.shields.io/badge/Packagist-afify/egy--names-F28D1A)](https://packagist.org/packages/afify/egy-names)
+[![Packagist](https://img.shields.io/packagist/v/afify/egy-names.svg?label=Packagist)](https://packagist.org/packages/afify/egy-names)
 [![Faker Provider](https://img.shields.io/badge/Faker-faker--egy--names_v0.1.0-563D7C)](https://pypi.org/project/faker-egy-names/)
 [![FakerPHP](https://img.shields.io/badge/FakerPHP-afify/faker--egy--names-777BB4)](https://packagist.org/packages/afify/faker-egy-names)
 [![npm Version](https://img.shields.io/badge/npm-v0.3.2-CB3837)](https://www.npmjs.com/package/egy-names)
@@ -371,7 +371,7 @@ echo $en->correct('احمد مصطفا');
 $names = $en->generate(count: 3, gender: 'female', length: 4);
 ```
 
-The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). Until Packagist lists it: [egy-names-php](https://github.com/AbdullahAfifyKhalil/egy-names-php).
+The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). Source: [egy-names-php](https://github.com/AbdullahAfifyKhalil/egy-names-php).
 
 ---
 

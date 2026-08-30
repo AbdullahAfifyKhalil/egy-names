@@ -1,6 +1,7 @@
 package com.afify.egynames.engine;
 
 import com.afify.egynames.index.LookupIndices;
+import com.afify.egynames.index.Quality;
 import com.afify.egynames.model.Models;
 
 import java.util.*;
@@ -22,7 +23,7 @@ public class Generator {
             if (religion != null && e.religion != religion && e.religion != Models.Religion.NEUTRAL) return false;
             if (role != null && e.role != role) return false;
             if (frequency != null && e.frequency != frequency) return false;
-            return true;
+            return Quality.isGeneratableEntry(e);
         }).collect(Collectors.toList());
     }
 

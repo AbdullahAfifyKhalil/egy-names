@@ -265,83 +265,106 @@ namespace EgyptianNames
 
         public bool IsValid(string name)
         {
-            return LookupIndices.Lookup(name, _customDataPath) != null;
+            var entry = LookupIndices.Lookup(name, _customDataPath);
+            return entry != null
+                && Quality.IsPersonalEntry(entry)
+                && !Quality.IsLowConfidenceEntry(entry);
         }
 
+        /// <summary>
+        /// Gender of the person: the first personal, non-lineage given name.
+        ///
+        /// Later tokens are father, grandfather, family. They do not vote. A
+        /// tie must not become male. Two-word compound lemmas (e.g. kunya
+        /// "Abu X") are recognized as one token, not two fragments.
+        /// </summary>
         public GenderDetection DetectGender(string fullName)
         {
-            if (string.IsNullOrWhiteSpace(fullName))
+            var tokens = NameTokenizer.CompoundTokens(fullName, _customDataPath);
+            if (tokens.Count == 0)
                 return new GenderDetection { Gender = "neutral", Confidence = 0.0 };
 
-            var tokens = fullName.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            if (tokens.Length == 0)
-                return new GenderDetection { Gender = "neutral", Confidence = 0.0 };
-
-            double maleScore = 0;
-            double femaleScore = 0;
-            double neutralScore = 0;
-            double totalWeight = 0;
-
-            for (int i = 0; i < tokens.Length; i++)
+            int skippedLineage = 0;
+            for (int i = 0; i < tokens.Count; i++)
             {
-                var entry = LookupIndices.Lookup(tokens[i], _customDataPath);
-                if (entry == null) continue;
-
-                double w = i == 0 ? 4.0 : (i == 1 ? 2.0 : 1.0);
-                totalWeight += w;
-
-                if (entry.Gender == Gender.Male) maleScore += w;
-                else if (entry.Gender == Gender.Female) femaleScore += w;
-                else neutralScore += w;
+                var entry = tokens[i].Entry;
+                if (entry == null || !Quality.IsPersonalEntry(entry) || Quality.IsLowConfidenceEntry(entry)) continue;
+                if (Quality.IsLineageRole(entry))
+                {
+                    skippedLineage++;
+                    continue;
+                }
+                if (entry.Gender == Gender.Neutral)
+                    return new GenderDetection { Gender = "neutral", Confidence = 0.6 };
+                double confidence = (skippedLineage == 0 && i == 0) ? 1.0 : 0.85;
+                return new GenderDetection { Gender = entry.Gender.ToString().ToLowerInvariant(), Confidence = confidence };
             }
-
-            if (totalWeight == 0)
-                return new GenderDetection { Gender = "neutral", Confidence = 0.0 };
-
-            double maxScore = Math.Max(maleScore, Math.Max(femaleScore, neutralScore));
-            double confidence = maxScore / totalWeight;
-
-            if (maxScore == maleScore) return new GenderDetection { Gender = "male", Confidence = confidence };
-            if (maxScore == femaleScore) return new GenderDetection { Gender = "female", Confidence = confidence };
-            return new GenderDetection { Gender = "neutral", Confidence = confidence };
+            return new GenderDetection { Gender = "neutral", Confidence = 0.0 };
         }
 
+        /// <summary>
+        /// Religion of the person: the first personal, non-lineage given name,
+        /// like gender.
+        ///
+        /// A father, grandfather, or family surname from one community does
+        /// not override the person's own first name. Lineage tokens only vote
+        /// if the person's own name gives no distinctive signal — an
+        /// intermarried or mixed-heritage family's surname should not outvote
+        /// what the person is actually named. Two-word compound lemmas (e.g.
+        /// kunya "Abu X") are recognized as one token.
+        /// </summary>
         public ReligionDetection DetectReligion(string fullName)
         {
-            if (string.IsNullOrWhiteSpace(fullName))
+            var tokens = NameTokenizer.CompoundTokens(fullName, _customDataPath);
+            if (tokens.Count == 0)
                 return new ReligionDetection { Religion = "neutral", Confidence = 0.0 };
 
-            var tokens = fullName.Trim().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            if (tokens.Length == 0)
-                return new ReligionDetection { Religion = "neutral", Confidence = 0.0 };
-
-            double muslimScore = 0;
-            double christianScore = 0;
-            double neutralScore = 0;
-            double totalWeight = 0;
-
-            for (int i = 0; i < tokens.Length; i++)
+            int skippedLineage = 0;
+            for (int i = 0; i < tokens.Count; i++)
             {
-                var entry = LookupIndices.Lookup(tokens[i], _customDataPath);
-                if (entry == null) continue;
-
-                double w = 1.0;
-                totalWeight += w;
-
-                if (entry.Religion == Religion.Muslim) muslimScore += w;
-                else if (entry.Religion == Religion.Christian) christianScore += w;
-                else neutralScore += w;
+                var entry = tokens[i].Entry;
+                if (entry == null || !Quality.IsPersonalEntry(entry) || Quality.IsLowConfidenceEntry(entry)) continue;
+                if (Quality.IsLineageRole(entry))
+                {
+                    skippedLineage++;
+                    continue;
+                }
+                if (entry.Religion == Religion.Neutral) continue;
+                double confidence = (skippedLineage == 0 && i == 0) ? 1.0 : 0.9;
+                return new ReligionDetection { Religion = entry.Religion.ToString().ToLowerInvariant(), Confidence = confidence };
             }
 
-            if (totalWeight == 0)
+            // The person's own given names carried no distinctive signal
+            // (neutral or not found). Fall back to an aggregate vote across
+            // every token, lineage included, rather than declaring neutral.
+            double muslim = 0;
+            double christian = 0;
+            string? first = null;
+
+            foreach (var (_, entry) in tokens)
+            {
+                if (entry == null || !Quality.IsPersonalEntry(entry) || Quality.IsLowConfidenceEntry(entry)) continue;
+                if (entry.Religion == Religion.Muslim)
+                {
+                    muslim++;
+                    if (first == null) first = "muslim";
+                }
+                else if (entry.Religion == Religion.Christian)
+                {
+                    christian++;
+                    if (first == null) first = "christian";
+                }
+            }
+
+            if (muslim == 0 && christian == 0)
                 return new ReligionDetection { Religion = "neutral", Confidence = 0.0 };
 
-            double maxScore = Math.Max(muslimScore, Math.Max(christianScore, neutralScore));
-            double confidence = maxScore / totalWeight;
-
-            if (maxScore == muslimScore) return new ReligionDetection { Religion = "muslim", Confidence = confidence };
-            if (maxScore == christianScore) return new ReligionDetection { Religion = "christian", Confidence = confidence };
-            return new ReligionDetection { Religion = "neutral", Confidence = confidence };
+            double distinctive = muslim + christian;
+            if (muslim > christian)
+                return new ReligionDetection { Religion = "muslim", Confidence = 0.5 * muslim / distinctive };
+            if (christian > muslim)
+                return new ReligionDetection { Religion = "christian", Confidence = 0.5 * christian / distinctive };
+            return new ReligionDetection { Religion = first ?? "neutral", Confidence = 0.5 };
         }
 
         public RankInfo? Rank(string name)

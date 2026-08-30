@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net8.0</TargetFrameworks>
     <PackageId>egy-names</PackageId>
-    <Version>0.3.4</Version>
+    <Version>0.3.5</Version>
     <Authors>Abdullah Afify (Afify)</Authors>
     <Company>Afify</Company>
     <Description>A production-grade Egyptian onomastic intelligence library for .NET — generate, translate, annotate, split, and analyze Egyptian names.</Description>
@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Data\names.json.gz" LogicalName="names.json.gz" />
+    <EmbeddedResource Include="Data\logic_config.json" LogicalName="logic_config.json" />
     <None Include="README.md" Pack="true" PackagePath="\" />
     <None Include="logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>

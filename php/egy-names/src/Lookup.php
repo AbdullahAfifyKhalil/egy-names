@@ -45,6 +45,38 @@ final class Lookup
         return strtolower(str_replace(['-', "'"], '', trim($text)));
     }
 
+    private static function claimEn(string $key, NameEntry $entry): void
+    {
+        $existing = self::$enIndex[$key] ?? null;
+        if ($existing === null || $entry->corpusShare > $existing->corpusShare) {
+            self::$enIndex[$key] = $entry;
+        }
+    }
+
+    /**
+     * Bind an Arabic variant spelling to the lemma with the larger
+     * corpus share, same rule as English keys.
+     *
+     * A canonical key (some entry's own ar / normalized-ar) always wins
+     * over any OTHER entry's variant claiming the same string — a rare
+     * misspelling must never shadow a real lemma's own canonical
+     * spelling. Among two variants with no canonical claim, the higher
+     * corpus share wins, exactly like claimEn.
+     *
+     * @param array<string, NameEntry> $index
+     * @param array<string, true> $canonicalKeys
+     */
+    private static function claimArVariant(array &$index, array $canonicalKeys, string $key, NameEntry $entry): void
+    {
+        if (isset($canonicalKeys[$key])) {
+            return;
+        }
+        $existing = $index[$key] ?? null;
+        if ($existing === null || $entry->corpusShare > $existing->corpusShare) {
+            $index[$key] = $entry;
+        }
+    }
+
     public static function isArabic(string $text): bool
     {
         return (bool) preg_match('/[\x{0600}-\x{06FF}\x{FE70}-\x{FEFF}]/u', $text);
@@ -200,43 +232,45 @@ final class Lookup
         $entries = Catalog::entries();
         $corrections = Catalog::corrections();
 
+        // Pass 1: canonical spellings are unconditional and take priority
+        // over any other lemma's variant claiming the same string (book
+        // has zero duplicate canonical ar values).
+        $canonicalArKeys = [];
+        $canonicalArNormKeys = [];
         foreach ($entries as $entry) {
-            if (!isset(self::$arIndex[$entry->ar])) {
-                self::$arIndex[$entry->ar] = $entry;
-            }
-            $normAr = self::normalizeAr($entry->ar);
-            if (!isset(self::$arNormIndex[$normAr])) {
-                self::$arNormIndex[$normAr] = $entry;
-            }
+            $canonicalArKeys[$entry->ar] = true;
+            $canonicalArNormKeys[self::normalizeAr($entry->ar)] = true;
+            self::$arIndex[$entry->ar] = $entry;
+            self::$arNormIndex[self::normalizeAr($entry->ar)] = $entry;
+        }
 
+        foreach ($entries as $entry) {
+            // Pass 2: variants. Keep the higher-share lemma when two
+            // rows' variants claim the same spelling — same rule as
+            // English keys, so a rare misspelling cannot steal a common
+            // name's lookup.
             foreach ($entry->arVariants as $v) {
                 $vStripped = trim($v);
                 if ($vStripped === '') {
                     continue;
                 }
-                if (!isset(self::$arIndex[$vStripped])) {
-                    self::$arIndex[$vStripped] = $entry;
-                }
-                $normV = self::normalizeAr($vStripped);
-                if (!isset(self::$arNormIndex[$normV])) {
-                    self::$arNormIndex[$normV] = $entry;
-                }
+                self::claimArVariant(self::$arIndex, $canonicalArKeys, $vStripped, $entry);
+                self::claimArVariant(
+                    self::$arNormIndex,
+                    $canonicalArNormKeys,
+                    self::normalizeAr($vStripped),
+                    $entry,
+                );
             }
 
-            $normEn = self::normalizeEn($entry->en);
-            if (!isset(self::$enIndex[$normEn])) {
-                self::$enIndex[$normEn] = $entry;
-            }
+            self::claimEn(self::normalizeEn($entry->en), $entry);
 
             foreach ($entry->enVariants as $v) {
                 $vStripped = trim($v);
                 if ($vStripped === '') {
                     continue;
                 }
-                $normV = self::normalizeEn($vStripped);
-                if (!isset(self::$enIndex[$normV])) {
-                    self::$enIndex[$normV] = $entry;
-                }
+                self::claimEn(self::normalizeEn($vStripped), $entry);
             }
         }
 

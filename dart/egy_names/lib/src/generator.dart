@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'lookup_indices.dart';
+import 'quality.dart';
 import 'types.dart';
 
 class Generator {
@@ -28,7 +29,7 @@ class Generator {
       if (frequency != null && e.frequency != frequency) {
         return false;
       }
-      return true;
+      return isGeneratableEntry(e);
     }).toList();
   }
 

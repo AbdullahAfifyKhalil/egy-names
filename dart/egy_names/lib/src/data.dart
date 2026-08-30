@@ -25,7 +25,11 @@ class DataLoader {
 
   static const _catalogRel = 'lib/src/data/names.json.gz';
 
-  static String? _fromPackageConfig() {
+  /// Resolve the on-disk path of a package-relative data file (e.g.
+  /// `lib/src/data/logic_config.json`) via the same package_config.json
+  /// walk used for the name catalog. Shared with [RulesConfigLoader] so
+  /// every bundled data file next to `names.json.gz` resolves consistently.
+  static String? resolveSiblingDataPath(String relPath) {
     var dir = Directory.current;
     for (var i = 0; i < 12; i++) {
       final configFile = File(
@@ -43,7 +47,7 @@ class DataLoader {
                 : dir.uri.resolve('.dart_tool/$rootUri').toFilePath();
             final trimmed = rootPath.replaceAll(RegExp(r'[/\\]+$'), '');
             final candidate = File(
-              '$trimmed${Platform.pathSeparator}${_catalogRel.replaceAll('/', Platform.pathSeparator)}',
+              '$trimmed${Platform.pathSeparator}${relPath.replaceAll('/', Platform.pathSeparator)}',
             );
             if (candidate.existsSync()) return candidate.path;
           }
@@ -55,6 +59,8 @@ class DataLoader {
     }
     return null;
   }
+
+  static String? _fromPackageConfig() => resolveSiblingDataPath(_catalogRel);
 
   static String _resolveDataPath(String? customPath) {
     if (customPath != null && File(customPath).existsSync()) {

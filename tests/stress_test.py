@@ -24,6 +24,7 @@ from egy_names import (  # noqa: E402
     __version__,
 )
 from egy_names._index import get_all  # noqa: E402
+from egy_names._quality import is_personal_entry  # noqa: E402
 
 en = EgyNames()
 all_entries = get_all()
@@ -432,6 +433,76 @@ def test_10_3():
     dt = time.perf_counter() - t0
     print(f"      Split 5,000 unspaced chains in {dt:.3f}s ({5000/dt:.0f} splits/sec)")
 run_test("10.3 DP Split 5,000 concatenated strings", test_10_3)
+
+
+print("\n=======================================================")
+print("SUITE 11: ABILITY — THE ENGINE MUST STILL DO THE WORK")
+print("=======================================================")
+
+
+def test_11_1():
+    assert len(all_entries) >= 44000
+    sample = [e for i, e in enumerate(all_entries) if e.frequency.value == "common" or i % 20 == 0]
+    for entry in sample:
+        info = en.lookup(entry.ar)
+        assert info is not None and info.ar == entry.ar and info.en == entry.en
+        if is_personal_entry(entry):
+            assert en.is_valid(entry.ar)
+        else:
+            assert en.is_valid(entry.ar) is False
+        if " " not in entry.ar.strip():
+            assert en.translate(entry.ar) == entry.en
+    print(f"      checked {len(sample)} lemmas (valid + AR→EN)")
+run_test("11.1 Catalog sample: valid, lookup, Arabic-to-English", test_11_1)
+
+
+def test_11_2():
+    assert_eq(en.correct("عبد الرحمن"), "عبدالرحمن")
+    assert_eq(en.correct("عبدالرحمن"), "عبدالرحمن")
+    assert "عَبْدُ" in en.tashkeel("عبدالرحمن")
+    assert_eq(en.split("محمدأحمدعليحسنالشناوي"), ["محمد", "أحمد", "علي", "حسن", "الشناوي"])
+    assert en.detect_gender("فاطمة الزهراء").gender == "female"
+    assert en.detect_religion("مينا جرجس بطرس شنودة").religion == "christian"
+    names = en.generate(count=80, gender="female", religion="muslim", length=5, seed=21)
+    for gn in names:
+        first = en.lookup(gn.parts_ar[0])
+        last = en.lookup(gn.parts_ar[-1])
+        assert first is not None and first.gender in ("female", "neutral")
+        assert last is not None and last.role == "family"
+        assert all(en.is_valid(p) for p in gn.parts_ar)
+        assert en.translate(gn.ar) == gn.en
+run_test("11.2 Correct, split, detect, and constrained generate", test_11_2)
+
+
+def test_11_3():
+    unknown = "اسم_غير_موجود_نهائيا_12345"
+    assert en.is_valid(unknown) is False
+    assert_eq(en.translate(unknown), unknown)
+    assert_eq(en.dallaa(unknown), [])
+    assert_eq(en.famous_figures(unknown), [])
+    assert en.rank(unknown) is None
+    assert en.meaning(unknown) is None
+run_test("11.3 Unknown token is not invented", test_11_3)
+
+
+def test_11_4():
+    assert_eq(en.translate("Mahmoud"), "محمود")
+    assert_eq(en.translate("Ibrahim"), "إبراهيم")
+    assert_eq(en.translate("Mostafa"), "مصطفى")
+    assert_eq(en.translate("Abdullah"), "عبدالله")
+    assert_eq(en.translate("Elsayed"), "السيد")
+    assert_eq(en.translate("Abdelrahman"), "عبدالرحمن")
+run_test("11.4 Common English keys are not stolen by misspellings", test_11_4)
+
+
+def test_11_5():
+    assert_eq(en.detect_gender("فاطمة محمد علي حسن").gender, "female")
+    assert_eq(en.detect_gender("زينب أسامة بكري شلقامي").gender, "female")
+    assert_eq(en.detect_religion("جورج علاءالدين عبدالمسيح دغيدي").religion, "christian")
+    assert en.is_valid("الله") is False
+    assert en.lookup("الله") is not None
+    assert en.is_valid("محمد") is True
+run_test("11.5 First given name wins; non-person surfaces are not valid", test_11_5)
 
 
 print("\n=======================================================")

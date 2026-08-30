@@ -1,0 +1,50 @@
+name: Tag release
+
+# PHP (Packagist), Java (JitPack), and Swift (Swift PM) all resolve
+# published versions from git tags, not from a package-manager push —
+# there is no separate "publish" step for them once the tag exists.
+# This workflow creates that tag automatically whenever
+# python/pyproject.toml's version changes (the one canonical version
+# number for a monorepo release), so bumping the version and pushing
+# to main is the only manual step needed anywhere in the repo.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "python/pyproject.toml"
+  workflow_dispatch: {}
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Read version
+        id: local
+        working-directory: python
+        run: |
+          v=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      - name: Create and push tag if it doesn't exist
+        run: |
+          v="v${{ steps.local.outputs.version }}"
+          if git rev-parse "$v" >/dev/null 2>&1; then
+            echo "$v already exists — nothing to do."
+          else
+            git config user.name "egy-names-release-bot"
+            git config user.email "actions@github.com"
+            git tag "$v"
+            git push origin "$v"
+            echo "pushed tag $v"
+          fi

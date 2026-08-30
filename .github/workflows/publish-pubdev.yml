@@ -1,0 +1,65 @@
+name: Test and publish pub.dev package
+
+# Requires a one-time OIDC publisher setup on pub.dev for this GitHub repo
+# (pub.dev Admin > Automated publishing), no long-lived secret needed —
+# see https://dart.dev/tools/pub/automated-publishing
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "dart/**"
+      - "data/**"
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      - name: Get deps
+        working-directory: dart/egy_names
+        run: dart pub get
+      - name: Analyze
+        working-directory: dart/egy_names
+        run: dart analyze
+      - name: Test
+        working-directory: dart/egy_names
+        run: dart test
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # required for pub.dev OIDC publishing
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+
+      - name: Read local version
+        id: local
+        working-directory: dart/egy_names
+        run: |
+          v=$(grep -m1 "^version:" pubspec.yaml | awk '{print $2}')
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      - name: Check whether that version is already on pub.dev
+        id: check
+        run: |
+          v="${{ steps.local.outputs.version }}"
+          code=$(curl -s -o /dev/null -w "%{http_code}" "https://pub.dev/api/packages/egy_names/versions/$v")
+          if [ "$code" = "200" ]; then
+            echo "already_published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "already_published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish
+        if: steps.check.outputs.already_published == 'false'
+        working-directory: dart/egy_names
+        run: dart pub get && dart pub publish --force
+
+      - name: Skip (nothing new)
+        if: steps.check.outputs.already_published == 'true'
+        run: echo "egy_names ${{ steps.local.outputs.version }} is already on pub.dev — nothing to publish."

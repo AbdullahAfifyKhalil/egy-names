@@ -100,9 +100,32 @@ namespace EgyptianNames
             if (string.IsNullOrWhiteSpace(fullName)) return new List<string>();
 
             string text = fullName.Trim();
+
+            // If spaces exist, use simple whitespace splitting, but keep a
+            // two-word compound lemma (e.g. kunya "Abu X") as one part instead
+            // of two meaningless fragments.
             if (text.Contains(" "))
             {
-                return text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                var raw = text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var outList = new List<string>();
+                int i = 0;
+                int n = raw.Length;
+                while (i < n)
+                {
+                    if (i < n - 1)
+                    {
+                        var pair = $"{raw[i]} {raw[i + 1]}";
+                        if (LookupIndices.LookupAr(pair, dataPath) != null || LookupIndices.LookupAr($"{raw[i]}{raw[i + 1]}", dataPath) != null)
+                        {
+                            outList.Add(pair);
+                            i += 2;
+                            continue;
+                        }
+                    }
+                    outList.Add(raw[i]);
+                    i++;
+                }
+                return outList;
             }
 
             if (LookupIndices.IsArabic(text))

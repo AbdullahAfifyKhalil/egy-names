@@ -36,6 +36,30 @@ public class LookupIndices {
         return text.toLowerCase().replace("-", "").replace("'", "").trim();
     }
 
+    private static void claimEn(String key, Models.NameEntry entry) {
+        Models.NameEntry existing = enIndex.get(key);
+        if (existing == null || entry.corpusShare > existing.corpusShare) {
+            enIndex.put(key, entry);
+        }
+    }
+
+    /**
+     * Second-pass Arabic-variant claim: skip if the key is a canonical key of
+     * ANY entry (canonical spellings win unconditionally), otherwise keep the
+     * higher corpus_share among competing variant claims.
+     */
+    private static void claimArVariant(
+            Map<String, Models.NameEntry> index,
+            Set<String> canonicalKeys,
+            String key,
+            Models.NameEntry entry) {
+        if (canonicalKeys.contains(key)) return;
+        Models.NameEntry existing = index.get(key);
+        if (existing == null || entry.corpusShare > existing.corpusShare) {
+            index.put(key, entry);
+        }
+    }
+
     public static boolean isArabic(String text) {
         return text != null && !text.isEmpty() && IS_ARABIC_PATTERN.matcher(text).find();
     }
@@ -46,26 +70,37 @@ public class LookupIndices {
         DataLoader.DataBundle bundle = DataLoader.loadBundle(dataPath);
         allEntries = Collections.unmodifiableList(bundle.names);
 
+        // Pass 1: every entry's own canonical ar/normalized-ar spelling binds
+        // unconditionally, and canonical keys are recorded so variant claims
+        // (pass 2) can never displace a canonical binding.
+        Set<String> canonicalArKeys = new HashSet<>();
+        Set<String> canonicalArNormKeys = new HashSet<>();
         for (Models.NameEntry entry : allEntries) {
-            arIndex.putIfAbsent(entry.ar, entry);
-            String normAr = normalizeAr(entry.ar);
-            arNormIndex.putIfAbsent(normAr, entry);
+            arIndex.put(entry.ar, entry);
+            canonicalArKeys.add(entry.ar);
 
+            String normAr = normalizeAr(entry.ar);
+            arNormIndex.put(normAr, entry);
+            canonicalArNormKeys.add(normAr);
+        }
+
+        // Pass 2: variant spellings compete on corpus_share, but never win
+        // over a canonical spelling of any entry.
+        for (Models.NameEntry entry : allEntries) {
             for (String v : entry.arVariants) {
                 String stripped = v.trim();
                 if (!stripped.isEmpty()) {
-                    arIndex.putIfAbsent(stripped, entry);
-                    arNormIndex.putIfAbsent(normalizeAr(stripped), entry);
+                    claimArVariant(arIndex, canonicalArKeys, stripped, entry);
+                    claimArVariant(arNormIndex, canonicalArNormKeys, normalizeAr(stripped), entry);
                 }
             }
 
-            String normEn = normalizeEn(entry.en);
-            enIndex.putIfAbsent(normEn, entry);
+            claimEn(normalizeEn(entry.en), entry);
 
             for (String v : entry.enVariants) {
                 String stripped = v.trim();
                 if (!stripped.isEmpty()) {
-                    enIndex.putIfAbsent(normalizeEn(stripped), entry);
+                    claimEn(normalizeEn(stripped), entry);
                 }
             }
         }
@@ -149,5 +184,51 @@ public class LookupIndices {
     public static Map<String, Models.NameEntry> getArNormForms(String dataPath) {
         ensureBuilt(dataPath);
         return arNormIndex;
+    }
+
+    /** One resolved token of a compound-aware split: its surface text and its book entry (may be null). */
+    public static final class CompoundToken {
+        public final String text;
+        public final Models.NameEntry entry;
+
+        public CompoundToken(String text, Models.NameEntry entry) {
+            this.text = text;
+            this.entry = entry;
+        }
+    }
+
+    /**
+     * Split on whitespace, but merge an adjacent pair into one lemma when the
+     * book has it as a two-word compound (e.g. kunya "Abu X").
+     *
+     * <p>Mirrors Python's {@code _compound_tokens}: greedy pairwise lookahead
+     * tries {@code lookupAr(word[i] + " " + word[i+1])} then
+     * {@code lookupAr(word[i] + word[i+1])} before falling back to a single
+     * token resolved via the general {@code lookup}.
+     */
+    public static List<CompoundToken> compoundTokens(String fullName, String dataPath) {
+        List<CompoundToken> out = new ArrayList<>();
+        if (fullName == null || fullName.trim().isEmpty()) return out;
+
+        String[] raw = fullName.trim().split("\\s+");
+        int n = raw.length;
+        int i = 0;
+        while (i < n) {
+            if (i < n - 1) {
+                String pair = raw[i] + " " + raw[i + 1];
+                Models.NameEntry pairEntry = lookupAr(pair, dataPath);
+                if (pairEntry == null) {
+                    pairEntry = lookupAr(raw[i] + raw[i + 1], dataPath);
+                }
+                if (pairEntry != null) {
+                    out.add(new CompoundToken(pair, pairEntry));
+                    i += 2;
+                    continue;
+                }
+            }
+            out.add(new CompoundToken(raw[i], lookup(raw[i], dataPath)));
+            i += 1;
+        }
+        return out;
     }
 }

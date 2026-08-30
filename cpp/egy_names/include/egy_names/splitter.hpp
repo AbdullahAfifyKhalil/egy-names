@@ -2,6 +2,7 @@
 
 #include "types.hpp"
 #include "lookup_indices.hpp"
+#include "quality.hpp"
 #include <string>
 #include <vector>
 #include <cmath>
@@ -86,15 +87,19 @@ public:
     static std::vector<std::string> split(const std::string& fullName, const std::string& data_path = "") {
         if (fullName.empty()) return {};
 
-        std::stringstream ss(fullName);
-        std::string tok;
-        std::vector<std::string> tokens;
-        while (ss >> tok) {
-            tokens.push_back(tok);
-        }
+        std::string trimmed = fullName;
+        size_t first = trimmed.find_first_not_of(" \t\n\r");
+        size_t last = trimmed.find_last_not_of(" \t\n\r");
+        trimmed = (first == std::string::npos) ? "" : trimmed.substr(first, last - first + 1);
 
-        if (tokens.size() > 1) {
-            return tokens;
+        // Space-separated input: keep a two-word compound lemma (e.g. kunya
+        // "Abu X") as one part instead of two meaningless fragments.
+        if (trimmed.find(' ') != std::string::npos) {
+            auto tokens = compound_tokens(trimmed, data_path);
+            std::vector<std::string> out;
+            out.reserve(tokens.size());
+            for (const auto& t : tokens) out.push_back(t.first);
+            return out;
         }
 
         if (LookupIndices::is_arabic(fullName)) {

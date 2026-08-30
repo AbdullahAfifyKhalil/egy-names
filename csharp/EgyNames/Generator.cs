@@ -22,7 +22,7 @@ namespace EgyptianNames
                 if (religion.HasValue && e.Religion != religion.Value && e.Religion != Religion.Neutral) return false;
                 if (role.HasValue && e.Role != role.Value) return false;
                 if (frequency.HasValue && e.Frequency != frequency.Value) return false;
-                return true;
+                return Quality.IsGeneratableEntry(e);
             }).ToList();
         }
 

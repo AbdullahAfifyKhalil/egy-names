@@ -82,7 +82,11 @@ public class Splitter {
 
         String text = fullName.trim();
         if (text.contains(" ")) {
-            return Arrays.asList(text.split("\\s+"));
+            List<String> tokens = new ArrayList<>();
+            for (LookupIndices.CompoundToken t : LookupIndices.compoundTokens(text, dataPath)) {
+                tokens.add(t.text);
+            }
+            return tokens;
         }
 
         if (LookupIndices.isArabic(text)) {

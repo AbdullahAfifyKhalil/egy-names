@@ -63,6 +63,34 @@ def normalize_en(text: str) -> str:
     return text.lower().replace("-", "").replace("'", "").strip()
 
 
+def _claim_en(key: str, entry: NameEntry) -> None:
+    """Bind an English key to the lemma with the larger corpus share."""
+    existing = _en_index.get(key)
+    if existing is None or entry.corpus_share > existing.corpus_share:
+        _en_index[key] = entry
+
+
+def _claim_ar_variant(
+    index: Dict[str, NameEntry], canonical_keys: set, key: str, entry: NameEntry
+) -> None:
+    """Bind an Arabic variant spelling to the lemma with the larger
+    corpus share, same rule as English keys.
+
+    A canonical key (some entry's own ``ar``/normalized ``ar``) always
+    wins over any OTHER entry's variant claiming the same string — a
+    rare misspelling must never shadow a real lemma's own canonical
+    spelling. Among two variants with no canonical claim, the higher
+    corpus share wins, exactly like ``_claim_en``.
+    """
+    if key in canonical_keys:
+        # Already bound to its own entry in the canonical pass; a
+        # variant from a different lemma must never override it.
+        return
+    existing = index.get(key)
+    if existing is None or entry.corpus_share > existing.corpus_share:
+        index[key] = entry
+
+
 def _build() -> None:
     """Build all lookup indices (called once, thread-safe)."""
     global _built, _ranked, _all_entries
@@ -70,22 +98,38 @@ def _build() -> None:
     entries = get_entries()
     corrections = get_corrections()
 
+    # ── AR index, pass 1: canonical spellings are unconditional and
+    # take priority over any other lemma's variant claiming the same
+    # string (book has zero duplicate canonical ar values). ──
+    canonical_ar_keys = {entry.ar for entry in entries}
+    canonical_ar_norm_keys = {normalize_ar(entry.ar) for entry in entries}
     for entry in entries:
-        # ── AR index: canonical + variants ──
         _ar_index[entry.ar] = entry
         _ar_norm_index[normalize_ar(entry.ar)] = entry
+
+    for entry in entries:
+        # ── AR index, pass 2: variants. Keep the higher-share lemma
+        # when two rows' variants claim the same spelling — same rule
+        # as English keys, so a rare misspelling cannot steal a common
+        # name's lookup the way it could before this was checked. ──
         for v in entry.ar_variants:
             v_stripped = v.strip()
             if v_stripped:
-                _ar_index.setdefault(v_stripped, entry)
-                _ar_norm_index.setdefault(normalize_ar(v_stripped), entry)
+                _claim_ar_variant(_ar_index, canonical_ar_keys, v_stripped, entry)
+                _claim_ar_variant(
+                    _ar_norm_index,
+                    canonical_ar_norm_keys,
+                    normalize_ar(v_stripped),
+                    entry,
+                )
 
         # ── EN index: canonical + variants (case-insensitive) ──
-        _en_index[normalize_en(entry.en)] = entry
+        # Keep the higher-share lemma when two rows claim the same English key.
+        _claim_en(normalize_en(entry.en), entry)
         for v in entry.en_variants:
             v_stripped = v.strip()
             if v_stripped:
-                _en_index.setdefault(normalize_en(v_stripped), entry)
+                _claim_en(normalize_en(v_stripped), entry)
 
     # ── Correction index ──
     _correction_index.update(corrections)

@@ -39,6 +39,12 @@ function normalizeAr(text) {
 function normalizeEn(text) {
     return text.toLowerCase().replace(/-/g, "").replace(/'/g, "").trim();
 }
+function claimEn(key, entry) {
+    const existing = enIndex.get(key);
+    if (!existing || entry.corpusShare > existing.corpusShare) {
+        enIndex.set(key, entry);
+    }
+}
 function build() {
     if (built)
         return;
@@ -61,16 +67,12 @@ function build() {
                     arNormIndex.set(normV, entry);
             }
         }
-        // EN index
-        const normEn = normalizeEn(entry.en);
-        if (!enIndex.has(normEn))
-            enIndex.set(normEn, entry);
+        // EN index — keep the higher-share lemma on a colliding key
+        claimEn(normalizeEn(entry.en), entry);
         for (const v of entry.enVariants) {
             const vStripped = v.trim();
             if (vStripped) {
-                const normV = normalizeEn(vStripped);
-                if (!enIndex.has(normV))
-                    enIndex.set(normV, entry);
+                claimEn(normalizeEn(vStripped), entry);
             }
         }
     }

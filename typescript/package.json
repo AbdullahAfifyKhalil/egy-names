@@ -1,6 +1,6 @@
 {
   "name": "egy-names",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "A production-grade Egyptian onomastic intelligence library for TypeScript & JavaScript \u2014 generate, translate, annotate, split, and analyze Egyptian names.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -10,7 +10,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc && mkdir -p dist/src/data && cp src/data/names.json.gz dist/src/data/",
+    "build": "tsc && mkdir -p dist/src/data && cp src/data/names.json.gz dist/src/data/ && cp src/data/logic_config.json dist/src/data/",
     "prepublishOnly": "npm run build",
     "test": "npm run build && node dist/tests/smoke.js"
   },

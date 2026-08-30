@@ -1,4 +1,5 @@
 import { getArForms, getArNormForms, isArabic, lookup, normalizeAr } from "./lookupIndices";
+import { compoundTokens } from "./compoundTokens";
 
 const BASE_SEGMENT_COST = 1.0;
 const UNKNOWN_PENALTY = 8.0;
@@ -65,7 +66,9 @@ export function split(fullName: string): string[] {
 
   const text = fullName.trim();
   if (text.includes(" ")) {
-    return text.split(/\s+/);
+    // Keep a two-word compound lemma (e.g. kunya "Abu X") as one part
+    // instead of two meaningless fragments.
+    return compoundTokens(text).map(([token]) => token);
   }
 
   if (isArabic(text)) {

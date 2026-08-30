@@ -2,6 +2,7 @@
 
 #include "types.hpp"
 #include "lookup_indices.hpp"
+#include "quality.hpp"
 #include <random>
 #include <vector>
 #include <algorithm>
@@ -40,6 +41,7 @@ public:
 
         for (int slot = 0; slot < 5; ++slot) {
             for (const auto& entry : all_entries) {
+                if (!is_generatable_entry(entry)) continue;
                 if (slot == 0) {
                     if (!gender.empty() && entry.gender != target_gender && entry.gender != Gender::NEUTRAL) {
                         continue;

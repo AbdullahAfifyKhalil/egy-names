@@ -16,6 +16,7 @@ from ._index import (
     get_ar_norm_forms,
     is_arabic,
     lookup,
+    lookup_ar,
     normalize_ar,
 )
 from ._types import NameEntry
@@ -115,9 +116,24 @@ def split(full_name: str) -> List[str]:
 
     text = full_name.strip()
 
-    # If spaces exist, use simple whitespace splitting
+    # If spaces exist, use simple whitespace splitting, but keep a
+    # two-word compound lemma (e.g. kunya "Abu X") as one part instead
+    # of two meaningless fragments.
     if " " in text:
-        return text.split()
+        raw = text.split()
+        out: List[str] = []
+        i = 0
+        n = len(raw)
+        while i < n:
+            if i < n - 1:
+                pair = f"{raw[i]} {raw[i + 1]}"
+                if lookup_ar(pair) is not None or lookup_ar(f"{raw[i]}{raw[i + 1]}") is not None:
+                    out.append(pair)
+                    i += 2
+                    continue
+            out.append(raw[i])
+            i += 1
+        return out
 
     # Single token — is it Arabic with potential concatenation?
     if is_arabic(text):

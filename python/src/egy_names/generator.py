@@ -12,6 +12,7 @@ import random
 from typing import List, Optional, Sequence
 
 from ._index import get_all
+from ._quality import is_generatable_entry
 from ._types import (
     FrequencyClass,
     Gender,
@@ -62,7 +63,7 @@ def _filter_entries(
         result = [e for e in result if e.role == role]
     if frequency is not None:
         result = [e for e in result if e.frequency == frequency]
-    return result
+    return [e for e in result if is_generatable_entry(e)]
 
 
 def _weighted_pick(

@@ -13,7 +13,7 @@ Quick start:
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, List, Optional, Sequence, Union
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 
 from ._data import get_metadata
 from ._index import (
@@ -47,12 +47,43 @@ from ._types import (
     ReligionDetection,
     UniquenessScore,
 )
+from ._infer import infer as _infer_fn, infer_token as _infer_token_fn
+from ._quality import is_lineage_role, is_low_confidence_entry, is_personal_entry
+from ._types import InferredName
 from .annotator import annotate, annotate_single
 from .corrector import correct, correct_token
 from .generator import generate as generate_names
 from .search import search
 from .splitter import split
 from .translator import translate, translate_token
+
+
+def _compound_tokens(full_name: str) -> List[Tuple[str, Optional[NameEntry]]]:
+    """Split on whitespace, but merge an adjacent pair into one lemma
+    when the book has it as a two-word compound (e.g. kunya "Abu X").
+
+    A handful of book entries are legitimately two words (roughly 800
+    "Abu X" kunya/family lemmas plus a few compound given names). A
+    blind whitespace split treats them as two meaningless fragments,
+    breaking gender/religion detection and split() on names that
+    contain one. Greedy pairwise lookahead, same approach tashkeel()
+    already uses for "عبد الرحمن"-style pairs.
+    """
+    raw = full_name.strip().split()
+    out: List[Tuple[str, Optional[NameEntry]]] = []
+    i = 0
+    n = len(raw)
+    while i < n:
+        if i < n - 1:
+            pair = f"{raw[i]} {raw[i + 1]}"
+            pair_entry = lookup_ar(pair) or lookup_ar(f"{raw[i]}{raw[i + 1]}")
+            if pair_entry is not None:
+                out.append((pair, pair_entry))
+                i += 2
+                continue
+        out.append((raw[i], lookup(raw[i])))
+        i += 1
+    return out
 
 
 class EgyptianNames:
@@ -121,6 +152,38 @@ class EgyptianNames:
     ) -> Optional[Union[NameInfo, List[Optional[NameInfo]]]]:
         """Annotate a name with linguistic and demographic metadata."""
         return annotate(name)
+
+    def identify(
+        self,
+        name: str,
+    ) -> Optional[InferredName]:
+        """Identify a single name token, in or out of the book.
+
+        Looks the token up first. If it is not in the book, falls back
+        to a machine-learned model and marks the result ``inferred=True``.
+        The model abstains (returns "unknown") on gender/religion/role
+        whenever its confidence is below the precision-tuned threshold,
+        rather than guessing. Never use an inferred result as if it were
+        a verified book entry — check ``.inferred`` and ``.source``.
+        """
+        return _infer_token_fn(name)
+
+    def identify_all(
+        self,
+        full_name: str,
+    ) -> List[InferredName]:
+        """Identify every token in a full name, book-first with ML fallback.
+
+        Same semantics as :meth:`identify`, applied token by token.
+        Always a list: empty input gives an empty list, never None, so
+        callers can iterate the result without a type check.
+        """
+        result = _infer_fn(full_name)
+        if result is None:
+            return []
+        if isinstance(result, list):
+            return [r for r in result if r is not None]
+        return [result]
 
 
     def split(self, full_name: str) -> List[str]:
@@ -337,78 +400,99 @@ class EgyptianNames:
     # ------------------------------------------------------------------
 
     def is_valid(self, name: str) -> bool:
-        """Check if a name is a verified Egyptian name in the dataset."""
-        return lookup(name) is not None
+        """True if this is a usable personal name.
+
+        Catalog surfaces that are not a person (God, titles, common nouns)
+        stay in lookup for split. They are not valid names.
+        """
+        entry = lookup(name)
+        return (
+            entry is not None
+            and is_personal_entry(entry)
+            and not is_low_confidence_entry(entry)
+        )
 
     def detect_gender(self, full_name: str) -> GenderDetection:
-        """Infer the overall gender of a person from their full name."""
-        tokens = full_name.strip().split()
+        """Gender of the person: the first given name.
+
+        Later tokens are father, grandfather, family. They do not vote.
+        A tie must not become male. Two-word compound lemmas (e.g.
+        kunya "Abu X") are recognized as one token, not two fragments.
+        """
+        tokens = _compound_tokens(full_name)
         if not tokens:
             return GenderDetection(gender="neutral", confidence=0.0)
 
-        male_score = 0.0
-        female_score = 0.0
-        neutral_score = 0.0
-        total_weight = 0.0
-
-        for i, token in enumerate(tokens):
-            entry = lookup(token)
-            if not entry:
+        skipped_lineage = 0
+        for i, (_, entry) in enumerate(tokens):
+            if entry is None or not is_personal_entry(entry) or is_low_confidence_entry(entry):
                 continue
+            if is_lineage_role(entry):
+                skipped_lineage += 1
+                continue
+            if entry.gender == Gender.NEUTRAL:
+                return GenderDetection(gender="neutral", confidence=0.6)
+            confidence = 1.0 if skipped_lineage == 0 and i == 0 else 0.85
+            return GenderDetection(gender=entry.gender.value, confidence=confidence)
 
-            weight = 4.0 if i == 0 else (2.0 if i == 1 else 1.0)
-            total_weight += weight
-
-            if entry.gender == Gender.MALE:
-                male_score += weight
-            elif entry.gender == Gender.FEMALE:
-                female_score += weight
-            else:
-                neutral_score += weight
-
-        if total_weight == 0.0:
-            return GenderDetection(gender="neutral", confidence=0.0)
-
-        scores = {"male": male_score, "female": female_score, "neutral": neutral_score}
-        best_gender = max(scores, key=scores.get)  # type: ignore
-        confidence = scores[best_gender] / total_weight
-
-        return GenderDetection(gender=best_gender, confidence=confidence)
+        return GenderDetection(gender="neutral", confidence=0.0)
 
     def detect_religion(self, full_name: str) -> ReligionDetection:
-        """Infer the likely religious background from the full name chain."""
-        tokens = full_name.strip().split()
+        """Religion of the person: the first given name, like gender.
+
+        A father, grandfather, or family surname from one community does
+        not override the person's own first name. Lineage tokens only
+        vote if the person's own name gives no distinctive signal — an
+        intermarried or mixed-heritage family's surname should not
+        outvote what the person is actually named. Two-word compound
+        lemmas (e.g. kunya "Abu X") are recognized as one token.
+        """
+        tokens = _compound_tokens(full_name)
         if not tokens:
             return ReligionDetection(religion="neutral", confidence=0.0)
 
-        muslim_score = 0.0
-        christian_score = 0.0
-        neutral_score = 0.0
-        total_weight = 0.0
-
-        for token in tokens:
-            entry = lookup(token)
-            if not entry:
+        skipped_lineage = 0
+        for i, (_, entry) in enumerate(tokens):
+            if entry is None or not is_personal_entry(entry) or is_low_confidence_entry(entry):
                 continue
+            if is_lineage_role(entry):
+                skipped_lineage += 1
+                continue
+            if entry.religion == Religion.NEUTRAL:
+                continue
+            confidence = 1.0 if skipped_lineage == 0 and i == 0 else 0.9
+            return ReligionDetection(religion=entry.religion.value, confidence=confidence)
 
-            weight = 1.0
-            total_weight += weight
+        # The person's own given names carried no distinctive signal
+        # (neutral or not found). Fall back to an aggregate vote across
+        # every token, lineage included, rather than declaring neutral.
+        muslim = 0.0
+        christian = 0.0
+        first: Optional[str] = None
 
+        for _, entry in tokens:
+            if entry is None or not is_personal_entry(entry) or is_low_confidence_entry(entry):
+                continue
             if entry.religion == Religion.MUSLIM:
-                muslim_score += weight
+                muslim += 1
+                if first is None:
+                    first = "muslim"
             elif entry.religion == Religion.CHRISTIAN:
-                christian_score += weight
-            else:
-                neutral_score += weight
+                christian += 1
+                if first is None:
+                    first = "christian"
 
-        if total_weight == 0.0:
+        if muslim == 0.0 and christian == 0.0:
             return ReligionDetection(religion="neutral", confidence=0.0)
 
-        scores = {"muslim": muslim_score, "christian": christian_score, "neutral": neutral_score}
-        best_religion = max(scores, key=scores.get)  # type: ignore
-        confidence = scores[best_religion] / total_weight
-
-        return ReligionDetection(religion=best_religion, confidence=confidence)
+        distinctive = muslim + christian
+        if muslim > christian:
+            return ReligionDetection(religion="muslim", confidence=0.5 * muslim / distinctive)
+        if christian > muslim:
+            return ReligionDetection(
+                religion="christian", confidence=0.5 * christian / distinctive
+            )
+        return ReligionDetection(religion=first or "neutral", confidence=0.5)
 
     def rank(self, name: str) -> Optional[RankInfo]:
         """Get the national frequency rank and percentile of a name."""
@@ -725,6 +809,7 @@ __all__ = [
     "FrequencyClass",
     "NameEntry",
     "NameInfo",
+    "InferredName",
     "PetName",
     "GeneratedName",
     "ChainPart",

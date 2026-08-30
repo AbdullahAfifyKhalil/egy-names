@@ -9,6 +9,7 @@
 #include "splitter.hpp"
 #include "annotator.hpp"
 #include "search.hpp"
+#include "quality.hpp"
 
 #include <string>
 #include <vector>
@@ -268,38 +269,85 @@ public:
             starts_with, ends_with, contains, min_corpus_share, max_results, sort_by, custom_data_path);
     }
 
+    // Gender of the person: the first given name. Later tokens are father,
+    // grandfather, family — they do not vote. A tie must not become male.
+    // Two-word compound lemmas (e.g. kunya "Abu X") are recognized as one
+    // token, not two fragments.
     GenderDetection detect_gender(const std::string& fullName) {
-        auto parts = split(fullName);
-        if (parts.empty()) return {"unknown", 0.0};
+        auto tokens = compound_tokens(fullName, custom_data_path);
+        if (tokens.empty()) return {"neutral", 0.0};
 
-        auto first_entry = LookupIndices::lookup(parts[0], custom_data_path);
-        if (!first_entry.has_value() || first_entry->gender == Gender::NEUTRAL) {
-            return {"neutral", 0.5};
+        int skipped_lineage = 0;
+        for (size_t i = 0; i < tokens.size(); ++i) {
+            const auto& entry = tokens[i].second;
+            if (!entry.has_value() || !is_personal_entry(*entry, custom_data_path)
+                || is_low_confidence_entry(*entry, custom_data_path)) {
+                continue;
+            }
+            if (is_lineage_role(*entry)) {
+                skipped_lineage++;
+                continue;
+            }
+            if (entry->gender == Gender::NEUTRAL) {
+                return {"neutral", 0.6};
+            }
+            double confidence = (skipped_lineage == 0 && i == 0) ? 1.0 : 0.85;
+            return {gender_to_string(entry->gender), confidence};
         }
-
-        double confidence = (first_entry->gender == Gender::FEMALE) ? 0.95 : 0.90;
-        return {gender_to_string(first_entry->gender), confidence};
+        return {"neutral", 0.0};
     }
 
+    // Religion of the person: the first given name, like gender. A father,
+    // grandfather, or family surname from one community does not override
+    // the person's own first name. Lineage tokens only vote if the
+    // person's own name gives no distinctive signal.
     ReligionDetection detect_religion(const std::string& fullName) {
-        auto parts = split(fullName);
-        if (parts.empty()) return {"unknown", 0.0};
+        auto tokens = compound_tokens(fullName, custom_data_path);
+        if (tokens.empty()) return {"neutral", 0.0};
 
-        int c_count = 0, m_count = 0;
-        for (const auto& p : parts) {
-            auto entry = LookupIndices::lookup(p, custom_data_path);
-            if (!entry.has_value()) continue;
-            if (entry->religion == Religion::CHRISTIAN) c_count++;
-            else if (entry->religion == Religion::MUSLIM) m_count++;
+        int skipped_lineage = 0;
+        for (size_t i = 0; i < tokens.size(); ++i) {
+            const auto& entry = tokens[i].second;
+            if (!entry.has_value() || !is_personal_entry(*entry, custom_data_path)
+                || is_low_confidence_entry(*entry, custom_data_path)) {
+                continue;
+            }
+            if (is_lineage_role(*entry)) {
+                skipped_lineage++;
+                continue;
+            }
+            if (entry->religion == Religion::NEUTRAL) {
+                continue;
+            }
+            double confidence = (skipped_lineage == 0 && i == 0) ? 1.0 : 0.9;
+            return {religion_to_string(entry->religion), confidence};
         }
 
-        if (c_count > 0 && c_count >= m_count) {
-            return {"christian", std::min(0.99, 0.60 + c_count * 0.20)};
+        // The person's own given names carried no distinctive signal
+        // (neutral or not found). Fall back to an aggregate vote across
+        // every token, lineage included, rather than declaring neutral.
+        double muslim = 0.0, christian = 0.0;
+        std::string first;
+        for (const auto& t : tokens) {
+            const auto& entry = t.second;
+            if (!entry.has_value() || !is_personal_entry(*entry, custom_data_path)
+                || is_low_confidence_entry(*entry, custom_data_path)) {
+                continue;
+            }
+            if (entry->religion == Religion::MUSLIM) {
+                muslim += 1.0;
+                if (first.empty()) first = "muslim";
+            } else if (entry->religion == Religion::CHRISTIAN) {
+                christian += 1.0;
+                if (first.empty()) first = "christian";
+            }
         }
-        if (m_count > 0) {
-            return {"muslim", std::min(0.99, 0.60 + m_count * 0.15)};
-        }
-        return {"neutral", 0.5};
+
+        if (muslim == 0.0 && christian == 0.0) return {"neutral", 0.0};
+        double distinctive = muslim + christian;
+        if (muslim > christian) return {"muslim", 0.5 * muslim / distinctive};
+        if (christian > muslim) return {"christian", 0.5 * christian / distinctive};
+        return {first.empty() ? "neutral" : first, 0.5};
     }
 
     std::vector<ChainPart> analyze_chain(const std::string& fullName) {
@@ -384,7 +432,10 @@ public:
     }
 
     bool is_valid(const std::string& name) {
-        return LookupIndices::lookup(name, custom_data_path).has_value();
+        auto entry = LookupIndices::lookup(name, custom_data_path);
+        return entry.has_value()
+            && is_personal_entry(*entry, custom_data_path)
+            && !is_low_confidence_entry(*entry, custom_data_path);
     }
 
     nlohmann::json stats() {

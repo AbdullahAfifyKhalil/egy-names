@@ -32,36 +32,74 @@ export function normalizeEn(text: string): string {
   return text.toLowerCase().replace(/-/g, "").replace(/'/g, "").trim();
 }
 
+function claimEn(key: string, entry: NameEntry): void {
+  const existing = enIndex.get(key);
+  if (!existing || entry.corpusShare > existing.corpusShare) {
+    enIndex.set(key, entry);
+  }
+}
+
+/**
+ * Bind an Arabic variant spelling to the lemma with the larger corpus
+ * share, same rule as `claimEn`.
+ *
+ * A canonical key (some entry's own `ar`/normalized `ar`) always wins
+ * over any OTHER entry's variant claiming the same string — a rare
+ * misspelling must never shadow a real lemma's own canonical spelling.
+ * Among two variants with no canonical claim, the higher corpus share
+ * wins, exactly like `claimEn`.
+ */
+function claimArVariant(
+  index: Map<string, NameEntry>,
+  canonicalKeys: Set<string>,
+  key: string,
+  entry: NameEntry
+): void {
+  if (canonicalKeys.has(key)) {
+    // Already bound to its own entry in the canonical pass; a variant
+    // from a different lemma must never override it.
+    return;
+  }
+  const existing = index.get(key);
+  if (!existing || entry.corpusShare > existing.corpusShare) {
+    index.set(key, entry);
+  }
+}
+
 function build(): void {
   if (built) return;
 
   const entries = getEntries();
   const corrections = getCorrections();
 
+  // AR index, pass 1: canonical spellings are unconditional and take
+  // priority over any other lemma's variant claiming the same string
+  // (book has zero duplicate canonical ar values).
+  const canonicalArKeys = new Set(entries.map((e) => e.ar));
+  const canonicalArNormKeys = new Set(entries.map((e) => normalizeAr(e.ar)));
   for (const entry of entries) {
-    // AR index
-    if (!arIndex.has(entry.ar)) arIndex.set(entry.ar, entry);
-    const normAr = normalizeAr(entry.ar);
-    if (!arNormIndex.has(normAr)) arNormIndex.set(normAr, entry);
+    arIndex.set(entry.ar, entry);
+    arNormIndex.set(normalizeAr(entry.ar), entry);
+  }
 
+  for (const entry of entries) {
+    // AR index, pass 2: variants. Keep the higher-share lemma when two
+    // rows' variants claim the same spelling — same rule as English
+    // keys, so a rare misspelling cannot steal a common name's lookup.
     for (const v of entry.arVariants) {
       const vStripped = v.trim();
       if (vStripped) {
-        if (!arIndex.has(vStripped)) arIndex.set(vStripped, entry);
-        const normV = normalizeAr(vStripped);
-        if (!arNormIndex.has(normV)) arNormIndex.set(normV, entry);
+        claimArVariant(arIndex, canonicalArKeys, vStripped, entry);
+        claimArVariant(arNormIndex, canonicalArNormKeys, normalizeAr(vStripped), entry);
       }
     }
 
-    // EN index
-    const normEn = normalizeEn(entry.en);
-    if (!enIndex.has(normEn)) enIndex.set(normEn, entry);
-    
+    // EN index — keep the higher-share lemma on a colliding key
+    claimEn(normalizeEn(entry.en), entry);
     for (const v of entry.enVariants) {
       const vStripped = v.trim();
       if (vStripped) {
-        const normV = normalizeEn(vStripped);
-        if (!enIndex.has(normV)) enIndex.set(normV, entry);
+        claimEn(normalizeEn(vStripped), entry);
       }
     }
   }

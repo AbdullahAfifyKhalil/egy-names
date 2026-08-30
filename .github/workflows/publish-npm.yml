@@ -1,0 +1,67 @@
+name: Test and publish npm package
+
+# Same pattern as publish-python.yml: bump the version in
+# typescript/package.json and push to main. This runs the test suite,
+# then only publishes if that version isn't already on npm.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "typescript/**"
+      - "data/**"
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install deps
+        working-directory: typescript
+        run: npm ci || npm install
+      - name: Run test suite
+        working-directory: typescript
+        run: npm test
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Read local version
+        id: local
+        working-directory: typescript
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Check whether that version is already on npm
+        id: check
+        working-directory: typescript
+        run: |
+          v="${{ steps.local.outputs.version }}"
+          if npm view "egy-names@$v" version >/dev/null 2>&1; then
+            echo "already_published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "already_published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install and publish
+        if: steps.check.outputs.already_published == 'false'
+        working-directory: typescript
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npm ci || npm install
+          npm publish --access public
+
+      - name: Skip (nothing new)
+        if: steps.check.outputs.already_published == 'true'
+        run: echo "egy-names@${{ steps.local.outputs.version }} is already on npm — nothing to publish."

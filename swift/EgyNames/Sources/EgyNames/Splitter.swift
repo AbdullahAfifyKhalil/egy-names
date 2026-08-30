@@ -72,9 +72,8 @@ public final class Splitter: @unchecked Sendable {
         let trimmed = fullName.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return [] }
 
-        let tokens = trimmed.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
-        if tokens.count > 1 {
-            return tokens
+        if trimmed.contains(" ") {
+            return LookupIndices.compoundTokens(trimmed, customPath: customPath).map { $0.0 }
         }
 
         if LookupIndices.isArabic(trimmed) {

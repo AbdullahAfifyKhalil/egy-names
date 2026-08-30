@@ -1,3 +1,4 @@
+import 'compound_tokens.dart';
 import 'lookup_indices.dart';
 
 class Splitter {
@@ -80,7 +81,9 @@ class Splitter {
 
     final text = fullName.trim();
     if (text.contains(' ')) {
-      return text.split(RegExp(r'\s+'));
+      return compoundTokens(text, dataPath: dataPath)
+          .map((t) => t.text)
+          .toList();
     }
 
     if (LookupIndices.isArabic(text)) {

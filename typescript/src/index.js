@@ -10,6 +10,7 @@ const annotator_1 = require("./annotator");
 const splitter_1 = require("./splitter");
 const corrector_1 = require("./corrector");
 const search_1 = require("./search");
+const quality_1 = require("./quality");
 class EgyptianNames {
     seed;
     constructor(options) {
@@ -67,69 +68,59 @@ class EgyptianNames {
     }
     // Creative Features
     isValid(name) {
-        return (0, lookupIndices_1.lookup)(name) !== undefined;
+        const entry = (0, lookupIndices_1.lookup)(name);
+        return entry !== undefined && (0, quality_1.isPersonalEntry)(entry);
     }
     detectGender(fullName) {
-        const tokens = fullName.trim().split(/\s+/);
+        const tokens = fullName.trim().split(/\s+/).filter(Boolean);
         if (tokens.length === 0)
             return { gender: "neutral", confidence: 0 };
-        let maleScore = 0;
-        let femaleScore = 0;
-        let neutralScore = 0;
-        let totalWeight = 0;
+        let skippedLineage = 0;
         for (let i = 0; i < tokens.length; i++) {
             const entry = (0, lookupIndices_1.lookup)(tokens[i]);
-            if (!entry)
+            if (!entry || !(0, quality_1.isPersonalEntry)(entry))
                 continue;
-            const w = i === 0 ? 4.0 : i === 1 ? 2.0 : 1.0;
-            totalWeight += w;
-            if (entry.gender === types_1.Gender.MALE)
-                maleScore += w;
-            else if (entry.gender === types_1.Gender.FEMALE)
-                femaleScore += w;
-            else
-                neutralScore += w;
+            if ((0, quality_1.isLineageRole)(entry)) {
+                skippedLineage++;
+                continue;
+            }
+            if (entry.gender === types_1.Gender.NEUTRAL)
+                return { gender: "neutral", confidence: 0.6 };
+            const confidence = skippedLineage === 0 && i === 0 ? 1.0 : 0.85;
+            return { gender: entry.gender, confidence };
         }
-        if (totalWeight === 0)
-            return { gender: "neutral", confidence: 0 };
-        const maxScore = Math.max(maleScore, femaleScore, neutralScore);
-        const confidence = maxScore / totalWeight;
-        if (maxScore === maleScore)
-            return { gender: "male", confidence };
-        if (maxScore === femaleScore)
-            return { gender: "female", confidence };
-        return { gender: "neutral", confidence };
+        return { gender: "neutral", confidence: 0 };
     }
     detectReligion(fullName) {
-        const tokens = fullName.trim().split(/\s+/);
+        const tokens = fullName.trim().split(/\s+/).filter(Boolean);
         if (tokens.length === 0)
             return { religion: "neutral", confidence: 0 };
-        let muslimScore = 0;
-        let christianScore = 0;
-        let neutralScore = 0;
-        let totalWeight = 0;
-        for (let i = 0; i < tokens.length; i++) {
-            const entry = (0, lookupIndices_1.lookup)(tokens[i]);
-            if (!entry)
+        let muslim = 0;
+        let christian = 0;
+        let first = null;
+        for (const token of tokens) {
+            const entry = (0, lookupIndices_1.lookup)(token);
+            if (!entry || !(0, quality_1.isPersonalEntry)(entry))
                 continue;
-            const w = 1.0;
-            totalWeight += w;
-            if (entry.religion === types_1.Religion.MUSLIM)
-                muslimScore += w;
-            else if (entry.religion === types_1.Religion.CHRISTIAN)
-                christianScore += w;
-            else
-                neutralScore += w;
+            if (entry.religion === types_1.Religion.MUSLIM) {
+                muslim++;
+                if (first === null)
+                    first = "muslim";
+            }
+            else if (entry.religion === types_1.Religion.CHRISTIAN) {
+                christian++;
+                if (first === null)
+                    first = "christian";
+            }
         }
-        if (totalWeight === 0)
+        if (muslim === 0 && christian === 0)
             return { religion: "neutral", confidence: 0 };
-        const maxScore = Math.max(muslimScore, christianScore, neutralScore);
-        const confidence = maxScore / totalWeight;
-        if (maxScore === muslimScore)
-            return { religion: "muslim", confidence };
-        if (maxScore === christianScore)
-            return { religion: "christian", confidence };
-        return { religion: "neutral", confidence };
+        const distinctive = muslim + christian;
+        if (muslim > christian)
+            return { religion: "muslim", confidence: muslim / distinctive };
+        if (christian > muslim)
+            return { religion: "christian", confidence: christian / distinctive };
+        return { religion: first ?? "neutral", confidence: 0.5 };
     }
     fingerprint(name) {
         const entry = (0, lookupIndices_1.lookup)(name);

@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'src/annotator.dart';
+import 'src/compound_tokens.dart';
 import 'src/corrector.dart';
 import 'src/data.dart';
 import 'src/generator.dart';
 import 'src/lookup_indices.dart';
+import 'src/quality.dart';
 import 'src/search.dart';
 import 'src/splitter.dart';
 import 'src/translator.dart';
@@ -239,95 +241,111 @@ class EgyptianNames {
   // ----------------------------------------------------------------------
 
   bool isValid(String name) {
-    return LookupIndices.lookup(name, dataPath: customDataPath) != null;
+    final entry = LookupIndices.lookup(name, dataPath: customDataPath);
+    return entry != null &&
+        isPersonalEntry(entry) &&
+        !isLowConfidenceEntry(entry);
   }
 
+  /// Gender of the person: the first given name.
+  ///
+  /// Later tokens are father, grandfather, family. They do not vote.
+  /// A tie must not become male. Two-word compound lemmas (e.g. kunya
+  /// "Abu X") are recognized as one token, not two fragments.
   GenderDetection detectGender(String fullName) {
-    final tokens = fullName.trim().split(RegExp(r'\s+'));
+    final tokens = compoundTokens(fullName, dataPath: customDataPath);
     if (tokens.isEmpty) {
       return GenderDetection(gender: 'neutral', confidence: 0.0);
     }
 
-    double maleScore = 0;
-    double femaleScore = 0;
-    double neutralScore = 0;
-    double totalWeight = 0;
-
-    for (int i = 0; i < tokens.length; i++) {
-      final entry =
-          LookupIndices.lookup(tokens[i], dataPath: customDataPath);
-      if (entry == null) continue;
-
-      final w = i == 0 ? 4.0 : (i == 1 ? 2.0 : 1.0);
-      totalWeight += w;
-
-      if (entry.gender == Gender.male) {
-        maleScore += w;
-      } else if (entry.gender == Gender.female) {
-        femaleScore += w;
-      } else {
-        neutralScore += w;
+    var skippedLineage = 0;
+    for (var i = 0; i < tokens.length; i++) {
+      final entry = tokens[i].entry;
+      if (entry == null ||
+          !isPersonalEntry(entry) ||
+          isLowConfidenceEntry(entry)) {
+        continue;
       }
+      if (isLineageRole(entry)) {
+        skippedLineage++;
+        continue;
+      }
+      if (entry.gender == Gender.neutral) {
+        return GenderDetection(gender: 'neutral', confidence: 0.6);
+      }
+      final confidence = skippedLineage == 0 && i == 0 ? 1.0 : 0.85;
+      return GenderDetection(gender: entry.gender.value, confidence: confidence);
     }
-
-    if (totalWeight == 0) {
-      return GenderDetection(gender: 'neutral', confidence: 0.0);
-    }
-
-    final maxScore = max(maleScore, max(femaleScore, neutralScore));
-    final confidence = maxScore / totalWeight;
-
-    if (maxScore == maleScore) {
-      return GenderDetection(gender: 'male', confidence: confidence);
-    }
-    if (maxScore == femaleScore) {
-      return GenderDetection(gender: 'female', confidence: confidence);
-    }
-    return GenderDetection(gender: 'neutral', confidence: confidence);
+    return GenderDetection(gender: 'neutral', confidence: 0.0);
   }
 
+  /// Religion of the person: the first given name, like gender.
+  ///
+  /// A father, grandfather, or family surname from one community does
+  /// not override the person's own first name. Lineage tokens only
+  /// vote if the person's own name gives no distinctive signal — an
+  /// intermarried or mixed-heritage family's surname should not
+  /// outvote what the person is actually named. Two-word compound
+  /// lemmas (e.g. kunya "Abu X") are recognized as one token.
   ReligionDetection detectReligion(String fullName) {
-    final tokens = fullName.trim().split(RegExp(r'\s+'));
+    final tokens = compoundTokens(fullName, dataPath: customDataPath);
     if (tokens.isEmpty) {
       return ReligionDetection(religion: 'neutral', confidence: 0.0);
     }
 
-    double muslimScore = 0;
-    double christianScore = 0;
-    double neutralScore = 0;
-    double totalWeight = 0;
+    var skippedLineage = 0;
+    for (var i = 0; i < tokens.length; i++) {
+      final entry = tokens[i].entry;
+      if (entry == null ||
+          !isPersonalEntry(entry) ||
+          isLowConfidenceEntry(entry)) {
+        continue;
+      }
+      if (isLineageRole(entry)) {
+        skippedLineage++;
+        continue;
+      }
+      if (entry.religion == Religion.neutral) continue;
+      final confidence = skippedLineage == 0 && i == 0 ? 1.0 : 0.9;
+      return ReligionDetection(religion: entry.religion.value, confidence: confidence);
+    }
 
-    for (int i = 0; i < tokens.length; i++) {
-      final entry =
-          LookupIndices.lookup(tokens[i], dataPath: customDataPath);
-      if (entry == null) continue;
+    // The person's own given names carried no distinctive signal
+    // (neutral or not found). Fall back to an aggregate vote across
+    // every token, lineage included, rather than declaring neutral.
+    var muslim = 0.0;
+    var christian = 0.0;
+    String? first;
 
-      const w = 1.0;
-      totalWeight += w;
-
+    for (final token in tokens) {
+      final entry = token.entry;
+      if (entry == null ||
+          !isPersonalEntry(entry) ||
+          isLowConfidenceEntry(entry)) {
+        continue;
+      }
       if (entry.religion == Religion.muslim) {
-        muslimScore += w;
+        muslim++;
+        first ??= 'muslim';
       } else if (entry.religion == Religion.christian) {
-        christianScore += w;
-      } else {
-        neutralScore += w;
+        christian++;
+        first ??= 'christian';
       }
     }
 
-    if (totalWeight == 0) {
+    if (muslim == 0 && christian == 0) {
       return ReligionDetection(religion: 'neutral', confidence: 0.0);
     }
-
-    final maxScore = max(muslimScore, max(christianScore, neutralScore));
-    final confidence = maxScore / totalWeight;
-
-    if (maxScore == muslimScore) {
-      return ReligionDetection(religion: 'muslim', confidence: confidence);
+    final distinctive = muslim + christian;
+    if (muslim > christian) {
+      return ReligionDetection(
+          religion: 'muslim', confidence: 0.5 * muslim / distinctive);
     }
-    if (maxScore == christianScore) {
-      return ReligionDetection(religion: 'christian', confidence: confidence);
+    if (christian > muslim) {
+      return ReligionDetection(
+          religion: 'christian', confidence: 0.5 * christian / distinctive);
     }
-    return ReligionDetection(religion: 'neutral', confidence: confidence);
+    return ReligionDetection(religion: first ?? 'neutral', confidence: 0.5);
   }
 
   Map<String, dynamic>? fingerprint(String name) {

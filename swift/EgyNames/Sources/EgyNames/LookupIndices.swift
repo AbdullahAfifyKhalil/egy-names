@@ -57,6 +57,33 @@ public final class LookupIndices: @unchecked Sendable {
         return text.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
+    private static func claimEn(_ key: String, _ entry: NameEntry) {
+        if let existing = enIndex[key], existing.corpusShare >= entry.corpusShare {
+            return
+        }
+        enIndex[key] = entry
+    }
+
+    /// Bind an Arabic variant spelling to the lemma with the larger corpus
+    /// share, same rule as `claimEn`.
+    ///
+    /// A canonical key (some entry's own `ar`/normalized-`ar`) always wins
+    /// over any OTHER entry's variant claiming the same string — a rare
+    /// misspelling must never shadow a real lemma's own canonical spelling.
+    /// Among two variants with no canonical claim, the higher corpus share
+    /// wins.
+    private static func claimArVariant(
+        _ index: inout [String: NameEntry], canonicalKeys: Set<String>, key: String, entry: NameEntry
+    ) {
+        if canonicalKeys.contains(key) {
+            return
+        }
+        if let existing = index[key], existing.corpusShare >= entry.corpusShare {
+            return
+        }
+        index[key] = entry
+    }
+
     public static func isArabic(_ text: String) -> Bool {
         for scalar in text.unicodeScalars {
             if scalar.value >= 0x0600 && scalar.value <= 0x06FF {
@@ -77,33 +104,44 @@ public final class LookupIndices: @unchecked Sendable {
         metadata = bundle.metadata
         correctionIndex = bundle.corrections
 
+        // AR index, pass 1: canonical spellings are unconditional and take
+        // priority over any other lemma's variant claiming the same string
+        // (book has zero duplicate canonical ar values).
+        var canonicalArKeys = Set<String>()
+        var canonicalArNormKeys = Set<String>()
+        canonicalArKeys.reserveCapacity(allEntries.count)
+        canonicalArNormKeys.reserveCapacity(allEntries.count)
+        for entry in allEntries {
+            canonicalArKeys.insert(entry.ar)
+            canonicalArNormKeys.insert(normalizeAr(entry.ar))
+        }
         for entry in allEntries {
             arIndex[entry.ar] = entry
-            let norm = normalizeAr(entry.ar)
-            if arNormIndex[norm] == nil {
-                arNormIndex[norm] = entry
-            }
+            arNormIndex[normalizeAr(entry.ar)] = entry
+        }
 
+        for entry in allEntries {
+            // AR index, pass 2: variants. Keep the higher-share lemma when
+            // two rows' variants claim the same spelling, and never let a
+            // variant steal a string that is some entry's own canonical
+            // spelling.
             for v in entry.arVariants {
-                if !v.isEmpty {
-                    arIndex[v] = entry
-                    let normV = normalizeAr(v)
-                    if arNormIndex[normV] == nil {
-                        arNormIndex[normV] = entry
-                    }
+                let vStripped = v.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !vStripped.isEmpty {
+                    claimArVariant(&arIndex, canonicalKeys: canonicalArKeys, key: vStripped, entry: entry)
+                    claimArVariant(
+                        &arNormIndex,
+                        canonicalKeys: canonicalArNormKeys,
+                        key: normalizeAr(vStripped),
+                        entry: entry
+                    )
                 }
             }
 
-            let normEn = normalizeEn(entry.en)
-            if enIndex[normEn] == nil {
-                enIndex[normEn] = entry
-            }
+            claimEn(normalizeEn(entry.en), entry)
             for v in entry.enVariants {
                 if !v.isEmpty {
-                    let normEv = normalizeEn(v)
-                    if enIndex[normEv] == nil {
-                        enIndex[normEv] = entry
-                    }
+                    claimEn(normalizeEn(v), entry)
                 }
             }
         }
@@ -191,5 +229,38 @@ public final class LookupIndices: @unchecked Sendable {
     public static func getMetadata(customPath: String? = nil) -> [String: AnyCodable] {
         ensureBuilt(customPath: customPath)
         return metadata
+    }
+
+    /// Split on whitespace, but merge an adjacent pair into one lemma when
+    /// the book has it as a two-word compound (e.g. kunya "Abu X").
+    ///
+    /// A handful of book entries are legitimately two words (roughly 800
+    /// "Abu X" kunya/family lemmas plus a few compound given names). A
+    /// blind whitespace split treats them as two meaningless fragments,
+    /// breaking gender/religion detection and split() on names that
+    /// contain one. Greedy pairwise lookahead.
+    public static func compoundTokens(_ fullName: String, customPath: String? = nil) -> [(String, NameEntry?)] {
+        ensureBuilt(customPath: customPath)
+        let raw = fullName.trimmingCharacters(in: .whitespacesAndNewlines)
+            .components(separatedBy: .whitespacesAndNewlines)
+            .filter { !$0.isEmpty }
+        var out: [(String, NameEntry?)] = []
+        var i = 0
+        let n = raw.count
+        while i < n {
+            if i < n - 1 {
+                let pair = "\(raw[i]) \(raw[i + 1])"
+                let pairEntry = lookupAr(pair, customPath: customPath)
+                    ?? lookupAr("\(raw[i])\(raw[i + 1])", customPath: customPath)
+                if let pairEntry {
+                    out.append((pair, pairEntry))
+                    i += 2
+                    continue
+                }
+            }
+            out.append((raw[i], lookup(raw[i], customPath: customPath)))
+            i += 1
+        }
+        return out
     }
 }

@@ -378,7 +378,10 @@ class EgyptianNames
 
     public function isValid(string $name): bool
     {
-        return Lookup::lookup($name) !== null;
+        $entry = Lookup::lookup($name);
+        return $entry !== null
+            && Quality::isPersonalEntry($entry)
+            && !Quality::isLowConfidenceEntry($entry);
     }
 
     public function is_valid(string $name): bool
@@ -386,48 +389,57 @@ class EgyptianNames
         return $this->isValid($name);
     }
 
+    /**
+     * Split on whitespace, but merge an adjacent pair into one lemma
+     * when the book has it as a two-word compound (e.g. kunya "Abu X").
+     *
+     * @return list<array{0: string, 1: ?NameEntry}>
+     */
+    public function compoundTokens(string $fullName): array
+    {
+        $raw = preg_split('/\s+/u', trim($fullName), -1, PREG_SPLIT_NO_EMPTY) ?: [];
+        $out = [];
+        $i = 0;
+        $n = count($raw);
+        while ($i < $n) {
+            if ($i < $n - 1) {
+                $pair = $raw[$i] . ' ' . $raw[$i + 1];
+                $pairEntry = Lookup::lookupAr($pair) ?? Lookup::lookupAr($raw[$i] . $raw[$i + 1]);
+                if ($pairEntry !== null) {
+                    $out[] = [$pair, $pairEntry];
+                    $i += 2;
+                    continue;
+                }
+            }
+            $out[] = [$raw[$i], Lookup::lookup($raw[$i])];
+            $i++;
+        }
+        return $out;
+    }
+
     public function detectGender(string $full_name): GenderDetection
     {
-        $tokens = preg_split('/\s+/u', trim($full_name)) ?: [];
-        if ($tokens === [] || $tokens === ['']) {
+        $tokens = $this->compoundTokens($full_name);
+        if ($tokens === []) {
             return new GenderDetection('neutral', 0);
         }
 
-        $maleScore = 0.0;
-        $femaleScore = 0.0;
-        $neutralScore = 0.0;
-        $totalWeight = 0.0;
-
-        foreach ($tokens as $i => $tok) {
-            $entry = Lookup::lookup($tok);
-            if ($entry === null) {
+        $skippedLineage = 0;
+        foreach ($tokens as $i => [, $entry]) {
+            if ($entry === null || !Quality::isPersonalEntry($entry) || Quality::isLowConfidenceEntry($entry)) {
                 continue;
             }
-            $w = $i === 0 ? 4.0 : ($i === 1 ? 2.0 : 1.0);
-            $totalWeight += $w;
-            if ($entry->gender === Gender::MALE) {
-                $maleScore += $w;
-            } elseif ($entry->gender === Gender::FEMALE) {
-                $femaleScore += $w;
-            } else {
-                $neutralScore += $w;
+            if (Quality::isLineage($entry)) {
+                $skippedLineage++;
+                continue;
             }
+            if ($entry->gender === Gender::NEUTRAL) {
+                return new GenderDetection('neutral', 0.6);
+            }
+            $confidence = ($skippedLineage === 0 && $i === 0) ? 1.0 : 0.85;
+            return new GenderDetection($entry->gender->value, $confidence);
         }
-
-        if ($totalWeight === 0.0) {
-            return new GenderDetection('neutral', 0);
-        }
-
-        $maxScore = max($maleScore, $femaleScore, $neutralScore);
-        $confidence = $maxScore / $totalWeight;
-
-        if ($maxScore === $maleScore) {
-            return new GenderDetection('male', $confidence);
-        }
-        if ($maxScore === $femaleScore) {
-            return new GenderDetection('female', $confidence);
-        }
-        return new GenderDetection('neutral', $confidence);
+        return new GenderDetection('neutral', 0);
     }
 
     public function detect_gender(string $full_name): GenderDetection
@@ -437,46 +449,63 @@ class EgyptianNames
 
     public function detectReligion(string $full_name): ReligionDetection
     {
-        $tokens = preg_split('/\s+/u', trim($full_name)) ?: [];
-        if ($tokens === [] || $tokens === ['']) {
+        $tokens = $this->compoundTokens($full_name);
+        if ($tokens === []) {
             return new ReligionDetection('neutral', 0);
         }
 
-        $muslimScore = 0.0;
-        $christianScore = 0.0;
-        $neutralScore = 0.0;
-        $totalWeight = 0.0;
-
-        foreach ($tokens as $tok) {
-            $entry = Lookup::lookup($tok);
-            if ($entry === null) {
+        $skippedLineage = 0;
+        foreach ($tokens as $i => [, $entry]) {
+            if ($entry === null || !Quality::isPersonalEntry($entry) || Quality::isLowConfidenceEntry($entry)) {
                 continue;
             }
-            $w = 1.0;
-            $totalWeight += $w;
+            if (Quality::isLineage($entry)) {
+                $skippedLineage++;
+                continue;
+            }
+            if ($entry->religion === Religion::NEUTRAL) {
+                continue;
+            }
+            $confidence = ($skippedLineage === 0 && $i === 0) ? 1.0 : 0.9;
+            return new ReligionDetection($entry->religion->value, $confidence);
+        }
+
+        // The person's own given names carried no distinctive signal
+        // (neutral or not found). Fall back to an aggregate vote across
+        // every token, lineage included, rather than declaring neutral.
+        $muslim = 0.0;
+        $christian = 0.0;
+        $first = null;
+
+        foreach ($tokens as [, $entry]) {
+            if ($entry === null || !Quality::isPersonalEntry($entry) || Quality::isLowConfidenceEntry($entry)) {
+                continue;
+            }
             if ($entry->religion === Religion::MUSLIM) {
-                $muslimScore += $w;
+                $muslim++;
+                if ($first === null) {
+                    $first = 'muslim';
+                }
             } elseif ($entry->religion === Religion::CHRISTIAN) {
-                $christianScore += $w;
-            } else {
-                $neutralScore += $w;
+                $christian++;
+                if ($first === null) {
+                    $first = 'christian';
+                }
             }
         }
 
-        if ($totalWeight === 0.0) {
+        if ($muslim === 0.0 && $christian === 0.0) {
             return new ReligionDetection('neutral', 0);
         }
 
-        $maxScore = max($muslimScore, $christianScore, $neutralScore);
-        $confidence = $maxScore / $totalWeight;
-
-        if ($maxScore === $muslimScore) {
-            return new ReligionDetection('muslim', $confidence);
+        $distinctive = $muslim + $christian;
+        if ($muslim > $christian) {
+            return new ReligionDetection('muslim', 0.5 * $muslim / $distinctive);
         }
-        if ($maxScore === $christianScore) {
-            return new ReligionDetection('christian', $confidence);
+        if ($christian > $muslim) {
+            return new ReligionDetection('christian', 0.5 * $christian / $distinctive);
         }
-        return new ReligionDetection('neutral', $confidence);
+        return new ReligionDetection($first ?? 'neutral', 0.5);
     }
 
     public function detect_religion(string $full_name): ReligionDetection

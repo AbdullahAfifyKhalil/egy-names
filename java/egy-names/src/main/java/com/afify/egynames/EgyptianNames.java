@@ -3,6 +3,7 @@ package com.afify.egynames;
 import com.afify.egynames.data.DataLoader;
 import com.afify.egynames.engine.*;
 import com.afify.egynames.index.LookupIndices;
+import com.afify.egynames.index.Quality;
 import com.afify.egynames.model.Models;
 
 import java.util.*;
@@ -233,71 +234,89 @@ public class EgyptianNames {
     // Creative Methods
 
     public boolean isValid(String name) {
-        return LookupIndices.lookup(name, customDataPath) != null;
+        Models.NameEntry entry = LookupIndices.lookup(name, customDataPath);
+        return entry != null
+                && Quality.isPersonalEntry(entry)
+                && !Quality.isLowConfidenceEntry(entry);
     }
 
+    /**
+     * Gender of the person: the first personal, non-lineage given name.
+     *
+     * <p>Later tokens are father, grandfather, family — they do not vote. A
+     * tie must not become male. Two-word compound lemmas (e.g. kunya "Abu X")
+     * are recognized as one token, not two fragments.
+     */
     public Models.GenderDetection detectGender(String fullName) {
-        if (fullName == null || fullName.trim().isEmpty()) return new Models.GenderDetection("neutral", 0.0);
-        String[] tokens = fullName.trim().split("\\s+");
-        if (tokens.length == 0) return new Models.GenderDetection("neutral", 0.0);
+        List<LookupIndices.CompoundToken> tokens = LookupIndices.compoundTokens(fullName, customDataPath);
+        if (tokens.isEmpty()) return new Models.GenderDetection("neutral", 0.0);
 
-        double maleScore = 0;
-        double femaleScore = 0;
-        double neutralScore = 0;
-        double totalWeight = 0;
-
-        for (int i = 0; i < tokens.length; i++) {
-            Models.NameEntry entry = LookupIndices.lookup(tokens[i], customDataPath);
-            if (entry == null) continue;
-
-            double w = i == 0 ? 4.0 : (i == 1 ? 2.0 : 1.0);
-            totalWeight += w;
-
-            if (entry.gender == Models.Gender.MALE) maleScore += w;
-            else if (entry.gender == Models.Gender.FEMALE) femaleScore += w;
-            else neutralScore += w;
+        int skippedLineage = 0;
+        for (int i = 0; i < tokens.size(); i++) {
+            Models.NameEntry entry = tokens.get(i).entry;
+            if (entry == null || !Quality.isPersonalEntry(entry) || Quality.isLowConfidenceEntry(entry)) continue;
+            if (Quality.isLineageRole(entry)) {
+                skippedLineage++;
+                continue;
+            }
+            if (entry.gender == Models.Gender.NEUTRAL) {
+                return new Models.GenderDetection("neutral", 0.6);
+            }
+            double confidence = (skippedLineage == 0 && i == 0) ? 1.0 : 0.85;
+            return new Models.GenderDetection(entry.gender.getValue(), confidence);
         }
-
-        if (totalWeight == 0) return new Models.GenderDetection("neutral", 0.0);
-
-        double maxScore = Math.max(maleScore, Math.max(femaleScore, neutralScore));
-        double confidence = maxScore / totalWeight;
-
-        if (maxScore == maleScore) return new Models.GenderDetection("male", confidence);
-        if (maxScore == femaleScore) return new Models.GenderDetection("female", confidence);
-        return new Models.GenderDetection("neutral", confidence);
+        return new Models.GenderDetection("neutral", 0.0);
     }
 
+    /**
+     * Religion of the person: the first given name, like gender.
+     *
+     * <p>A father, grandfather, or family surname from one community does not
+     * override the person's own first name. Lineage tokens only vote if the
+     * person's own name gives no distinctive signal. Two-word compound
+     * lemmas (e.g. kunya "Abu X") are recognized as one token.
+     */
     public Models.ReligionDetection detectReligion(String fullName) {
-        if (fullName == null || fullName.trim().isEmpty()) return new Models.ReligionDetection("neutral", 0.0);
-        String[] tokens = fullName.trim().split("\\s+");
-        if (tokens.length == 0) return new Models.ReligionDetection("neutral", 0.0);
+        List<LookupIndices.CompoundToken> tokens = LookupIndices.compoundTokens(fullName, customDataPath);
+        if (tokens.isEmpty()) return new Models.ReligionDetection("neutral", 0.0);
 
-        double muslimScore = 0;
-        double christianScore = 0;
-        double neutralScore = 0;
-        double totalWeight = 0;
-
-        for (int i = 0; i < tokens.length; i++) {
-            Models.NameEntry entry = LookupIndices.lookup(tokens[i], customDataPath);
-            if (entry == null) continue;
-
-            double w = 1.0;
-            totalWeight += w;
-
-            if (entry.religion == Models.Religion.MUSLIM) muslimScore += w;
-            else if (entry.religion == Models.Religion.CHRISTIAN) christianScore += w;
-            else neutralScore += w;
+        int skippedLineage = 0;
+        for (int i = 0; i < tokens.size(); i++) {
+            Models.NameEntry entry = tokens.get(i).entry;
+            if (entry == null || !Quality.isPersonalEntry(entry) || Quality.isLowConfidenceEntry(entry)) continue;
+            if (Quality.isLineageRole(entry)) {
+                skippedLineage++;
+                continue;
+            }
+            if (entry.religion == Models.Religion.NEUTRAL) continue;
+            double confidence = (skippedLineage == 0 && i == 0) ? 1.0 : 0.9;
+            return new Models.ReligionDetection(entry.religion.getValue(), confidence);
         }
 
-        if (totalWeight == 0) return new Models.ReligionDetection("neutral", 0.0);
+        // The person's own given names carried no distinctive signal
+        // (neutral or not found). Fall back to an aggregate vote across
+        // every token, lineage included, rather than declaring neutral.
+        double muslim = 0;
+        double christian = 0;
+        String first = null;
 
-        double maxScore = Math.max(muslimScore, Math.max(christianScore, neutralScore));
-        double confidence = maxScore / totalWeight;
+        for (LookupIndices.CompoundToken token : tokens) {
+            Models.NameEntry entry = token.entry;
+            if (entry == null || !Quality.isPersonalEntry(entry) || Quality.isLowConfidenceEntry(entry)) continue;
+            if (entry.religion == Models.Religion.MUSLIM) {
+                muslim++;
+                if (first == null) first = "muslim";
+            } else if (entry.religion == Models.Religion.CHRISTIAN) {
+                christian++;
+                if (first == null) first = "christian";
+            }
+        }
 
-        if (maxScore == muslimScore) return new Models.ReligionDetection("muslim", confidence);
-        if (maxScore == christianScore) return new Models.ReligionDetection("christian", confidence);
-        return new Models.ReligionDetection("neutral", confidence);
+        if (muslim == 0 && christian == 0) return new Models.ReligionDetection("neutral", 0.0);
+        double distinctive = muslim + christian;
+        if (muslim > christian) return new Models.ReligionDetection("muslim", 0.5 * muslim / distinctive);
+        if (christian > muslim) return new Models.ReligionDetection("christian", 0.5 * christian / distinctive);
+        return new Models.ReligionDetection(first != null ? first : "neutral", 0.5);
     }
 
     public Models.RankInfo rank(String name) {

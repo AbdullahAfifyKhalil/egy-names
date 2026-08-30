@@ -31,6 +31,38 @@ class LookupIndices {
     return text.toLowerCase().replaceAll('-', '').replaceAll("'", '').trim();
   }
 
+  static void _claimEn(String key, NameEntry entry) {
+    final existing = _enIndex[key];
+    if (existing == null || entry.corpusShare > existing.corpusShare) {
+      _enIndex[key] = entry;
+    }
+  }
+
+  /// Bind an Arabic variant spelling to the lemma with the larger
+  /// corpus share, same rule as English keys.
+  ///
+  /// A canonical key (some entry's own `ar`/normalized `ar`) always
+  /// wins over any OTHER entry's variant claiming the same string — a
+  /// rare misspelling must never shadow a real lemma's own canonical
+  /// spelling. Among two variants with no canonical claim, the higher
+  /// corpus share wins, exactly like [_claimEn].
+  static void _claimArVariant(
+    Map<String, NameEntry> index,
+    Set<String> canonicalKeys,
+    String key,
+    NameEntry entry,
+  ) {
+    if (canonicalKeys.contains(key)) {
+      // Already bound to its own entry in the canonical pass; a
+      // variant from a different lemma must never override it.
+      return;
+    }
+    final existing = index[key];
+    if (existing == null || entry.corpusShare > existing.corpusShare) {
+      index[key] = entry;
+    }
+  }
+
   static bool isArabic(String text) {
     return _isArabicRegex.hasMatch(text);
   }
@@ -41,28 +73,42 @@ class LookupIndices {
     final bundle = DataLoader.loadBundle(customPath: dataPath);
     _allEntries = List.unmodifiable(bundle.names);
 
+    // AR index, pass 1: canonical spellings are unconditional and take
+    // priority over any other lemma's variant claiming the same string
+    // (the book has zero duplicate canonical ar values).
+    final canonicalArKeys = _allEntries.map((e) => e.ar).toSet();
+    final canonicalArNormKeys =
+        _allEntries.map((e) => normalizeAr(e.ar)).toSet();
     for (final entry in _allEntries) {
-      // AR Index
-      _arIndex.putIfAbsent(entry.ar, () => entry);
-      final normAr = normalizeAr(entry.ar);
-      _arNormIndex.putIfAbsent(normAr, () => entry);
+      _arIndex[entry.ar] = entry;
+      _arNormIndex[normalizeAr(entry.ar)] = entry;
+    }
 
+    for (final entry in _allEntries) {
+      // AR index, pass 2: variants. Keep the higher-share lemma when
+      // two rows' variants claim the same spelling — same rule as
+      // English keys, so a rare misspelling cannot steal a common
+      // name's lookup.
       for (final v in entry.arVariants) {
         final stripped = v.trim();
         if (stripped.isNotEmpty) {
-          _arIndex.putIfAbsent(stripped, () => entry);
-          _arNormIndex.putIfAbsent(normalizeAr(stripped), () => entry);
+          _claimArVariant(_arIndex, canonicalArKeys, stripped, entry);
+          _claimArVariant(
+            _arNormIndex,
+            canonicalArNormKeys,
+            normalizeAr(stripped),
+            entry,
+          );
         }
       }
 
-      // EN Index
-      final normEn = normalizeEn(entry.en);
-      _enIndex.putIfAbsent(normEn, () => entry);
+      // EN Index — keep the higher-share lemma on a colliding key
+      _claimEn(normalizeEn(entry.en), entry);
 
       for (final v in entry.enVariants) {
         final stripped = v.trim();
         if (stripped.isNotEmpty) {
-          _enIndex.putIfAbsent(normalizeEn(stripped), () => entry);
+          _claimEn(normalizeEn(stripped), entry);
         }
       }
     }

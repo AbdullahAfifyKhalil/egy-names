@@ -1,3 +1,12 @@
+## 0.3.5
+
+- Fix: English and Arabic-variant key collisions — a rare misspelling could shadow a common lemma's own canonical spelling or steal its English key. The higher corpus-share lemma always wins now.
+- Fix: `detect_gender`/`detect_religion` now key off the first personal, non-lineage token instead of a whole-name majority vote; a father's or family's community can no longer outvote the person.
+- Fix: multi-word compound lemmas (kunya "Abu X", "Ahmed Saad-El-Din") are recognized as one token by `split`/`detect_gender`/`detect_religion`, not two meaningless fragments.
+- Fix: `is_valid`/`generate` now exclude non-personal catalog rows (e.g. "الله") and low-confidence/fabricated filler entries.
+- Fix: corrected ~100 malformed compound spellings and one mislabeled gender in the catalog.
+- New: shared `logic_config.json` — every threshold/rule list is now data, synced across SDKs from one source.
+
 ## 0.3.4
 
 - Catalog: `Youakeem` is an English spelling of يواقيم.

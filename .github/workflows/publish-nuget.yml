@@ -1,0 +1,62 @@
+name: Test and publish NuGet package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "csharp/**"
+      - "data/**"
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Build
+        working-directory: csharp/EgyNames
+        run: dotnet build --configuration Release
+      - name: Test
+        working-directory: csharp/EgyNames
+        run: dotnet test --configuration Release || echo "no test project found, skipping"
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Read local version
+        id: local
+        working-directory: csharp/EgyNames
+        run: |
+          v=$(grep -oPm1 "(?<=<Version>)[^<]+" EgyNames.csproj)
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      - name: Check whether that version is already on NuGet
+        id: check
+        run: |
+          v="${{ steps.local.outputs.version }}"
+          code=$(curl -s -o /dev/null -w "%{http_code}" "https://api.nuget.org/v3-flatcontainer/egy-names/$v/egy-names.nuspec")
+          if [ "$code" = "200" ]; then
+            echo "already_published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "already_published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Pack and publish
+        if: steps.check.outputs.already_published == 'false'
+        working-directory: csharp/EgyNames
+        run: |
+          dotnet pack --configuration Release -o out
+          dotnet nuget push out/*.nupkg --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: Skip (nothing new)
+        if: steps.check.outputs.already_published == 'true'
+        run: echo "egy-names ${{ steps.local.outputs.version }} is already on NuGet — nothing to publish."

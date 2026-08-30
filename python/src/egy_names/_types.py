@@ -323,6 +323,57 @@ class ChainPart:
 
 
 @dataclass(frozen=True)
+class InferredName:
+    """A fallback guess. Never a verified book row.
+
+    ``inferred`` is True when the surface is not in the book.
+    ``is_valid`` is always False for those rows. Rank, pet names,
+    figures, and official passport spelling are omitted on purpose.
+    """
+
+    surface: str
+    inferred: bool
+    source: str
+    note: str
+    is_valid: bool
+    ar: str
+    en: str
+    gender: str
+    gender_confidence: float
+    religion: str
+    religion_confidence: float
+    role: str
+    role_confidence: float
+    tashkeel: Optional[str]
+    nearest_book_ar: Optional[str]
+    nearest_book_en: Optional[str]
+    nearest_distance: Optional[int]
+    script: str
+
+    def to_dict(self) -> dict:
+        return {
+            "surface": self.surface,
+            "inferred": self.inferred,
+            "source": self.source,
+            "note": self.note,
+            "is_valid": self.is_valid,
+            "ar": self.ar,
+            "en": self.en,
+            "gender": self.gender,
+            "gender_confidence": round(self.gender_confidence, 3),
+            "religion": self.religion,
+            "religion_confidence": round(self.religion_confidence, 3),
+            "role": self.role,
+            "role_confidence": round(self.role_confidence, 3),
+            "tashkeel": self.tashkeel,
+            "nearest_book_ar": self.nearest_book_ar,
+            "nearest_book_en": self.nearest_book_en,
+            "nearest_distance": self.nearest_distance,
+            "script": self.script,
+        }
+
+
+@dataclass(frozen=True)
 class GenderDetection:
     """Result of gender detection on a full name."""
     gender: str

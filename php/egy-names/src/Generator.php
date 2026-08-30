@@ -122,6 +122,9 @@ final class Generator
             if ($frequency !== null && $e->frequency !== $frequency) {
                 continue;
             }
+            if (!Quality::isGeneratable($e)) {
+                continue;
+            }
             $out[] = $e;
         }
         return $out;

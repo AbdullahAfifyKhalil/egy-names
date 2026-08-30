@@ -31,7 +31,23 @@ final class Splitter
 
         $text = trim($fullName);
         if (str_contains($text, ' ')) {
-            return preg_split('/\s+/u', $text) ?: [];
+            $raw = preg_split('/\s+/u', $text, -1, PREG_SPLIT_NO_EMPTY) ?: [];
+            $out = [];
+            $i = 0;
+            $n = count($raw);
+            while ($i < $n) {
+                if ($i < $n - 1) {
+                    $pair = $raw[$i] . ' ' . $raw[$i + 1];
+                    if (Lookup::lookupAr($pair) !== null || Lookup::lookupAr($raw[$i] . $raw[$i + 1]) !== null) {
+                        $out[] = $pair;
+                        $i += 2;
+                        continue;
+                    }
+                }
+                $out[] = $raw[$i];
+                $i++;
+            }
+            return $out;
         }
 
         if (Lookup::isArabic($text)) {

@@ -9,6 +9,8 @@ import {
   getAll,
   getRanked,
 } from "./lookupIndices";
+import { isGeneratableEntry, isLineageRole, isLowConfidenceEntry, isPersonalEntry } from "./quality";
+import { compoundTokens } from "./compoundTokens";
 import {
   Gender,
   Religion,
@@ -248,69 +250,90 @@ export class EgyptianNames {
 
   // Creative Features
   public isValid(name: string): boolean {
-    return lookup(name) !== undefined;
+    const entry = lookup(name);
+    return entry !== undefined && isPersonalEntry(entry) && !isLowConfidenceEntry(entry);
   }
 
+  /**
+   * Gender of the person: the first personal, non-lineage token wins.
+   *
+   * Later tokens are father, grandfather, family. They do not vote. A
+   * tie must not become male. Two-word compound lemmas (e.g. kunya
+   * "Abu X") are recognized as one token, not two fragments.
+   */
   public detectGender(fullName: string): GenderDetection {
-    const tokens = fullName.trim().split(/\s+/);
+    const tokens = compoundTokens(fullName);
     if (tokens.length === 0) return { gender: "neutral", confidence: 0 };
 
-    let maleScore = 0;
-    let femaleScore = 0;
-    let neutralScore = 0;
-    let totalWeight = 0;
-
+    let skippedLineage = 0;
     for (let i = 0; i < tokens.length; i++) {
-      const entry = lookup(tokens[i]);
-      if (!entry) continue;
-
-      const w = i === 0 ? 4.0 : i === 1 ? 2.0 : 1.0;
-      totalWeight += w;
-
-      if (entry.gender === Gender.MALE) maleScore += w;
-      else if (entry.gender === Gender.FEMALE) femaleScore += w;
-      else neutralScore += w;
+      const entry = tokens[i][1];
+      if (!entry || !isPersonalEntry(entry) || isLowConfidenceEntry(entry)) continue;
+      if (isLineageRole(entry)) {
+        skippedLineage++;
+        continue;
+      }
+      if (entry.gender === Gender.NEUTRAL) {
+        return { gender: "neutral", confidence: 0.6 };
+      }
+      const confidence = skippedLineage === 0 && i === 0 ? 1.0 : 0.85;
+      return { gender: entry.gender, confidence };
     }
-
-    if (totalWeight === 0) return { gender: "neutral", confidence: 0 };
-
-    const maxScore = Math.max(maleScore, femaleScore, neutralScore);
-    const confidence = maxScore / totalWeight;
-
-    if (maxScore === maleScore) return { gender: "male", confidence };
-    if (maxScore === femaleScore) return { gender: "female", confidence };
-    return { gender: "neutral", confidence };
+    return { gender: "neutral", confidence: 0 };
   }
 
+  /**
+   * Religion of the person: the first given name, like gender.
+   *
+   * A father, grandfather, or family surname from one community does
+   * not override the person's own first name. Lineage tokens only vote
+   * if the person's own name gives no distinctive signal — an
+   * intermarried or mixed-heritage family's surname should not outvote
+   * what the person is actually named. Two-word compound lemmas (e.g.
+   * kunya "Abu X") are recognized as one token.
+   */
   public detectReligion(fullName: string): ReligionDetection {
-    const tokens = fullName.trim().split(/\s+/);
+    const tokens = compoundTokens(fullName);
     if (tokens.length === 0) return { religion: "neutral", confidence: 0 };
 
-    let muslimScore = 0;
-    let christianScore = 0;
-    let neutralScore = 0;
-    let totalWeight = 0;
-
+    let skippedLineage = 0;
     for (let i = 0; i < tokens.length; i++) {
-      const entry = lookup(tokens[i]);
-      if (!entry) continue;
-
-      const w = 1.0;
-      totalWeight += w;
-
-      if (entry.religion === Religion.MUSLIM) muslimScore += w;
-      else if (entry.religion === Religion.CHRISTIAN) christianScore += w;
-      else neutralScore += w;
+      const entry = tokens[i][1];
+      if (!entry || !isPersonalEntry(entry) || isLowConfidenceEntry(entry)) continue;
+      if (isLineageRole(entry)) {
+        skippedLineage++;
+        continue;
+      }
+      if (entry.religion === Religion.NEUTRAL) continue;
+      const confidence = skippedLineage === 0 && i === 0 ? 1.0 : 0.9;
+      return { religion: entry.religion, confidence };
     }
 
-    if (totalWeight === 0) return { religion: "neutral", confidence: 0 };
+    // The person's own given names carried no distinctive signal
+    // (neutral or not found). Fall back to an aggregate vote across
+    // every token, lineage included, rather than declaring neutral.
+    let muslim = 0;
+    let christian = 0;
+    let first: "muslim" | "christian" | null = null;
 
-    const maxScore = Math.max(muslimScore, christianScore, neutralScore);
-    const confidence = maxScore / totalWeight;
+    for (const [, entry] of tokens) {
+      if (!entry || !isPersonalEntry(entry) || isLowConfidenceEntry(entry)) continue;
+      if (entry.religion === Religion.MUSLIM) {
+        muslim++;
+        if (first === null) first = "muslim";
+      } else if (entry.religion === Religion.CHRISTIAN) {
+        christian++;
+        if (first === null) first = "christian";
+      }
+    }
 
-    if (maxScore === muslimScore) return { religion: "muslim", confidence };
-    if (maxScore === christianScore) return { religion: "christian", confidence };
-    return { religion: "neutral", confidence };
+    if (muslim === 0 && christian === 0) return { religion: "neutral", confidence: 0 };
+    const distinctive = muslim + christian;
+    if (muslim > christian) return { religion: "muslim", confidence: 0.5 * (muslim / distinctive) };
+    if (christian > muslim) {
+      return { religion: "christian", confidence: 0.5 * (christian / distinctive) };
+    }
+    return { religion: first ?? "neutral", confidence: 0.5 };
   }
 
   public fingerprint(name: string): Fingerprint | null {

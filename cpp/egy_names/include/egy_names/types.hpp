@@ -50,15 +50,21 @@ inline Religion string_to_religion(const std::string& s) {
 
 enum class NameRole {
     GIVEN,
-    FAMILY
+    FAMILY,
+    TRIBAL
 };
 
 inline std::string role_to_string(NameRole r) {
-    return r == NameRole::GIVEN ? "given" : "family";
+    switch (r) {
+        case NameRole::FAMILY: return "family";
+        case NameRole::TRIBAL: return "tribal";
+        default: return "given";
+    }
 }
 
 inline NameRole string_to_role(const std::string& s) {
-    if (s == "f" || s == "family") return NameRole::FAMILY;
+    if (s == "f" || s == "family" || s == "surname" || s == "last") return NameRole::FAMILY;
+    if (s == "t" || s == "tribal" || s == "clan") return NameRole::TRIBAL;
     return NameRole::GIVEN;
 }
 

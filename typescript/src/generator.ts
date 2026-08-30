@@ -1,4 +1,5 @@
 import { getAll } from "./lookupIndices";
+import { isGeneratableEntry } from "./quality";
 import { NameEntry, Gender, Religion, NameRole, FrequencyClass, GeneratedName } from "./types";
 
 const DEFAULT_MIN_LEN = 4;
@@ -38,7 +39,7 @@ function filterEntries(
     result = result.filter((e) => e.frequency === options.frequency);
   }
 
-  return result;
+  return result.filter(isGeneratableEntry);
 }
 
 function weightedPick(

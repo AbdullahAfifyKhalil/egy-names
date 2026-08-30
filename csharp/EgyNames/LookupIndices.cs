@@ -39,6 +39,38 @@ namespace EgyptianNames
             return text.ToLowerInvariant().Replace("-", "").Replace("'", "").Trim();
         }
 
+        private static void ClaimEn(string key, NameEntry entry)
+        {
+            if (!_enIndex.TryGetValue(key, out var existing) || entry.CorpusShare > existing.CorpusShare)
+            {
+                _enIndex[key] = entry;
+            }
+        }
+
+        /// <summary>
+        /// Bind an Arabic variant spelling to the lemma with the larger corpus
+        /// share, same rule as English keys.
+        ///
+        /// A canonical key (some entry's own ar/normalized-ar) always wins over
+        /// any OTHER entry's variant claiming the same string — a rare
+        /// misspelling must never shadow a real lemma's own canonical spelling.
+        /// Among two variants with no canonical claim, the higher corpus share
+        /// wins, exactly like <see cref="ClaimEn"/>.
+        /// </summary>
+        private static void ClaimArVariant(Dictionary<string, NameEntry> index, HashSet<string> canonicalKeys, string key, NameEntry entry)
+        {
+            if (canonicalKeys.Contains(key))
+            {
+                // Already bound to its own entry in the canonical pass; a
+                // variant from a different lemma must never override it.
+                return;
+            }
+            if (!index.TryGetValue(key, out var existing) || entry.CorpusShare > existing.CorpusShare)
+            {
+                index[key] = entry;
+            }
+        }
+
         public static bool IsArabic(string text)
         {
             return !string.IsNullOrEmpty(text) && IsArabicRegex.IsMatch(text);
@@ -55,35 +87,45 @@ namespace EgyptianNames
                 var bundle = DataLoader.LoadBundle(dataPath);
                 _allEntries = bundle.Names;
 
+                // ── AR index, pass 1: canonical spellings are unconditional
+                // and take priority over any other lemma's variant claiming
+                // the same string (book has zero duplicate canonical ar
+                // values). ──
+                var canonicalArKeys = new HashSet<string>(_allEntries.Select(e => e.Ar));
+                var canonicalArNormKeys = new HashSet<string>(_allEntries.Select(e => NormalizeAr(e.Ar)));
+
                 foreach (var entry in _allEntries)
                 {
-                    // AR
-                    if (!_arIndex.ContainsKey(entry.Ar)) _arIndex[entry.Ar] = entry;
-                    var normAr = NormalizeAr(entry.Ar);
-                    if (!_arNormIndex.ContainsKey(normAr)) _arNormIndex[normAr] = entry;
+                    _arIndex[entry.Ar] = entry;
+                    _arNormIndex[NormalizeAr(entry.Ar)] = entry;
+                }
 
+                foreach (var entry in _allEntries)
+                {
+                    // ── AR index, pass 2: variants. Keep the higher-share
+                    // lemma when two rows' variants claim the same spelling —
+                    // same rule as English keys, so a rare misspelling cannot
+                    // steal a common name's lookup the way it could before
+                    // this was checked. ──
                     foreach (var v in entry.ArVariants)
                     {
                         var stripped = v.Trim();
                         if (!string.IsNullOrEmpty(stripped))
                         {
-                            if (!_arIndex.ContainsKey(stripped)) _arIndex[stripped] = entry;
-                            var normV = NormalizeAr(stripped);
-                            if (!_arNormIndex.ContainsKey(normV)) _arNormIndex[normV] = entry;
+                            ClaimArVariant(_arIndex, canonicalArKeys, stripped, entry);
+                            ClaimArVariant(_arNormIndex, canonicalArNormKeys, NormalizeAr(stripped), entry);
                         }
                     }
 
-                    // EN
-                    var normEn = NormalizeEn(entry.En);
-                    if (!_enIndex.ContainsKey(normEn)) _enIndex[normEn] = entry;
+                    // EN — keep the higher-share lemma on a colliding key
+                    ClaimEn(NormalizeEn(entry.En), entry);
 
                     foreach (var v in entry.EnVariants)
                     {
                         var stripped = v.Trim();
                         if (!string.IsNullOrEmpty(stripped))
                         {
-                            var normV = NormalizeEn(stripped);
-                            if (!_enIndex.ContainsKey(normV)) _enIndex[normV] = entry;
+                            ClaimEn(NormalizeEn(stripped), entry);
                         }
                     }
                 }

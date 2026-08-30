@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateNames = generateNames;
 const lookupIndices_1 = require("./lookupIndices");
+const quality_1 = require("./quality");
 const types_1 = require("./types");
 const DEFAULT_MIN_LEN = 4;
 const DEFAULT_MAX_LEN = 5;
@@ -28,7 +29,7 @@ function filterEntries(entries, options) {
     if (options.frequency !== undefined) {
         result = result.filter((e) => e.frequency === options.frequency);
     }
-    return result;
+    return result.filter(quality_1.isGeneratableEntry);
 }
 function weightedPick(entries, slotIdx, randFunc) {
     const candidates = [];

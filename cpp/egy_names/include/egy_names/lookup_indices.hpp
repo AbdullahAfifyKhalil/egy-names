@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <algorithm>
 #include <mutex>
 #include <cstdint>
@@ -132,23 +133,63 @@ public:
         _all_entries = bundle.names;
         _metadata = bundle.metadata;
 
-        for (const auto& entry : _all_entries) {
-            // AR Index
-            _ar_index.try_emplace(entry.ar, entry);
-            _ar_norm_index.try_emplace(normalize_ar(entry.ar), entry);
+        auto claim_en = [](const std::string& key, const NameEntry& e) {
+            auto it = _en_index.find(key);
+            if (it == _en_index.end() || e.corpus_share > it->second.corpus_share) {
+                _en_index[key] = e;
+            }
+        };
 
+        // A canonical key (some entry's own ar / normalized-ar) always wins
+        // over any OTHER entry's variant claiming the same string — a rare
+        // misspelling must never shadow a real lemma's own canonical
+        // spelling. Among two variants with no canonical claim, the higher
+        // corpus share wins, exactly like claim_en.
+        std::unordered_set<std::string> canonical_ar_keys;
+        std::unordered_set<std::string> canonical_ar_norm_keys;
+        for (const auto& entry : _all_entries) {
+            canonical_ar_keys.insert(entry.ar);
+            canonical_ar_norm_keys.insert(normalize_ar(entry.ar));
+        }
+
+        auto claim_ar_variant = [](std::unordered_map<std::string, NameEntry>& index,
+                                    const std::unordered_set<std::string>& canonical_keys,
+                                    const std::string& key,
+                                    const NameEntry& e) {
+            if (canonical_keys.find(key) != canonical_keys.end()) {
+                return;
+            }
+            auto it = index.find(key);
+            if (it == index.end() || e.corpus_share > it->second.corpus_share) {
+                index[key] = e;
+            }
+        };
+
+        // Pass 1: canonical spellings are unconditional and take priority
+        // over any other lemma's variant claiming the same string.
+        for (const auto& entry : _all_entries) {
+            _ar_index[entry.ar] = entry;
+            _ar_norm_index[normalize_ar(entry.ar)] = entry;
+        }
+
+        // Pass 2: variants (AR + EN).
+        for (const auto& entry : _all_entries) {
             for (const auto& v : entry.ar_variants) {
-                if (!v.empty()) {
-                    _ar_index.try_emplace(v, entry);
-                    _ar_norm_index.try_emplace(normalize_ar(v), entry);
-                }
+                std::string v_stripped = v;
+                size_t first = v_stripped.find_first_not_of(" \t\n\r");
+                if (first == std::string::npos) continue;
+                size_t last = v_stripped.find_last_not_of(" \t\n\r");
+                v_stripped = v_stripped.substr(first, last - first + 1);
+                if (v_stripped.empty()) continue;
+                claim_ar_variant(_ar_index, canonical_ar_keys, v_stripped, entry);
+                claim_ar_variant(_ar_norm_index, canonical_ar_norm_keys, normalize_ar(v_stripped), entry);
             }
 
-            // EN Index
-            _en_index.try_emplace(normalize_en(entry.en), entry);
+            // EN Index — keep the higher-share lemma on a colliding key
+            claim_en(normalize_en(entry.en), entry);
             for (const auto& v : entry.en_variants) {
                 if (!v.empty()) {
-                    _en_index.try_emplace(normalize_en(v), entry);
+                    claim_en(normalize_en(v), entry);
                 }
             }
         }

@@ -100,6 +100,9 @@ final class Engine
             if ($frequency !== null && ($e['fc'] ?? 'n') !== $frequency) {
                 continue;
             }
+            if (!Quality::isGeneratableEntry($e)) {
+                continue;
+            }
             $out[] = $e;
         }
         return $out;

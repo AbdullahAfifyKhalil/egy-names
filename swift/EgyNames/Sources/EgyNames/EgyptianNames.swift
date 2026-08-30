@@ -253,40 +253,94 @@ public final class EgyptianNames: @unchecked Sendable {
         )
     }
 
+    /// Gender of the person: the first given name.
+    ///
+    /// Later tokens are father, grandfather, family. They do not vote. A
+    /// tie must not become male. Two-word compound lemmas (e.g. kunya
+    /// "Abu X") are recognized as one token, not two fragments.
     public func detectGender(_ fullName: String) -> GenderDetection {
-        let parts = split(fullName)
-        guard let first = parts.first,
-              let entry = LookupIndices.lookup(first, customPath: customDataPath),
-              entry.gender != .neutral else {
-            return GenderDetection(gender: "neutral", confidence: 0.5)
+        let tokens = LookupIndices.compoundTokens(fullName, customPath: customDataPath)
+        guard !tokens.isEmpty else {
+            return GenderDetection(gender: "neutral", confidence: 0.0)
         }
 
-        let confidence = (entry.gender == .female) ? 0.95 : 0.90
-        return GenderDetection(gender: entry.gender.rawValue, confidence: confidence)
+        var skippedLineage = 0
+        for (i, token) in tokens.enumerated() {
+            guard let entry = token.1,
+                  Quality.isPersonalEntry(entry),
+                  !Quality.isLowConfidenceEntry(entry) else { continue }
+            if Quality.isLineageRole(entry) {
+                skippedLineage += 1
+                continue
+            }
+            if entry.gender == .neutral {
+                return GenderDetection(gender: "neutral", confidence: 0.6)
+            }
+            let confidence = (skippedLineage == 0 && i == 0) ? 1.0 : 0.85
+            return GenderDetection(gender: entry.gender.rawValue, confidence: confidence)
+        }
+        return GenderDetection(gender: "neutral", confidence: 0.0)
     }
 
+    /// Religion of the person: the first given name, like gender.
+    ///
+    /// A father, grandfather, or family surname from one community does
+    /// not override the person's own first name. Lineage tokens only vote
+    /// if the person's own name gives no distinctive signal.
     public func detectReligion(_ fullName: String) -> ReligionDetection {
-        let parts = split(fullName)
-        guard !parts.isEmpty else {
-            return ReligionDetection(religion: "unknown", confidence: 0.0)
+        let tokens = LookupIndices.compoundTokens(fullName, customPath: customDataPath)
+        guard !tokens.isEmpty else {
+            return ReligionDetection(religion: "neutral", confidence: 0.0)
         }
 
-        var cCount = 0
-        var mCount = 0
-        for p in parts {
-            if let entry = LookupIndices.lookup(p, customPath: customDataPath) {
-                if entry.religion == .christian { cCount += 1 }
-                else if entry.religion == .muslim { mCount += 1 }
+        var skippedLineage = 0
+        for (i, token) in tokens.enumerated() {
+            guard let entry = token.1,
+                  Quality.isPersonalEntry(entry),
+                  !Quality.isLowConfidenceEntry(entry) else { continue }
+            if Quality.isLineageRole(entry) {
+                skippedLineage += 1
+                continue
+            }
+            if entry.religion == .neutral {
+                continue
+            }
+            let confidence = (skippedLineage == 0 && i == 0) ? 1.0 : 0.9
+            return ReligionDetection(religion: entry.religion.rawValue, confidence: confidence)
+        }
+
+        // The person's own given names carried no distinctive signal
+        // (neutral or not found). Fall back to an aggregate vote across
+        // every token, lineage included, rather than declaring neutral.
+        var muslim = 0.0
+        var christian = 0.0
+        var first: String?
+
+        for token in tokens {
+            guard let entry = token.1,
+                  Quality.isPersonalEntry(entry),
+                  !Quality.isLowConfidenceEntry(entry) else { continue }
+            if entry.religion == .muslim {
+                muslim += 1
+                if first == nil { first = "muslim" }
+            } else if entry.religion == .christian {
+                christian += 1
+                if first == nil { first = "christian" }
             }
         }
 
-        if cCount > 0 && cCount >= mCount {
-            return ReligionDetection(religion: "christian", confidence: min(0.99, 0.60 + Double(cCount) * 0.20))
+        if muslim == 0.0 && christian == 0.0 {
+            return ReligionDetection(religion: "neutral", confidence: 0.0)
         }
-        if mCount > 0 {
-            return ReligionDetection(religion: "muslim", confidence: min(0.99, 0.60 + Double(mCount) * 0.15))
+
+        let distinctive = muslim + christian
+        if muslim > christian {
+            return ReligionDetection(religion: "muslim", confidence: 0.5 * muslim / distinctive)
         }
-        return ReligionDetection(religion: "neutral", confidence: 0.5)
+        if christian > muslim {
+            return ReligionDetection(religion: "christian", confidence: 0.5 * christian / distinctive)
+        }
+        return ReligionDetection(religion: first ?? "neutral", confidence: 0.5)
     }
 
     public func analyzeChain(_ fullName: String) -> [ChainPart] {
@@ -372,8 +426,15 @@ public final class EgyptianNames: @unchecked Sendable {
         return UniquenessScore(score: score, label: label, note: "Estimated uniqueness score")
     }
 
+    /// True if this is a usable personal name.
+    ///
+    /// Catalog surfaces that are not a person (God, titles, common nouns)
+    /// stay in lookup for split. They are not valid names.
     public func isValid(_ name: String) -> Bool {
-        return LookupIndices.lookup(name, customPath: customDataPath) != nil
+        guard let entry = LookupIndices.lookup(name, customPath: customDataPath) else {
+            return false
+        }
+        return Quality.isPersonalEntry(entry) && !Quality.isLowConfidenceEntry(entry)
     }
 
     public func stats() -> [String: Any] {

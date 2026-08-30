@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "description": "Shared rule config for egy-names. Every SDK should read these values instead of hardcoding them, so a single edit here plus scripts/sync-catalog.sh fixes every language at once. Only pure algorithms (compound-token lookahead, first-personal-token-wins gender/religion, corpus-share tie-break) stay as code per SDK — everything expressible as a threshold or a list lives here.",
+
+  "quality": {
+    "non_personal_ar": [
+      "الله",
+      "الرجل",
+      "الرجال",
+      "شربه",
+      "لافندي",
+      "لفندي",
+      "ماء",
+      "البيت"
+    ],
+    "uncertain_meaning_markers": [
+      "غير واضح",
+      "لا يوجد معنى",
+      "غير معروف",
+      "قد يكون تحريف",
+      "تحريفاً",
+      "تحريفًا"
+    ],
+    "low_confidence_share_epsilon": 0.0001,
+    "kunya_exempt_prefixes": ["أبو", "ابو", "أم", "ام"]
+  },
+
+  "infer_thresholds": {
+    "_comment": "Holdout-measured precision-at-threshold, not guessed. Re-run python/scripts/calibrate_thresholds.py after any retrain and update here.",
+    "gender_min_p": 0.70,
+    "muslim_min_p": 0.85,
+    "christian_min_p": 0.90,
+    "role_min_p": 0.88
+  },
+
+  "infer_rules": {
+    "_comment": "Ordered rule tables the fallback checks before trusting the ML model. Each rule: script (ar/en), one or more of prefix/suffix/contains (string or list), 'match':'all' requires every listed condition, 'match':'any' (default) requires just one. Then value + confidence.",
+    "gender": [
+      { "script": "ar", "prefix": "عبد", "value": "male", "confidence": 0.97 },
+      { "script": "en", "prefix": ["abdel", "abdul", "abd"], "value": "male", "confidence": 0.95 }
+    ],
+    "religion": [
+      { "script": "ar", "prefix": "عبد", "value": "muslim", "confidence": 0.97 },
+      {
+        "script": "ar",
+        "match": "any",
+        "contains": "ائيل",
+        "suffix": "ئيل",
+        "value": "christian",
+        "confidence": 0.86
+      },
+      { "script": "en", "prefix": ["abdel", "abdul"], "value": "muslim", "confidence": 0.95 }
+    ],
+    "role": [
+      {
+        "script": "en",
+        "match": "all",
+        "prefix": ["el", "al"],
+        "suffix": ["awy", "awi", "any", "ani"],
+        "value": "family",
+        "confidence": 0.95
+      },
+      {
+        "script": "ar",
+        "match": "all",
+        "prefix": "ال",
+        "suffix": ["وي", "اوي", "اني", "ي"],
+        "value": "family",
+        "confidence": 0.99
+      }
+    ]
+  }
+}

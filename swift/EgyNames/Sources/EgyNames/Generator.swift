@@ -20,6 +20,7 @@ public final class Generator: @unchecked Sendable {
 
         for slot in 0..<5 {
             for entry in allEntries {
+                if !Quality.isGeneratableEntry(entry) { continue }
                 if slot == 0 {
                     if let tg = targetGender, entry.gender != tg && entry.gender != .neutral {
                         continue

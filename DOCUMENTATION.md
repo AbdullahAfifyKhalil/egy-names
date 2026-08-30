@@ -1,6 +1,6 @@
 # Egyptian Names (`egy-names`) — Complete API Reference & Documentation
 
-Welcome to the definitive developer guide for **Egyptian Names (`egy-names`)**, the production-grade onomastic intelligence engine for Egyptian names — offline across seven languages, with a Faker companion and Hugging Face datasets.
+Welcome to the definitive developer guide for **Egyptian Names (`egy-names`)**, the production-grade onomastic intelligence engine for Egyptian names — offline across eight languages, with a Faker companion and Hugging Face datasets.
 
 The full product page — origin, process, insights, interactive lab, examples, and demo — is at **[afify.co/egy-names](https://afify.co/egy-names)**.
 
@@ -26,7 +26,7 @@ The full product page — origin, process, insights, interactive lab, examples, 
    - [3.13 Patronymic Chain Decomposition & Formatting (`analyze_chain`, `format_name`)](#313-patronymic-chain-decomposition--formatting)
    - [3.14 Frequency Ranking & Rarity Metrics (`rank`, `uniqueness`)](#314-frequency-ranking--rarity-metrics)
    - [3.15 High-Throughput Batch Processing (`batch`)](#315-high-throughput-batch-processing)
-4. [Cross-Language SDK Code Reference (Python, TS, Dart, Swift, Java, C#, C++, Faker)](#4-cross-language-sdk-code-reference)
+4. [Cross-Language SDK Code Reference (Python, TS, PHP, Dart, Swift, Java, C#, C++, Faker)](#4-cross-language-sdk-code-reference)
 5. [Data Types & Models Reference](#5-data-types--models-reference)
 6. [Performance, Concurrency & Security](#6-performance-concurrency--security)
 7. [Faker Companion (`faker-egy-names`)](#7-faker-companion-faker-egy-names)
@@ -78,12 +78,20 @@ pip install faker-egy-names
 
 See [§7 Faker Companion](#7-faker-companion-faker-egy-names).
 
-### PHP (Faker companion)
+### PHP (8.1+)
+```bash
+composer require afify/egy-names
+```
+
+Until Packagist lists the engine: add the VCS repo `https://github.com/AbdullahAfifyKhalil/egy-names-php`.
+
+Faker test suites:
+
 ```bash
 composer require afify/faker-egy-names
 ```
 
-See [§7.5 PHP](#75-php-fakerphp).
+See [§4 PHP](#php-81) and [§7.5 PHP](#75-php-fakerphp).
 
 ### TypeScript / JavaScript (Node.js & Browsers)
 ```bash
@@ -518,6 +526,21 @@ en.batch.tashkeel(["محمد", "فاطمة", "علي"])
 
 ## 4. Cross-Language SDK Code Reference
 
+### PHP (8.1+)
+```php
+use Afify\EgyNames\EgyNames;
+
+$en = new EgyNames();
+$names = $en->generate(count: 5, gender: 'female', religion: 'muslim');
+echo $en->translate('محمد أحمد علي');
+print_r($en->split('محمدأحمدعليحسنالشناوي'));
+echo $en->tashkeel('محمد عبدالرحمن');
+echo $en->correct('احمد مصطفا');
+print_r($en->dallaa('محمد', 'tashkeel'));
+```
+
+Source: [`php/egy-names/`](php/egy-names/) · [GitHub](https://github.com/AbdullahAfifyKhalil/egy-names-php) · [Packagist](https://packagist.org/packages/afify/egy-names).
+
 ### TypeScript / JavaScript (Node.js & ESM/CJS)
 ```typescript
 import { EgyNames, Gender, Religion } from "egy-names";
@@ -667,7 +690,7 @@ interface NameInfo {
 
 - **In-Memory Zero-Allocation Engine**: All 44,626 entries and 23,457 correction rules are loaded from a compact, gzip-compressed hash trie (~6.89 MB compressed, ~18 MB in-memory).
 - **Sub-Microsecond Latency**: Lookups, translations, and DP splits execute in $< 0.05\text{ ms}$.
-- **Thread-Safe**: Fully read-only, immutable singleton design across all 7 language SDKs. Safe for high-concurrency HTTP servers, multi-threaded pipelines, and mobile apps.
+- **Thread-Safe**: Fully read-only, immutable singleton design across all 8 language SDKs. Safe for high-concurrency HTTP servers, multi-threaded pipelines, and mobile apps.
 - **100% Offline & Private**: Zero external API calls, zero telemetry, zero data collection. Meets strict enterprise, banking, and GDPR privacy standards.
 
 ---
@@ -676,10 +699,10 @@ interface NameInfo {
 
 Python: [`faker-egy-names`](https://pypi.org/project/faker-egy-names/) **0.1.0** is a separate PyPI package. It does **not** add Faker as a dependency of `egy-names`. Every method forwards to `EgyNames.generate()` from `egy-names>=0.3.2,<0.4`.
 
-PHP: [`afify/faker-egy-names`](faker-egy-names-php/) is the same API for [FakerPHP](https://fakerphp.github.io/). There is no PHP `egy-names` package yet, so it ships a generate-only catalog (v0.3.2). Same methods, same arguments, no `first_name` / `last_name` mapping.
+PHP: [`afify/faker-egy-names`](https://packagist.org/packages/afify/faker-egy-names) is the same API for [FakerPHP](https://fakerphp.github.io/). The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). The Faker companion still ships a generate-only catalog so test suites do not have to load the full book. Same methods, same arguments, no `first_name` / `last_name` mapping.
 
 **Install:** `pip install faker-egy-names` · `composer require afify/faker-egy-names`  
-**Source:** [`faker-egy-names/`](faker-egy-names/) · [`faker-egy-names-php/`](faker-egy-names-php/) · [FakerPHP on GitHub](https://github.com/AbdullahAfifyKhalil/faker-egy-names-php)
+**Source:** [`faker-egy-names/`](faker-egy-names/) · [`faker-egy-names-php/`](faker-egy-names-php/) · [Packagist](https://packagist.org/packages/afify/faker-egy-names)
 
 ### 7.1 Registration
 

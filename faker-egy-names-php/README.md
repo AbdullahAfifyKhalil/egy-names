@@ -2,7 +2,7 @@
 
 Faker provider for Egyptian names. Same idea as the [Python companion](https://pypi.org/project/faker-egy-names/): it does not invent a first name and a last name. Every call runs the egy-names `generate()` rules — grounded patronymic chains from the 44,626-lemma book.
 
-There is no PHP `egy-names` package yet, so this companion ships a generate-only catalog (`data/names.json.gz`, v0.3.2). Offline. MIT. Product page: [afify.co/egy-names](https://afify.co/egy-names).
+The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). This companion ships a generate-only catalog so Faker tests do not load the full book. Offline. MIT. Product page: [afify.co/egy-names](https://afify.co/egy-names).
 
 ## Install
 
@@ -10,21 +10,7 @@ There is no PHP `egy-names` package yet, so this companion ships a generate-only
 composer require afify/faker-egy-names
 ```
 
-Package: [`afify/faker-egy-names`](https://github.com/AbdullahAfifyKhalil/faker-egy-names-php) `0.1.0`. Until it is on Packagist, add the GitHub repo:
-
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/AbdullahAfifyKhalil/faker-egy-names-php"
-    }
-  ],
-  "require": {
-    "afify/faker-egy-names": "^0.1"
-  }
-}
-```
+Packagist: [`afify/faker-egy-names`](https://packagist.org/packages/afify/faker-egy-names) `0.1.0`.
 
 From this monorepo:
 

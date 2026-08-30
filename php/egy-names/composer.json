@@ -1,0 +1,51 @@
+{
+  "name": "afify/egy-names",
+  "description": "Egyptian names engine for PHP — generate, translate, split, correct, and annotate grounded patronymic chains. Offline.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "egy-names",
+    "egyptian",
+    "names",
+    "arabic",
+    "onomastics",
+    "patronymic"
+  ],
+  "authors": [
+    {
+      "name": "Abdullah Afify",
+      "email": "abdullah@afify.dev"
+    }
+  ],
+  "homepage": "https://afify.co/egy-names",
+  "support": {
+    "issues": "https://github.com/AbdullahAfifyKhalil/egy-names/issues",
+    "source": "https://github.com/AbdullahAfifyKhalil/egy-names-php",
+    "docs": "https://afify.co/egy-names"
+  },
+  "require": {
+    "php": "^8.1",
+    "ext-json": "*",
+    "ext-zlib": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^10.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Afify\\EgyNames\\": "src/"
+    },
+    "files": [
+      "src/Types.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Afify\\EgyNames\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "minimum-stability": "stable"
+}

@@ -5,14 +5,15 @@
 <img src="https://raw.githubusercontent.com/AbdullahAfifyKhalil/egy-names/main/assets/logo.png" alt="Egyptian Names Logo" width="130" style="border-radius: 28px; box-shadow: 0 12px 36px rgba(0,0,0,0.25); margin-bottom: 12px;" />
 
 # Egyptian Names (`egy-names`)
-### *The Production-Grade Onomastic Intelligence Engine for Egyptian Names — offline across 7 languages, plus Faker and Hugging Face*
+### *The Production-Grade Onomastic Intelligence Engine for Egyptian Names — offline across 8 languages, plus Faker and Hugging Face*
 
 **[afify.co/egy-names](https://afify.co/egy-names)** — origin, process, insights, interactive lab, examples, and demo.
 
 [![Afify](https://img.shields.io/badge/afify.co-Egy--Names-17191c)](https://afify.co/egy-names)
 [![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.2-3776AB)](https://pypi.org/project/egy-names/)
+[![Packagist](https://img.shields.io/badge/Packagist-afify/egy--names-F28D1A)](https://packagist.org/packages/afify/egy-names)
 [![Faker Provider](https://img.shields.io/badge/Faker-faker--egy--names_v0.1.0-563D7C)](https://pypi.org/project/faker-egy-names/)
-[![FakerPHP](https://img.shields.io/badge/FakerPHP-afify/faker--egy--names-777BB4)](https://github.com/AbdullahAfifyKhalil/faker-egy-names-php)
+[![FakerPHP](https://img.shields.io/badge/FakerPHP-afify/faker--egy--names-777BB4)](https://packagist.org/packages/afify/faker-egy-names)
 [![npm Version](https://img.shields.io/badge/npm-v0.3.2-CB3837)](https://www.npmjs.com/package/egy-names)
 [![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.2-0175C2)](https://pub.dev/packages/egy_names)
 [![Maven Central](https://img.shields.io/badge/Maven_Central-v0.3.2-C71A36)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
@@ -23,9 +24,9 @@
 [![Documentation](https://img.shields.io/badge/Documentation-Complete_API_Reference-blue.svg)](DOCUMENTATION.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-**Engineered with 100% Deterministic Parity across 7 Major Languages:**
+**Engineered with 100% Deterministic Parity across 8 Major Languages:**
 <br />
-**Python** | **TypeScript / JavaScript** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)** | **Faker** | **Hugging Face**
+**Python** | **TypeScript / JavaScript** | **PHP** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)** | **Faker** | **Hugging Face**
 
 [Site · origin, lab, demo](https://afify.co/egy-names) | [Complete API Reference & Documentation](DOCUMENTATION.md) | [Why you need this](#why-you-need-this) | [Try it in 30 seconds](#try-it-in-30-seconds) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
 
@@ -247,7 +248,7 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 | **Arabic Diacritization (Tashkeel)**| Partial guessing | **100.0% Verified Arabic Tashkeel (44,626/44,626)** |
 | **Morphological Etymology** | None | **100.0% Roots and Toponyms in Arabic and English** |
 | **Age Intelligence Engine** | Non-existent | **Continuous Gaussian Generational Demographic Model** |
-| **Cross-Language Parity** | Python-only | **7 Native SDKs** (Python, TS, Swift, C#, Dart, Java, C++) |
+| **Cross-Language Parity** | Python-only | **8 Native SDKs** (Python, TS, PHP, Swift, C#, Dart, Java, C++) |
 
 ---
 
@@ -350,7 +351,27 @@ echo $name->ar;
 echo $name->en;
 ```
 
-There is no `first_name` / `last_name` mapping. For one coherent person, call `egyptian_name()` once and read `parts_ar` / `parts_en`. Source: [faker-egy-names](https://github.com/AbdullahAfifyKhalil/egy-names/tree/main/faker-egy-names) · [faker-egy-names-php](https://github.com/AbdullahAfifyKhalil/faker-egy-names-php) · [PyPI](https://pypi.org/project/faker-egy-names/).
+There is no `first_name` / `last_name` mapping. For one coherent person, call `egyptian_name()` once and read `parts_ar` / `parts_en`. Source: [faker-egy-names](https://github.com/AbdullahAfifyKhalil/egy-names/tree/main/faker-egy-names) · [faker-egy-names-php](https://github.com/AbdullahAfifyKhalil/faker-egy-names-php) · [PyPI](https://pypi.org/project/faker-egy-names/) · [Packagist](https://packagist.org/packages/afify/faker-egy-names).
+
+---
+
+### PHP (8.1+)
+
+```bash
+composer require afify/egy-names
+```
+
+```php
+use Afify\EgyNames\EgyNames;
+
+$en = new EgyNames();
+echo $en->translate('محمد أحمد علي');
+print_r($en->split('محمدأحمدعليحسنالشناوي'));
+echo $en->correct('احمد مصطفا');
+$names = $en->generate(count: 3, gender: 'female', length: 4);
+```
+
+The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). Until Packagist lists it: [egy-names-php](https://github.com/AbdullahAfifyKhalil/egy-names-php).
 
 ---
 

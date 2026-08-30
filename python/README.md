@@ -603,6 +603,7 @@ Egy-Names is an Afify open-source project.
 * **Egy-Names**: [**afify.co/egy-names**](https://afify.co/egy-names) — origin, process, insights, lab, examples, and demo
 * **Website**: [**afify.co**](https://afify.co)
 * **Instagram**: [**@afify.life**](https://www.instagram.com/afify.life/)
+* **LinkedIn**: [**Abdullah Afify**](https://www.linkedin.com/in/abdullah-afify)
 * **Medium**: [**The Secret Code of Egyptian Names**](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4) · [**@abdullah.afify**](https://medium.com/@abdullah.afify)
 * **GitHub**: [**@AbdullahAfifyKhalil**](https://github.com/AbdullahAfifyKhalil)
 * **Founder**: [**Abdullah Afify**](https://github.com/AbdullahAfifyKhalil)

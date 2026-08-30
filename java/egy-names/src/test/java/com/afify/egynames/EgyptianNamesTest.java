@@ -68,4 +68,12 @@ public class EgyptianNamesTest {
         Models.ReligionDetection r = en.detectReligion("جورج بطرس سمير ميخائيل");
         assertEquals("christian", r.religion);
     }
+
+    @Test
+    public void testFirstGivenNameWinsAndNonPersonIsInvalid() {
+        assertEquals("female", en.detectGender("فاطمة محمد علي حسن").gender);
+        assertEquals("christian", en.detectReligion("جورج علاءالدين عبدالمسيح دغيدي").religion);
+        assertFalse(en.isValid("الله"));
+        assertEquals("محمود", en.translate("Mahmoud"));
+    }
 }

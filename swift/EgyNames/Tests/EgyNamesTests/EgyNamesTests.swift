@@ -62,6 +62,11 @@ final class EgyNamesTests: XCTestCase {
         let r = en.detectReligion("جورج بطرس سمير ميخائيل")
         XCTAssertEqual(r.religion, "christian")
 
+        let first = en.detectGender("فاطمة محمد علي حسن")
+        XCTAssertEqual(first.gender, "female")
+        XCTAssertFalse(en.isValid("الله"))
+        XCTAssertEqual(en.translate("Mahmoud"), "محمود")
+
         // 8. Chain Analysis
         let chain = en.analyzeChain("محمد أحمد علي حسن الشاذلي")
         XCTAssertEqual(chain.count, 5)

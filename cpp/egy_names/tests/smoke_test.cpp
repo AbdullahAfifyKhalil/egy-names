@@ -89,6 +89,11 @@ int main() {
     std::cout << "   جورج بطرس سمير ميخائيل -> religion: " << r.religion << " (conf: " << r.confidence << ")" << std::endl;
     assert(r.religion == "christian");
 
+    auto first = en.detect_gender("فاطمة محمد علي حسن");
+    assert(first.gender == "female");
+    assert(!en.is_valid("الله"));
+    assert(en.translate("Mahmoud") == "محمود");
+
     // 9. Chain Analysis
     std::cout << "\n9. Patronymic Chain Analysis:" << std::endl;
     auto chain = en.analyze_chain("محمد أحمد علي حسن الشاذلي");

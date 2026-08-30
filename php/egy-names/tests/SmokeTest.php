@@ -116,6 +116,15 @@ final class SmokeTest extends TestCase
     {
         $this->assertTrue($this->en->is_valid('محمد'));
         $this->assertFalse($this->en->isValid('zzzznotaname'));
+        $this->assertFalse($this->en->isValid('الله'));
+        $this->assertNotNull($this->en->lookup('الله'));
+    }
+
+    public function testFirstGivenNameWins(): void
+    {
+        $this->assertSame('female', $this->en->detect_gender('فاطمة محمد علي حسن')->gender);
+        $this->assertSame('christian', $this->en->detectReligion('جورج علاءالدين عبدالمسيح دغيدي')->religion);
+        $this->assertSame('محمود', $this->en->translate('Mahmoud'));
     }
 
     public function testDetectAge(): void

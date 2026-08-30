@@ -505,6 +505,13 @@ def test_11_5():
 run_test("11.5 First given name wins; non-person surfaces are not valid", test_11_5)
 
 
+def test_11_6():
+    assert_eq(en.detect_religion("لورانزو حسابالدين الشافعي").religion, "christian")
+    assert_eq(en.translate("Mahmoud"), "محمود")
+    assert en.is_valid("عببد الله") is False
+run_test("11.6 Religion follows the person; malformed compounds are not valid", test_11_6)
+
+
 print("\n=======================================================")
 print("SUMMARY REPORT")
 print("=======================================================")

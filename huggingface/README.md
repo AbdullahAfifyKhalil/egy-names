@@ -52,6 +52,8 @@ configs:
 
 This repository hosts the complete, multi-phase statistical and linguistic dataset powering **`egy-names`**, the production onomastic intelligence engine for contemporary Egyptian naming traditions.
 
+The book comes from real records, not invention. It is as tight as the records allow. Some names will still come back wrong. The library marks guesses and we keep tightening the book.
+
 ---
 
 ## Dataset Pipeline Overview
@@ -166,6 +168,16 @@ The master 14-dimensional enriched onomastic dictionary:
 | `trend_category` | string | Sociological generation trend | `classic_timeless` |
 | `slot1_pct` ... `slot8_pct` | float | Generational slot distribution percentages | `26.91`, `31.77`, `28.84`, `7.19`, ... |
 | `corpus_share_pct` | float | Overall percentage share of all tokens in Egypt | `0.179624` |
+| `is_personal_name` | bool | False for catalog surfaces that are not a person's name (e.g. `الله`) | `true` |
+| `is_low_confidence` | bool | True for noise-floor / unverified filler rows the library excludes from `is_valid` and `generate` | `false` |
+
+The book comes from real records, not invention. It is as tight as the records allow. Some names will still come back wrong. When the library guesses, it marks the guess. When it is not sure, it says so.
+
+---
+
+## Related model
+
+The [`egy-names-fallback-classifier`](https://huggingface.co/Abdullah-afify/egy-names-fallback-classifier) is trained on this catalog and used only when a name is not in the book. Local card: [`../huggingface_model/README.md`](../huggingface_model/README.md).
 
 ---
 

@@ -60,5 +60,15 @@ void main() {
       final r = en.detectReligion('جورج بطرس سمير ميخائيل');
       expect(r.religion, equals('christian'));
     });
+
+    test('First given name wins; non-person surfaces are not valid', () {
+      expect(en.detectGender('فاطمة محمد علي حسن').gender, equals('female'));
+      expect(
+        en.detectReligion('جورج علاءالدين عبدالمسيح دغيدي').religion,
+        equals('christian'),
+      );
+      expect(en.isValid('الله'), isFalse);
+      expect(en.translate('Mahmoud'), equals('محمود'));
+    });
   });
 }

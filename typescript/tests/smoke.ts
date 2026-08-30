@@ -86,6 +86,17 @@ function runTests() {
   console.log(`  Root: ${rt} | Origin: ${ot} | Trend: ${tr}`);
   console.log(`  Famous Figures:`, ff);
 
+  const first = en.detectGender("فاطمة محمد علي حسن");
+  if (first.gender !== "female") {
+    throw new Error(`first given name should win: ${first.gender}`);
+  }
+  if (en.isValid("الله")) {
+    throw new Error("الله must not be a valid personal name");
+  }
+  if (en.translate("Mahmoud") !== "محمود") {
+    throw new Error("Mahmoud must not be stolen by a misspelling");
+  }
+
   console.log("\nAll smoke tests passed!");
 }
 

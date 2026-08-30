@@ -19,7 +19,7 @@ import pandas as pd  # noqa: E402
 from egy_names._index import get_all  # noqa: E402
 from egy_names._quality import is_low_confidence_entry, is_personal_entry  # noqa: E402
 
-OUT_DIR = Path(__file__).parent.parent.parent / "hf_export"
+OUT_DIR = Path(__file__).parent.parent.parent / "huggingface" / "data"
 OUT_DIR.mkdir(exist_ok=True)
 
 

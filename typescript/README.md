@@ -15,7 +15,7 @@ The book comes from real records. Some names will still come back wrong — a ra
 ## Install
 
 ```bash
-npm install egy-names@0.3.5
+npm install egy-names@0.3.6
 ```
 
 ## Use

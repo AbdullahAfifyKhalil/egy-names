@@ -1,6 +1,6 @@
 {
   "name": "egy-names",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "A production-grade Egyptian onomastic intelligence library for TypeScript & JavaScript \u2014 generate, translate, annotate, split, and analyze Egyptian names.",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",

@@ -15,7 +15,7 @@ The book comes from real records. Names outside the book go through the [fallbac
 ## Install
 
 ```bash
-pip install egy-names==0.3.5
+pip install egy-names==0.3.6
 ```
 
 ## Use

@@ -48,7 +48,7 @@ Egypt does not use Western surnames. A legal name is a **patronymic chain** — 
 
 ## Accuracy
 
-The book comes from real records, not invention. It is as tight as the records allow. Some names will still come back wrong — a rare spelling, a name the catalog has never seen, an edge we have not hit yet. When we guess, we mark it. When we are not sure, we say so. We keep tightening the book and the fallback. If you find one, [open an issue](https://github.com/AbdullahAfifyKhalil/egy-names/issues).
+The book comes from real records, not invention. It is as tight as those records allow. Some names will still come back wrong — a rare spelling, a name the catalog has never seen, an edge we have not hit yet. Names outside the book go through the [fallback model](https://huggingface.co/Abdullah-afify/egy-names-fallback-classifier). Every guess is marked `inferred`. If it is not sure, it abstains. We keep tightening the book and the model. If you find one, [open an issue](https://github.com/AbdullahAfifyKhalil/egy-names/issues).
 
 ## Try it in 30 seconds
 

@@ -52,7 +52,7 @@ configs:
 
 This repository hosts the complete, multi-phase statistical and linguistic dataset powering **`egy-names`**, the production onomastic intelligence engine for contemporary Egyptian naming traditions.
 
-The book comes from real records, not invention. It is as tight as the records allow. Some names will still come back wrong. The library marks guesses and we keep tightening the book.
+The book comes from real records, not invention. It is as tight as those records allow. Some names will still come back wrong — a rare spelling, a name the catalog has never seen, an edge we have not hit yet. Names outside the book go through the [fallback model](https://huggingface.co/Abdullah-afify/egy-names-fallback-classifier). Every guess is marked `inferred`. If it is not sure, it abstains. We keep tightening the book and the model.
 
 ---
 
@@ -171,7 +171,7 @@ The master 14-dimensional enriched onomastic dictionary:
 | `is_personal_name` | bool | False for catalog surfaces that are not a person's name (e.g. `الله`) | `true` |
 | `is_low_confidence` | bool | True for noise-floor / unverified filler rows the library excludes from `is_valid` and `generate` | `false` |
 
-The book comes from real records, not invention. It is as tight as the records allow. Some names will still come back wrong. When the library guesses, it marks the guess. When it is not sure, it says so.
+The book comes from real records, not invention. It is as tight as those records allow. Some names will still come back wrong — a rare spelling, a name the catalog has never seen, an edge we have not hit yet. Names outside the book go through the [fallback model](https://huggingface.co/Abdullah-afify/egy-names-fallback-classifier). Every guess is marked `inferred`. If it is not sure, it abstains. We keep tightening the book and the model.
 
 ---
 

@@ -7,6 +7,9 @@
 # Egyptian Names (`egy-names`)
 ### *The Production-Grade Onomastic Intelligence Engine for Egyptian Names — offline across 7 languages, plus Faker and Hugging Face*
 
+**[afify.co/egy-names](https://afify.co/egy-names)** — origin, process, insights, interactive lab, examples, and demo.
+
+[![Afify](https://img.shields.io/badge/afify.co-Egy--Names-17191c)](https://afify.co/egy-names)
 [![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.2-3776AB)](https://pypi.org/project/egy-names/)
 [![Faker Provider](https://img.shields.io/badge/Faker-faker--egy--names_v0.1.0-563D7C)](https://pypi.org/project/faker-egy-names/)
 [![npm Version](https://img.shields.io/badge/npm-v0.3.2-CB3837)](https://www.npmjs.com/package/egy-names)
@@ -23,7 +26,7 @@
 <br />
 **Python** | **TypeScript / JavaScript** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)** | **Faker** | **Hugging Face**
 
-[Complete API Reference & Documentation](DOCUMENTATION.md) | [Why you need this](#why-you-need-this) | [Try it in 30 seconds](#try-it-in-30-seconds) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
+[Site · origin, lab, demo](https://afify.co/egy-names) | [Complete API Reference & Documentation](DOCUMENTATION.md) | [Why you need this](#why-you-need-this) | [Try it in 30 seconds](#try-it-in-30-seconds) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
 
 </div>
 
@@ -562,6 +565,7 @@ $$\text{Cost}(i) = \min_{j < i} \Big( \text{Cost}(j) + \text{BaseCost} + \text{B
 
 Egy-Names is an Afify open-source project.
 
+* **Egy-Names**: [**afify.co/egy-names**](https://afify.co/egy-names) — origin, process, insights, lab, examples, and demo
 * **Website**: [**afify.co**](https://afify.co)
 * **Instagram**: [**@afify.life**](https://www.instagram.com/afify.life/)
 * **Medium**: [**@abdullah.afify**](https://medium.com/@abdullah.afify)
@@ -588,5 +592,5 @@ Distributed under the **MIT License**. See `LICENSE` for details.
 ---
 
 <div align="center">
-  <sub>Developed by <b><a href="https://github.com/AbdullahAfifyKhalil">Abdullah Afify</a></b> • An <b><a href="https://afify.co">Afify</a></b> open-source project</sub>
+  <sub>Developed by <b><a href="https://github.com/AbdullahAfifyKhalil">Abdullah Afify</a></b> • An <b><a href="https://afify.co">Afify</a></b> open-source project • <b><a href="https://afify.co/egy-names">afify.co/egy-names</a></b></sub>
 </div>

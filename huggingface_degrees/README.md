@@ -48,7 +48,7 @@ configs:
 # Egyptian High School (Thanawya Amma) Students Degrees (2017–2026)
 ### *A Large-Scale National Demographic and Educational Dataset of 3,790,225 Student Records*
 
-Published and maintained by **[Afify](https://afify.co)** and **[Abdullah Afify](https://github.com/AbdullahAfifyKhalil)**.
+Published and maintained by **[Afify](https://afify.co)** and **[Abdullah Afify](https://github.com/AbdullahAfifyKhalil)**. Product page: **[afify.co/egy-names](https://afify.co/egy-names)**.
 
 ---
 

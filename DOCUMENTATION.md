@@ -2,6 +2,8 @@
 
 Welcome to the definitive developer guide for **Egyptian Names (`egy-names`)**, the production-grade onomastic intelligence engine for Egyptian names — offline across seven languages, with a Faker companion and Hugging Face datasets.
 
+The full product page — origin, process, insights, interactive lab, examples, and demo — is at **[afify.co/egy-names](https://afify.co/egy-names)**.
+
 ---
 
 ## Table of Contents
@@ -736,4 +738,4 @@ fake.egyptian_family()
 ## License
 
 Released under the **MIT License**. Free for commercial, academic, government, and personal use.
-© 2026 Abdullah Afify. An Afify open-source project. [afify.co](https://afify.co)
+© 2026 Abdullah Afify. An Afify open-source project. [afify.co/egy-names](https://afify.co/egy-names)

@@ -2,7 +2,7 @@
 
 Faker provider for Egyptian names. It does not sample names itself — every call goes to [`egy-names`](https://pypi.org/project/egy-names/) `0.3.2` `generate()`.
 
-This is a companion package. `egy-names` stays offline, zero-dependency, and unchanged.
+This is a companion package. `egy-names` stays offline, zero-dependency, and unchanged. Product page: [afify.co/egy-names](https://afify.co/egy-names).
 
 ## Install
 

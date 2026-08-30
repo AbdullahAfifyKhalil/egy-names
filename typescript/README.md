@@ -12,6 +12,7 @@
 [![Afify](https://img.shields.io/badge/afify.co-Egy--Names-17191c)](https://afify.co/egy-names)
 [![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.2-3776AB)](https://pypi.org/project/egy-names/)
 [![Faker Provider](https://img.shields.io/badge/Faker-faker--egy--names_v0.1.0-563D7C)](https://pypi.org/project/faker-egy-names/)
+[![FakerPHP](https://img.shields.io/badge/FakerPHP-afify/faker--egy--names-777BB4)](https://github.com/AbdullahAfifyKhalil/faker-egy-names-php)
 [![npm Version](https://img.shields.io/badge/npm-v0.3.2-CB3837)](https://www.npmjs.com/package/egy-names)
 [![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.2-0175C2)](https://pub.dev/packages/egy_names)
 [![Maven Central](https://img.shields.io/badge/Maven_Central-v0.3.2-C71A36)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
@@ -319,10 +320,11 @@ print(f"Age: ~{det.estimated_age} yrs | Conf: {det.confidence} | {det.generation
 
 #### Faker companion (`faker-egy-names`)
 
-A separate PyPI package for test suites that already use [Faker](https://faker.readthedocs.io/). It does not sample names itself — every call forwards to `egy-names==0.3.2` `generate()`. The engine stays offline and unchanged.
+Python and PHP packages for test suites that already use Faker. They do not invent a first name and a last name. Every call runs `generate()` — grounded patronymic chains. Offline.
 
 ```bash
 pip install faker-egy-names
+composer require afify/faker-egy-names
 ```
 
 ```python
@@ -341,7 +343,14 @@ fake.egyptian_grandfather()        # slot 3
 fake.egyptian_family()             # clan / toponymic surname
 ```
 
-There is no `first_name` / `last_name` mapping. For one coherent person, call `egyptian_name()` once and read `parts_ar` / `parts_en`. Source: [faker-egy-names](https://github.com/AbdullahAfifyKhalil/egy-names/tree/main/faker-egy-names) · [PyPI](https://pypi.org/project/faker-egy-names/).
+```php
+$fake = egyptian_faker();
+$name = $fake->egyptian_name(gender: 'female', religion: 'muslim');
+echo $name->ar;
+echo $name->en;
+```
+
+There is no `first_name` / `last_name` mapping. For one coherent person, call `egyptian_name()` once and read `parts_ar` / `parts_en`. Source: [faker-egy-names](https://github.com/AbdullahAfifyKhalil/egy-names/tree/main/faker-egy-names) · [faker-egy-names-php](https://github.com/AbdullahAfifyKhalil/faker-egy-names-php) · [PyPI](https://pypi.org/project/faker-egy-names/).
 
 ---
 

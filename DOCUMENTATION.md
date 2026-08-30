@@ -78,6 +78,13 @@ pip install faker-egy-names
 
 See [§7 Faker Companion](#7-faker-companion-faker-egy-names).
 
+### PHP (Faker companion)
+```bash
+composer require afify/faker-egy-names
+```
+
+See [§7.5 PHP](#75-php-fakerphp).
+
 ### TypeScript / JavaScript (Node.js & Browsers)
 ```bash
 npm install egy-names@0.3.2
@@ -667,10 +674,12 @@ interface NameInfo {
 
 ## 7. Faker Companion (`faker-egy-names`)
 
-[`faker-egy-names`](https://pypi.org/project/faker-egy-names/) **0.1.0** is a separate PyPI package. It does **not** add Faker as a dependency of `egy-names`. Every method forwards to `EgyNames.generate()` from `egy-names>=0.3.2,<0.4`. There is no `first_name` / `last_name` mapping.
+Python: [`faker-egy-names`](https://pypi.org/project/faker-egy-names/) **0.1.0** is a separate PyPI package. It does **not** add Faker as a dependency of `egy-names`. Every method forwards to `EgyNames.generate()` from `egy-names>=0.3.2,<0.4`.
 
-**Install:** `pip install faker-egy-names`  
-**Source:** [`faker-egy-names/`](faker-egy-names/)
+PHP: [`afify/faker-egy-names`](faker-egy-names-php/) is the same API for [FakerPHP](https://fakerphp.github.io/). There is no PHP `egy-names` package yet, so it ships a generate-only catalog (v0.3.2). Same methods, same arguments, no `first_name` / `last_name` mapping.
+
+**Install:** `pip install faker-egy-names` · `composer require afify/faker-egy-names`  
+**Source:** [`faker-egy-names/`](faker-egy-names/) · [`faker-egy-names-php/`](faker-egy-names-php/) · [FakerPHP on GitHub](https://github.com/AbdullahAfifyKhalil/faker-egy-names-php)
 
 ### 7.1 Registration
 
@@ -732,6 +741,26 @@ fake.egyptian_father()
 fake.egyptian_grandfather()
 fake.egyptian_family()
 ```
+
+### 7.5 PHP (FakerPHP)
+
+```php
+$fake = egyptian_faker();
+$name = $fake->egyptian_name(gender: 'female', religion: 'muslim', length: 4, seed: 1);
+echo $name->ar;
+echo $name->en;
+print_r($name->parts_en);
+
+$fake->egyptian_full_name();
+$fake->egyptian_full_name('ar');
+$fake->egyptian_full_name(lang: 'both'); // [ar, en]
+$fake->egyptian_person(gender: 'male');
+$fake->egyptian_father();
+$fake->egyptian_grandfather();
+$fake->egyptian_family();
+```
+
+CamelCase aliases (`egyptianName`, `egyptianFullName`, …) are identical. `$fake->seed(n)` uses FakerPHP's process-wide `mt_srand`. Seeds are not aligned with the Python companion.
 
 ---
 

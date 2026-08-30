@@ -6,7 +6,7 @@
 
     <groupId>io.github.abdullahafifykhalil</groupId>
     <artifactId>egy-names</artifactId>
-    <version>0.3.2</version>
+    <version>0.3.4</version>
     <packaging>jar</packaging>
 
     <name>Egyptian Names</name>

@@ -69,7 +69,7 @@ $$\text{Full Legal Name} = \text{Personal Name} \to \text{Father} \to \text{Gran
 
 ### Python
 ```bash
-pip install egy-names==0.3.2
+pip install egy-names==0.3.4
 ```
 
 Faker test suites can install the companion instead of calling `generate()` directly:
@@ -97,22 +97,22 @@ See [§4 PHP](#php-81) and [§7.5 PHP](#75-php-fakerphp).
 
 ### TypeScript / JavaScript (Node.js & Browsers)
 ```bash
-npm install egy-names@0.3.2
+npm install egy-names@0.3.4
 # or: yarn add egy-names / pnpm add egy-names
 ```
 
 ### Dart / Flutter
 ```bash
 flutter pub add egy_names
-# or in pubspec.yaml: egy_names: ^0.3.3
+# or in pubspec.yaml: egy_names: ^0.3.4
 ```
 
 ### Swift (iOS, macOS, watchOS, visionOS)
-In Xcode: **File → Add Package Dependencies...** with `https://github.com/AbdullahAfifyKhalil/egy-names.git` (Version `0.3.3`).
+In Xcode: **File → Add Package Dependencies...** with `https://github.com/AbdullahAfifyKhalil/egy-names.git` (Version `0.3.4`).
 Or in `Package.swift`:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.3")
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.4")
 ]
 ```
 
@@ -120,20 +120,20 @@ dependencies: [
 **Gradle:**
 ```groovy
 repositories { maven { url 'https://jitpack.io' } }
-dependencies { implementation 'com.github.AbdullahAfifyKhalil.egy-names:egy-names:v0.3.2' }
+dependencies { implementation 'com.github.AbdullahAfifyKhalil.egy-names:egy-names:v0.3.4' }
 ```
 **Maven:**
 ```xml
 <dependency>
     <groupId>com.github.AbdullahAfifyKhalil.egy-names</groupId>
     <artifactId>egy-names</artifactId>
-    <version>v0.3.2</version>
+    <version>v0.3.4</version>
 </dependency>
 ```
 
 ### .NET / C#
 ```bash
-dotnet add package egy-names --version 0.3.2
+dotnet add package egy-names --version 0.3.4
 ```
 
 ### C++ (Modern C++17/C++20 via CMake FetchContent)
@@ -142,7 +142,7 @@ include(FetchContent)
 FetchContent_Declare(
     egy_names
     GIT_REPOSITORY https://github.com/AbdullahAfifyKhalil/egy-names.git
-    GIT_TAG v0.3.2
+    GIT_TAG v0.3.4
     SOURCE_SUBDIR cpp/egy_names
 )
 FetchContent_MakeAvailable(egy_names)

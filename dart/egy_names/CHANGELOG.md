@@ -1,3 +1,7 @@
+## 0.3.4
+
+- Catalog: `Youakeem` is an English spelling of يواقيم.
+
 ## 0.3.3
 
 - Resolve `names.json.gz` from the installed package, not the app working directory.

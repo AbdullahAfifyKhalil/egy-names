@@ -9,7 +9,7 @@ namespace Afify\EgyNames;
  */
 class EgyptianNames
 {
-    public const VERSION = '0.3.2';
+    public const VERSION = '0.3.4';
 
     public function __construct(private ?int $seed = null)
     {

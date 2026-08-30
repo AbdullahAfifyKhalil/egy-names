@@ -6,7 +6,7 @@
 
     <groupId>com.github.AbdullahAfifyKhalil</groupId>
     <artifactId>egy-names-parent</artifactId>
-    <version>0.3.2</version>
+    <version>0.3.4</version>
     <packaging>pom</packaging>
 
     <name>Egyptian Names Parent</name>

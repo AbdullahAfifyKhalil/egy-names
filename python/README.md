@@ -12,16 +12,16 @@
 **[The Secret Code of Egyptian Names](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4)** — how the 14-dimensional engine was built.
 
 [![Afify](https://img.shields.io/badge/afify.co-Egy--Names-17191c)](https://afify.co/egy-names)
-[![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.2-3776AB)](https://pypi.org/project/egy-names/)
+[![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.4-3776AB)](https://pypi.org/project/egy-names/)
 [![Packagist](https://img.shields.io/packagist/v/afify/egy-names.svg?label=Packagist)](https://packagist.org/packages/afify/egy-names)
 [![Faker Provider](https://img.shields.io/badge/Faker-faker--egy--names_v0.1.0-563D7C)](https://pypi.org/project/faker-egy-names/)
 [![FakerPHP](https://img.shields.io/badge/FakerPHP-afify/faker--egy--names-777BB4)](https://packagist.org/packages/afify/faker-egy-names)
-[![npm Version](https://img.shields.io/badge/npm-v0.3.2-CB3837)](https://www.npmjs.com/package/egy-names)
-[![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.3-0175C2)](https://pub.dev/packages/egy_names)
-[![Maven Central](https://img.shields.io/badge/Maven_Central-v0.3.2-C71A36)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
-[![JitPack](https://img.shields.io/badge/JitPack-v0.3.2-2ECC71)](https://jitpack.io/#AbdullahAfifyKhalil/egy-names/v0.3.2)
-[![NuGet Version](https://img.shields.io/badge/NuGet-v0.3.2-004880)](https://www.nuget.org/packages/egy-names/)
-[![Swift PM](https://img.shields.io/badge/Swift_PM-v0.3.3-FA7343)](https://github.com/AbdullahAfifyKhalil/egy-names)
+[![npm Version](https://img.shields.io/badge/npm-v0.3.4-CB3837)](https://www.npmjs.com/package/egy-names)
+[![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.4-0175C2)](https://pub.dev/packages/egy_names)
+[![Maven Central](https://img.shields.io/badge/Maven_Central-v0.3.4-C71A36)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
+[![JitPack](https://img.shields.io/badge/JitPack-v0.3.4-2ECC71)](https://jitpack.io/#AbdullahAfifyKhalil/egy-names/v0.3.4)
+[![NuGet Version](https://img.shields.io/badge/NuGet-v0.3.4-004880)](https://www.nuget.org/packages/egy-names/)
+[![Swift PM](https://img.shields.io/badge/Swift_PM-v0.3.4-FA7343)](https://github.com/AbdullahAfifyKhalil/egy-names)
 [![Hugging Face](https://img.shields.io/badge/Hugging_Face-44.6K_Lexicon-FFD21E)](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
 [![Medium](https://img.shields.io/badge/Medium-14D_Engine-00AB6C)](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4)
 [![Documentation](https://img.shields.io/badge/Documentation-Complete_API_Reference-blue.svg)](DOCUMENTATION.md)
@@ -48,7 +48,7 @@ Egypt does not use Western surnames. A legal name is a **patronymic chain** — 
 ## Try it in 30 seconds
 
 ```bash
-pip install egy-names==0.3.2
+pip install egy-names==0.3.4
 ```
 
 ```python
@@ -243,7 +243,7 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 
 ## Comparison with Existing Systems
 
-| Dimension | Standard Open-Source / LLMs | `egy-names` (v0.3.2) |
+| Dimension | Standard Open-Source / LLMs | `egy-names` (v0.3.4) |
 | :--- | :--- | :--- |
 | **National Empirical Corpus** | Synthetic / web-scraped (<50K records) | **15.88M+ Verified Official Records** (30M+ total corpus) |
 | **Master Lexicon Size** | 1,000–5,000 common names | **44,626 Unique Canonical Lemmas** (>99.9% population coverage) |
@@ -275,10 +275,12 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 
 > **Full Documentation**: For exhaustive method signatures, parameter tables, and advanced configurations, see the [Complete API Reference](DOCUMENTATION.md).
 
+The name book is one file: [`data/names.json.gz`](data/names.json.gz). Edit that, run [`scripts/sync-catalog.sh`](scripts/sync-catalog.sh), then publish.
+
 ### 1. Python (3.9+)
 
 ```bash
-pip install --upgrade egy-names==0.3.2
+pip install --upgrade egy-names==0.3.4
 ```
 
 ```python
@@ -338,15 +340,8 @@ from faker_egy_names import egyptian_faker
 
 fake = egyptian_faker()
 name = fake.egyptian_name(gender="female", religion="muslim")
-print(name.ar)   # grounded 6-slot chain
+print(name.ar)   # grounded chain
 print(name.en)
-
-fake.egyptian_full_name()          # English full name
-fake.egyptian_full_name("ar")      # Arabic full name
-fake.egyptian_person()             # slot 1
-fake.egyptian_father()             # slot 2
-fake.egyptian_grandfather()        # slot 3
-fake.egyptian_family()             # clan / toponymic surname
 ```
 
 ```php
@@ -356,7 +351,7 @@ echo $name->ar;
 echo $name->en;
 ```
 
-There is no `first_name` / `last_name` mapping. For one coherent person, call `egyptian_name()` once and read `parts_ar` / `parts_en`. Source: [`faker-egy-names/`](../faker-egy-names/) · [`faker-egy-names-php/`](../faker-egy-names-php/) · [PyPI](https://pypi.org/project/faker-egy-names/) · [Packagist](https://packagist.org/packages/afify/faker-egy-names).
+There is no `first_name` / `last_name` mapping. For one coherent person, call `egyptian_name()` once and read `parts_ar` / `parts_en`. Source: [`faker-egy-names/`](faker-egy-names/) · [`faker-egy-names-php/`](faker-egy-names-php/) · [PyPI](https://pypi.org/project/faker-egy-names/) · [Packagist](https://packagist.org/packages/afify/faker-egy-names).
 
 ---
 
@@ -383,7 +378,7 @@ The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names
 ### 2. TypeScript / JavaScript (Node.js & Modern Browsers)
 
 ```bash
-npm install egy-names@0.3.2
+npm install egy-names@0.3.4
 ```
 
 ```typescript
@@ -415,7 +410,7 @@ console.log(en.detectReligion("مينا جرجس بطرس")); // { religion: 'ch
 Add in Xcode or `Package.swift`:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.3")
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.4")
 ]
 ```
 
@@ -439,7 +434,7 @@ print(en.translate("محمد أحمد علي")) // "Mohamed Ahmed Ali"
 ### 4. .NET / C#
 
 ```bash
-dotnet add package egy-names --version 0.3.2
+dotnet add package egy-names --version 0.3.4
 ```
 
 ```csharp
@@ -462,7 +457,7 @@ Console.WriteLine(string.Join(", ", en.Split("محمدأحمدعليحسن"))); 
 ### 5. Dart / Flutter
 
 ```bash
-flutter pub add egy_names:^0.3.3
+flutter pub add egy_names:^0.3.4
 ```
 
 ```dart
@@ -492,13 +487,13 @@ void main() {
 <dependency>
     <groupId>io.github.abdullahafifykhalil</groupId>
     <artifactId>egy-names</artifactId>
-    <version>0.3.2</version>
+    <version>0.3.4</version>
 </dependency>
 ```
 
 **Gradle (`build.gradle` / `build.gradle.kts`):**
 ```groovy
-implementation 'io.github.abdullahafifykhalil:egy-names:0.3.2'
+implementation 'io.github.abdullahafifykhalil:egy-names:0.3.4'
 ```
 
 ```java
@@ -524,7 +519,7 @@ include(FetchContent)
 FetchContent_Declare(
     egy_names
     GIT_REPOSITORY https://github.com/AbdullahAfifyKhalil/egy-names.git
-    GIT_TAG v0.3.2
+    GIT_TAG v0.3.4
     SOURCE_SUBDIR cpp/egy_names
 )
 FetchContent_MakeAvailable(egy_names)
@@ -620,7 +615,7 @@ Distributed under the **MIT License**. See `LICENSE` for details.
   title        = {egy-names: A Production-Grade Onomastic Intelligence and Linguistic Engine for Egyptian Names},
   year         = {2026},
   publisher    = {GitHub},
-  version      = {0.3.2},
+  version      = {0.3.4},
   url          = {https://github.com/AbdullahAfifyKhalil/egy-names}
 }
 ```

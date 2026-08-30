@@ -1,3 +1,7 @@
+## 0.3.6
+
+- Version alignment with the other SDKs. Same book.
+
 ## 0.3.5
 
 - Fix: English and Arabic-variant key collisions — a rare misspelling could shadow a common lemma's own canonical spelling or steal its English key. The higher corpus-share lemma always wins now.

@@ -1,14 +1,16 @@
-# faker-egy-names
+# faker-egy-names (Python)
 
-Faker provider for Egyptian names. It does not sample names itself — every call goes to [`egy-names`](https://pypi.org/project/egy-names/) `0.3.5` `generate()`.
+Faker provider for Egyptian names. It does not sample names itself — every call goes to [`egy-names`](https://pypi.org/project/egy-names/) `0.3.6` `generate()`.
 
-This is a Python companion. `egy-names` stays offline and unchanged. Product page: [afify.co/egy-names](https://afify.co/egy-names). Story: [The Secret Code of Egyptian Names](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4).
+This is the Python companion (`0.1.2`). `egy-names` stays offline and unchanged. Need the same fixtures in PHP? [`afify/faker-egy-names`](https://packagist.org/packages/afify/faker-egy-names). Product page: [afify.co/egy-names](https://afify.co/egy-names). Story: [The Secret Code of Egyptian Names](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4).
 
 ## Install
 
 ```bash
-pip install faker-egy-names
+pip install faker-egy-names==0.1.2
 ```
+
+Requires `egy-names>=0.3.6,<0.4` and `Faker>=18`.
 
 ## Use
 
@@ -64,3 +66,7 @@ Shared keyword arguments (passed through to `egy-names.generate()`):
 `lang` is `"en"`, `"ar"`, or `"both"`. There is no `first_name` / `last_name` mapping — that flattening is what this library exists to avoid.
 
 Slot helpers on separate calls are **not** the same person. For one fixture, call `egyptian_name()` once and read `parts_ar` / `parts_en`.
+
+## License
+
+MIT. Copyright (c) 2026 Afify by Abdullah Afify. An Afify open-source project.

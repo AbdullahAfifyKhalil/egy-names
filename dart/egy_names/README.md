@@ -15,7 +15,14 @@ The book comes from real records. Some names will still come back wrong — a ra
 ## Install
 
 ```bash
-dart pub add egy_names
+dart pub add egy_names:^0.3.6
+```
+
+Or in `pubspec.yaml`:
+
+```yaml
+dependencies:
+  egy_names: ^0.3.6
 ```
 
 ## Use

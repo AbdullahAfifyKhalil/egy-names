@@ -18,7 +18,7 @@ The book comes from real records. Some names will still come back wrong — a ra
 include(FetchContent)
 FetchContent_Declare(egy_names
   GIT_REPOSITORY https://github.com/AbdullahAfifyKhalil/egy-names.git
-  GIT_TAG v0.3.5)
+  GIT_TAG v0.3.6)
 FetchContent_MakeAvailable(egy_names)
 target_link_libraries(your_target PRIVATE egy_names)
 ```

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 project(egy_names
-    VERSION 0.3.5
+    VERSION 0.3.6
     DESCRIPTION "A production-grade C++ library for Egyptian onomastic intelligence"
     LANGUAGES CXX
 )

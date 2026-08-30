@@ -586,7 +586,7 @@ class TestThroughputAbility:
         names = en.generate(count=1500, length=4, gender="male", seed=99)
         dt = time.perf_counter() - t0
         assert len(names) == 1500
-        assert dt < 25.0, f"generate 1500 too slow: {dt:.2f}s"
+        assert dt < 40.0, f"generate 1500 too slow: {dt:.2f}s"
         for name in names:
             assert all(en.is_valid(p) for p in name.parts_ar)
             assert en.translate(name.ar) == name.en

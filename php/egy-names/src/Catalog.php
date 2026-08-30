@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Afify\EgyNames;
 
 /**
- * Lazy gzip JSON catalog loader (full 0.3.4 book).
+ * Lazy gzip JSON catalog loader (full 0.3.6 book).
  */
 final class Catalog
 {

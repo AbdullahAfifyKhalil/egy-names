@@ -1,11 +1,11 @@
 /**
- * egy-names v0.3.2 — TypeScript Adversarial Stress & Edge-Case Suite
+ * egy-names v0.3.6 — TypeScript Adversarial Stress & Edge-Case Suite
  * Mirrors tests/stress_test.py for the APIs available in the TS SDK.
  */
 import { EgyptianNames } from '../src/index';
 
 const en = new EgyptianNames();
-console.log("Initialized TypeScript EgyNames v0.3.2 successfully.");
+console.log("Initialized TypeScript EgyNames v0.3.6 successfully.");
 
 let passed = 0;
 let failed = 0;

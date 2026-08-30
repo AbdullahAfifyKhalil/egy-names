@@ -9,10 +9,10 @@ This is the engine. Packagist: [`afify/egy-names`](https://packagist.org/package
 ## Install
 
 ```bash
-composer require afify/egy-names
+composer require afify/egy-names:^0.3.6
 ```
 
-Requires PHP 8.1+, `ext-json`, and `ext-zlib`. No Faker dependency.
+Packagist: [`afify/egy-names`](https://packagist.org/packages/afify/egy-names) `0.3.6`. Requires PHP 8.1+, `ext-json`, and `ext-zlib`. No Faker dependency.
 
 ## Use
 

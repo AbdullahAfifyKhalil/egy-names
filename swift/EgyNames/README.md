@@ -17,7 +17,7 @@ The book comes from real records. Some names will still come back wrong — a ra
 Add in Xcode or `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.5")
+.package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.6")
 ```
 
 The root `Package.swift` points at `swift/EgyNames/`.

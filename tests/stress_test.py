@@ -1,5 +1,5 @@
 """
-egy-names v0.3.2 — Adversarial Stress & Edge-Case Suite
+egy-names v0.3.6 — Adversarial Stress & Edge-Case Suite
 
 Portable runner for the published GitHub repo. Exercises empty/malicious
 input, DP splitting, 14D lookup, age intelligence, and high-throughput

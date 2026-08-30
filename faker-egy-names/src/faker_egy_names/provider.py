@@ -55,7 +55,7 @@ def _roles(
 
 
 class Provider(BaseProvider):
-    """Egyptian patronymic names via egy-names 0.3.2."""
+    """Egyptian patronymic names via egy-names 0.3.6."""
 
     def egyptian_name(
         self,

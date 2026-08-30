@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Afify\FakerEgyNames;
 
 /**
- * Slot-weighted generate() — same rules as egy-names 0.3.2 / the Python faker.
+ * Slot-weighted generate() — same rules as egy-names 0.3.6 / the Python faker.
  */
 final class Engine
 {

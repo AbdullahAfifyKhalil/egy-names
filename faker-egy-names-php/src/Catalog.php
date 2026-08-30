@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Afify\FakerEgyNames;
 
 /**
- * Lazy loader for the generate-only lemma catalog (egy-names 0.3.2).
+ * Lazy loader for the generate-only lemma catalog (egy-names 0.3.6).
  */
 final class Catalog
 {

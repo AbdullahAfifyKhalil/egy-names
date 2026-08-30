@@ -3,4 +3,4 @@ jdk:
 before_install:
   - cd java/egy-names
 install:
-  - mvn install -DskipTests
+  - mvn install -DskipTests -Dmaven.javadoc.skip=true

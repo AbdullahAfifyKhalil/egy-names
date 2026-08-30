@@ -171,7 +171,7 @@ The master 14-dimensional enriched onomastic dictionary:
 
 ## Research Citations & Licensing
 
-This dataset is released under the **MIT License** and is free for academic, commercial, and research use.
+Published by **[Afify](https://afify.co)** and **[Abdullah Afify](https://github.com/AbdullahAfifyKhalil)**. Released under the **MIT License** and free for academic, commercial, and research use.
 
 ```bibtex
 @dataset{afify2026egyptian_names,

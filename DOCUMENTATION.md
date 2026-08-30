@@ -736,4 +736,4 @@ fake.egyptian_family()
 ## License
 
 Released under the **MIT License**. Free for commercial, academic, government, and personal use.
-© 2026 Abdullah Afify. Powered by Afify Corp.
+© 2026 Abdullah Afify. An Afify open-source project. [afify.co](https://afify.co)

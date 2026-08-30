@@ -556,13 +556,17 @@ $$\text{Cost}(i) = \min_{j < i} \Big( \text{Cost}(j) + \text{BaseCost} + \text{B
 
 ---
 
-## About Afify Corporation
+## About Afify
 
-**[Afify Corporation](https://afify.co)** is a technology and intelligence enterprise innovating across software architecture, language engineering, and high-performance machine systems.
+**[Afify](https://afify.co)** works in software, hardware, and media. One product. Many pieces. No center. Built to last. Unified, modular, decentralized, sustainable — or it does not ship.
+
+Egy-Names is an Afify open-source project.
 
 * **Website**: [**afify.co**](https://afify.co)
+* **Instagram**: [**@afify.life**](https://www.instagram.com/afify.life/)
+* **Medium**: [**@abdullah.afify**](https://medium.com/@abdullah.afify)
 * **GitHub**: [**@AbdullahAfifyKhalil**](https://github.com/AbdullahAfifyKhalil)
-* **Founder and Lead Architect**: [**Abdullah Afify**](https://github.com/AbdullahAfifyKhalil)
+* **Founder**: [**Abdullah Afify**](https://github.com/AbdullahAfifyKhalil)
 
 ---
 
@@ -584,5 +588,5 @@ Distributed under the **MIT License**. See `LICENSE` for details.
 ---
 
 <div align="center">
-  <sub>Developed by <b><a href="https://github.com/AbdullahAfifyKhalil">Abdullah Afify</a></b> • Backed by <b><a href="https://afify.co">Afify Corporation (afify.co)</a></b></sub>
+  <sub>Developed by <b><a href="https://github.com/AbdullahAfifyKhalil">Abdullah Afify</a></b> • An <b><a href="https://afify.co">Afify</a></b> open-source project</sub>
 </div>

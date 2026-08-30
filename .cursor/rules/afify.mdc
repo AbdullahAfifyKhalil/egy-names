@@ -1,0 +1,43 @@
+---
+description: Official Afify identity from afify.co — never invent a company blurb
+alwaysApply: true
+---
+
+# Afify
+
+Source of truth: `/Volumes/MAC/Development/Afify.corp/Afify Website` (`src/i18n/copy.js`, `index.html`). Live site: [afify.co](https://afify.co).
+
+## Names
+
+- Brand: **Afify** / **عفيفي**. Arabic company: **شركة عفيفي**. Short English: **Afify Corp**.
+- Do not write **Afify Corporation**. Do not call it a “technology and intelligence enterprise.”
+- Founder: **Abdullah Afify** / **عبد الله عفيفي**. Signature: `by Abdullah Afify`.
+- Egy-Names is **an Afify open-source project**, not a first-and-last-name library.
+
+## What the company is
+
+Afify works in **software, hardware, and media**. An app, a machine, a film. Same demand on everything that ships.
+
+Thesis: **One product. Many pieces. No center. Built to last.**
+
+Four tests — every product, or it does not ship:
+
+1. **Unified** — one thing you can name. If it needs two names, it is two products.
+2. **Modular** — take a piece out, put a better one in. The next idea clicks in.
+3. **Decentralized** — no single throat to choke. If one hand can turn it off, it is a hostage.
+4. **Sustainable** — used, repaired, kept. If it is designed to be thrown away, it is waste.
+
+## Divisions and products
+
+- Software: open source (**Egy-Names**), apps (**Al Qebabat**). Hardware and Media: nothing public yet (`Nothing yet.`).
+- Instagram: [@afify.life](https://www.instagram.com/afify.life/). Medium: [@abdullah.afify](https://medium.com/@abdullah.afify).
+- GitHub: [@AbdullahAfifyKhalil](https://github.com/AbdullahAfifyKhalil). Email in packages: `abdullah@afify.dev`.
+- License line: `Copyright (c) 2026 Afify by Abdullah Afify`.
+
+## Voice
+
+Use the site’s short sentences. Do not invent extra industries, slogans, or a corporate mission.
+
+## Git attribution
+
+Never add `Co-authored-by: Cursor`, `Made-with: Cursor`, or any Cursor trailer to commits or PRs. The Attribution toggle is missing in this Cursor build — strip those lines if they appear.

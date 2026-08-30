@@ -29,7 +29,7 @@ console.log(e.split("محمدأحمدعليحسنالشناوي"));
 // ['محمد', 'أحمد', 'علي', 'حسن', 'الشناوي']
 
 console.log(e.translate("محمد أحمد علي الشناوي"));
-// Mohamed Ahmed Ali Elshenawy
+// Mohamed Ahmed Ali El Shenawy
 
 console.log(e.correct("احمد مصطفا عبد الرحيم"));
 // أحمد مصطفى عبدالرحيم

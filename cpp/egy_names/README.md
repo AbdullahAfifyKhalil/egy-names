@@ -18,10 +18,12 @@ The book comes from real records. Some names will still come back wrong — a ra
 include(FetchContent)
 FetchContent_Declare(egy_names
   GIT_REPOSITORY https://github.com/AbdullahAfifyKhalil/egy-names.git
-  GIT_TAG v0.3.6)
+  GIT_TAG v0.3.7)
 FetchContent_MakeAvailable(egy_names)
 target_link_libraries(your_target PRIVATE egy_names)
 ```
+
+The book ships in the clone (`data/names.json.gz`). CMake records that path. You can also set `EGY_NAMES_DATA` to the file or its directory. `v0.3.6` only looked next to the working directory.
 
 ## Use
 

@@ -8,6 +8,7 @@
 // last known correct, so the library never hard-fails on a packaging
 // mistake.
 
+#include "paths.hpp"
 #include <nlohmann/json.hpp>
 #include <filesystem>
 #include <fstream>
@@ -51,25 +52,7 @@ private:
     }
 
     static std::string resolve_config_path(const std::string& data_dir_hint) {
-        std::vector<std::string> search_paths;
-        if (!data_dir_hint.empty()) {
-            std::filesystem::path hinted(data_dir_hint);
-            search_paths.push_back((hinted.parent_path() / "logic_config.json").string());
-        }
-        search_paths.insert(search_paths.end(), {
-            "data/logic_config.json",
-            "../data/logic_config.json",
-            "../../data/logic_config.json",
-            "/Volumes/MAC/Development/Personal/Egyptian Names/library building/data/logic_config.json",
-            "/Volumes/MAC/Development/Personal/Egyptian Names/library building/cpp/egy_names/data/logic_config.json",
-        });
-
-        for (const auto& p : search_paths) {
-            if (!p.empty() && std::filesystem::exists(p)) {
-                return p;
-            }
-        }
-        return "data/logic_config.json";
+        return resolve_data_file("logic_config.json", data_dir_hint);
     }
 
 public:

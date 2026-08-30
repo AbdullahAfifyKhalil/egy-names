@@ -67,7 +67,7 @@ print(e.split("محمدأحمدعليحسنالشناوي"))
 
 # Egyptian passport spelling (Gamal, not Jamal)
 print(e.translate("محمد أحمد علي الشناوي"))
-# Mohamed Ahmed Ali Elshenawy
+# Mohamed Ahmed Ali El Shenawy
 
 # A grounded test person — never a female father
 name = e.generate(gender="female", religion="muslim", length=4)[0]
@@ -93,7 +93,7 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 | **Ancient / Coptic Substrate** | مهرائيل , سوريال , بهنس , مينا | *Mehraeil, Soryal, Bahnas, Mina* | Pharaonic theophoric names and Coptic Christian heritage dating back millennia |
 | **Classical Islamic / Arabic** | محمد , عبد الرحمن , فاطمة , نور الدين | *Mohamed, Abdelrahman, Fatma, Nour Eldin* | Pure Semitic triliteral roots (h-m-d, a-b-d, f-t-m) and honorific compounds |
 | **Ottoman / Turkish Guilds** | بوادقجي , الجوهرجي , شلتوت , خاقان | *Bawadqgy, Gowharji, Shaltout, Khaqan* | Professional trade guilds, military titles, and aristocratic family surnames |
-| **Nile Geographic Toponyms** | المنياوي , الطهطاوي , الشناوي , الدمياطي | *Elminyawy, Tahtawy, Elshenawy, Domyaty* | Surnames of geographic attribution across the 27 Governorates of Upper and Lower Egypt |
+| **Nile Geographic Toponyms** | المنياوي , الطهطاوي , الشناوي , الدمياطي | *Elminyawy, Tahtawy, El Shenawy, Domyaty* | Surnames of geographic attribution across the 27 Governorates of Upper and Lower Egypt |
 
 ---
 
@@ -242,7 +242,7 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 | **Slot 2** | **Father ($N_2$)** | Direct Paternal Lineage (Male Only) | Age ~54 in 2026 | `عادل` *(Adel)* |
 | **Slot 3** | **Grandfather ($N_3$)** | Paternal Grandfather (Male Only) | Age ~84 in 2026 | `فاروق` *(Farouk)* |
 | **Slot 4** | **Ancestor ($N_4$)** | Ancestral Patriarch (Male Only) | Historical Era | `مخلوف` *(Makhlouf)* |
-| **Slot 5** | **Family Surname ($N_5$)**| Clan / Toponymic Surname | All Generations | `الشناوي` *(Elshenawy)* |
+| **Slot 5** | **Family Surname ($N_5$)**| Clan / Toponymic Surname | All Generations | `الشناوي` *(El Shenawy)* |
 
 ---
 
@@ -524,7 +524,7 @@ include(FetchContent)
 FetchContent_Declare(
     egy_names
     GIT_REPOSITORY https://github.com/AbdullahAfifyKhalil/egy-names.git
-    GIT_TAG v0.3.6
+    GIT_TAG v0.3.7
     SOURCE_SUBDIR cpp/egy_names
 )
 FetchContent_MakeAvailable(egy_names)

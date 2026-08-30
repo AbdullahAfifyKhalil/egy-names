@@ -14,11 +14,13 @@ The book comes from real records. Some names will still come back wrong — a ra
 
 ## Install
 
-[JitPack](https://jitpack.io/#AbdullahAfifyKhalil/egy-names/v0.3.6):
+[Maven Central](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names/0.3.6):
 
 ```kotlin
-implementation("com.github.AbdullahAfifyKhalil:egy-names:v0.3.6")
+implementation("io.github.abdullahafifykhalil:egy-names:0.3.6")
 ```
+
+JitPack still builds the same tag if you need it: `com.github.AbdullahAfifyKhalil:egy-names:v0.3.6`.
 
 ## Use
 

@@ -24,7 +24,7 @@ fake.add_provider(Provider)
 # Coherent 6-slot chain (use this for one person)
 name = fake.egyptian_name(gender="female", religion="muslim")
 print(name.ar)   # يارا عادل فاروق الشناوي
-print(name.en)   # Yara Adel Farouk Elshenawy
+print(name.en)   # Yara Adel Farouk El Shenawy
 print(name.parts_ar)
 
 # Slot helpers — each call generates a new chain

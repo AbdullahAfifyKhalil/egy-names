@@ -1,6 +1,4 @@
 jdk:
   - openjdk17
-before_install:
-  - cd java/egy-names
 install:
-  - mvn install -DskipTests -Dmaven.javadoc.skip=true
+  - cd java/egy-names && mvn install -DskipTests -Dmaven.javadoc.skip=true

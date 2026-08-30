@@ -2,15 +2,15 @@
 
 Faker provider for Egyptian names. Same idea as the [Python companion](https://pypi.org/project/faker-egy-names/) `0.1.2`: it does not invent a first name and a last name. Every call runs the egy-names `0.3.6` `generate()` rules — grounded patronymic chains from the 44,626-lemma book.
 
-The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). This companion (`0.1.2`) ships a generate-only catalog so Faker tests do not load the full book. Offline. Product page: [afify.co/egy-names](https://afify.co/egy-names). Story: [The Secret Code of Egyptian Names](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4).
+The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). This companion (`0.1.3`) ships a generate-only catalog so Faker tests do not load the full book. Offline. Product page: [afify.co/egy-names](https://afify.co/egy-names). Story: [The Secret Code of Egyptian Names](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4).
 
 ## Install
 
 ```bash
-composer require afify/faker-egy-names:^0.1.2
+composer require afify/faker-egy-names:^0.1.3
 ```
 
-Packagist: [`afify/faker-egy-names`](https://packagist.org/packages/afify/faker-egy-names) `0.1.2`.
+Packagist: [`afify/faker-egy-names`](https://packagist.org/packages/afify/faker-egy-names) `0.1.3`.
 
 From this monorepo:
 
@@ -40,7 +40,7 @@ $fake = egyptian_faker();
 // Coherent chain (use this for one person)
 $name = $fake->egyptian_name(gender: 'female', religion: 'muslim');
 echo $name->ar;       // يارا عادل فاروق الشناوي
-echo $name->en;       // Yara Adel Farouk Elshenawy
+echo $name->en;       // Yara Adel Farouk El Shenawy
 print_r($name->parts_ar);
 
 // Slot helpers — each call generates a new chain

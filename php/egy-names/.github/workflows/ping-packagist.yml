@@ -1,0 +1,23 @@
+name: Ping Packagist
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update afify/egy-names
+        env:
+          PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+        run: |
+          if [ -z "$PACKAGIST_TOKEN" ]; then
+            echo "Add PACKAGIST_TOKEN (Packagist API token for Afify) or a GitHub → Packagist webhook."
+            exit 0
+          fi
+          curl -sS -X POST \
+            "https://packagist.org/api/update-package?username=Afify&apiToken=${PACKAGIST_TOKEN}" \
+            -H 'Content-Type: application/json' \
+            -d '{"repository":{"url":"https://packagist.org/packages/afify/egy-names"}}'

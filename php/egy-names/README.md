@@ -9,10 +9,10 @@ This is the engine. Packagist: [`afify/egy-names`](https://packagist.org/package
 ## Install
 
 ```bash
-composer require afify/egy-names:^0.3.6
+composer require afify/egy-names:^0.3.7
 ```
 
-Packagist: [`afify/egy-names`](https://packagist.org/packages/afify/egy-names) `0.3.6`. Requires PHP 8.1+, `ext-json`, and `ext-zlib`. No Faker dependency.
+Packagist: [`afify/egy-names`](https://packagist.org/packages/afify/egy-names) `0.3.7`. Requires PHP 8.1+, `ext-json`, and `ext-zlib`. No Faker dependency. The book is large; the engine raises `memory_limit` to 1G if the process limit is lower.
 
 ## Use
 

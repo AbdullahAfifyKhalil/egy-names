@@ -24,6 +24,8 @@ final class Catalog
             return self::$bundle;
         }
 
+        Memory::ensureCatalogBudget();
+
         $path = dirname(__DIR__) . '/data/names.json.gz';
         $raw = @file_get_contents($path);
         if ($raw === false) {

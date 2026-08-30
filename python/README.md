@@ -29,7 +29,7 @@ print(e.split("محمدأحمدعليحسنالشناوي"))
 # ['محمد', 'أحمد', 'علي', 'حسن', 'الشناوي']
 
 print(e.translate("محمد أحمد علي الشناوي"))
-# Mohamed Ahmed Ali Elshenawy
+# Mohamed Ahmed Ali El Shenawy
 
 print(e.correct("احمد مصطفا عبد الرحيم"))
 # أحمد مصطفى عبدالرحيم

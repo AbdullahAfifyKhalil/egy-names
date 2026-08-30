@@ -1,6 +1,7 @@
 #pragma once
 
 #include "types.hpp"
+#include "paths.hpp"
 #include <nlohmann/json.hpp>
 #include <zlib.h>
 #include <fstream>
@@ -38,25 +39,7 @@ public:
     }
 
     static std::string resolve_data_path(const std::string& custom_path = "") {
-        if (!custom_path.empty() && std::filesystem::exists(custom_path)) {
-            return custom_path;
-        }
-
-        std::vector<std::string> search_paths = {
-            "data/names.json.gz",
-            "../data/names.json.gz",
-            "../../data/names.json.gz",
-            "/Volumes/MAC/Development/Personal/Egyptian Names/library building/data/names.json.gz",
-            "/Volumes/MAC/Development/Personal/Egyptian Names/library building/cpp/egy_names/data/names.json.gz"
-        };
-
-        for (const auto& p : search_paths) {
-            if (std::filesystem::exists(p)) {
-                return p;
-            }
-        }
-
-        return "data/names.json.gz";
+        return resolve_data_file("names.json.gz", custom_path);
     }
 
     static DataBundle load_bundle(const std::string& custom_path = "") {

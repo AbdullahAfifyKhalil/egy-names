@@ -10,7 +10,7 @@ The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names
 composer require afify/faker-egy-names
 ```
 
-Packagist: [`afify/faker-egy-names`](https://packagist.org/packages/afify/faker-egy-names) `0.1.0`.
+Packagist: [`afify/faker-egy-names`](https://packagist.org/packages/afify/faker-egy-names) `0.1.1`.
 
 From this monorepo:
 

@@ -9,6 +9,8 @@
 
 **[afify.co/egy-names](https://afify.co/egy-names)** — origin, process, insights, interactive lab, examples, and demo.
 
+**[The Secret Code of Egyptian Names](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4)** — how the 14-dimensional engine was built.
+
 [![Afify](https://img.shields.io/badge/afify.co-Egy--Names-17191c)](https://afify.co/egy-names)
 [![PyPI Version](https://img.shields.io/badge/PyPI-v0.3.2-3776AB)](https://pypi.org/project/egy-names/)
 [![Packagist](https://img.shields.io/packagist/v/afify/egy-names.svg?label=Packagist)](https://packagist.org/packages/afify/egy-names)
@@ -21,6 +23,7 @@
 [![NuGet Version](https://img.shields.io/badge/NuGet-v0.3.2-004880)](https://www.nuget.org/packages/egy-names/)
 [![Swift PM](https://img.shields.io/badge/Swift_PM-v0.3.2-FA7343)](https://github.com/AbdullahAfifyKhalil/egy-names)
 [![Hugging Face](https://img.shields.io/badge/Hugging_Face-44.6K_Lexicon-FFD21E)](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
+[![Medium](https://img.shields.io/badge/Medium-14D_Engine-00AB6C)](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4)
 [![Documentation](https://img.shields.io/badge/Documentation-Complete_API_Reference-blue.svg)](DOCUMENTATION.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
@@ -28,7 +31,7 @@
 <br />
 **Python** | **TypeScript / JavaScript** | **PHP** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)** | **Faker** | **Hugging Face**
 
-[Site · origin, lab, demo](https://afify.co/egy-names) | [Complete API Reference & Documentation](DOCUMENTATION.md) | [Why you need this](#why-you-need-this) | [Try it in 30 seconds](#try-it-in-30-seconds) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face Datasets](#hugging-face-datasets) | [License](#license)
+[Site · origin, lab, demo](https://afify.co/egy-names) | [Complete API Reference & Documentation](DOCUMENTATION.md) | [Why you need this](#why-you-need-this) | [Try it in 30 seconds](#try-it-in-30-seconds) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face Datasets](#hugging-face-datasets) | [Medium](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4) | [License](#license)
 
 </div>
 
@@ -600,7 +603,7 @@ Egy-Names is an Afify open-source project.
 * **Egy-Names**: [**afify.co/egy-names**](https://afify.co/egy-names) — origin, process, insights, lab, examples, and demo
 * **Website**: [**afify.co**](https://afify.co)
 * **Instagram**: [**@afify.life**](https://www.instagram.com/afify.life/)
-* **Medium**: [**@abdullah.afify**](https://medium.com/@abdullah.afify)
+* **Medium**: [**The Secret Code of Egyptian Names**](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4) · [**@abdullah.afify**](https://medium.com/@abdullah.afify)
 * **GitHub**: [**@AbdullahAfifyKhalil**](https://github.com/AbdullahAfifyKhalil)
 * **Founder**: [**Abdullah Afify**](https://github.com/AbdullahAfifyKhalil)
 

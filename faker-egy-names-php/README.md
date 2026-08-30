@@ -2,7 +2,7 @@
 
 Faker provider for Egyptian names. Same idea as the [Python companion](https://pypi.org/project/faker-egy-names/): it does not invent a first name and a last name. Every call runs the egy-names `generate()` rules — grounded patronymic chains from the 44,626-lemma book.
 
-The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). This companion ships a generate-only catalog so Faker tests do not load the full book. Offline. MIT. Product page: [afify.co/egy-names](https://afify.co/egy-names).
+The engine is [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). This companion ships a generate-only catalog so Faker tests do not load the full book. Offline. MIT. Product page: [afify.co/egy-names](https://afify.co/egy-names). Story: [The Secret Code of Egyptian Names](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4).
 
 ## Install
 

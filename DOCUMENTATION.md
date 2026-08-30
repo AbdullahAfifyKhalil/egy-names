@@ -4,6 +4,8 @@ Welcome to the definitive developer guide for **Egyptian Names (`egy-names`)**, 
 
 The full product page — origin, process, insights, interactive lab, examples, and demo — is at **[afify.co/egy-names](https://afify.co/egy-names)**.
 
+The story of the 14-dimensional engine: **[The Secret Code of Egyptian Names](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4)**.
+
 ---
 
 ## Table of Contents

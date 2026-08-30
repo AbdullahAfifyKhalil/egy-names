@@ -2,7 +2,7 @@
 
 Faker provider for Egyptian names. It does not sample names itself — every call goes to [`egy-names`](https://pypi.org/project/egy-names/) `0.3.2` `generate()`.
 
-This is a companion package. `egy-names` stays offline, zero-dependency, and unchanged. PHP engine: [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). PHP Faker: [`afify/faker-egy-names`](https://packagist.org/packages/afify/faker-egy-names). Product page: [afify.co/egy-names](https://afify.co/egy-names).
+This is a companion package. `egy-names` stays offline, zero-dependency, and unchanged. PHP engine: [`afify/egy-names`](https://packagist.org/packages/afify/egy-names). PHP Faker: [`afify/faker-egy-names`](https://packagist.org/packages/afify/faker-egy-names). Product page: [afify.co/egy-names](https://afify.co/egy-names). Story: [The Secret Code of Egyptian Names](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4).
 
 ## Install
 

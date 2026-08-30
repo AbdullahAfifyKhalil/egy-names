@@ -7,9 +7,8 @@ name: Test and publish pub.dev package
 on:
   push:
     branches: [main]
-    paths:
-      - "dart/**"
-      - "data/**"
+    tags:
+      - "v*"
   workflow_dispatch: {}
 
 jobs:

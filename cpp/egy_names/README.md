@@ -32,7 +32,7 @@
 <br />
 **Python** | **TypeScript / JavaScript** | **PHP** | **.NET / C#** | **Flutter / Dart** | **Swift (iOS/macOS)** | **Java / Kotlin** | **C++ (C++20/17)** | **Faker** | **Hugging Face**
 
-[Site · origin, lab, demo](https://afify.co/egy-names) | [Complete API Reference & Documentation](DOCUMENTATION.md) | [Why you need this](#why-you-need-this) | [Try it in 30 seconds](#try-it-in-30-seconds) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face](#hugging-face-datasets-and-model) | [Medium](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4) | [License](#license)
+[Site · origin, lab, demo](https://afify.co/egy-names) | [Complete API Reference & Documentation](DOCUMENTATION.md) | [Why you need this](#why-you-need-this) | [Accuracy](#accuracy) | [Try it in 30 seconds](#try-it-in-30-seconds) | [Why Egyptian Names?](#why-egyptian-names-are-unique-and-computationally-complex) | [Feature Deep Dive](#feature-engineering-deep-dive) | [Grounded Generation Engine](#the-mathematics-of-grounded-patronymic-generation) | [Multi-Language Usage](#installation-and-multi-language-usage) | [Faker Companion](#faker-companion-faker-egy-names) | [Hugging Face](#hugging-face-datasets-and-model) | [Medium](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4) | [License](#license)
 
 </div>
 
@@ -45,6 +45,10 @@ Your signup form asks for *first name* and *last name*. An Egyptian user types *
 Egypt does not use Western surnames. A legal name is a **patronymic chain** — person → father → grandfather → family. Flatten it and you silently corrupt identity for **115 million** people.
 
 `egy-names` is the offline engine trained on **15.8 million** official records. Same input, same output. No network. No hallucination. If you ship forms, KYC, OCR cleanup, test fixtures, or TTS for Egypt — you need this.
+
+## Accuracy
+
+The book comes from real records, not invention. It is as tight as the records allow. Some names will still come back wrong — a rare spelling, a name the catalog has never seen, an edge we have not hit yet. When we guess, we mark it. When we are not sure, we say so. We keep tightening the book and the fallback. If you find one, [open an issue](https://github.com/AbdullahAfifyKhalil/egy-names/issues).
 
 ## Try it in 30 seconds
 

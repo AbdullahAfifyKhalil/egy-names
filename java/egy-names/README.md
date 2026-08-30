@@ -20,7 +20,7 @@ The book comes from real records. Some names will still come back wrong — a ra
 implementation("io.github.abdullahafifykhalil:egy-names:0.3.6")
 ```
 
-JitPack still builds the same tag if you need it: `com.github.AbdullahAfifyKhalil:egy-names:v0.3.6`.
+JitPack still builds the same tag if you need it: `com.github.AbdullahAfifyKhalil:egy-names:v0.3.8`.
 
 ## Use
 

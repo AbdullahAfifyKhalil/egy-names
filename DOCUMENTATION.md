@@ -231,11 +231,11 @@ Applies an $O(1)$ in-memory hash trie of **23,457 deterministic spelling and OCR
 - `en.correct(name) -> str`
 
 #### Corrects:
-- **Alif Maqsura vs. Ya**: `مصطفا` $\to$ `مصطفى`, `يحي` $\to$ `يحيى`
-- **Hamza Normalization**: `احمد` $\to$ `أحمد`, `اسماعيل` $\to$ `إسماعيل`
-- **Ta Marbuta vs. Ha**: `فاطمه` $\to$ `فاطمة`, `مروه` $\to$ `مروة`
-- **Compound Fusion**: `عبد الرحمن` $\to$ `عبدالرحمن`
-- **Typographical Slips**: `محمودد` $\to$ `محمود`, `ابراهم` $\to$ `إبراهيم`
+- **Alif Maqsura vs. Ya**: <span dir="ltr"><code>مصطفا</code> → <code>مصطفى</code></span>, <span dir="ltr"><code>يحي</code> → <code>يحيى</code></span>
+- **Hamza Normalization**: <span dir="ltr"><code>احمد</code> → <code>أحمد</code></span>, <span dir="ltr"><code>اسماعيل</code> → <code>إسماعيل</code></span>
+- **Ta Marbuta vs. Ha**: <span dir="ltr"><code>فاطمه</code> → <code>فاطمة</code></span>, <span dir="ltr"><code>مروه</code> → <code>مروة</code></span>
+- **Compound Fusion**: <span dir="ltr"><code>عبد الرحمن</code> → <code>عبدالرحمن</code></span>
+- **Typographical Slips**: <span dir="ltr"><code>محمودد</code> → <code>محمود</code></span>, <span dir="ltr"><code>ابراهم</code> → <code>إبراهيم</code></span>
 
 #### Example:
 ```python

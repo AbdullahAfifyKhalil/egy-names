@@ -142,7 +142,7 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 ### 4. 100% Arabic Tashkeel (Diacritization) and Vocalization
 * **The Challenge**: Arabic without Tashkeel is ambiguous (`محمد` could theoretically be read as *Mohamed*, *Mahmad*, or *Mohamad*).
 * **Our Solution**: Every single one of the **44,626 canonical lemmas** is 100% vocalized with classical diacritics (Fathah, Dammah, Kasrah, Shaddah, Sukun).
-* **Compound Awareness**: Handles bound genitive constructs (`عبدالرحمن` $\to$ `عَبْدُ الرَّحْمَن`, `حسام الدين` $\to$ `حُسَامُ الدِّين`).
+* **Compound Awareness**: Handles bound genitive constructs (<span dir="ltr"><code>عبدالرحمن</code> → <code>عَبْدُ الرَّحْمَن</code></span>, <span dir="ltr"><code>حسام الدين</code> → <code>حُسَامُ الدِّين</code></span>).
 
 ---
 
@@ -168,11 +168,11 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 ### 7. 23,457 Deterministic Typo and Orthographic Correction Rules
 * **The Challenge**: Real-world citizen data entry is plagued by typos, keyboard slips, and OCR scanning noise.
 * **Our Solution**: Extracted from 15.88M+ records to build an in-memory $O(1)$ lookup hash index covering:
-  * Missing/Extra letters (`ابراهم` $\to$ `إبراهيم`)
-  * Compound fusion/spacing (`عبدالرحمن` $\to$ `عبد الرحمن`)
-  * Alif Maqsura vs. Ya (`مصطفا` $\to$ `مصطفى`, `يحي` $\to$ `يحيى`)
-  * Hamza normalization (`اسماعيل` $\to$ `إسماعيل`)
-  * Ta Marbuta vs. Ha (`فاطمه` $\to$ `فاطمة`)
+  * Missing/Extra letters (<span dir="ltr"><code>ابراهم</code> → <code>إبراهيم</code></span>)
+  * Compound fusion/spacing (<span dir="ltr"><code>عبد الرحمن</code> → <code>عبدالرحمن</code></span>)
+  * Alif Maqsura vs. Ya (<span dir="ltr"><code>مصطفا</code> → <code>مصطفى</code></span>, <span dir="ltr"><code>يحي</code> → <code>يحيى</code></span>)
+  * Hamza normalization (<span dir="ltr"><code>اسماعيل</code> → <code>إسماعيل</code></span>)
+  * Ta Marbuta vs. Ha (<span dir="ltr"><code>فاطمه</code> → <code>فاطمة</code></span>)
 
 ---
 
@@ -260,7 +260,7 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 | **Phase 0: Raw National Records** | **15,875,535 Records** | Official student and citizen examination rows across 494 national dataset files |
 | **Phase 1: Patronymic Occurrences** | **~63,500,000 Tokens** | Individual name slot occurrences across all genealogical positions |
 | **Phase 2: Raw Unique Word Tokens** | **43,333 Distinct Words** | Unique word forms before spelling normalization |
-| **Phase 3: Typo and Orthography Rules** | **23,457 Rules** | Mappings for misspellings and unspaced compounds (`عبدالرحمن` $\to$ `عبد الرحمن`) |
+| **Phase 3: Typo and Orthography Rules** | **23,457 Rules** | Mappings for misspellings and unspaced compounds (<span dir="ltr"><code>عبد الرحمن</code> → <code>عبدالرحمن</code></span>) |
 | **Phase 4: Master Canonical Lexicon** | **44,626 Master Lemmas** | **The complete verified onomastic dictionary of Egypt** |
 
 ---

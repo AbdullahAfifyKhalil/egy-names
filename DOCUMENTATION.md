@@ -239,11 +239,15 @@ Applies an $O(1)$ in-memory hash trie of **23,457 deterministic spelling and OCR
 - `en.correct(name) -> str`
 
 #### Corrects:
-- **Alif Maqsura vs. Ya**: <code><bdi>مصطفا</bdi></code>&lrm; → <code><bdi>مصطفى</bdi></code>, <code><bdi>يحي</bdi></code>&lrm; → <code><bdi>يحيى</bdi></code>
-- **Hamza Normalization**: <code><bdi>احمد</bdi></code>&lrm; → <code><bdi>أحمد</bdi></code>, <code><bdi>اسماعيل</bdi></code>&lrm; → <code><bdi>إسماعيل</bdi></code>
-- **Ta Marbuta vs. Ha**: <code><bdi>فاطمه</bdi></code>&lrm; → <code><bdi>فاطمة</bdi></code>, <code><bdi>مروه</bdi></code>&lrm; → <code><bdi>مروة</bdi></code>
+- **Alif Maqsura vs. Ya**: <code><bdi>مصطفا</bdi></code>&lrm; → <code><bdi>مصطفى</bdi></code>
+- **Alif Maqsura vs. Ya**: <code><bdi>يحي</bdi></code>&lrm; → <code><bdi>يحيى</bdi></code>
+- **Hamza Normalization**: <code><bdi>احمد</bdi></code>&lrm; → <code><bdi>أحمد</bdi></code>
+- **Hamza Normalization**: <code><bdi>اسماعيل</bdi></code>&lrm; → <code><bdi>إسماعيل</bdi></code>
+- **Ta Marbuta vs. Ha**: <code><bdi>فاطمه</bdi></code>&lrm; → <code><bdi>فاطمة</bdi></code>
+- **Ta Marbuta vs. Ha**: <code><bdi>مروه</bdi></code>&lrm; → <code><bdi>مروة</bdi></code>
 - **Compound Fusion**: <code><bdi>عبد الرحمن</bdi></code>&lrm; → <code><bdi>عبدالرحمن</bdi></code>
-- **Typographical Slips**: <code><bdi>محمودد</bdi></code>&lrm; → <code><bdi>محمود</bdi></code>, <code><bdi>ابراهم</bdi></code>&lrm; → <code><bdi>إبراهيم</bdi></code>
+- **Typographical Slips**: <code><bdi>محمودد</bdi></code>&lrm; → <code><bdi>محمود</bdi></code>
+- **Typographical Slips**: <code><bdi>ابراهم</bdi></code>&lrm; → <code><bdi>إبراهيم</bdi></code>
 
 #### Example:
 ```python

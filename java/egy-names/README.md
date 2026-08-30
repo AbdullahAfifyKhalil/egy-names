@@ -143,7 +143,8 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 ### 4. 100% Arabic Tashkeel (Diacritization) and Vocalization
 * **The Challenge**: Arabic without Tashkeel is ambiguous (`محمد` could theoretically be read as *Mohamed*, *Mahmad*, or *Mohamad*).
 * **Our Solution**: Every single one of the **44,626 canonical lemmas** is 100% vocalized with classical diacritics (Fathah, Dammah, Kasrah, Shaddah, Sukun).
-* **Compound Awareness**: Handles bound genitive constructs (<code><bdi>عبدالرحمن</bdi></code>&lrm; → <code><bdi>عَبْدُ الرَّحْمَن</bdi></code>, <code><bdi>حسام الدين</bdi></code>&lrm; → <code><bdi>حُسَامُ الدِّين</bdi></code>).
+* **Compound Awareness**: Handles bound genitive constructs (<code><bdi>عبدالرحمن</bdi></code>&lrm; → <code><bdi>عَبْدُ الرَّحْمَن</bdi></code>).
+* **Compound Awareness**: Bound iḍāfa (<code><bdi>حسام الدين</bdi></code>&lrm; → <code><bdi>حُسَامُ الدِّين</bdi></code>).
 
 ---
 
@@ -171,7 +172,8 @@ This ancient onomastic system—intertwined with **Pharaonic and Coptic substrat
 * **Our Solution**: Extracted from 15.88M+ records to build an in-memory $O(1)$ lookup hash index covering:
   * Missing/Extra letters (<code><bdi>ابراهم</bdi></code>&lrm; → <code><bdi>إبراهيم</bdi></code>)
   * Compound fusion/spacing (<code><bdi>عبد الرحمن</bdi></code>&lrm; → <code><bdi>عبدالرحمن</bdi></code>)
-  * Alif Maqsura vs. Ya (<code><bdi>مصطفا</bdi></code>&lrm; → <code><bdi>مصطفى</bdi></code>, <code><bdi>يحي</bdi></code>&lrm; → <code><bdi>يحيى</bdi></code>)
+  * Alif Maqsura vs. Ya (<code><bdi>مصطفا</bdi></code>&lrm; → <code><bdi>مصطفى</bdi></code>)
+  * Alif Maqsura vs. Ya (<code><bdi>يحي</bdi></code>&lrm; → <code><bdi>يحيى</bdi></code>)
   * Hamza normalization (<code><bdi>اسماعيل</bdi></code>&lrm; → <code><bdi>إسماعيل</bdi></code>)
   * Ta Marbuta vs. Ha (<code><bdi>فاطمه</bdi></code>&lrm; → <code><bdi>فاطمة</bdi></code>)
 

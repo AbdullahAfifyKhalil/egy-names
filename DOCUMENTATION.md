@@ -6,6 +6,8 @@ The full product page — origin, process, insights, interactive lab, examples, 
 
 The story of the 14-dimensional engine: **[The Secret Code of Egyptian Names](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4)**.
 
+The book comes from real records, not invention. It is as tight as those records allow. Some names will still come back wrong — a rare spelling, a name the catalog has never seen, an edge we have not hit yet. Names outside the book go through the [fallback model](https://huggingface.co/Abdullah-afify/egy-names-fallback-classifier). Every guess is marked `inferred`. If it is not sure, it abstains. We keep tightening the book and the model. If you find one, [open an issue](https://github.com/AbdullahAfifyKhalil/egy-names/issues).
+
 ---
 
 ## Table of Contents
@@ -28,10 +30,12 @@ The story of the 14-dimensional engine: **[The Secret Code of Egyptian Names](ht
    - [3.13 Patronymic Chain Decomposition & Formatting (`analyze_chain`, `format_name`)](#313-patronymic-chain-decomposition--formatting)
    - [3.14 Frequency Ranking & Rarity Metrics (`rank`, `uniqueness`)](#314-frequency-ranking--rarity-metrics)
    - [3.15 High-Throughput Batch Processing (`batch`)](#315-high-throughput-batch-processing)
+   - [3.16 Validity, compounds, and fallback identification (`is_valid`, `identify`, `identify_all`)](#316-validity-compounds-and-fallback-identification)
 4. [Cross-Language SDK Code Reference (Python, TS, PHP, Dart, Swift, Java, C#, C++, Faker)](#4-cross-language-sdk-code-reference)
 5. [Data Types & Models Reference](#5-data-types--models-reference)
 6. [Performance, Concurrency & Security](#6-performance-concurrency--security)
 7. [Faker Companion (`faker-egy-names`)](#7-faker-companion-faker-egy-names)
+8. [Hugging Face dataset and fallback model](#8-hugging-face-dataset-and-fallback-model)
 
 ---
 
@@ -69,7 +73,7 @@ $$\text{Full Legal Name} = \text{Personal Name} \to \text{Father} \to \text{Gran
 
 ### Python
 ```bash
-pip install egy-names==0.3.4
+pip install egy-names==0.3.5
 ```
 
 Faker test suites can install the companion instead of calling `generate()` directly:
@@ -97,22 +101,22 @@ See [§4 PHP](#php-81) and [§7.5 PHP](#75-php-fakerphp).
 
 ### TypeScript / JavaScript (Node.js & Browsers)
 ```bash
-npm install egy-names@0.3.4
+npm install egy-names@0.3.5
 # or: yarn add egy-names / pnpm add egy-names
 ```
 
 ### Dart / Flutter
 ```bash
 flutter pub add egy_names
-# or in pubspec.yaml: egy_names: ^0.3.4
+# or in pubspec.yaml: egy_names: ^0.3.5
 ```
 
 ### Swift (iOS, macOS, watchOS, visionOS)
-In Xcode: **File → Add Package Dependencies...** with `https://github.com/AbdullahAfifyKhalil/egy-names.git` (Version `0.3.4`).
+In Xcode: **File → Add Package Dependencies...** with `https://github.com/AbdullahAfifyKhalil/egy-names.git` (Version `0.3.5`).
 Or in `Package.swift`:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.4")
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.5")
 ]
 ```
 
@@ -120,20 +124,20 @@ dependencies: [
 **Gradle:**
 ```groovy
 repositories { maven { url 'https://jitpack.io' } }
-dependencies { implementation 'com.github.AbdullahAfifyKhalil.egy-names:egy-names:v0.3.4' }
+dependencies { implementation 'com.github.AbdullahAfifyKhalil.egy-names:egy-names:v0.3.5' }
 ```
 **Maven:**
 ```xml
 <dependency>
     <groupId>com.github.AbdullahAfifyKhalil.egy-names</groupId>
     <artifactId>egy-names</artifactId>
-    <version>v0.3.4</version>
+    <version>v0.3.5</version>
 </dependency>
 ```
 
 ### .NET / C#
 ```bash
-dotnet add package egy-names --version 0.3.4
+dotnet add package egy-names --version 0.3.5
 ```
 
 ### C++ (Modern C++17/C++20 via CMake FetchContent)
@@ -142,7 +146,7 @@ include(FetchContent)
 FetchContent_Declare(
     egy_names
     GIT_REPOSITORY https://github.com/AbdullahAfifyKhalil/egy-names.git
-    GIT_TAG v0.3.4
+    GIT_TAG v0.3.5
     SOURCE_SUBDIR cpp/egy_names
 )
 FetchContent_MakeAvailable(egy_names)
@@ -394,7 +398,7 @@ top_youth = en.names_for_age(24, gender="female", top=3)
 
 ### 3.10 Bayesian Gender & Religion Detection
 
-Computes calibrated Bayesian probabilities across single tokens and multi-part patronymic chains.
+Reads the first personal, non-lineage token. A father's or family's community does not outvote the person. Two-word compounds (kunya `أبو X`, `أحمد سعدالدين`) count as one token.
 
 #### Signature:
 - `en.detect_gender(name) -> GenderDetection`
@@ -402,11 +406,17 @@ Computes calibrated Bayesian probabilities across single tokens and multi-part p
 
 #### Example:
 ```python
-# Gender detection:
+# Gender: first given name wins
+en.detect_gender("فاطمة محمد علي حسن")
+# -> GenderDetection(gender='female', ...)
+
 en.detect_gender("مريم إبراهيم حسن")
 # -> GenderDetection(gender='female', confidence=0.98, method='slot_weighted')
 
-# Religion detection:
+# Religion: first distinctive token wins
+en.detect_religion("جورج علاءالدين عبدالمسيح دغيدي")
+# -> ReligionDetection(religion='christian', ...)
+
 en.detect_religion("جورج بطرس سمير ميخائيل")
 # -> ReligionDetection(religion='christian', confidence=0.99)
 
@@ -526,6 +536,32 @@ en.batch.correct(["احمد مصطفا", "اسماعيل فاطمه"])
 
 en.batch.tashkeel(["محمد", "فاطمة", "علي"])
 # -> ['مُحَمَّد', 'فَاطِمَة', 'عَلِيّ']
+```
+
+---
+
+### 3.16 Validity, compounds, and fallback identification
+
+`is_valid` is true only for a personal, attested lemma. Non-person catalog rows (`الله`) and low-confidence filler stay in the index for `split` / lookup, but they are not valid names and `generate` will not emit them.
+
+`identify` / `identify_all` try the book first. On a miss, the Python SDK runs the [fallback classifier](https://huggingface.co/Abdullah-afify/egy-names-fallback-classifier). Every fallback answer is marked `inferred: true`. Below the calibrated threshold it returns `unknown` / `neutral` instead of guessing.
+
+#### Signature:
+- `en.is_valid(name) -> bool`
+- `en.identify(name) -> Optional[InferredName]` *(Python)*
+- `en.identify_all(full_name) -> List[InferredName]` *(Python; always a list)*
+
+#### Example:
+```python
+en.is_valid("محمد")   # True
+en.is_valid("الله")   # False — in the index, not a person's name
+en.lookup("الله")     # still resolves, so compounds can split
+
+# Book hit: inferred is False
+en.identify("محمد")
+
+# Book miss: fallback model, marked inferred
+en.identify_all("محمد زوكرمانوفيتش")
 ```
 
 ---
@@ -790,6 +826,21 @@ $fake->egyptian_family();
 ```
 
 CamelCase aliases (`egyptianName`, `egyptianFullName`, …) are identical. `$fake->seed(n)` uses FakerPHP's process-wide `mt_srand`. Seeds are not aligned with the Python companion.
+
+---
+
+## 8. Hugging Face dataset and fallback model
+
+Dataset: [Abdullah-afify/egyptian-names](https://huggingface.co/datasets/Abdullah-afify/egyptian-names) — 44,626 canonical lemmas plus the raw/segmented pipeline. Audit columns `is_personal_name` and `is_low_confidence` match what `is_valid` / `generate` use.
+
+Fallback model: [Abdullah-afify/egy-names-fallback-classifier](https://huggingface.co/Abdullah-afify/egy-names-fallback-classifier) — trained on that catalog. Used only when lookup misses. Local cards live in [`huggingface/`](huggingface/) and [`huggingface_model/`](huggingface_model/).
+
+```python
+from datasets import load_dataset
+
+dataset = load_dataset("Abdullah-afify/egyptian-names")
+print(dataset["train"][0])
+```
 
 ---
 

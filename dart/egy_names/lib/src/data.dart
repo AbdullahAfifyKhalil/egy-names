@@ -23,17 +23,53 @@ class DataBundle {
 class DataLoader {
   static DataBundle? _cachedBundle;
 
+  static const _catalogRel = 'lib/src/data/names.json.gz';
+
+  static String? _fromPackageConfig() {
+    var dir = Directory.current;
+    for (var i = 0; i < 12; i++) {
+      final configFile = File(
+        '${dir.path}${Platform.pathSeparator}.dart_tool${Platform.pathSeparator}package_config.json',
+      );
+      if (configFile.existsSync()) {
+        try {
+          final json = jsonDecode(configFile.readAsStringSync()) as Map<String, dynamic>;
+          for (final raw in (json['packages'] as List<dynamic>? ?? [])) {
+            final pkg = raw as Map<String, dynamic>;
+            if (pkg['name'] != 'egy_names') continue;
+            final rootUri = pkg['rootUri'] as String? ?? '';
+            final rootPath = rootUri.startsWith('file:')
+                ? Uri.parse(rootUri).toFilePath()
+                : dir.uri.resolve('.dart_tool/$rootUri').toFilePath();
+            final trimmed = rootPath.replaceAll(RegExp(r'[/\\]+$'), '');
+            final candidate = File(
+              '$trimmed${Platform.pathSeparator}${_catalogRel.replaceAll('/', Platform.pathSeparator)}',
+            );
+            if (candidate.existsSync()) return candidate.path;
+          }
+        } catch (_) {}
+      }
+      final parent = dir.parent;
+      if (parent.path == dir.path) break;
+      dir = parent;
+    }
+    return null;
+  }
+
   static String _resolveDataPath(String? customPath) {
     if (customPath != null && File(customPath).existsSync()) {
       return customPath;
     }
 
+    final fromConfig = _fromPackageConfig();
+    if (fromConfig != null) return fromConfig;
+
     // Try several standard relative locations
     final possiblePaths = [
-      'lib/src/data/names.json.gz',
+      _catalogRel,
       'packages/egy_names/src/data/names.json.gz',
-      '${Directory.current.path}/lib/src/data/names.json.gz',
-      '${Directory.current.path}/dart/egy_names/lib/src/data/names.json.gz',
+      '${Directory.current.path}/$_catalogRel',
+      '${Directory.current.path}/dart/egy_names/$_catalogRel',
       Platform.script.resolve('src/data/names.json.gz').toFilePath(),
       Platform.script.resolve('../lib/src/data/names.json.gz').toFilePath(),
     ];
@@ -47,7 +83,7 @@ class DataLoader {
     }
 
     // Fallback to default
-    return 'lib/src/data/names.json.gz';
+    return _catalogRel;
   }
 
   static DataBundle loadBundle({String? customPath}) {

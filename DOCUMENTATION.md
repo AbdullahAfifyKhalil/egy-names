@@ -104,15 +104,15 @@ npm install egy-names@0.3.2
 ### Dart / Flutter
 ```bash
 flutter pub add egy_names
-# or in pubspec.yaml: egy_names: ^0.3.2
+# or in pubspec.yaml: egy_names: ^0.3.3
 ```
 
 ### Swift (iOS, macOS, watchOS, visionOS)
-In Xcode: **File → Add Package Dependencies...** with `https://github.com/AbdullahAfifyKhalil/egy-names.git` (Version `0.3.2`).
+In Xcode: **File → Add Package Dependencies...** with `https://github.com/AbdullahAfifyKhalil/egy-names.git` (Version `0.3.3`).
 Or in `Package.swift`:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.2")
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.3")
 ]
 ```
 

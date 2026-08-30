@@ -1,3 +1,7 @@
+## 0.3.3
+
+- Resolve `names.json.gz` from the installed package, not the app working directory.
+
 ## 0.3.2
 
 - Edge-case hardening, whitespace safety, and full stress-test validation.

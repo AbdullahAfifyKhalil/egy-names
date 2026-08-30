@@ -17,11 +17,11 @@
 [![Faker Provider](https://img.shields.io/badge/Faker-faker--egy--names_v0.1.0-563D7C)](https://pypi.org/project/faker-egy-names/)
 [![FakerPHP](https://img.shields.io/badge/FakerPHP-afify/faker--egy--names-777BB4)](https://packagist.org/packages/afify/faker-egy-names)
 [![npm Version](https://img.shields.io/badge/npm-v0.3.2-CB3837)](https://www.npmjs.com/package/egy-names)
-[![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.2-0175C2)](https://pub.dev/packages/egy_names)
+[![pub.dev Version](https://img.shields.io/badge/pub.dev-v0.3.3-0175C2)](https://pub.dev/packages/egy_names)
 [![Maven Central](https://img.shields.io/badge/Maven_Central-v0.3.2-C71A36)](https://central.sonatype.com/artifact/io.github.abdullahafifykhalil/egy-names)
 [![JitPack](https://img.shields.io/badge/JitPack-v0.3.2-2ECC71)](https://jitpack.io/#AbdullahAfifyKhalil/egy-names/v0.3.2)
 [![NuGet Version](https://img.shields.io/badge/NuGet-v0.3.2-004880)](https://www.nuget.org/packages/egy-names/)
-[![Swift PM](https://img.shields.io/badge/Swift_PM-v0.3.2-FA7343)](https://github.com/AbdullahAfifyKhalil/egy-names)
+[![Swift PM](https://img.shields.io/badge/Swift_PM-v0.3.3-FA7343)](https://github.com/AbdullahAfifyKhalil/egy-names)
 [![Hugging Face](https://img.shields.io/badge/Hugging_Face-44.6K_Lexicon-FFD21E)](https://huggingface.co/datasets/Abdullah-afify/egyptian-names)
 [![Medium](https://img.shields.io/badge/Medium-14D_Engine-00AB6C)](https://medium.com/@abdullah.afify/the-secret-code-of-egyptian-names-how-we-engineered-a-14-dimensional-nlp-engine-5205db7f04f4)
 [![Documentation](https://img.shields.io/badge/Documentation-Complete_API_Reference-blue.svg)](DOCUMENTATION.md)
@@ -415,7 +415,7 @@ console.log(en.detectReligion("مينا جرجس بطرس")); // { religion: 'ch
 Add in Xcode or `Package.swift`:
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.2")
+    .package(url: "https://github.com/AbdullahAfifyKhalil/egy-names.git", from: "0.3.3")
 ]
 ```
 
@@ -462,7 +462,7 @@ Console.WriteLine(string.Join(", ", en.Split("محمدأحمدعليحسن"))); 
 ### 5. Dart / Flutter
 
 ```bash
-flutter pub add egy_names:^0.3.2
+flutter pub add egy_names:^0.3.3
 ```
 
 ```dart
